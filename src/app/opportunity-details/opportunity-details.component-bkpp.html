@@ -1,0 +1,1247 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="TopbarAllComponentDivs">
+      <div class="Innerpagename">
+        <span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="backClicked()" style="cursor: pointer;"></span><h2>Opportunity <span style="font-size: 19px; display: inline-block; transform: translate(-1px, 2px);">></span> <span>Details</span></h2>
+    </div>
+    <div class="SideBTnAllstyle"></div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales box">
+        <div class="dashboard-user-container">
+
+          <h4 class="dashboard-header" *ngIf="!!current_stage_name">
+            <span>{{ current_stage_name }}</span>
+          </h4>
+
+          <ng-container [ngSwitch]="true" *ngIf="!!current_stage_name">
+            <div class="title cursor-pointer" (click)="openEdit(contentEdit)">
+              <h5><a class="anch-add-user">+ Add Stage </a></h5>
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="flex-nowrap overflow-auto row">
+          <div id="leadarea" class="d-flex align-items-center">
+            <ul class="opportunity-button-wrapper">
+              <ng-container *ngFor="let stage of stages; let i = index">
+                <ng-container [ngSwitch]="true">
+                  <li class="{{ stage.Class }} {{ stage.Color }}"
+                  (click)="openEdit2(contentEdit2, stage)"
+                   title="{{ stage.Name }}">
+                {{ stage.Name }}
+              </li>
+                </ng-container>
+              </ng-container>
+            </ul>
+            <!-- <div class="text-center">
+              <ng-container [ngSwitch]="true">
+                <button *ngSwitchCase="lastStage == 0" class="add-invent" style="width: 125px" (click)="
+                    openEdit2(
+                      contentEdit2,
+                      current_stage_name,
+                      current_stage_number
+                    )
+                  ">
+                  Mark as Complete
+                </button>
+                <button *ngSwitchCase="lastStage == 1" class="add-invent" style="
+                    width: 250px;
+                    margin: 0;
+                    font-size: 12px;
+                    height: 42px !important;
+                    border-radius: 22px;
+                  " (click)="
+                    openEdit22(
+                      contentEdit22,
+                      current_stage_name,
+                      current_stage_number
+                    )
+                  ">
+                  Complete
+                </button>
+                <button *ngSwitchCase="lastStage == 2" class="add-invent" style="
+                    width: 250px;
+                    margin: 0;
+                    font-size: 12px;
+                    cursor: no-drop;
+                    background: #dce3f7;
+                    height: 42px !important;
+                    border-radius: 22px;
+                  ">
+                  Completed
+                </button>
+              </ng-container>
+            </div> -->
+          </div>
+
+          <ng-template #contentEdit let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title" style="
+                  width: 100%;
+                  text-align: center;
+                  color: #4a79e4;
+                  font-size: 20px;
+                ">
+                Add Stage
+              </h4>
+              <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+                style="outline: none">
+                <span aria-hidden="true" style="outline: none">×</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <form #f="ngForm" name="theForm" (submit)="addStage(f)">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>Stage Name</label><br />
+                    <input type="text" class="input-fld required-fld" name="Name" [(ngModel)]="Createstage.Name"
+                      placeholder="Stage Name" required />
+
+                    <label>Previous Stage</label><br />
+                    <select class="selectbox input-fld required-fld" name="Stageno" required
+                      [(ngModel)]="Createstage.Stageno">
+                      <option value="" disabled>Select Previous Stage</option>
+                      <option *ngFor="let item of stages" value="{{ item.Stageno }}">
+                        {{ item.Name }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-12" style="text-align: center">
+                    <button class="add-invent">Create</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </ng-template>
+
+          <ng-template #contentEdit2 let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title" style="
+                  width: 100%;
+                  text-align: center;
+                  color: #4a79e4;
+                  font-size: 20px;
+                ">
+                {{ Sname }}
+              </h4>
+              <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+                style="outline: none">
+                <span aria-hidden="true" style="outline: none">×</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <form #f="ngForm" name="theForm" (submit)="ChangeStage(f)">
+                <div class="row">
+                  <div class="col-md-12" *ngIf="current_stage_name == 'Lead'">
+                    <label>Lead</label><br />
+                    <div>
+                      <ng-select #selectbusinesspartner [clearOnBackspace]="false" [searchable]="false" name="DocId" #DocId="ngModel" [(ngModel)]="Changestage.DocId" required class="ngsearch-dropdown input-fld required-fld">
+                        <ng-template ng-header-tmp>
+                          <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                            type="text" (input)="selectbusinesspartner.filter($event.target.value)" />
+                        </ng-template>
+                        <ng-option value="" disable selected>Select Lead</ng-option>
+                        <ng-option *ngFor="let item of bridges2" value="{{item.id}}">{{item.companyName}}</ng-option>
+                      </ng-select>
+                      <span class="help-block danger" *ngIf="(DocId.errors?.required && f.submitted)||(DocId.errors?.required && DocId.touched)">
+                        Select Lead is required
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-12" *ngIf="current_stage_name == 'Quotation' || current_stage_name ==  'Negotiation'">
+                    <label>Quotation</label><br />
+                    <div>
+                      <ng-select #selectbusinesspartner [clearOnBackspace]="false" [searchable]="false" name="DocId" #DocId="ngModel" [(ngModel)]="Changestage.DocId" required class="ngsearch-dropdown input-fld required-fld">
+                        <ng-template ng-header-tmp>
+                          <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                            type="text" (input)="selectbusinesspartner.filter($event.target.value)" />
+                        </ng-template>
+                        <ng-option value="" disable selected>Select Quotation</ng-option>
+                        <ng-option *ngFor="let item of quotationsList" value="{{item.id}}">{{item.U_QUOTNM}}</ng-option>
+                      </ng-select>
+                      <span class="help-block danger" *ngIf="(DocId.errors?.required && f.submitted)||(DocId.errors?.required && DocId.touched)">
+                        Select Quotation is required
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-12" *ngIf="current_stage_name == 'Order'">
+                    <label>Order</label><br />
+                    <div>
+                      <ng-select #selectbusinesspartner [clearOnBackspace]="false" [searchable]="false" name="DocId" #DocId="ngModel" [(ngModel)]="Changestage.DocId" required class="ngsearch-dropdown input-fld required-fld">
+                        <ng-template ng-header-tmp>
+                          <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                            type="text" (input)="selectbusinesspartner.filter($event.target.value)" />
+                        </ng-template>
+                        <ng-option value="" disable selected>Select Order</ng-option>
+                        <ng-option *ngFor="let item of ordersList" value="{{item.id}}">{{item.CardName}}</ng-option>
+                      </ng-select>
+                      <span class="help-block danger" *ngIf="(DocId.errors?.required && f.submitted)||(DocId.errors?.required && DocId.touched)">
+                        Select Order is required
+                      </span>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-12" *ngIf="current_stage_name == 'Order'">
+                    <label>Status {{Changestage.Status}}</label><br />
+                    <select class="input-fld required-fld" name="Status" [(ngModel)]="Changestage.Status">
+                      <option value="">Select Status</option>
+                      <option value="{{stage.key}}" *ngFor="let stage of OrderStage">{{stage.name}}</option>
+                     <option value="sos_Sold">sos_Sold</option>
+                      <option value="sos_Won">sos_Won</option>
+                    </select>
+                  </div> -->
+                  <div class="col-md-6">
+                    <label>Start Date</label><br />
+                    <input type="date" class="input-fld required-fld" name="EndDate"
+                      [(ngModel)]="Changestage.StartDate" placeholder="Start Date" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label>End Date</label><br />
+                    <input type="date" class="input-fld required-fld" name="EndDate"
+                      [(ngModel)]="Changestage.EndDate" placeholder="End Date" required>
+                  </div>
+                  <div class="col-md-12">
+                    <label>Add Comments</label><br />
+                    <textarea type="text" class="input-fld required-fld" name="Comment"
+                      [(ngModel)]="Changestage.Comment" placeholder="Add Comments" required></textarea>
+                  </div>
+
+                  <div class="col-md-12" style="text-align: center">
+                    <button class="add-invent">Done</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </ng-template>
+
+          <ng-template #contentEdit22 let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title" style="width: 100%; text-align: center; color: #4a79e4">
+                {{ Sname }}
+              </h4>
+              <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+                style="outline: none">
+                <span aria-hidden="true" style="outline: none">×</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <form #f="ngForm" name="theForm" (submit)="CompleteStage(f)">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>Stage</label><br />
+                    <select class="input-fld required-fld" name="Status" [(ngModel)]="Completetage.Status">
+                      <option value="{{stage.key}}" *ngFor="let stage of OrderStage">{{stage.name}}</option>
+                      <!-- <option value="sos_Sold">sos_Sold</option>
+                      <option value="sos_Won">sos_Won</option> -->
+                    </select>
+                  </div>
+                  <div class="col-md-12">
+                    <label>Add Comments</label><br />
+                    <textarea type="text" class="input-fld required-fld" name="Remarks"
+                      [(ngModel)]="Completetage.Remarks" placeholder="Add Comments" required></textarea>
+                  </div>
+
+                  <div class="col-md-12" style="text-align: center">
+                    <button class="add-invent" [disabled]="f.invalid">
+                      Done
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="home-content-divider">
+      <div class="home-left-container">
+        <div class="sales-boxes">
+          <div class="recent-sales box" *ngFor="let item of opportunitys">
+            <div class="row">
+              <div class="title">
+                <h5 class="company-name">
+                  {{ item.OpportunityName }}
+                </h5>
+                <h6>
+                  <a class="btn btn-sm" routerLink="/opportunity/edit-opportunity/{{ idd }}">Edit</a>
+                </h6>
+              </div>
+            </div>
+
+            <div class="customer-details-grid" style="margin-top:0px;">
+              <div>
+                <p class="grey1">Business Partner</p>
+              </div>
+              <div>
+                <p class="dtl">{{ item.CustomerName || "NA" }}</p>
+              </div>
+              <div>
+                <p class="grey1">Lead</p>
+              </div>
+              <div>
+                <p class="dtl">{{ item.U_LEADNM || "NA" }}</p>
+              </div>
+              <div>
+                <p class="grey1">Contact Person</p>
+              </div>
+              <div>
+                <p class="dtl">{{ item.ContactPersonName || "NA" }}</p>
+              </div>
+              <div>
+                <p class="grey1">Close Date</p>
+              </div>
+              <div>
+                <p class="dtl">
+                  {{ item.ClosingDate | customDate }}
+                </p>
+              </div>
+              <div>
+                <p class="grey1">Potential Amounts</p>
+              </div>
+              <div>
+                <!-- <p class="dtl">Rs {{item.MaxLocalTotal}}/-</p> -->
+                <p class="dtl">Rs {{ total_Amount }}/-</p>
+              </div>
+              <div>
+                <p class="grey1">Type</p>
+              </div>
+              <div>
+                <span *ngFor="let type of item.U_TYPE">
+                  <p>{{ type.Type }}</p>
+                </span>
+              </div>
+              <div>
+                <p class="grey1">Created on</p>
+              </div>
+              <div>
+                <p class="dtl">{{ item.StartDate | customDate }}</p>
+              </div>
+
+              <div>
+                <p class="grey1">Modified on</p>
+              </div>
+              <div>
+                <p class="dtl">{{ item.UpdateDate | customDate }}</p>
+              </div>
+              <div>
+                <p class="grey1">Probability</p>
+              </div>
+              <div>
+                <p class="dtl">{{ item.U_PROBLTY || "NA" }}</p>
+              </div>
+              <div>
+                <p class="grey1">Lead Source</p>
+              </div>
+              <div>
+                <p class="dtl">{{ item.U_LSOURCE }}</p>
+              </div>
+              <div>
+                <p class="grey1">Sales Employee</p>
+              </div>
+              <div>
+                <p class="dtl">{{ item.SalesPersonName }}</p>
+              </div>
+
+              <div>
+                <p class="grey1">Description</p>
+              </div>
+              <div>
+                <p class="dtl">{{ item.Remarks || "NA" }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sales-boxes">
+          <div class="recent-sales box" *ngFor="let item of opportunitys">
+            <div class="row">
+              <div class="title">
+                <h5 class="company-name">
+                  Stage Details
+                </h5>
+                <!-- <h6>
+                  <a class="btn btn-sm" routerLink="/opportunity/edit-opportunity/{{ idd }}">Edit</a>
+                </h6> -->
+              </div>
+            </div>
+
+            <div class="customer-details-grid" style="margin-top:20px;">
+              <div>
+                <p class="grey1">Stage Name</p>
+              </div>
+              <div>
+                <p class="dtl">{{ current_stage_name || "NA" }}</p>
+              </div>
+              <div>
+                <p class="grey1">Start Date</p>
+              </div>
+              <div>
+                <p class="dtl">{{ current_stage_StartDate || "NA" }}</p>
+              </div>
+              <div>
+                <p class="grey1">End Date</p>
+              </div>
+              <div>
+                <p class="dtl">{{ current_stage_EndDate || "NA" }}</p>
+              </div>
+              <ng-container *ngIf="current_stage_name == 'Quotation' || current_stage_name ==  'Negotiation' || current_stage_name ==  'Lead' || current_stage_name ==  'Order'">
+              <div>
+                <p class="grey1">Selected {{current_stage_name}}</p>
+              </div>
+              <div>
+                <p class="dtl" *ngIf="current_stage_DocId != ''"><a style="color: blue;cursor: pointer;text-decoration: underline;" (click)="goToPage(current_stage_name,current_stage_DocId)">{{ current_stage_name || "NA" }}</a></p>
+                <p class="dtl" *ngIf="current_stage_DocId == ''"><a >{{"NA"}}</a></p>
+              </div>
+              </ng-container>
+              <div>
+                <p class="grey1">Stage Comment</p>
+              </div>
+              <div>
+                <p class="dtl">{{ current_stage_comment || "NA" }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sales-boxes" style="display: none;">
+          <div class="recent-sales box">
+            <div class="row">
+              <div class="col-md-3 title" (click)="activiy()">
+                <h6 class="activity border-bb">Activities</h6>
+              </div>
+              <div class="col-md-3 title" (click)="chatter()">
+                <h6 class="chatter">Chatter</h6>
+              </div>
+            </div>
+            <br />
+            <div class="row activities">
+              <div class="col-md-2 title" (click)="showevents()">
+                <h6 class="Event bluee">Event</h6>
+              </div>
+              <div class="col-md-2 title" (click)="showtaskss()">
+                <h6 class="Task">Task</h6>
+              </div>
+              <!-- <div class="col-md-2 title" (click)=showlogs()>
+                <h6 class="Log"> Log</h6>
+              </div> -->
+              <div class="col-md-2 offset-md-6">
+                <input type="submit" class="input-filed addEventbtn comments" value="Create Event"
+                  (click)="addevent()" />
+                <input type="submit" class="input-filed addEventbtn comments2" value="Create Tasks"
+                  (click)="addtask()" />
+              </div>
+            </div>
+
+            <div class="row activities">
+              <div class="comments">
+                <div class="col-md-12 p-0">
+                  <h6 class="my-4">
+                    <b>Upcoming Events</b>
+                    <!-- <input type="date" [value]="curntDate" style="float: right;"> -->
+                  </h6>
+
+                  <table class="table opportunity-details-table">
+                    <tbody>
+                      <tr class="position-relative opportunitylistcolor" *ngFor="let item of activity">
+                        <div *ngIf="item.Type == 'Event' && idd == item.SourceID">
+                          <td class="w-100">
+                            <div class="card ms-2 me-5 opportunity-details-event-rounded opportunity-border-bg-left">
+                              <div class="card-body d-flex w-100 p-2 justify-content-between">
+                                <div class="row w-100">
+                                  <div class="col-md-8">
+                                    <span class="d-inline-flex fs-6">
+                                      <h6 class="card-title me-1">
+                                        <!-- {{item.Title | slice:0:30}}{{ item.Title.length > 30 ? '...' : ''}} -->
+                                        {{
+                                        item.Title.length > 30
+                                        ? (item.Title | slice : 0 : 30) +
+                                        ".."
+                                        : item.Title
+                                        }}
+                                      </h6>
+                                    </span>
+                                    <p class="card-text mb-0">
+                                      {{ item.Description }}
+                                    </p>
+                                    <p class="card-text" *ngIf="item.Location != ''">
+                                      Location- {{ item.Location }}
+                                    </p>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <span>{{ item.Time }}</span>
+                                    <p>{{ item.From | date : "dd/MM/yyyy" }}</p>
+                                  </div>
+                                </div>
+                                <div class="opportunity-event-user">
+                                  <div class="row d-flex align-items-center">
+                                    <div class="col-md-4">
+                                      <i class="fa fa-user fs-4" aria-hidden="true"></i>
+                                      <b class="mx-2">{{
+                                        participants(item.Participants).length
+                                        }}</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <ng-container class="d-block" *ngFor="
+                                          let participant of participants(
+                                            item.Participants
+                                          )
+                                        ">
+                                        <span class="fs-12 d-block">{{
+                                          participant.trim() | slice : 0 : 6
+                                          }}{{
+                                          participant.length > 6 ? "..." : ""
+                                          }}</span>
+                                      </ng-container>
+                                    </div>
+                                  </div>
+                                  <!-- <p class="d-flex align-items-center"><i class="fa fa-user fs-4" aria-hidden="true"></i>  <b class="mx-2">6</b> {{item.Participants}}</p> -->
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <span class="edit-delete edit-delete{{ item.id }}" (click)="editdeletepop(item)">
+                              <i class="fa fa-ellipsis-v" aria-hidden="true" style="width: 50px"></i></span>
+                            <div class="hover-show12 hover-show{{
+                                item.id
+                              }} hover-show-inactive">
+                              <span (click)="openEditFunction(item)" style="cursor: pointer"><i class="fa fa-pencil"
+                                  aria-hidden="true"></i>
+                                Edit {{ item.Type }}</span><br />
+                              <span (click)="deleteActivity(item.id ? item.id : 0)" style="cursor: pointer"><i
+                                  class="fa fa-trash" aria-hidden="true"></i>
+                                Delete {{ item.Type }}</span><br />
+                            </div>
+                          </td>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="events">
+                <form #f="ngForm" name="theForm">
+                  <div class="row">
+                    <div class="col-md-12 mb-1">
+                      <label class="event-level mb-2">Title</label>
+                      <input type="text" class="input-fld required-fld" placeholder="Title"
+                        [(ngModel)]="Activitys.Title" name="eventsTitle" #eventsTitle="ngModel" required />
+                      <span class="help-block danger" *ngIf="
+                          eventsTitle.errors?.required && eventsTitle.touched
+                        ">
+                        Title is required
+                      </span>
+                    </div>
+                    <div class="col-md-3 mb-1">
+                      <label class="event-level mb-2">Date </label>
+                      <input type="date" class="input-fld required-fld" [(ngModel)]="Activitys.From" name="eventsFrom"
+                        #eventsFrom="ngModel" required />
+                      <span class="help-block danger" *ngIf="
+                          eventsFrom.errors?.required && eventsFrom.touched
+                        ">
+                        Date is required
+                      </span>
+                    </div>
+                    <div class="col-md-3 mb-1">
+                      <label class="event-level mb-2">Time</label>
+                      <input type="time" class="input-fld required-fld" placeholder="Time" [(ngModel)]="Activitys.Time"
+                        name="eventsTime" #eventsTime="ngModel" required />
+                      <span class="help-block danger" *ngIf="
+                          eventsTime.errors?.required && eventsTime.touched
+                        ">
+                        Time is required
+                      </span>
+                    </div>
+                    <div class="col-md-6 mb-1 position-relative">
+                      <label class="mb-2">Repeated</label>
+                      <div
+                        class="border border-1 input-filed d-flex align-items-center px-3 rounded-3 w-100 justify-content-between">
+                        <div class="form-check form-switch" style="padding-top: 7px; padding-bottom: 7px">
+                          <input class="form-check-input" [(ngModel)]="Activitys.Allday" name="Allday"
+                            (change)="activityAllday($event)" type="checkbox" role="switch"
+                            id="flexSwitchCheckDefault" />
+                        </div>
+                        <div *ngIf="!activitydayall">
+
+                          <select class="input-fld required-fld border-0" style="width: auto; margin-left: auto"
+                            [(ngModel)]="Activitys.Repeated" name="eventsRepeated" #eventsRepeated="ngModel"
+                            [required]="!activitydayall">
+                            <option value="" selected disabled hidden>
+                              Repeat
+                            </option>
+                            <option value="{{frequency}}" *ngFor="let frequency of CampaignFrequency">{{frequency}}
+                            </option>
+                            <!-- <option value="monthly">Monthly</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="once">Once</option> -->
+                          </select>
+                          <span class="help-block danger position-absolute repeat-absolute" *ngIf="
+                              eventsRepeated.errors?.required &&
+                              eventsRepeated.touched
+                            ">
+                            Repeat is required
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- <input type="text" class="input-filed" placeholder="Repeated" [(ngModel)]="Activitys.Repeated" name="Repeated"> -->
+                    </div>
+                    <div class="col-md-6 mb-1">
+                      <label class="mb-2">Location</label>
+                      <input type="text" class="input-fld required-fld" placeholder="Location"
+                        [(ngModel)]="Activitys.Location" name="eventsLocation" #eventsLocation="ngModel" required />
+                      <span class="help-block danger" *ngIf="
+                          eventsLocation.errors?.required &&
+                          eventsLocation.touched
+                        ">
+                        Location is required
+                      </span>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                      <label class="mb-2">Host</label>
+                      <input type="text" class="input-fld required-fld" placeholder="Host" [(ngModel)]="Activitys.Host"
+                        name="eventsHost" #eventsHost="ngModel" required />
+                      <span class="help-block danger" *ngIf="
+                          eventsHost.errors?.required && eventsHost.touched
+                        ">
+                        Host is required
+                      </span>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                      <label class="mb-2">Participate</label>
+                      <!-- <input type="text" class="input-fld multiple-participants" placeholder="Participate" [(ngModel)]="Activitys.Participants" name="Participants"> -->
+
+                      <div class="inputParticipants">
+                        <div *ngFor="let pill of pills" class="pill">
+                          {{ pill }}
+                          <span (click)="removePill(pill)">x</span>
+                        </div>
+
+                        <input type="text" placeholder="Participants" [ngModel]="value" (change)="changeValue($event)"
+                          name="value" (blur)="changeFocussed(false)" (focus)="changeFocussed(true)" />
+                        <!-- (blur)="changeFocussed(false)" (focus)="changeFocussed(true)" -->
+                      </div>
+
+                      <ul *ngIf="filteredList?.length && isFocussed" class="dropdown">
+                        <li *ngFor="let item of filteredList" (click)="addPill(item)">
+                          {{ item }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                      <label class="mb-2">Description</label>
+                      <input type="text" class="input-fld" placeholder="Description" [(ngModel)]="Activitys.Description"
+                        name="eventsDescription" />
+                    </div>
+                    <div class="col-md-3 offset-md-9 mt-2 text-center">
+                      <input type="button" class="add-invent1 w-100 py-2" (click)="addActivityEvents(f)"
+                        (keydown.enter)="$event.preventDefault()" (keydown.shift.enter)="$event.preventDefault()"
+                        style="height: auto" value="Submit" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="comments2">
+                <div class="col-md-12 p-0">
+                  <h6 class="my-4"><b>Upcoming Tasks</b></h6>
+
+                  <table class="table opportunity-details-table">
+                    <tbody>
+                      <tr class="position-relative opportunitytasklistcolor" *ngFor="let item of activity">
+                        <div *ngIf="item.Type == 'Task' && idd == item.SourceID">
+                          <td class="align-middle">
+                            <div class="form-check">
+                              <!-- <input class="form-check-input" type="checkbox" value="" (click)="checktask(item.id)" #i (change)="!i['checked']" id="flexCheckDefault"> -->
+                              <input class="form-check-input" type="checkbox" [ngModel]="item.Status == '1'"
+                                (click)="checktask(item.id)" id="flexCheckDefault" />
+                            </div>
+                          </td>
+                          <td class="w-100">
+                            <!-- [style.background-color]="i.checked ? 'rgba(146, 146, 146, 0.42)':'' " -->
+                            <div class="card ms-2 me-5 opportunity-details-event-rounded opportunity-border-bg-left"
+                              [style.background-color]="
+                                item.Status == '1'
+                                  ? 'rgba(146, 146, 146, 0.42)'
+                                  : 'transparent'
+                              ">
+                              <div class="card-body d-flex w-100 p-2 justify-content-between">
+                                <div class="row w-100">
+                                  <div class="col-md-8">
+                                    <span class="d-inline-flex fs-6">
+                                      <!-- <h6 class="card-title me-1">{{item.Title | slice:0:30}}{{ item.Title.length > 30 ? '...' : ''}}</h6> -->
+                                      <h6 class="card-title me-1">
+                                        {{
+                                        item.Title.length > 30
+                                        ? (item.Title | slice : 0 : 30) +
+                                        ".."
+                                        : item.Title
+                                        }}
+                                      </h6>
+                                    </span>
+                                    <p class="card-text">
+                                      {{ item.Description }}
+                                    </p>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <span>{{ item.Time }}</span>
+                                  </div>
+                                </div>
+
+                                <div class="opportunity-event-user">
+                                  <p class="d-flex align-items-center">
+                                    <i class="fa fa-user fs-4" aria-hidden="true"></i>
+                                    <b class="mx-1">18</b>
+                                    {{ item.Participants }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <span class="edit-delete edit-delete{{ item.id }}" (click)="editdeletepop1(item)">
+                              <i class="fa fa-ellipsis-v" aria-hidden="true" style="width: 50px"></i></span>
+                            <div class="hover-show12 hover-show{{
+                                item.id
+                              }} hover-show-inactive">
+                              <span (click)="openEditFunction(item)" style="cursor: pointer"><i class="fa fa-pencil"
+                                  aria-hidden="true"></i>
+                                Edit {{ item.Type }}</span><br />
+                              <span (click)="deleteActivity(item.id ? item.id : 0)" style="cursor: pointer"><i
+                                  class="fa fa-trash" aria-hidden="true"></i>
+                                Delete {{ item.Type }}</span><br />
+                            </div>
+                          </td>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tasks">
+                <form #f1="ngForm" name="theForm" (ngSubmit)="addActivityTasks(f1)">
+                  <div class="row">
+                    <div class="col-md-12 mb-1">
+                      <label class="event-level mb-2">Title</label>
+                      <input type="text" class="input-fld required-fld" required placeholder="Title"
+                        name="addactivitytitle" #addactivitytitle="ngModel" [(ngModel)]="Activitys.Title" />
+                      <span class="help-block danger" *ngIf="
+                          addactivitytitle.errors?.required &&
+                          addactivitytitle.touched
+                        ">
+                        Title is required
+                      </span>
+                    </div>
+                    <div class="col-md-3 mb-1">
+                      <label class="event-level mb-2">Date </label>
+                      <input type="date" class="input-fld required-fld" [(ngModel)]="Activitys.From"
+                        name="addactivitydate" #addactivitydate="ngModel" required />
+                      <span class="help-block danger" *ngIf="
+                          addactivitydate.errors?.required &&
+                          addactivitydate.touched
+                        ">
+                        Date is required
+                      </span>
+                    </div>
+                    <div class="col-md-3 mb-1">
+                      <label class="event-level mb-2">Time</label>
+                      <input type="time" class="input-fld required-fld" placeholder="Time" [(ngModel)]="Activitys.Time"
+                        name="addactivityTime" #addactivityTime="ngModel" required />
+                      <span class="help-block danger" *ngIf="
+                          addactivityTime.errors?.required &&
+                          addactivityTime.touched
+                        ">
+                        Time is required
+                      </span>
+                    </div>
+                    <div class="col-md-6 mb-1 position-relative">
+                      <label class="event-level mb-2">Repeated</label>
+                      <div
+                        class="border border-1 input-filed d-flex align-items-center px-3 rounded-3 w-100 justify-content-between">
+                        <div class="form-check form-switch" style="padding-top: 7px; padding-bottom: 7px">
+                          <input class="form-check-input" type="checkbox" (change)="activityAllTaskday($event)"
+                            [(ngModel)]="Activitys.Allday" name="Allday" role="switch" id="flexSwitchCheckDefault" />
+                        </div>
+                        <div *ngIf="!activityTaskdayall">
+
+
+                          <select class="input-fld required-fld border-0" style="width: auto; margin-left: auto"
+                            aria-label="Default select example" [(ngModel)]="Activitys.Repeated"
+                            name="addactivityRepeated" #addactivityRepeated="ngModel" [required]="!activityTaskdayall">
+                            <option value="" selected>Repeat</option>
+                            <option value="{{frequency}}" *ngFor="let frequency of CampaignFrequency">{{frequency}}
+                            </option>
+                          </select>
+
+                          <span class="help-block danger position-absolute repeat-absolute" *ngIf="
+                              addactivityRepeated.errors?.required &&
+                              addactivityRepeated.touched
+                            ">
+                            Repeat is required
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- <input type="text" class="input-filed" placeholder="Repeated" [(ngModel)]="Activitys.Repeated" name="Repeated"> -->
+                    </div>
+                    <div class="col-md-6 mb-1">
+                      <label class="event-level mb-2">Location</label>
+                      <input type="text" class="input-fld required-fld" placeholder="Location"
+                        [(ngModel)]="Activitys.Location" name="addactivityLocation" #addactivityLocation="ngModel"
+                        required />
+                      <span class="help-block danger" *ngIf="
+                          addactivityLocation.errors?.required &&
+                          addactivityLocation.touched
+                        ">
+                        Location is required
+                      </span>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                      <label class="event-level mb-2">Host </label>
+                      <input type="text" class="input-fld required-fld" placeholder="Host" [(ngModel)]="Activitys.Host"
+                        name="addactivityHost" #addactivityHost="ngModel" required />
+                      <span class="help-block danger" *ngIf="
+                          addactivityHost.errors?.required &&
+                          addactivityHost.touched
+                        ">
+                        Host is required
+                      </span>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                      <label class="event-level mb-2">Progress Status</label>
+                      <!-- [(ngModel)]="Activitys.Participants" -->
+                      <select class="input-fld rounded-3" aria-label="Default select example" name="Participants">
+                        <option value="" selected>
+                          Select Progress Status
+                        </option>
+                        <option value="{{progressstatus.value}}" *ngFor="let progressstatus of TaskProgressStatus">
+                          {{progressstatus.name}}</option>
+                        <!-- <option value="inprogress">In Progress</option>
+                        <option value="complete">Complete</option> -->
+                      </select>
+                      <!-- <input type="text" class="input-filed" placeholder="Participate" [(ngModel)]="Activitys.Participants" name="Participants"> -->
+                    </div>
+                    <div class="col-md-6 mb-1">
+                      <label class="event-level mb-2">Description</label>
+                      <input type="text" class="input-fld" placeholder="Description" [(ngModel)]="Activitys.Description"
+                        name="Description" />
+                    </div>
+                    <div class="col-md-3 offset-md-9 mt-2">
+                      <input type="submit" class="add-invent1 w-100 py-2" style="height: auto" value="Submit" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="editarea">
+                <form #fe="ngForm" name="theForm">
+                  <div class="row">
+                    <div class="col-md-12" style="
+                        text-align: center;
+                        margin-top: 15px;
+                        color: #4a79e4;
+                        font-size: 20px;
+                        font-weight: 500;
+                      ">
+                      Edit {{ EdiitActivitys.Type }}
+                    </div>
+                    <div class="col-md-12 mb-1">
+                      <label class="event-level mb-2">Title</label>
+                      <input type="text" class="input-fld required-fld" placeholder="Title"
+                        [(ngModel)]="EdiitActivitys.Title" name="editTitle" #editTitle="ngModel" required />
+                      <span class="help-block danger" *ngIf="editTitle.errors?.required && editTitle.touched">
+                        Title is required
+                      </span>
+                    </div>
+                    <div class="col-md-3">
+                      <label class="event-level mb-2">Date </label>
+                      <input type="date" class="input-fld required-fld" [(ngModel)]="EdiitActivitys.From"
+                        name="editFrom" #editFrom="ngModel" required />
+                      <span class="help-block danger" *ngIf="editFrom.errors?.required && editFrom.touched">
+                        Date is required
+                      </span>
+                    </div>
+                    <div class="col-md-3">
+                      <label class="event-level mb-2">Time</label>
+                      <input type="Time" class="input-fld required-fld" placeholder="Time"
+                        [(ngModel)]="EdiitActivitys.Time" name="editTime" #editTime="ngModel" required />
+                      <span class="help-block danger" *ngIf="editTime.errors?.required && editTime.touched">
+                        Time is required
+                      </span>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="event-level mb-2"> Repeated </label>
+                      <div
+                        class="border border-1 input-filed d-flex align-items-center px-3 rounded-3 w-100 justify-content-between position-relative">
+                        <div class="form-check form-switch" style="padding-top: 7px; padding-bottom: 7px">
+                          <input class="form-check-input" type="checkbox" (change)="editactivityAllTaskday($event)"
+                            [(ngModel)]="EdiitActivitys.Allday" name="Allday" role="switch"
+                            id="flexSwitchCheckDefault" />
+                          <!-- <input class="form-check-input" type="checkbox"   [(ngModel)]="EdiitActivitys.Allday" name="Allday" role="switch" id="flexSwitchCheckDefault"> -->
+                        </div>
+                        <div *ngIf="!editactivityTaskdayall">
+                          <select class="input-fld required-fld border-0" style="width: auto; margin-left: auto"
+                            [(ngModel)]="EdiitActivitys.Repeated" name="editRepeated" #editRepeated="ngModel"
+                            [required]="!editactivityTaskdayall">
+                            <option value="" selected>Repeat</option>
+                            <option value="{{frequency}}" *ngFor="let frequency of CampaignFrequency">{{frequency}}
+                            </option>
+                            <!-- <option value="monthly">Monthly</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="once">Once</option> -->
+                          </select>
+                          <span class="help-block danger position-absolute repeat-absolute1" *ngIf="
+                              editRepeated.errors?.required &&
+                              editRepeated.touched
+                            ">
+                            Repeat is required
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- <input type="text" class="input-filed" placeholder="Repeated" [(ngModel)]="EdiitActivitys.Repeated" name="Repeated"> -->
+                    </div>
+                    <div class="col-md-6">
+                      <label class="event-level mb-2">Location</label>
+                      <input type="text" class="input-fld required-fld" placeholder="Location"
+                        [(ngModel)]="EdiitActivitys.Location" name="editLocation" #editLocation="ngModel" required />
+                      <span class="help-block danger" *ngIf="editTitle.errors?.required && editTitle.touched">
+                        Location is required
+                      </span>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="event-level mb-2">Host</label>
+                      <input type="text" class="input-fld required-fld" placeholder="Host"
+                        [(ngModel)]="EdiitActivitys.Host" name="editHost" #editHost="ngModel" required />
+                      <span class="help-block danger" *ngIf="editHost.errors?.required && editHost.touched">
+                        Host is required
+                      </span>
+                    </div>
+                    <div class="col-md-6" *ngIf="EdiitActivitys.Type == 'Event'">
+                      <label class="event-level mb-2">Participate</label>
+                      <!-- <input type="text" class="input-filed" placeholder="Participate" [(ngModel)]="EdiitActivitys.Participants" name="Participants"> -->
+                      <div class="inputParticipants">
+                        <div *ngFor="let pill of pills1" class="pill">
+                          {{ pill }}
+                          <span (click)="removePill1(pill)">x</span>
+                        </div>
+
+                        <input type="text" placeholder="Participants" [ngModel]="value1"
+                          class="input-fld multiple-participants" (change)="changeValue1($event)" name="value1"
+                          (blur)="changeFocussed1(false)" (focus)="changeFocussed1(true)" />
+                        <!-- (blur)="changeFocussed(false)" (focus)="changeFocussed(true)" -->
+                      </div>
+
+                      <ul *ngIf="filteredList1?.length && isFocussed1" class="dropdown">
+                        <li *ngFor="let item of filteredList1" (click)="addPill1(item)">
+                          {{ item }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6" *ngIf="EdiitActivitys.Type == 'Task'">
+                      <label class="event-level mb-2">Progress Status</label>
+                      <select class="form-select rounded-3" aria-label="Default select example"
+                        [(ngModel)]="EdiitActivitys.Participants" name="Participants">
+                        <option value="" selected>
+                          Select Progress Status
+                        </option>
+                        <option value="{{progressstatus.value}}" *ngFor="let progressstatus of TaskProgressStatus">
+                          {{progressstatus.name}}</option>
+                        <!-- <option value="inprogress">In Progress</option>
+                        <option value="complete">Complete</option> -->
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="event-level mb-2">Description</label>
+                      <input type="text" class="input-filed" placeholder="Description"
+                        [(ngModel)]="EdiitActivitys.Description" name="Description" />
+                    </div>
+
+                    <div class="col-md-3 mt-2 offset-md-9">
+                      <input type="button" class="add-invent1 w-100 py-2" (click)="EditActivity(fe)"
+                        (keydown.enter)="$event.preventDefault()" (keydown.shift.enter)="$event.preventDefault()"
+                        style="height: auto" value="Submit" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="row chatters">
+              <div class="commentss">
+                <main class="content">
+                  <div class="container p-0">
+                    <div class="card">
+                      <div class="row g-0">
+                        <div class="col-12 col-lg-7 col-xl-12">
+                          <div class="py-2 border-bottom d-none d-lg-block">
+                            <div class="d-flex align-items-center py-1">
+                              <div class="position-relative">
+                                <img
+                                  src="https://www.nicepng.com/png/detail/202-2024687_profile-icon-for-the-politics-category-profile-icon.png"
+                                  class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40" />
+                              </div>
+                              <div class="flex-grow-1 pl-3">
+                                <strong style="text-transform: capitalize">&nbsp;&nbsp;{{ UserName }}</strong>
+                                <!-- <div class="text-muted small"><em>&nbsp;&nbsp;Typing...</em></div> -->
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="position-relative">
+                            <!-- <div class="chat-messages p-4" id="messages"  #scrollMe [scrollTop]="chatters.length === 0 ? 0 : scrollMe.scrollHeight"> -->
+                            <div class="chat-messages p-4" id="messages" #scrollMe
+                              style="overflow: scroll; height: xyz">
+                              <ng-container *ngFor="let item of chatters">
+                                <div class="chat-message-left pb-4" *ngIf="item.Emp != UserId">
+                                  <div>
+                                    <div class="other-chat">
+                                      {{ item.Emp_Name }}
+                                    </div>
+                                    <!-- <div class="text-muted small text-nowrap mt-2" style="font-size: 10px;">{{item.UpdateDate}}, {{item.UpdateTime}}</div> -->
+                                  </div>
+                                  <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                    {{ item.Message }}
+                                    <div class="font-weight-bold mb-1" style="font-size: 10px">
+                                      {{ item.UpdateDate }},
+                                      {{ item.UpdateTime }}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="chat-message-right mb-4" *ngIf="item.Emp == UserId">
+                                  <div>
+                                    <div class="our-chat">
+                                      {{ item.Emp_Name.trim()[0] }}
+                                    </div>
+                                    <!-- <div class="text-muted small text-nowrap mt-2" style="font-size: 10px;">{{item.UpdateDate}}, {{item.UpdateTime}}</div> -->
+                                  </div>
+                                  <!-- <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+									{{item.Message}}
+								</div> -->
+                                  <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                    {{ item.Message }}
+                                    <div class="font-weight-bold mb-1" style="font-size: 10px">
+                                      {{ item.UpdateDate }},
+                                      {{ item.UpdateTime }}
+                                    </div>
+                                  </div>
+                                </div>
+                              </ng-container>
+                            </div>
+                          </div>
+
+                          <div class="flex-grow-0 py-3 border-top">
+                            <form #f="ngForm" name="theForm" (submit)="addChatter(f)">
+                              <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Type your message"
+                                  (input)="validate($event)" [(ngModel)]="chatterr.Message" name="Message" />
+                                <button class="btn btn-primary">
+                                  <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </main>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="home-right-container">
+        <!-- <div class="sales-boxes">
+          <div class="recent-sales box">
+            <div class="row">
+              <div class="col-md-10 title">
+                <h6 style="font-size: 14px; font-weight: 600">
+                  Contact Person
+                </h6>
+              </div>
+            </div>
+            <div class="row align-items-center" *ngFor="let item of contactPersoneList">
+              <div class="col-md-2" style="margin-left: -5px;">
+                <img src="../../assets/img/contact-person-1.png" style="width: 50px; border:2px solid #dedede; border-radius: 50px;" />
+              </div>
+              <div class="col-md-10">
+                <a>{{ item.FirstName }}</a>
+                <p class="mb-1">Contact: {{ item.MobilePhone }}</p>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      <div class="row" id="ManDIvItem" style="background-color: #fff;">
+        <div class="col-lg-6">
+          <div class="recent-sales box">
+            <div class="mb-2" (click)="OppQuotation()" style="cursor: pointer">
+              <!-- <a routerLink="/quotation"> -->
+              <div class="col-md-2">
+                <img src="../../assets/img/contact-person2.png" style="width: 25px" />
+              </div>
+              <div class="col-md-9"><b>Quotations</b></div>
+              <div class="col-md-1">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="recent-sales box">
+            <div class="mt-2" (click)="OppOrder()" style="cursor:pointer;">
+              <!-- <a routerLink="/quotation"> -->
+              <div class="col-md-2" style="cursor: pointer">
+                <img src="../../assets/img/orders.png" style="width: 25px" />
+              </div>
+              <div class="col-md-9"><b>Order</b></div>
+              <div class="col-md-1">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- End Here Two Quotations and Order -->
+        <div class="sales-boxes" style="border-top:1.4px solid lightblue; border-radius: 10px;">
+          <div class="recent-sales box" *ngFor="let item of opportunitys" style="max-height: 400px; overflow: scroll; ">
+            <div class="col-md-12">
+              <h6 class="heading-title-underline">Selected Items</h6>
+            </div>
+            <div *ngFor="let light of item.OppItem" style="margin-bottom: 10px; margin-top: 30px">
+              <a>
+                <div class="customer-area">
+                  <div class="col-sm-2 customer-img">
+                    <img class="name-sec" src="../../assets/img/iner-box1.png" />
+                  </div>
+                  <div class="col-sm-9 customer-text">
+                    <span style="
+                        font-weight: 600;
+                        font-size: 12px;
+                        overflow-wrap: break-word;
+                        word-wrap: break-word;
+                      ">{{ light.ItemDescription }}</span><br />
+                        <span style="
+                        font-weight: 600;
+                        font-size: 12px;
+                        overflow-wrap: break-word;
+                        word-wrap: break-word;
+                        width: 300px;
+                      ">{{ light.ItemCode }}</span><br />
+                      <div style="display: flex; justify-content: space-between;">
+                    <span style="
+                        font-size: 12px;
+                        overflow-wrap: break-word;
+                        word-wrap: break-word;
+                      ">Unit Price : {{ light.UnitPrice | priceFormat }}</span>&nbsp;
+                      <span style="
+                      font-size: 12px;
+                      overflow-wrap: break-word;
+                      word-wrap: break-word;
+                    ">Quantity : {{ light.Quantity }}</span><br>
+                  </div>
+                    <div style="display: flex; justify-content: space-between;">
+                    <span style="
+                        font-size: 12px;
+                        overflow-wrap: break-word;
+                        word-wrap: break-word;
+                      ">Tax(GST) : {{ light.Tax }}%</span>&nbsp;
+                        <span style="
+                        font-size: 12px;
+                        overflow-wrap: break-word;
+                        word-wrap: break-word;
+                      ">Discount : {{ light.DiscountPercent }}%</span>
+                    </div>
+                    <br />
+                  </div>
+                  <!-- <div class="col-sm-8 customer-text">
+                    <span style="
+                        font-size: 12px;
+                        overflow-wrap: break-word;
+                        word-wrap: break-word;
+                      ">Discount {{ light.DiscountPercent }}%</span>
+                  </div> -->
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sales-boxes">
+          <div class="recent-sales box">
+            <p class="heading-title-underline">Attachments</p>
+
+            <div class="files-list">
+              <div class="single-file" *ngFor="let file of getoppoAttach; let i = index">
+                <div class="d-flex justify-content-between w-100">
+                  <div class="file-icon">
+                    <a href="{{ this.baseUrl2 }}{{ file.File }}" target="_blank">
+                      <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M18.1708 9.16035V20.9363C18.1708 21.626 17.8995 22.2874 17.4164 22.7751C16.9334 23.2627 16.2783 23.5367 15.5952 23.5367H3.57562C2.89253 23.5367 2.23741 23.2627 1.75438 22.7751C1.27136 22.2874 1 21.626 1 20.9363V3.60039C1 2.91072 1.27136 2.2493 1.75438 1.76164C2.23741 1.27397 2.89253 1 3.57562 1H9.85371C10.3089 1.00007 9.76625 1.18266 10.0882 1.50762L17.668 9.16035C17.9899 9.48538 18.1708 8.70073 18.1708 9.16035Z"
+                          fill="#F9A2A2" stroke="#F9A2A2" stroke-width="2" stroke-linejoin="round" />
+                      </svg>
+                      <!-- <img  style="width: 30px" src="{{this.baseUrl2}}{{file.File}}"  /> -->
+                    </a>
+                    <span class="ms-3" style="font-size: 12px">{{
+                      file.File.substr(file.File.lastIndexOf("/") + 1)
+                      }}</span>
+                  </div>
+
+                  <div class="delete" (click)="deletefileapi(file.id, i)">
+                    <span [innerHTML]="'delete' | svgIcons : ''"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="fileupload-container" appDnd (fileDropped)="oneditFileDropped($event)">
+              <input type="file" class="fileuploadref" #fileDropRef1 id="fileDropRef1" multiple
+                (change)="fileeditBrowseHandler($event)" />
+
+              <label class="fw-600"> Choose a file </label>
+              <label for="fileDropRef"> &nbsp; or drag it here</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="loadercss" style="text-align: center" *ngIf="isLoading">
+    <img src="../../assets/img/loder.gif" />
+  </div>
+</section>
+
+<div class="alert alert-primary task-success-box alert-dismissible fade show px-3 py-4" role="alert">
+  Are You Sure Do You Want To Complete Task ?
+  <!-- <button type="button" class="btn-close" (click)="yesdeleteUser(0)"></button> -->
+  <div class="delet-btn mt-4">
+    <button type="button" class="yes-task me-4" (click)="yesTask(1)">
+      Yes
+    </button>
+    <button type="button" class="no-task" (click)="yesTask(0)">No</button>
+  </div>
+</div>
+
+<div class="alert alert-primary success-box alert-dismissible fade show px-3 py-3" role="alert">
+  Successfully Created Event
+</div>
+
+<div class="alert alert-primary success-box2 alert-dismissible fade show px-3 py-3" role="alert">
+  Successfully Created Task
+</div>
+<div class="alert alert-primary edit-success-box alert-dismissible fade show px-3 py-3" role="alert">
+  Events Successfully Updated
+</div>
+
+<div class="alert alert-primary edit-success-box-attch alert-dismissible fade show" role="alert">
+  Added Attachment Successfully !
+</div>

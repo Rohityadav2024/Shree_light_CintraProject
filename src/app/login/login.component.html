@@ -1,0 +1,101 @@
+<div class="figma-new-login-design">
+  <div class="figma-login-left-view">
+    <div class="figma-lines-box-rect">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="figma-login-leads-img-wrapper">
+      <img src="../../assets/img/login-Leads.png" class="figma-lead-img">
+      <img src="../../assets/img/lead-human-img-1.png" class="figma-lead-human-img-1">
+      <img src="../../assets/img/lead-human-img-3.png" class="figma-lead-human-img-2">
+      <img src="../../assets/img/lead-human-img-2.png" class="figma-lead-human-img-3">
+    </div>
+    <div class="figma-head-text-lay">
+      <span class="figma-head-txt"> "From Leads to Loyalty: Drive Sales and <br /> Customer Satisfaction with Bridge CRM." </span>
+      <span class="figma-text"> Seamlessly manage and nurture your customer <br /> relationships with powerful Bridge CRM tool. </span>
+    </div>
+  </div>
+  <div class="figma-login-right-view">
+
+    <div [ngSwitch]="forgotPasswordClicked">
+      <div *ngSwitchCase="1" class="figma-login-logo-frame">
+        <img src="../../assets/img/newBridgelogo.png" class="figma-main-logo">
+        <span>Sign in</span>
+      </div>
+    <form *ngSwitchCase="1" class="figma-login-form-container" #f="ngForm" name="theForm">
+      <div class="figma-login-form-wrapper">
+        <label for="Email">Email</label>
+        <div class="figma-login-input-container">
+          <!-- <i class="fa-solid fa-envelope"></i> -->
+          <span [innerHTML]="'figma-mail-log-ico' | svgIcons:'figma-mail-form-input-ico':{w:20}"></span>
+          <input type="text" placeholder="Email" [(ngModel)]="login.email" name="email" #email="ngModel" autocomplete="off" required>
+        </div>
+      </div>
+      <div class="figma-login-form-wrapper">
+        <label for="Email">Password</label>
+        <div class="figma-login-input-container">
+          <span [innerHTML]="'figma-lock-ico' | svgIcons:'figma-mail-form-input-ico':{w:20}"></span>
+          <input [type]="fieldTextType?'text':'password'" placeholder="Password" [(ngModel)]="login.password" name="password" #password="ngModel" autocomplete="off" required>
+          <span [innerHTML]="'figma-eye-ico' | svgIcons:'figma-eye-ico'" (click)="toggleFieldTextType()"></span>
+        </div>
+      </div>
+      <div class="figma-login-form-reminder-forget">
+        <div class="figma-login-form-reminder">
+          <div class="form-check">
+            <input class="form-check-input checkbox" type="checkbox" [(ngModel)]="rememberMe" name="rememberMe">
+            <span>Remember Me</span>
+          </div>
+        </div>
+        <div class="figma-login-form-forget" (click)="showForgotPasswordForm('2')" style="cursor: pointer;"> Forgot Password ? </div>
+      </div>
+      <button class="figma-login-submit-btn" (click)="addLogin(f)" [disabled]="loginLoder">Sign in <i *ngIf="loginLoder" class="fa-solid fa-spinner fa-spin-pulse"></i></button>
+      <div class="figma-register-wrap">Don’t have an account? <span class="figma-register"><a class="resend" href="http://superadmin.bridgexd.com/assets/html/free-trial.html?id=2" target="_blank">Register Now</a></span></div>
+    </form>
+    <div *ngSwitchCase="2" class="figma-login-logo-frame">
+      <img src="../../assets/img/newBridgelogo.png" class="figma-main-logo">
+      <span>Forgot Password</span>
+    </div>
+    <form *ngSwitchCase="2" class="figma-login-form-container" #f="ngForm" name="theForm">
+      <div class="figma-login-form-wrapper">
+        <label for="Email">Email</label>
+        <div class="figma-login-input-container">
+          <span [innerHTML]="'figma-mail-log-ico' | svgIcons:'figma-mail-form-input-ico':{w:20}"></span>
+          <input type="text" placeholder="Email" [(ngModel)]="verifyEmail.email" name="email" #email="ngModel" autocomplete="off" required>
+        </div>
+      </div>
+      <button class="figma-login-submit-btn" (click)="CheckEmail(f)" [disabled]="loginLoder" >Verify Email <i *ngIf="loginLoder" class="fa-solid fa-spinner fa-spin-pulse"></i> </button>
+      <div class="figma-register-wrap">Go back to <span class="figma-register"><a class="resend" (click)="showForgotPasswordForm('1')">Login</a></span></div>
+    </form>
+
+    <div *ngSwitchCase="3" class="figma-login-logo-frame">
+      <img src="../../assets/img/newBridgelogo.png" class="figma-main-logo">
+      <span>Enter OTP Code</span>
+      <p>Enter the one-time password sent to your Email. <a class="resend" (click)="showForgotPasswordForm('2')">Change</a></p>
+    </div>
+    <form *ngSwitchCase="3" class="figma-login-form-container" #f="ngForm" name="theForm">
+      <div class="figma-login-form-wrapper">
+        <label for="OTP">Enter OTP</label>
+        <div class="figma-login-input-container">
+          <!-- Assuming the SVG icon for OTP input is named 'figma-otp-form-input-ico' -->
+          <span [innerHTML]="'figma-otp-log-ico' | svgIcons:'figma-otp-form-input-ico':{w:20}"></span>
+          <input type="text" placeholder="OTP" [(ngModel)]="verifyOtp.otp" name="otp" #otp="ngModel" autocomplete="off" pattern="[0-9]{4}" required>
+        </div>
+      </div>
+
+      <a class="resend" (click)="CheckEmail(f)">Resend OTP</a>
+      <div class="figma-login-form-wrapper">
+        <label for="newPassword">New Password</label>
+        <div class="figma-login-input-container">
+          <!-- Assuming the SVG icon for password input is named 'figma-password-form-input-ico' -->
+          <span [innerHTML]="'figma-password-log-ico' | svgIcons:'figma-password-form-input-ico':{w:20}"></span>
+          <input [type]="fieldTextType?'text':'password'"  placeholder="New Password" [(ngModel)]="verifyOtp.password" name="password" #password="ngModel" autocomplete="off" required>
+          <span [innerHTML]="'figma-eye-ico' | svgIcons:'figma-eye-ico'" (click)="toggleFieldTextType()"></span>
+        </div>
+      </div>
+      <button class="figma-login-submit-btn" (click)="CheckOtp(f)" [disabled]="loginLoder">Update <i *ngIf="loginLoder" class="fa-solid fa-spinner fa-spin-pulse"></i> </button>
+      <div class="figma-register-wrap">OTP Send to {{verifyEmail.email}}</div>
+    </form>
+    </div>
+  </div>
+</div>

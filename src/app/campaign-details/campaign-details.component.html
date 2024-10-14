@@ -1,0 +1,468 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="figma-detial-home-sec-spliter">
+      <div class="figma-left-main-container"  *ngFor="let item of compaign">
+        <div class="figma-detail-header">
+          <div class="figma-left-part">
+            <i class="fa-regular fa-arrow-left cursor-pointer" (click)="backClicked()"></i>
+            <div class="figma-heading-ref-wrap">
+              <span class="figma-main-head">{{Headingss[0].SubHeading1}} </span>
+              <i class="fa-solid fa-chevron-right"></i>
+              <span class="figma-lead-ref-name">Details</span>
+            </div>
+          </div>
+          <div class="figma-right-part">
+            <!-- <button class="figma-outline-btn">Remind</button> -->
+            <!-- <button class="figma-prim-btn" style="cursor: pointer;"(click)="CreateLeadstoBp(item.id)" *ngIf="item.status==='Qualified'">Create Customer</button> -->
+          </div>
+        </div>
+
+        <div class="figma-detail-main-info">
+          <div class="figma-detail-info-split-two" style="display: block;">
+            <div class="figma-detail-info-header">
+              <div class="cardnameicon" style="text-transform: capitalize;">{{item.CampaignSetName[0]}}</div>
+              <div class="figma-info-contain">
+                <div class="figma-info-name--address">
+                  <div class="figma-info-name" style="text-transform: capitalize;">{{item.CampaignSetName || "NA"}}</div>
+                </div>
+                <div class="campnewclass">
+                <div class="figma-info-role2">Created Date : {{ item.CreateDate | customDate}}</div>
+                <div class="figma-info-role2">{{Headingss[0].heading3}}  : {{ item.Description || "NA" }}</div>
+              </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="figma-ul-types-container" style="border-top: 1px solid #e0e0e0;">
+            <ul class="figma-ul-types">
+              <!-- <li [class.active]="commonObj.detailTab == 'Items'" (click)="commonObj.detailTab = 'Items'"><span [innerHTML]="'figma-product-bag-ico' | svgIcons:''"></span>Item</li> -->
+              <li [class.active]="commonObj.detailTab == 'detail'" (click)="commonObj.detailTab = 'detail'"><span [innerHTML]="'figma-detail-file-ico' | svgIcons:''"></span>Detail</li>
+              <li [class.active]="commonObj.detailTab == 'Member'" (click)="commonObj.detailTab = 'Member'"><span [innerHTML]="'figma-attachment-file-ico' | svgIcons:''"></span>Member List</li>
+              <li [class.active]="commonObj.detailTab == 'Campaign'" (click)="commonObj.detailTab = 'Campaign'"><span [innerHTML]="'figma-attachment-file-ico' | svgIcons:''"></span>Campaign</li>
+            </ul>
+          </div>
+
+
+          <ng-container *ngIf="commonObj.detailTab == 'detail'">
+            <div class="figma-collapse-common-info">
+              <div class="figma-collapse-head-tab">
+                <p class="figma-collapse-head-name" style="border-bottom: 2px solid #4a79e4;">Leads</p>
+                <i class="fa-solid fa-chevron-up figma-collapse-arrow-chev-font-awe-icon" (click)="collapse4.toggle()"
+                  [attr.aria-expanded]="!isCollapsed4" [ngClass]="{'fa-chevron-up': isCollapsed4, 'fa-chevron-down': !isCollapsed4}"></i>
+              </div>
+              <div class="figma-collapse-common-info-detail">
+                <div class="figma-collapse-common-info-detail-wrapper-new" #collapse4="ngbCollapse" [(ngbCollapse)]="isCollapsed4">
+
+                  <div class="row">
+
+                    <div class="col-md-6" *ngIf="item.AllLead == '1'" style="color: green;">
+                      <p>Selected All Lead</p>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+                    <ng-container *ngIf="isModulefieldview(2, 'LeadSource')">
+                    <div class="col-md-2" *ngIf="item.AllLead != '1'">
+                      <p class="grey1">{{Headingss[0].heading4}}</p>
+                    </div>
+                    <div class="col-md-3 " *ngIf="item.AllLead != '1'">
+
+                      <p class="cstmr-size" [ngClass]="{'limitTextHeight': isReadMore}"
+                        style="word-break: break-all;" *ngIf="item.LeadSource != ''">
+                        {{replaceall(item.LeadSource)}}</p>
+                      <p class="cstmr-size" *ngIf="item.LeadSource == ''">NA</p>
+                      <span (click)="showText()" *ngIf="item.LeadSource.length >30"
+                        style="color: #4a79e4;cursor: pointer;font-size: 12px;">{{ isReadMore ? 'Read More': 'Read Less' }}</span>
+                    </div>
+                  
+                    <div class="col-md-1" ></div>
+                  </ng-container>
+                    <ng-container *ngIf="isModulefieldview(2, 'LeadPriority')">
+                    <div class="col-md-2" *ngIf="item.AllLead != '1'">
+                      <p class="grey1">{{Headingss[0].heading5}}</p>
+                    </div>
+                    <div class="col-md-3" *ngIf="item.AllLead != '1'">
+                      <p class="cstmr-size" *ngIf="item.LeadPriority !=''">{{item.LeadPriority}}</p>
+                      <p class="cstmr-size" *ngIf="item.LeadPriority ==''">NA</p>
+                    </div>
+                  
+                    <div class="col-md-1" ></div>
+                  </ng-container>
+                  </div>
+                  
+                  <div class="row" *ngIf="item.AllLead != '1'">
+                    <ng-container *ngIf="isModulefieldview(2, 'LeadFromDate')">
+                    <div class="col-md-2">
+                      <p class="grey1">{{Headingss[0].heading6}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <p class="cstmr-size" *ngIf="item.LeadFromDate != ''">{{item.LeadFromDate
+                        | customDate}}</p>
+                      <p class="cstmr-size" *ngIf="item.LeadFromDate == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  <ng-container *ngIf="isModulefieldview(2, 'LeadToDate')">
+                    <div class="col-md-2">
+                      <p class="grey1">{{Headingss[0].heading7}} </p>
+                    </div>
+                    <div class="col-md-3">
+                      <p class="cstmr-size" *ngIf="item.LeadToDate != ''">{{item.LeadToDate |
+                        customDate}}</p>
+                      <p class="cstmr-size" *ngIf="item.LeadToDate == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+
+                  </div>
+                  <div class="row" *ngIf="item.AllLead != '1'">
+                    <ng-container *ngIf="isModulefieldview(2, 'LeadStatus')">
+                    <div class="col-md-2">
+                      <p class="grey1">{{Headingss[0].heading8}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <p class="cstmr-size" [ngClass]="{'limitTextHeight': isReadMore1}"
+                        *ngIf="item.LeadStatus != ''">{{item.LeadStatus}}</p>
+                      <p class="cstmr-size" *ngIf="item.LeadStatus == ''">NA</p>
+                      <span (click)="showText1()" *ngIf="item.LeadStatus.length >30"
+                        style="color: #4a79e4;cursor: pointer;font-size: 12px;">{{ isReadMore1 ? 'Read More': 'Read Less' }}</span>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+            <div class="figma-collapse-common-info">
+              <div class="figma-collapse-head-tab">
+                <p class="figma-collapse-head-name" style="border-bottom: 2px solid #4a79e4;">Business Partners</p>
+                <i class="fa-solid fa-chevron-up figma-collapse-arrow-chev-font-awe-icon" (click)="collapse42.toggle()"
+                  [attr.aria-expanded]="!isCollapsed42" [ngClass]="{'fa-chevron-up': isCollapsed42, 'fa-chevron-down': !isCollapsed42}"></i>
+              </div>
+              <div class="figma-collapse-common-info-detail">
+                <div class="figma-collapse-common-info-detail-wrapper-new" #collapse42="ngbCollapse" [(ngbCollapse)]="isCollapsed42">
+
+                  <div class="row">
+
+                    <div class="col-md-6" *ngIf="item.AllBP == '1'" style="color: green;">
+                      <p>Selected All Business Partner</p>
+                    </div>
+                    <ng-container *ngIf="isModulefieldview(2, 'BPType')">
+                    <div class="col-md-2" *ngIf="item.AllBP != '1'">
+                      <p class="grey1">{{Headingss[0].heading13}}</p>
+                    </div>
+                    <div class="col-md-3" *ngIf="item.AllBP != '1'">
+                      <p class="cstmr-size" *ngIf="item.BPType != ''">{{item.BPType}}</p>
+                      <p class="cstmr-size" *ngIf="item.BPType == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  <ng-container *ngIf="isModulefieldview(2, 'BPSalePerson')">
+                    <div class="col-md-2" *ngIf="item.AllBP != '1'">
+                      <p class="grey1">{{Headingss[0].heading14}}</p>
+                    </div>
+                    <div class="col-md-3 " *ngIf="item.AllBP != '1'">
+                      <span class="cstmr-size" style="font-size: 12px;"
+                        *ngFor="let item2 of item.BPSalePerson">{{item2.SalesEmployeeName}} </span>
+                      <p class="cstmr-size" *ngIf="item.BPSalePerson == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  </div>
+                  <div class="row" *ngIf="item.AllBP != '1'">
+                    <ng-container *ngIf="isModulefieldview(2, 'BPFromDate')">
+                    <div class="col-md-2">
+                      <p class="grey1">{{Headingss[0].heading15}} </p>
+                    </div>
+                    <div class="col-md-3">
+                      <p class="cstmr-size" *ngIf="item.BPFromDate != ''">{{item.BPFromDate |
+                        customDate}}</p>
+                      <p class="cstmr-size" *ngIf="item.BPFromDate == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  <ng-container *ngIf="isModulefieldview(2, 'BPToDate')">
+                    <div class="col-md-2">
+                      <p class="grey1">{{Headingss[0].heading16}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <p class="cstmr-size" *ngIf="item.BPToDate != ''">{{item.BPToDate | customDate}}
+                      </p>
+                      <p class="cstmr-size" *ngIf="item.BPToDate == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  </div>
+                  <div class="row" *ngIf="item.AllBP != '1'">
+                    <ng-container *ngIf="isModulefieldview(2, 'BPCountry')">
+                    <div class="col-md-2">
+                      <p class="grey1">{{Headingss[0].heading18}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <p class="cstmr-size" *ngIf="item.BPCountry != ''">{{item.BPCountry}}</p>
+                      <p class="cstmr-size" *ngIf="item.BPCountry == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  <ng-container *ngIf="isModulefieldview(2, 'BPState')">
+                    <div class="col-md-2">
+                      <p class="grey1">{{Headingss[0].heading19}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <p class="cstmr-size" *ngIf="item.BPState != ''">{{item.BPState}}</p>
+                      <p class="cstmr-size" *ngIf="item.BPState == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  </div>
+                  <div class="row" *ngIf="item.AllBP != '1'">
+                    <ng-container *ngIf="isModulefieldview(2, 'BPIndustry')">
+                    <div class="col-md-2">
+                      <p class="grey1">{{Headingss[0].heading17}}</p>
+                    </div>
+                    <div class="col-md-3 oppName">
+                      <span class="cstmr-size" style="font-size: 12px;"
+                        *ngFor="let item2 of item.BPIndustry">{{replaceall1(item2.IndustryName)}},
+                      </span>
+                      <p class="cstmr-size" *ngIf="item.BPIndustry == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+
+            <div class="figma-collapse-common-info">
+              <div class="figma-collapse-head-tab">
+                <p class="figma-collapse-head-name" style="border-bottom: 2px solid #4a79e4;">Opportunity</p>
+                <i class="fa-solid fa-chevron-up figma-collapse-arrow-chev-font-awe-icon" (click)="collapse43.toggle()"
+                  [attr.aria-expanded]="!isCollapsed43" [ngClass]="{'fa-chevron-up': isCollapsed43, 'fa-chevron-down': !isCollapsed43}"></i>
+              </div>
+              <div class="figma-collapse-common-info-detail">
+                <div class="figma-collapse-common-info-detail-wrapper-new" #collapse43="ngbCollapse" [(ngbCollapse)]="isCollapsed43">
+
+
+                  <div class="row">
+
+                    <div class="col-md-6" *ngIf="item.AllOpp == '1'" style="color: green;">
+                      <p>Selected All Opportunity</p>
+                    </div>
+                    <ng-container *ngIf="isModulefieldview(2, 'OppSalePerson')">
+                    <div class="col-md-2" *ngIf="item.AllOpp != '1'">
+                      <p class="grey1">{{Headingss[0].heading12}}</p>
+                    </div>
+                    <div class="col-md-3 " *ngIf="item.AllOpp != '1'">
+                      <span class="cstmr-size" style="font-size: 12px;"
+                        *ngFor="let item2 of item.OppSalePerson">{{item2.SalesEmployeeName}}, </span>
+                      <p class="cstmr-size" *ngIf="item.OppSalePerson == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  <ng-container *ngIf="isModulefieldview(2, 'OppType')">
+                    <div class="col-md-2" *ngIf="item.AllOpp != '1'">
+                      <p class="grey1">{{Headingss[0].heading11}}</p>
+                    </div>
+                    <div class="col-md-3" *ngIf="item.AllOpp != '1'">
+                      <p class="cstmr-size" *ngIf="item.OppType != ''">{{item.OppType}}</p>
+                      <p class="cstmr-size" *ngIf="item.OppType == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  </div>
+                  <div class="row" *ngIf="item.AllOpp != '1'">
+                    <ng-container *ngIf="isModulefieldview(2, 'OppFromDate')">
+                    <div class="col-md-2">
+                      <p class="grey1">{{Headingss[0].heading9}} </p>
+                    </div>
+                    <div class="col-md-3">
+                      <p class="cstmr-size" *ngIf="item.OppFromDate != ''">{{item.OppFromDate |
+                        customDate}}</p>
+                      <p class="cstmr-size" *ngIf="item.OppFromDate == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  <ng-container *ngIf="isModulefieldview(2, 'OppToDate')">
+                    <div class="col-md-2">
+                      <p class="grey1">{{Headingss[0].heading10}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <p class="cstmr-size" *ngIf="item.OppToDate != ''">{{item.OppToDate |
+                        customDate}}</p>
+                      <p class="cstmr-size" *ngIf="item.OppToDate == ''">NA</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="commonObj.detailTab == 'Member'">
+            <div class="figma-collapse-product-info">
+
+              <div class="figma-product-table-container" style="padding: 0;">
+                <div class="custom-search-container" style="padding: 0 6px;margin-bottom: 0;">
+                  <div class="custom-outter-body-lead-list-c9" style="width: auto;border-bottom: none;">
+                    <div class="custom-table-select-icons reloadenow">
+                       <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span>
+                    </div>
+                  </div>
+                  <div class="custom-search-wrapper">
+                    <div ngbDropdown class="custom-common-search-container">
+
+                      <div class="custom-search-ico-input-container">
+                        <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+                        <input type="text" name="" id="" placeholder="Search" [(ngModel)]="searchValue2" (keyup.enter)="RowPerPage()">
+                        <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+                          *ngIf="searchValue2 != ''"></span>
+                        <button type="button" class="new-search-btn" (click)="RowPerPage()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <table class="new-tabl">
+                  <thead  class="MainUserList" style="top:0px !important">
+                    <tr style="border-top: 1px solid #cdcdcd;">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    </tr>
+                  </thead>
+                      <tr *ngFor="let item3 of compaign1">
+                        <td>{{item3.id}}</td>
+                        <td>{{item3.Name || 'NA'}}</td>
+                        <td>{{item3.Phone || 'NA'}}</td>
+                        <td>{{item3.Email || 'NA'}}</td>
+                       </tr>
+                       <tr *ngIf="totalCount == 0">
+                        <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;">No Data Found</td>
+                      </tr>
+                </table>
+
+                <div class="LoderGifHere" *ngIf="isLoading2">
+                  <img src="../../assets/img/loder.gif">
+                </div>
+              </div>
+            </div>
+
+
+  <div class="figma-pagination-controls">
+    <div class="figma-pagination-rows-total">
+      <div class="figma-rows-per-page">
+        <div class="figma-rows-per-page-label">Row per page</div>
+        <ng-select [items]="['All']" class="figma-row-per-page-ng-select"
+          [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+        <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+      </div>
+      <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+        (pageChange)="pageChanged($event)" [(page)]="pagination.PageNo" [maxSize]="5" [rotate]="true"
+        [boundaryLinks]="false" class="figma-pagination">
+        <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+        <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+      </ngb-pagination>
+    </div>
+  </div>
+          </ng-container>
+
+          <ng-container *ngIf="commonObj.detailTab == 'Campaign'">
+            <div class="figma-collapse-product-info">
+
+              <div class="figma-product-table-container" style="padding: 0;">
+                <div class="custom-search-container" style="padding: 0 6px;margin-bottom: 0;">
+                  <div class="custom-outter-body-lead-list-c9" style="width: auto;border-bottom: none;">
+                    <div class="custom-table-select-icons reloadenow">
+                       <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span>
+                    </div>
+                  </div>
+                  <div class="custom-search-wrapper">
+                    <div ngbDropdown class="custom-common-search-container">
+
+                      <div class="custom-search-ico-input-container">
+                        <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+                        <input type="text" name="" id="" placeholder="Search" [(ngModel)]="searchValue" (keyup.enter)="RowPerPage()">
+                        <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+                          *ngIf="searchValue != ''"></span>
+                        <button type="button" class="new-search-btn" (click)="RowPerPage()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                      </div>
+                      <button type="button" class="custom-com-temp-btn" (click)="get()"><span
+                          class="custom-sp-plus-ft-sz">+</span> Add</button>
+
+                    </div>
+                  </div>
+                </div>
+                <table class="new-tabl">
+                  <thead  class="MainUserList" style="top:0px !important">
+                    <tr style="border-top: 1px solid #cdcdcd;">
+                    <th>S.NO</th>
+                    <th>Campaign Name</th>
+                    <th>Created Date</th>
+                    <th>From Date</th>
+                    <th>To Date</th>
+                    <th>Frequency </th>
+                    <th>Type </th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    </tr>
+                  </thead>
+                      <tr *ngFor="let item3 of compaignname" style="cursor: pointer;">
+                        <td (click)="suplier(item3.id)">{{item3.id}}</td>
+                        <td (click)="suplier(item3.id)">{{item3.CampaignName}}</td>
+                          <!-- <td (click)="suplier(item.id)">{{item.Industry}}</td> -->
+                          <td (click)="suplier(item3.id)">{{item3.CreateDate | customDate}}</td>
+                          <td (click)="suplier(item3.id)">{{item3.StartDate | customDate}}</td>
+                          <td (click)="suplier(item3.id)">{{item3.EndDate | customDate}}</td>
+                          <td (click)="suplier(item3.id)">{{item3.Frequency}}</td>
+                          <!-- <td (click)="suplier(item.id)">{{item.QualityResponse}}</td> -->
+                          <td (click)="suplier(item3.id)">{{item3.Type}}</td>
+                              <td *ngIf="item3.Status == '1'" style="color:green;">Active</td>
+                              <td *ngIf="item3.Status != '1'" style="color:red;">Inactive</td>
+
+                                  <td routerLink="/campaign/details/campaign-name/edit-campaign-name/{{item3.id}}" style="text-decoration: none;"><span><i class="fa fa-pencil" aria-hidden="true"></i></span></td><br>
+
+                      </tr>
+                      <tr *ngIf="totalCount2 == 0">
+                        <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;">No Data Found</td>
+                      </tr>
+                </table>
+
+                <div class="LoderGifHere" *ngIf="isLoading2">
+                  <img src="../../assets/img/loder.gif">
+                </div>
+              </div>
+            </div>
+
+            <div class="figma-pagination-controls">
+              <div class="figma-pagination-rows-total">
+                <div class="figma-rows-per-page">
+                  <div class="figma-rows-per-page-label">Row per page</div>
+                  <ng-select [items]="['All']" class="figma-row-per-page-ng-select"
+                    [(ngModel)]="pagination2.maxItem" (change)="RowPerPage()"></ng-select>
+                  <div class="figma-rows-per-page-total">Total {{startind2}}-{{endind2}} of {{totalCount2}}</div>
+                </div>
+                <ngb-pagination [collectionSize]="totalCount2" [pageSize]="pagination2.PageShow"
+                  (pageChange)="pageChanged($event)" [(page)]="pagination2.PageNo" [maxSize]="5" [rotate]="true"
+                  [boundaryLinks]="false" class="figma-pagination">
+                  <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+                  <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+                </ngb-pagination>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+

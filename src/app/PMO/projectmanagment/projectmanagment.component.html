@@ -1,0 +1,693 @@
+<!-- <app-left-menu></app-left-menu> -->
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+      <p class="custom-search-head-name">Project</p>
+      <div class="custom-search-wrapper">
+        <div ngbDropdown class="custom-common-search-container">
+          <button type="button" class="custom-action-btn openbtn" (click)="openNav()"><i class="fa fa-filter openbtn"></i> Filter</button>
+          <ng-template #filter>Filter</ng-template>
+          <div class="custom-search-ico-input-container">
+            <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+            <input type="text" name="" id="" placeholder="Search" [(ngModel)]="searchValue" (keyup.enter)="RowPerPage()">
+            <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+              *ngIf="searchValue != ''"></span>
+            <button type="button" class="new-search-btn" (click)="RowPerPage()"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+          <button type="button" class="custom-com-temp-btn" (click)="openmaximize(mymodal)"><span Name
+              class="custom-sp-plus-ft-sz">+</span> Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sales-boxes">
+      <div class="recent-sales UserManagement">
+        <div class="sales-details">
+          <div class="custom-outter-body-lead-list-c9">
+            <div class="custom-table-select-icons">
+              <span *ngIf="commonObj.tbCheckM_1 && commonObj.tbCheckM_2"
+                [innerHTML]="'figma-pencil-write' | svgIcons:'figma-template-central'" routerLink="/customer/edit-customer/{{count[0]}}"></span>
+              <!-- <span *ngIf="commonObj.tbCheckM_1" [innerHTML]="'figma-delete' | svgIcons:'figma-template-central'"
+                (click)="multipleDelete1()"></span> -->
+              <i *ngIf="commonObj.tbCheckM_2" class="fa-solid fa-eye figma-template-central" (click)="suplier(count[0])"></i>
+              <!-- <i class="fa-solid fa-gear" style="color:#909092;" data-bs-toggle="modal" data-bs-target="#EditModalNew"></i> -->
+              <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span>
+            </div>
+          </div>
+        </div>
+
+          <table class="new-tabl">
+            <!-- <ng-container *ngIf="!isLoading2"> -->
+            <thead class="MainUserList">
+            <tr>
+              <th><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+              <th class="MinWidthID" (click)="togglesortType('id')">ID <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th class="minWidth" (click)="togglesortType('CardName')">Project Name<span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('U_TYPE')">Customer <span
+                [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th class="StatusMIn" (click)="togglesortType('U_CONTOWNR')">Status <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('U_CONTOWNR')">Progress (%) <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('U_CONTOWNR')">Start Date <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('U_CONTOWNR')">End Date <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('U_CONTOWNR')">Priority <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('U_CONTOWNR')">Project Owner <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+                  <th (click)="togglesortType('U_CONTOWNR')">Created On <span
+                      [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th>Action</th>
+            </tr>
+          </thead>
+            <ng-container>
+              <tr class="hover">
+                <td>
+                  <input type="checkbox" class="checkbox"
+                    >
+                </td>
+                <td>12345</td>
+                <td [routerLink]="'/projectmanagment/ProjectDetails'">Wiscon</td>
+                <td>Wiscon Enterprises</td>
+                <td><li class="OnHold">On Hold</li></td>
+                <td style="position: relative;">
+                  <div class="progress" style="border-radius:50px; height: 11px;">
+                  <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+                <div style="position: absolute; top: 37%;left: 40%;color:#000; font-size:
+                9px;">5%</div>
+              </td>
+                <td>27/07/2023</td>
+                <td>27/07/2023</td>
+                <td><div class="PriorityPerent"><span class="High"></span><li class="PriorityTD">High</li></div></td>
+                <td>Nishita Arora</td>
+                <td>27/07/2023</td>
+                <td class="EditBoxForm">
+                  <span class="edit-delete edit-delete" (click)="editdeletepop"
+                    [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                  <div class="hover-show hover-show hover-show-inactive">
+                    <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                          class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                    <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                      Delete Customer</span><br> -->
+                    <span (click)="createOpportunity"><i class="fa fa-plus" aria-hidden="true"></i> Create
+                      Opportunity</span><br>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover">
+                  <td>
+                    <input type="checkbox" class="checkbox"
+                      >
+                  </td>
+                  <td>12345</td>
+                  <td [routerLink]="'/projectmanagment/ProjectDetails'">Wiscon</td>
+                  <td>Wiscon Enterprises</td>
+                  <td><li class="OffTrack">Off Track</li></td>
+                  <td style="position: relative;">
+                      <div class="progress" style="border-radius:50px; height: 11px;">
+                      <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div style="position: absolute; top: 37%;left: 40%;color:#000; font-size:
+                    9px;">5%</div>
+                  </td>
+                  <td>27/07/2023</td>
+                  <td>27/07/2023</td>
+                  <td><div class="PriorityPerent"><span class="Low"></span><li class="PriorityTD">Low</li></div></td>
+                  <td>Nishita Arora</td>
+                  <td>27/07/2023</td>
+                  <td class="EditBoxForm">
+                    <span class="edit-delete edit-delete" (click)="editdeletepop"
+                      [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                    <div class="hover-show hover-show hover-show-inactive">
+                      <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                            class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                      <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                        Delete Customer</span><br> -->
+                      <span (click)="createOpportunity"><i class="fa fa-plus" aria-hidden="true"></i> Create
+                        Opportunity</span><br>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover">
+                  <td>
+                    <input type="checkbox" class="checkbox"
+                      >
+                  </td>
+                  <td>12345</td>
+                  <td>Wiscon</td>
+                  <td>Wiscon Enterprises</td>
+                  <td><li class="OnHold">On Hold</li></td>
+                  <td style="position: relative;">
+                      <div class="progress" style="border-radius:50px; height: 11px;">
+                      <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div style="position: absolute; top: 37%;left: 40%;color:#000; font-size:
+                    9px;">5%</div>
+                  </td>
+                  <td>27/07/2023</td>
+                  <td>27/07/2023</td>
+                  <td><div class="PriorityPerent"><span class="Medium"></span><li class="PriorityTD">Medium</li></div></td>
+                  <td>Nishita Arora</td>
+                  <td>27/07/2023</td>
+                  <td class="EditBoxForm">
+                    <span class="edit-delete edit-delete" (click)="editdeletepop"
+                      [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                    <div class="hover-show hover-show hover-show-inactive">
+                      <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                            class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                      <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                        Delete Customer</span><br> -->
+                      <span (click)="createOpportunity"><i class="fa fa-plus" aria-hidden="true"></i> Create
+                        Opportunity</span><br>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover">
+                  <td>
+                    <input type="checkbox" class="checkbox"
+                      >
+                  </td>
+                  <td>12345</td>
+                  <td>Wiscon</td>
+                  <td>Wiscon Enterprises</td>
+                  <td><li class="InProcess">In Process</li></td>
+                  <td style="position: relative;">
+                      <div class="progress" style="border-radius:50px; height: 11px;">
+                      <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div style="position: absolute; top: 37%;left: 40%;color:#000; font-size:
+                    9px;">5%</div>
+                  </td>
+                  <td>27/07/2023</td>
+                  <td>27/07/2023</td>
+                  <td><div class="PriorityPerent"><span class="Low"></span><li class="PriorityTD">Low</li></div></td>
+                  <td>Nishita Arora</td>
+                  <td>27/07/2023</td>
+                  <td class="EditBoxForm">
+                    <span class="edit-delete edit-delete" (click)="editdeletepop"
+                      [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                    <div class="hover-show hover-show hover-show-inactive">
+                      <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                            class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                      <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                        Delete Customer</span><br> -->
+                      <span (click)="createOpportunity"><i class="fa fa-plus" aria-hidden="true"></i> Create
+                        Opportunity</span><br>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover">
+                  <td>
+                    <input type="checkbox" class="checkbox"
+                      >
+                  </td>
+                  <td>12345</td>
+                  <td>Wiscon</td>
+                  <td>Wiscon Enterprises</td>
+                  <td><li class="InProcess">In Process</li></td>
+                  <td style="position: relative;">
+                      <div class="progress" style="border-radius:50px; height: 11px;">
+                      <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div style="position: absolute; top: 37%;left: 40%;color:#000; font-size:
+                    9px;">5%</div>
+                  </td>
+                  <td>27/07/2023</td>
+                  <td>27/07/2023</td>
+                  <td><div class="PriorityPerent"><span class="High"></span><li class="PriorityTD">High</li></div></td>
+                  <td>Nishita Arora</td>
+                  <td>27/07/2023</td>
+                  <td class="EditBoxForm">
+                    <span class="edit-delete edit-delete" (click)="editdeletepop"
+                      [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                    <div class="hover-show hover-show hover-show-inactive">
+                      <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                            class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                      <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                        Delete Customer</span><br> -->
+                      <span (click)="createOpportunity"><i class="fa fa-plus" aria-hidden="true"></i> Create
+                        Opportunity</span><br>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover">
+                  <td>
+                    <input type="checkbox" class="checkbox"
+                      >
+                  </td>
+                  <td>12345</td>
+                  <td>Wiscon</td>
+                  <td>Wiscon Enterprises</td>
+                  <td><li class="CancelledLI">Cancelled</li></td>
+                  <td><div id="progressTDcontainer">
+                      <div id="progress_container_text">
+                        <div id="progress_container_text_align_center">5%</div>
+                      </div>
+                      <div class="loading_bar"></div>
+                    </div></td>
+                  <td>27/07/2023</td>
+                  <td>27/07/2023</td>
+                  <td><div class="PriorityPerent"><span class="Medium"></span><li class="PriorityTD">Medium</li></div></td>
+                  <td>Nishita Arora</td>
+                  <td>27/07/2023</td>
+                  <td class="EditBoxForm">
+                    <span class="edit-delete edit-delete" (click)="editdeletepop"
+                      [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                    <div class="hover-show hover-show hover-show-inactive">
+                      <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                            class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                      <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                        Delete Customer</span><br> -->
+                      <span (click)="createOpportunity"><i class="fa fa-plus" aria-hidden="true"></i> Create
+                        Opportunity</span><br>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover">
+                  <td>
+                    <input type="checkbox" class="checkbox"
+                      >
+                  </td>
+                  <td>12345</td>
+                  <td>Wiscon</td>
+                  <td>Wiscon Enterprises</td>
+                  <td><li class="CompletedLI">Completed</li></td>
+                  <td><div id="progressTDcontainer">
+                      <div id="progress_container_text">
+                        <div id="progress_container_text_align_center">5%</div>
+                      </div>
+                      <div class="loading_bar"></div>
+                    </div></td>
+                  <td>27/07/2023</td>
+                  <td>27/07/2023</td>
+                  <td><div class="PriorityPerent"><span class="High"></span><li class="PriorityTD">High</li></div></td>
+                  <td>Nishita Arora</td>
+                  <td>27/07/2023</td>
+                  <td class="EditBoxForm">
+                    <span class="edit-delete edit-delete" (click)="editdeletepop"
+                      [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                    <div class="hover-show hover-show hover-show-inactive">
+                      <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                            class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                      <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                        Delete Customer</span><br> -->
+                      <span (click)="createOpportunity"><i class="fa fa-plus" aria-hidden="true"></i> Create
+                        Opportunity</span><br>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover">
+                  <td>
+                    <input type="checkbox" class="checkbox"
+                      >
+                  </td>
+                  <td>12345</td>
+                  <td>Wiscon</td>
+                  <td>Wiscon Enterprises</td>
+                  <td><li class="OnHold">On Hold</li></td>
+                  <td><div id="progressTDcontainer">
+                      <div id="progress_container_text">
+                        <div id="progress_container_text_align_center">5%</div>
+                      </div>
+                      <div class="loading_bar"></div>
+                    </div></td>
+                  <td>27/07/2023</td>
+                  <td>27/07/2023</td>
+                  <td><div class="PriorityPerent"><span class="Low"></span><li class="PriorityTD">Low</li></div></td>
+                  <td>Nishita Arora</td>
+                  <td>27/07/2023</td>
+                  <td class="EditBoxForm">
+                    <span class="edit-delete edit-delete" (click)="editdeletepop"
+                      [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                    <div class="hover-show hover-show hover-show-inactive">
+                      <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                            class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                      <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                        Delete Customer</span><br> -->
+                      <span (click)="createOpportunity"><i class="fa fa-plus" aria-hidden="true"></i> Create
+                        Opportunity</span><br>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover">
+                  <td>
+                    <input type="checkbox" class="checkbox"
+                      >
+                  </td>
+                  <td>12345</td>
+                  <td>Wiscon</td>
+                  <td>Wiscon Enterprises</td>
+                  <td><li class="CompletedLI">Completed</li></td>
+                  <td><div id="progressTDcontainer">
+                      <div id="progress_container_text">
+                        <div id="progress_container_text_align_center">5%</div>
+                      </div>
+                      <div class="loading_bar"></div>
+                    </div></td>
+                  <td>27/07/2023</td>
+                  <td>27/07/2023</td>
+                  <td><div class="PriorityPerent"><span class="Medium"></span><li class="PriorityTD">Medium</li></div></td>
+                  <td>Nishita Arora</td>
+                  <td>27/07/2023</td>
+                  <td class="EditBoxForm">
+                    <span class="edit-delete edit-delete" (click)="editdeletepop"
+                      [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                    <div class="hover-show hover-show hover-show-inactive">
+                      <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                            class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                      <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                        Delete Customer</span><br> -->
+                      <span (click)="createOpportunity"><i class="fa fa-plus" aria-hidden="true"></i> Create
+                        Opportunity</span><br>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover">
+                  <td>
+                    <input type="checkbox" class="checkbox"
+                      >
+                  </td>
+                  <td>12345</td>
+                  <td>Wiscon</td>
+                  <td>Wiscon Enterprises</td>
+                  <td><li class="CompletedLI">Completed</li></td>
+                  <td><div id="progressTDcontainer">
+                      <div id="progress_container_text">
+                        <div id="progress_container_text_align_center">5%</div>
+                      </div>
+                      <div class="loading_bar"></div>
+                    </div></td>
+                  <td>27/07/2023</td>
+                  <td>27/07/2023</td>
+                  <td><div class="PriorityPerent"><span class="high"></span><li class="PriorityTD">High</li></div></td>
+                  <td>Nishita Arora</td>
+                  <td>27/07/2023</td>
+                  <td class="EditBoxForm">
+                    <span class="edit-delete edit-delete" (click)="editdeletepop"
+                      [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                    <div class="hover-show hover-show hover-show-inactive">
+                      <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                            class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                      <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                        Delete Customer</span><br> -->
+                      <span (click)="createOpportunity"><i class="fa fa-plus" aria-hidden="true"></i> Create
+                        Opportunity</span><br>
+                    </div>
+                  </td>
+                </tr>
+
+            </ng-container>
+
+            <tr *ngIf="totalCount == 0">
+              <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No Data Found</td>
+            </tr>
+          <!-- </ng-container> -->
+          </table>
+
+  <div class="LoderGifHere" *ngIf="isLoading2">
+    <img src="../../assets/img/loder.gif">
+  </div>
+      </div>
+
+    </div>
+
+
+
+  <div class="figma-pagination-controls">
+    <div class="figma-pagination-rows-total">
+      <div class="figma-rows-per-page">
+        <div class="figma-rows-per-page-label">Row per page</div>
+        <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+          [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+        <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+      </div>
+      <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+        (pageChange)="pageChanged($event)" [(page)]="pagination.PageNo" [maxSize]="5" [rotate]="true"
+        [boundaryLinks]="false" class="figma-pagination">
+        <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+        <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+      </ngb-pagination>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<div class="alert alert-primary delete-success-box alert-dismissible fade show px-3 py-5" role="alert">
+  Are You Sure Do You Want To Delete ?
+  <!-- <button type="button" class="btn-close" (click)="yesdeleteUser(0)"></button> -->
+  <div class="delet-btn">
+    <button type="button" class="yes-delete" (click)="yesdeleteUser(1)">Yes</button>
+    <button type="button" class="no-delete" (click)="yesdeleteUser(0)">No</button>
+  </div>
+</div>
+
+<div id="mySidepanel" class="sidepanel sidepanel2">
+  <div class="row">
+    <div class="col-12 mb-2 d-flex justify-content-between px-3 border-bottom py-2" >
+      <strong style="color: #4a79e4 !important;">Customer Filters</strong>
+      <a class="closebtn" (click)="closeNav()">&times;</a>
+    </div>
+   </div>
+  <form name="form">
+    <div class="filterForm-container">
+    <div class="row">
+    <!-- <div class="col-5 mb-3" >
+    </div> -->
+    <div class="col-12 mb-1">
+      <label class="MainLabelNames">Business Type </label>
+      <ng-select #selecttypeofcustomer [clearOnBackspace]="false" [searchable]="false" name="ctype" placeholder="Select Business Type " [(ngModel)]="filter_customer.ctype" class="ngsearch-dropdown input-fld">
+        <ng-template ng-header-tmp>
+          <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+            type="text" (input)="selecttypeofcustomer.filter($event.target.value)" />
+        </ng-template>
+        <ng-option value="" disable selected>Type of Customer</ng-option>
+        <ng-option *ngFor="let item of cstmrtype " value="{{item.id}}">{{item.Type}}</ng-option>
+      </ng-select>
+    </div>
+    <!-- <div class="col-5 mb-3">
+    </div> -->
+    <div class="col-12 mb-1">
+      <label class="MainLabelNames">Industry</label>
+      <ng-select #selectindustry  [clearOnBackspace]="false" [searchable]="false" name="industry" placeholder="Select Industry" [(ngModel)]="filter_customer.industry" class="ngsearch-dropdown input-fld">
+        <ng-template ng-header-tmp>
+          <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+            type="text" (input)="selectindustry.filter($event.target.value)" />
+        </ng-template>
+        <ng-option value="" disable selected>Select Industry</ng-option>
+        <ng-option *ngFor="let item of industorys" value="{{item.IndustryCode}}">{{item.IndustryName}}</ng-option>
+      </ng-select>
+
+
+    </div>
+
+
+    <!-- <div class="col-5 mb-3">
+    </div> -->
+    <div class="col-12 mb-1">
+      <label class="MainLabelNames">Sales Employee</label>
+      <ng-select #selectindustry [clearOnBackspace]="false" [searchable]="false" name="saleemp" placeholder="Select Employee" [(ngModel)]="filter_customer.saleemp" class="ngsearch-dropdown input-fld">
+        <ng-template ng-header-tmp>
+          <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+            type="text" (input)="selectindustry.filter($event.target.value)" />
+        </ng-template>
+        <ng-option value="" disable selected>Select Sales Employee</ng-option>
+        <ng-option *ngFor="let item of bridgess" value="{{item.SalesEmployeeCode}}">{{item.firstName}}</ng-option>
+      </ng-select>
+
+    </div>
+
+    <!-- <div class="col-5 mb-3">
+    </div> -->
+    <div class="col-12 mb-1 pb-3">
+      <label class="MainLabelNames">Payment Term</label>
+      <ng-select #selectpterms [clearOnBackspace]="false" [searchable]="false" name="pterms" placeholder="Select Payment Term" [(ngModel)]="filter_customer.pterms" class="ngsearch-dropdown input-fld">
+        <ng-template ng-header-tmp>
+          <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+            type="text" (input)="selectpterms.filter($event.target.value)" />
+        </ng-template>
+        <ng-option value="" disable selected>Select Payment Term</ng-option>
+        <ng-option *ngFor="let item of paymentterms" value="{{item.GroupNumber}}">{{item.PaymentTermsGroupName}}</ng-option>
+      </ng-select>
+    </div>
+  </div>
+  </div>
+  <!-- <hr class="TophrLIne"> -->
+    <div class="row">
+      <div class="FilterBtnHere">
+        <div class="ResetBTN">
+          <a (click)="resetfilter()">Reset</a>
+        </div>
+        <div class="ApplyBTN">
+          <button (click)="RowPerPage()">Apply</button>
+        </div>
+      </div>
+    </div>
+</form>
+</div>
+
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">ADD {{ProductItem.productComponent ? 'PROJECT' : ProductItem.modalSelectName}}</h4>
+    <span class="figma-screen-ico" [innerHTML]="(commonObj.bigScreenMode ? 'figma-modal-big-screen-ico' : 'figma-modal-mid-screen-ico') | svgIcons:''" (click)="bigScreenOrMid()"></span>
+    <span class="figma-screen-close" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="modal.dismiss('Cross click')"></span>
+  </div>
+  <ng-container *ngIf="ProductItem.productComponent else selectProduct" >
+    <p class="figma-modal-inner-heading">Project Details</p>
+    <form #f="ngForm" name="theForm" class="figma-modal-form" id="ProjectManagmentPopupHere">
+      <div class="figma-modal-body">
+        <div class="figma-form-wrapper">
+          <label>Quotation Name<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+          <input type="text" class="input-fld" placeholder="Quotation Name" autocomplete="off">
+        </div>
+        <div class="figma-form-wrapper">
+          <label>Order<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" class="input-fld" placeholder="Order">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="Search" type="text" (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Choose Order</ng-option>
+            <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+          </ng-select>
+        </div>
+        <div class="figma-form-wrapper">
+          <label>Customer<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" placeholder="Select Customer" class="input-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text" (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Choose Customer</ng-option>
+            <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+          </ng-select>
+        </div>
+        <div class="figma-form-wrapper">
+          <label>Business Partner Contact Person<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" placeholder="Business Partner Contact Person" class="input-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text" (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Choose Contact Person</ng-option>
+            <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+          </ng-select>
+        </div>
+        <div class="figma-form-wrapper">
+          <label>Project Owner<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" placeholder="Select Project Owner" class="input-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text" (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Choose Project Owner</ng-option>
+            <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+          </ng-select>
+        </div>
+        <div class="figma-form-wrapper">
+          <label>Department<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" placeholder="Enter Department" class="input-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text" (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Choose Department</ng-option>
+            <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+          </ng-select>
+        </div>
+        <div class="figma-form-wrapper">
+          <label>Start Date</label>
+          <input type="date" email="true" class="input-fld" placeholder="Select Date">
+        </div>
+        <div class="figma-form-wrapper">
+          <label>End Date</label>
+          <input type="date" email="true" class="input-fld" placeholder="Select Date">
+        </div>
+        <div class="figma-form-wrapper">
+          <label>Status<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" placeholder="Select Status" class="input-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text" (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Choose Status</ng-option>
+            <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+          </ng-select>
+        </div>
+        <div class="figma-form-wrapper">
+          <label>Priority<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" placeholder="Select Priority" class="input-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text" (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Choose Department</ng-option>
+            <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+          </ng-select>
+        </div>
+        <div class="figma-form-wrapper">
+          <label>Location</label>
+          <input type="text" class="input-fld" placeholder="Location">
+        </div>
+        <div class="figma-form-wrapper">
+          <label>Address</label>
+          <input type="text" class="input-fld" placeholder="Address">
+        </div>
+        <div class="figma-form-wrapper">
+          <label>Project Cost</label>
+          <input type="text" class="input-fld" placeholder="Eg. 2,000">
+        </div>
+        <div class="figma-form-wrapper">
+          <label>Cost to Company</label>
+          <input type="text" class="input-fld" placeholder="Eg. 2,000">
+        </div>
+        <div class="figma-form-wrapper figma-form-wrapper-full">
+          <label for="">Project Access</label>
+          <div class="form-check" style="margin-top: 14px;">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1" style="display: inline;">
+              Private
+              <br>
+              <span style="font-size:12px; color:#5C5E67; margin-top: -3px; display: block;font-weight: 400;">Only Project owner can access and view project.</span>
+            </label>
+          </div>
+          <div class="form-check" style="padding-bottom: 10px; margin-top: 14px;">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+            <label class="form-check-label" for="flexRadioDefault2" style="display: inline;">
+              Public
+              <br>
+              <span style="font-size:12px; color:#5C5E67; margin-top: -3px; display: block;font-weight: 400;">Portal users can only view, comment , whereas Project users can complete access. </span>
+            </label>
+          </div>
+        </div>
+        <div class="figma-form-wrapper figma-form-wrapper-full">
+          <label>Description</label>
+          <textarea class="input-fld" rows="6" placeholder="Description"></textarea>
+        </div>
+        <div class="figma-form-wrapper figma-form-wrapper-full">
+          <label style="background-color: #E9EFFC; border:1px dotted #4A79E4; padding: 12px; border-radius:5px; text-align: center; border: 1px dotted #4A79E4; width:100%; justify-content: center; align-items: center; display:flex;">
+            <input type="file" style="display: none;">
+            <span class="edit-delete edit-delete" [innerHTML]="'figma-attachment-file-ico' | svgIcons:''" class="table-v-dots"></span>
+            <li style="list-style: none;">Choose a File Or Drag Here</li>
+          </label>
+
+
+        </div>
+      </div>
+      <div class="figma-modal-fotter">
+        <button class="figma-outline-btn">Cancel</button>
+        <button class="figma-outline-btn">Save and Create Other</button>
+        <button class="figma-prim-btn" (click)="addLeads(f)">Save</button>
+      </div>
+    </form>
+  </ng-container>
+  <ng-template #selectProduct>
+    <p class="figma-modal-inner-heading">{{ProductItem.selectItems?ProductItem.modalSelectLabelName : ProductItem.modalSelectedLabelName}}</p>
+    <app-project-product [ProductItem]="ProductItem"></app-project-product>
+  </ng-template>
+</ng-template>

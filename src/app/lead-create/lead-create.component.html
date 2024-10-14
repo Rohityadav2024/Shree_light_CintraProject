@@ -1,0 +1,144 @@
+<!-- <app-left-menu></app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+
+
+    <div class="sales-boxes">
+      <div class="recent-sales box">
+        <div class="row">
+          <div class="col-md-7 title">
+            <h4> <strong>Add Lead</strong></h4>
+          </div>
+        </div>
+        <br>
+
+        <div class="row">
+          <div class="col-lg-10">
+            <form #f="ngForm" name="theForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="col-sm-5">
+                    <label>Company Name</label>
+                  </div>
+                  <div class="col-sm-7">
+                    <input type="text" required class="input-fld required-fld" name="OpportunityName"
+                      [(ngModel)]="opportunity.OpportunityName" placeholder="Company Name">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="col-sm-5">
+                    <label>Turnover </label>
+                  </div>
+                  <div class="col-sm-7">
+                    <input type="text" required class="input-fld required-fld" name="OpportunityName"
+                      [(ngModel)]="opportunity.OpportunityName" placeholder="Turnover ">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="col-sm-5">
+                    <label>Name</label>
+                  </div>
+                  <div class="col-sm-7">
+                    <input type="text" required class="input-fld required-fld" name="OpportunityName"
+                      [(ngModel)]="opportunity.OpportunityName" placeholder="Name">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="col-sm-5">
+                    <label>Email</label>
+                  </div>
+                  <div class="col-sm-7">
+                    <input type="text" required class="input-fld required-fld" name="OpportunityName"
+                      [(ngModel)]="opportunity.OpportunityName" placeholder="Email">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="col-sm-5">
+                    <label>Mobile number</label>
+                  </div>
+                  <div class="col-sm-7">
+                    <input type="text" required class="input-fld required-fld" name="OpportunityName"
+                      [(ngModel)]="opportunity.OpportunityName" placeholder="Mobile number">
+                  </div>
+                </div>
+
+
+                <div class="col-md-6">
+                  <div class="col-sm-5">
+                    <label>Location</label>
+                  </div>
+                  <div class="col-sm-7">
+                    <input type="text" required class="input-fld required-fld" name="OpportunityName"
+                      [(ngModel)]="opportunity.OpportunityName" placeholder="Location">
+                  </div>
+                </div>
+
+
+                <div class="col-md-6">
+                  <div class="col-sm-5">
+                    <label>Designation</label>
+                  </div>
+                  <div class="col-sm-7">
+                    <input type="text" required class="input-fld required-fld" name="OpportunityName"
+                      [(ngModel)]="opportunity.OpportunityName" placeholder="Designation">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="col-sm-5">
+                    <label>Product Intrest </label>
+                  </div>
+                  <div class="col-sm-7">
+                    <input type="text" required class="input-fld required-fld" name="OpportunityName"
+                      [(ngModel)]="opportunity.OpportunityName" placeholder="Product Intrest ">
+                  </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+                  <div class="col-sm-5">
+                    <label>Campaign</label>
+                  </div>
+                  <div class="col-sm-7">
+                    <select class="input-fld required-fld" [(ngModel)]="opportunity.U_TYPE" name="U_TYPE" required>
+                      <option value="" selected>Select Campaign</option>
+                      <option value="Facebook">Facebook </option>
+                      <option value="google ">google </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="col-sm-5">
+                    <label>Description</label>
+                  </div>
+                  <div class="col-sm-7">
+                    <textarea class="input-fld required-fld" required name="Opportunity Name" placeholder="Description"
+                      [(ngModel)]="opportunity.Remarks" name="Remarks"></textarea>
+                  </div>
+                </div>
+
+                <div style="text-align: center;" *ngIf="isLoading">
+                  <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+                </div>
+
+                <div class="col-md-12" style="text-align: right;" *ngIf="!isLoading">
+                  <button class="add-invent" [disabled]="f.invalid">Create</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

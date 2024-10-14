@@ -1,0 +1,45 @@
+::ng-deep .col-md-6 .ng-select.ng-select-single .ng-select-container{
+  height: 38px;
+}
+p.mid-set {
+  margin-bottom: 0;
+  position: relative;
+  top: 6px;
+  overflow: hidden;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+height: 20px;
+}
+.figma-form-wrapper-file-upload {
+  position: relative;
+  height: 60px;
+  grid-column: 1 / -1;
+  border-radius: 6px;
+  border: 1px dashed var(--main-template-bg-color);
+  background: rgba(74, 121, 228, 0.12);
+}
+.figma-form-wrapper-file-upload input[type=file] {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+.figma-form-wrapper-file-upload .figma-form-wrapper-file-upload-text {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 10px;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.024px;
+  z-index: 1;
+}

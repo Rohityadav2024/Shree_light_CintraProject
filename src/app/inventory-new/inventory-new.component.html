@@ -1,0 +1,540 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+      <p class="custom-search-head-name" style="cursor: pointer;">
+        <span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="setModule({id:2})" *ngIf="CAteId != 0" style="cursor:pointer;"></span>
+       <span (click)="toggleNav($event)"> {{ModuleItem}}</span>
+        <span  (click)="toggleNav($event)" style="font-size: 19px; display: inline-block; transform: translate(-1px, 2px);">
+          <i class="fa fa-caret-down" *ngIf="CAteId == 0"></i>
+          <i class="fa fa-caret-right" *ngIf="CAteId != 0"></i>
+        </span>
+         <span> {{CateName}} </span>
+      </p>
+        <nav *ngIf="isNavVisible">
+          <ul>
+            <li *ngFor="let item of ReportModule" [ngClass]="{'active':item.title==ModuleItem }" (click)="setModule(item)">{{item.title}}</li>
+          </ul>
+        </nav>
+      <div class="custom-search-wrapper" (click)="isNavVisible = false">
+        <div ngbDropdown class="custom-common-search-container">
+          <button *ngIf="exportStatus" type="button" class="custom-action-btn openbtn" (click)="Exportexcel()" ><i >Export &nbsp;</i>
+            <i title="Download Excel" class="fa-solid fa-file-export download-icon cursor-pointer exportfileicon"></i>
+          </button>
+          <div class="custom-search-ico-input-container">
+            <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+            <input type="text" name="" id="" placeholder="Search" [(ngModel)]="searchValue" (keyup.enter)="RowPerPage()">
+            <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+              *ngIf="searchValue != ''"></span>
+            <button type="button" class="new-search-btn" (click)="RowPerPage()"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+          <button type="button" class="custom-com-temp-btn" (click)="open(mymodal)"><span
+              class="custom-sp-plus-ft-sz">+</span> {{Headingss[0].heading101}}</button>
+
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes" (click)="isNavVisible = false">
+      <div class="recent-sales UserManagement">
+        <div class="sales-details">
+          <div class="custom-outter-body-lead-list-c9">
+            <div class="custom-table-select-icons">
+              <!-- <span *ngIf="commonObj.tbCheckM_1 && commonObj.tbCheckM_2"
+                [innerHTML]="'figma-pencil-write' | svgIcons:'figma-template-central'" (click)="openEdit(contentEdit, count,false)"></span>
+              <span *ngIf="commonObj.tbCheckM_1" [innerHTML]="'figma-delete' | svgIcons:'figma-template-central'"
+                (click)="multipleDelete1()"></span>
+              <i *ngIf="commonObj.tbCheckM_2" class="fa-solid fa-eye figma-template-central" (click)="openEdit(contentEdit, count,true)"></i> -->
+              <!-- <i class="fa-solid fa-gear" style="color:#909092;" data-bs-toggle="modal" data-bs-target="#EditModalNew"></i> -->
+              <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span>
+            </div>
+          </div>
+        </div>
+          <table class="new-tabl" id="yourTableId" *ngIf="idd != 2 || CAteId != 0">
+            <thead class="MainUserList">
+            <tr>
+              <th><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+              <th (click)="togglesortType('id')">{{Headingss[0].heading0}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+              <th>{{Headingss[0].Extra2}} </th>
+              <th (click)="togglesortType('ItemName')">{{Headingss[0].Extra3}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+              <th (click)="togglesortType('ItemName')">{{Headingss[0].Extra4}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+
+              <th (click)="togglesortType('Tax')">{{Headingss[0].Extra5}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+              <th (click)="togglesortType('Discount')">{{Headingss[0].Extra6}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+                 <th class="text-center">{{Headingss[0].heading111}} </th>
+              <!-- <th>Action</th> -->
+
+            </tr>
+            </thead>
+            <!-- <ng-container *ngIf="!isLoading2"> -->
+            <ng-container>
+              <tr class="hover" *ngFor="let item of items;  let i = index">
+                  <td>
+                  <input type="checkbox" id="checkbox{{item.id}}" value="{{item.id}}" class="checkbox">
+                </td>
+                <td >{{item.id}}</td>
+                <td >{{item.ItemName}}</td>
+                <td >{{item.id}}</td>
+                <td >{{item.id}}</td>
+                <td >{{item.id}}</td>
+                <td >{{item.id}}</td>
+
+                <td class="EditBoxForm text-center" style="padding: 0 0px; width: 150px;">
+                  <span class="edit-delete edit-delete{{item.id}}" (click)="editdeletepop(item)"
+                    [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                  <div class="hover-show hover-show{{item.id}} hover-show-inactive">
+                    <a style="text-decoration: none;" (click)="openmaximize(mymodal2,true,item)"><i class="fa fa-pencil"
+                        aria-hidden="true"></i> Edit {{Headingss[0].heading118}}</a><br>
+                        <!-- <a style="text-decoration: none;" (click)="confirmModal2(confirmModal22,item.id)"><i class="fa fa-trash"
+                          aria-hidden="true"></i> Delete Item</a><br> -->
+                  </div>
+                </td>
+              </tr>
+
+            </ng-container>
+
+            <tr *ngIf="totalCount == 0">
+              <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No Data Found</td>
+            </tr>
+          <!-- </ng-container> -->
+          </table>
+
+          <table class="new-tabl" id="yourTableId" *ngIf="idd == 2 && CAteId == 0">
+            <thead class="MainUserList">
+            <tr>
+              <th><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+              <th (click)="togglesortType('id')">{{Headingss[0].heading0}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+              <th>{{Headingss[1].header1}} </th>
+              <th>{{Headingss[0].header2}} </th>
+              <th>Total no of {{Headingss[1].header3}} </th>
+              <th class="text-center">{{Headingss[0].heading111}} </th>
+              <!-- <th>Action</th> -->
+
+            </tr>
+            </thead>
+            <!-- <ng-container *ngIf="!isLoading2"> -->
+            <ng-container>
+              <tr class="hover" *ngFor="let item of categorys;  let i = index">
+                  <td>
+                  <input type="checkbox" id="checkbox{{item.id}}" value="{{item.id}}" class="checkbox">
+                </td>
+                <td (click)="SetID(item)">{{item.id}}</td>
+                <td (click)="SetID(item)" class="figma-inventory-product-img-container">
+                  <img *ngIf="item.CategoryImageURL == ''" src="../../assets/img/iner-box1.png" alt="" class="figma-inventory-product-img">
+                  <img *ngIf="item.CategoryImageURL != ''" src="{{bridgeService2.baseUrl2}}{{item.CategoryImageURL}}" alt="" class="figma-inventory-product-img">
+                </td>
+                <td (click)="SetID(item)">{{item.CategoryName}}</td>
+                <td (click)="SetID(item)">{{item.ItemCount}}</td>
+
+                <td class="EditBoxForm text-center" style="padding: 0 0px; width: 150px;">
+                  <span class="edit-delete edit-delete{{item.id}}" (click)="editdeletepop(item)"
+                    [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                  <div class="hover-show hover-show{{item.id}} hover-show-inactive">
+                    <a style="text-decoration: none;" (click)="openCate(mymodalCate,true,item)"><i class="fa fa-pencil"
+                        aria-hidden="true"></i> {{Headingss[0].Extra7}} {{Headingss[0].header2}}</a><br>
+                        <a style="text-decoration: none;" (click)="confirmModal(confirmModal2,item.id)"><i class="fa fa-trash"
+                          aria-hidden="true"></i> Delete {{Headingss[0].header2}}</a><br>
+                  </div>
+                </td>
+              </tr>
+
+            </ng-container>
+
+            <tr *ngIf="totalCount == 0">
+              <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No Data Found</td>
+            </tr>
+          <!-- </ng-container> -->
+          </table>
+          <div class="LoderGifHere" *ngIf="isLoading2">
+            <img src="../../assets/img/loder.gif">
+          </div>
+        </div>
+      </div>
+
+
+  <div class="figma-pagination-controls">
+    <div class="figma-pagination-rows-total">
+      <div class="figma-rows-per-page">
+        <div class="figma-rows-per-page-label">Row per page</div>
+        <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+          [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+        <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+      </div>
+      <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+        (pageChange)="pageChanged($event)" [(page)]="pagination.PageNo" [maxSize]="5" [rotate]="true"
+        [boundaryLinks]="false" class="figma-pagination">
+        <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+        <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+      </ngb-pagination>
+    </div>
+  </div>
+  </div>
+
+
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="closnePop()" style="outline: none;">
+        <span aria-hidden="true" style="outline: none;">×</span>
+      </button>
+    </div>
+    <form #f="ngForm" name="theForm">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <label style="font-size:12px">{{Headingss[0].header2}}</label>
+            <select type="text" class="input-fld required-fld" name="AddCAteId" [(ngModel)]="AddCAteId" required>
+              <option value="">Select {{Headingss[0].header2}}</option>
+              <option *ngFor="let item of categorys;  let i = index" value="{{item.id}}">{{item.CategoryName}}</option>
+            </select>
+          </div>
+          <div class="col-md-12">
+            <div style="cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            color: #4a79e4;
+        " (click)="openCate(mymodalCate,false,'')">+ {{Headingss[0].heading101}} {{Headingss[0].header2}}</div>
+          </div>
+          <br>
+          <div class="col-md-12 text-center mt-2">
+            <!-- <button class="add-invent1" [disabled]="f.invalid">Save</button> -->
+            <button class="add-invent" (click)="closnePop()">{{Headingss[0].heading112}}</button> &nbsp;&nbsp;&nbsp;
+            <button class="add-invent1" (click)="ClickConticu()">Continue</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+</section>
+
+
+
+
+<ng-template #mymodal2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">{{Headingss[0].heading1}}</h4>
+    <span class="figma-screen-ico" [innerHTML]="(commonObj.bigScreenMode ? 'figma-modal-big-screen-ico' : 'figma-modal-mid-screen-ico') | svgIcons:''" (click)="bigScreenOrMid()"></span>
+    <span class="figma-screen-close" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="modal.dismiss('Cross click')"></span>
+  </div>
+  <ng-container >
+    <form #f="ngForm" name="theForm" (submit)="addItem(f)" class="figma-modal-form" id="ProjectManagmentPopupHere">
+
+    <p class="figma-modal-inner-heading">{{Headingss[0].heading118}} Information</p>
+    <!-- <div style="
+    font-weight: 500;
+    padding: 0 60px;
+    padding-top: 10px;
+">
+      <span>Type</span>
+      <input type="radio" name="type" class="input-fld required-fld" autocomplete="off" [checked]="ShowTabval == 1" (click)="ShowTab(1)" placeholder="Name" style="width: 100px;" required>
+      <span (click)="ShowTab(1)" style="cursor: pointer;">Products</span>
+      <input type="radio" name="type" class="input-fld required-fld" autocomplete="off" [checked]="ShowTabval == 2" placeholder="Name" (click)="ShowTab(2)" style="width: 100px;" required>
+      <span (click)="ShowTab(2)" style="cursor: pointer;">Services</span>
+      <input type="radio" name="type" class="input-fld required-fld" autocomplete="off" [checked]="ShowTabval == 3" placeholder="Name" (click)="ShowTab(3)" style="width: 100px;" required>
+      <span (click)="ShowTab(3)" style="cursor: pointer;">Non Inventory</span>
+    </div> -->
+
+    <div class="figma-modal-body" style="margin-bottom: 0;padding-block: 0px;padding-top: 10px;">
+    <div class="figma-form-wrapper figma-form-wrapper-full">
+      <label>{{Headingss[0].Extra2}}</label>
+      <input type="text" class="input-fld required-fld" name="ItemName" [(ngModel)]="item.ItemName" #ItemName="ngModel" placeholder="Item Name" required>
+    </div>
+
+    <div class="figma-form-wrapper">
+      <label>{{Headingss[1].header1}}</label>
+      <input type="file" class="input-fld"  (change)="onFileChanged2($event)" name="ItemImageURL" >
+
+    </div>
+
+    <div class="figma-form-wrapper">
+      <label>Item ID</label>
+      <input type="text"  class="input-fld required-fld" name="ItemCode" [(ngModel)]="item.ItemCode" #ItemCode="ngModel" autocomplete="off" placeholder="Item ID" required>
+    </div>
+
+
+    <div class="figma-form-wrapper">
+      <label>Tax (%)</label>
+      <input type="number" class="input-fld required-fld" name="Tax" [(ngModel)]="item.Tax" pattern="^[0-9]*$" #TaxCode="ngModel" placeholder="18" min="0" max="100" required>
+      <span class="help-block danger" *ngIf="TaxCode.errors?.required && TaxCode.touched">
+        The Tax is required
+      </span>
+      <span class="help-block danger" *ngIf="TaxCode.errors?.min || TaxCode.errors?.max">
+        The Tax between 0 to 100
+      </span>
+      <span class="help-block danger" *ngIf="TaxCode.errors?.pattern && TaxCode.touched">
+        Take Numeric Value Only
+      </span>
+    </div>
+
+    <div class="figma-form-wrapper">
+      <label>Discount (%)</label>
+      <input type="number" class="input-fld required-fld" name="Discount" [(ngModel)]="item.Discount" pattern="^[0-9]*$" #Discount="ngModel" placeholder="10" min="0" max="100" required>
+      <span class="help-block danger" *ngIf="Discount.errors?.required && Discount.touched">
+        The Discount is required
+      </span>
+      <span class="help-block danger" *ngIf="Discount.errors?.min || Discount.errors?.max">
+        The Discount between 0 to 100
+      </span>
+      <span class="help-block danger" *ngIf="Discount.errors?.pattern && Discount.touched">
+        Take Numeric Value Only
+      </span>
+    </div>
+  </div>
+
+      <div class="figma-modal-body" *ngIf="ShowTabval == 1 || ShowTabval == 3">
+
+        <div class="figma-form-wrapper">
+          <label>SKU</label>
+          <input type="text" class="input-fld required-fld" name="SKU" [(ngModel)]="item.SKU" #SKU="ngModel" autocomplete="off" placeholder="SKU" required>
+        </div>
+
+        <div class="figma-form-wrapper">
+          <label>Reorder Point</label>
+          <input type="number" class="input-fld required-fld" name="ROP" [(ngModel)]="item.ROP" #ROP="ngModel" autocomplete="off" placeholder="Reorder Point" required>
+        </div>
+
+        <div class="figma-form-wrapper">
+          <label>Selling Unit Price</label>
+          <div class="newrupe">
+            <span style="top:14px;">{{'' | priceFormat:''}}</span>
+            <input type="number" min="0" class="input-fld required-fld" name="UnitPrice" [(ngModel)]="item.UnitPrice" #UnitPrice="ngModel" name="FreightCharge" required
+             placeholder="Selling Unit Price">
+            </div>
+        </div>
+
+        <div class="figma-form-wrapper">
+          <label>Quantity in Stock</label>
+          <input type="text" class="input-fld required-fld" name="Inventory" [(ngModel)]="item.Inventory" #Inventory="ngModel" autocomplete="off" placeholder="Quantity in Stock" required>
+        </div>
+
+        <div class="figma-form-wrapper figma-form-wrapper-full" style="display: none;">
+          <input type="checkbox" [(ngModel)]="isChecked" name="isChecked" (click)="getval()" class="input-fld required-fld" style="width: 50px;">
+          <label>Choose this option only for recurring business</label>
+        </div>
+
+        <div class="figma-form-wrapper" *ngIf="isChecked">
+          <label>Billing Frequency</label>
+          <div>
+            <ng-select #selectshipstate [clearOnBackspace]="false" name="Billing_Frequency" [(ngModel)]="item.Billing_Frequency" #Billing_Frequency="ngModel" [searchable]="false" placeholder="Select Billing Frequency"  required
+              class="ngsearch-dropdown input-fld required-fld">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                  type="text" (input)="selectshipstate.filter($event.target.value)" />
+              </ng-template>
+              <ng-option value="" selected>Select Billing Frequency</ng-option>
+              <ng-option *ngFor="let it of frequency" value="{{it.name}}">{{it.name}}</ng-option>
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="figma-form-wrapper figma-form-wrapper-full" style="display: none;">
+          <input type="checkbox" [(ngModel)]="isChecked2" name="isChecked2" (click)="getval2()" class="input-fld required-fld" style="width: 50px;">
+          <label>Product specifications</label>
+        </div>
+
+
+        <div class="figma-form-wrapper" *ngIf="isChecked2">
+          <label>Unit</label>
+          <div>
+            <ng-select #selectshipstate [clearOnBackspace]="false" [searchable]="false" placeholder="kg"  name="Unit" [(ngModel)]="item.Unit" #Unit="ngModel" required
+              class="ngsearch-dropdown input-fld required-fld">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                  type="text" (input)="selectshipstate.filter($event.target.value)" />
+              </ng-template>
+              <ng-option value="" selected>Select</ng-option>
+              <ng-option value="kg">kg</ng-option>
+            </ng-select>
+          </div>
+        </div>
+
+          <div class="figma-form-wrapper" *ngIf="isChecked2">
+            <label>Weight</label>
+            <div>
+              <ng-select #selectshipstate [clearOnBackspace]="false" [searchable]="false" placeholder="kg"  name="Weight" [(ngModel)]="item.Weight" #Weight="ngModel" required
+                class="ngsearch-dropdown input-fld required-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selectshipstate.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" selected>Select Weight</ng-option>
+                <ng-option value="kg">kg</ng-option>
+              </ng-select>
+            </div>
+          </div>
+
+          <div class="figma-form-wrapper" *ngIf="isChecked2">
+            <label>Dimension</label>
+            <div>
+              <ng-select #selectshipstate [clearOnBackspace]="false" [searchable]="false" placeholder="cm"  name="Dimension" [(ngModel)]="item.Dimension" #Dimension="ngModel" required
+                class="ngsearch-dropdown input-fld required-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selectshipstate.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" selected>Select Dimension</ng-option>
+                <ng-option value="cm">cm</ng-option>
+              </ng-select>
+            </div>
+          </div>
+
+          <div class="figma-form-wrapper" *ngIf="isChecked2">
+            <label>Description</label>
+            <div>
+              <input type="text" class="input-fld required-fld" autocomplete="off"  name="Description" [(ngModel)]="item.Description" #Description="ngModel"  placeholder="Description" required>
+            </div>
+          </div>
+
+        <div class="figma-form-wrapper figma-form-wrapper-full" style="display: none;">
+          <input type="checkbox" [(ngModel)]="isChecked3" name="isChecked3" (click)="getval3()" class="input-fld required-fld" style="width: 50px;">
+          <label>Multiple Items ?</label>
+        </div>
+
+        <ng-container *ngIf="isChecked3">
+          <div class="figma-form-wrapper">
+            <label>Attribute</label>
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Option</label>
+          </div>
+          <ng-container *ngFor="let item of multiitme;let i = index">
+          <div class="figma-form-wrapper">
+            <div>
+              <ng-select #selectshipstate [clearOnBackspace]="false" [searchable]="false" name="Attribute_{{i}}" [(ngModel)]="item.Attribute" placeholder="Eg Color"  required
+                class="ngsearch-dropdown input-fld required-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selectshipstate.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" selected>Select Attribute</ng-option>
+                <ng-option value="Color">Color</ng-option>
+              </ng-select>
+            </div>
+          </div>
+          <div class="figma-form-wrapper">
+            <div>
+              <ng-select style="width: 80%;float: left;" #selectshipstate [clearOnBackspace]="false" name="Option_{{i}}" [(ngModel)]="item.Option" [searchable]="false" placeholder="Green"  required
+                class="ngsearch-dropdown input-fld required-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selectshipstate.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" selected>Select Option</ng-option>
+                <ng-option value="Green">Green</ng-option>
+              </ng-select>
+              <div style="width: 15%;float: right;margin-top: 6px;">
+                <i class="fa fa-trash" style="color: red;cursor: pointer;" (click)="removeFromArra(i)"></i>
+              </div>
+            </div>
+          </div>
+          </ng-container>
+          <span style="width: 80%;float: left;" style="
+          color: #4a79e4;
+          font-size: 14px;
+          cursor: pointer;
+          margin-top: 10px;
+      " (click)="addinMulti()">+ Add Attribute</span>
+        </ng-container>
+      </div>
+
+      <div class="figma-modal-body" *ngIf="ShowTabval == 2">
+
+        <div class="figma-form-wrapper">
+          <label>Price</label>
+          <div class="newrupe">
+            <span style="top:14px;">{{'' | priceFormat:''}}</span>
+            <input type="number" min="0" class="input-fld"  name="UnitPrice" [(ngModel)]="item.UnitPrice" #UnitPrice="ngModel"
+             placeholder="Price">
+            </div>
+        </div>
+
+        <div class="figma-form-wrapper figma-form-wrapper-full">
+          <input type="checkbox" [(ngModel)]="isChecked2" name="isChecked2" (click)="getval2()" class="input-fld required-fld" style="width: 50px;">
+          <label>Service specifications</label>
+        </div>
+
+        <ng-container *ngIf="isChecked2">
+          <div class="figma-form-wrapper">
+            <label>Service Location</label>
+            <input type="text" class="input-fld required-fld"  name="Location" [(ngModel)]="item.Location" #Location="ngModel" autocomplete="off" placeholder="Service Location" required>
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Estimated Duration</label>
+            <input type="text" class="input-fld required-fld" name="Duration" [(ngModel)]="item.Duration" #Duration="ngModel" autocomplete="off" placeholder="Estimated Duration" required>
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Description</label>
+            <input type="text" class="input-fld required-fld" name="Description" [(ngModel)]="item.Description" #Description="ngModel" autocomplete="off" placeholder="Description" required>
+          </div>
+        </ng-container>
+</div>
+
+      <div class="figma-modal-fotter">
+        <button class="figma-outline-btn" (click)="modal.dismiss('Cross click')">Cancel</button>
+        <button class="figma-outline-btn">Save and Create Other</button>
+        <button class="figma-prim-btn">Save</button>
+      </div>
+    </form>
+  </ng-container>
+
+</ng-template>
+
+
+
+<ng-template #mymodalCate let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="width: 100%;text-align: center;color: #4A79E4; font-size: 20px;">{{isEdit?'Edit':'Add'}} {{Headingss[0].header2}}</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')" style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm" (submit)="addCategory(f)">
+      <div class="row">
+        <div class="col-md-12">
+          <label>{{Headingss[0].Extra8}} {{Headingss[0].Extra2}}</label>
+          <input type="text" class="input-fld required-fld" name="CategoryName" [(ngModel)]="category.CategoryName" #CategoryName="ngModel" placeholder="Category Name" required>
+          <span class="help-block danger" *ngIf="(CategoryName.errors?.required && f.submitted)||(CategoryName.errors?.required && CategoryName.touched)">
+            The Category Name is required
+          </span>
+        </div>
+        <div class="col-md-12">
+          <label>{{Headingss[0].Extra8}} {{Headingss[1].header1}}</label>
+          <input type="file" class="input-fld"  (change)="onFileChanged($event)" name="CategoryImageURL" >
+
+        </div>
+
+        <div class="col-md-12 text-center mt-2">
+          <!-- <button class="add-invent1" [disabled]="f.invalid">Save</button> -->
+          <button class="add-invent1">Save</button>
+        </div>
+        <!-- <div *ngIf="isLoading"><img src="../../assets/img/loder.gif"></div> -->
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+<ng-template #confirmModal2 let-modal>
+  <div class="modal-body">
+    <p>Are You Sure Do You Want To Delete ?</p>
+    <div class="confirm-btn">
+      <button class="btn custom-btn-blue" (click)="multipleDelete1(JunkId)">OK</button>
+      <button class="btn custom-btn-outline-blue" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #confirmModal22 let-modal>
+  <div class="modal-body">
+    <p>Are You Sure Do You Want To Delete ?</p>
+    <div class="confirm-btn">
+      <button class="btn custom-btn-blue" (click)="multipleDelete12(JunkId2)">OK</button>
+      <button class="btn custom-btn-outline-blue" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>

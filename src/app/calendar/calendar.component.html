@@ -1,0 +1,138 @@
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="sales-boxes">
+      <div class="recent-sales box">
+        <div class="em-search-wrapper">
+          <div class="em-search-heading">Calendar </div>
+          <div class="changeDate-fs12">{{changeDate}}</div>
+          <div class="em-search-container">
+            <button class="btn btn-sm" (click)="open(eventModal,'Event')"><span>+</span> New</button>
+          </div>
+        </div>
+        <div class="row mt-2" style="row-gap:10px">
+          <div class="col-lg-7">
+            <full-calendar [options]="CalendarOptions"></full-calendar>
+          </div>
+
+          <div class="col-lg-5 padding-inline-992">
+
+            <div class="caland">
+              <ng-container *ngFor="let item of activity ">
+                <div class="row p-2" *ngIf="item.Type == 'Event'" (click)="goToDetial(item)"
+                  style="border-left: 5px solid green;box-shadow:0px 0px 30px 0px rgb;padding: 10px 0;border-bottom: 1px solid #eee;cursor: pointer;">
+                  <div class="col-md-4" style="padding-left: 3px; font-size: 10px;"> <b> {{item.To | customDate}}</b><br> {{item.Time }} </div>
+                  <div class="col-md-8" style="padding-right:5px; font-size: 12px;">
+                    <b> <span placement="bottom" ngbTooltip="{{item.Title}}">{{item.Title |
+                        slice:0:10}}{{ item.Title.length > 10 ? '...' : ''}}</span> </b><br><span placement="top"
+                      ngbTooltip="{{item.Description}}"> {{item.Description | slice:0:40}}{{ item.Description.length >
+                      40 ? '...' : ''}}</span>
+                  </div>
+                </div>
+
+                <div class="row p-2" *ngIf="item.Type == 'Task'" (click)="goToDetial(item)"
+                  style="border-left: 5px solid orange;border-bottom: 1px solid #eee;cursor: pointer;">
+                  <div class="col-md-4" style="padding-left: 3px; font-size: 10px;"> <b> {{item.To  | customDate}}</b><br> {{item.Time}} </div>
+                  <div class="col-md-8" style="padding-right:5px; font-size: 12px;">
+                    <!-- <b>T0 - {{item.id}} {{item.Title}} </b><br> {{item.Description}} -->
+                    <b><span placement="bottom" ngbTooltip="{{item.Title}}"> {{item.Title | slice:0:10}}{{
+                        item.Title.length > 10 ? '...' : ''}}</span> </b><br><span placement="top"
+                      ngbTooltip="{{item.Description}}"> {{item.Description | slice:0:40}}{{ item.Description.length >
+                      40 ? '...' : ''}}</span>
+                  </div>
+                </div>
+
+                <div class="row p-2" *ngIf="item.Type == 'Followup'" (click)="goToDetial(item)"
+                  style="border-left: 5px solid #4a79e4;border-bottom: 1px solid #eee;cursor: pointer;">
+                  <div class="col-md-4" style="padding-left: 3px; font-size: 10px;">
+                    <!-- <b> {{item.Time}} </b><br> {{item.CreateDate}} -->
+                    <b> {{item.To | customDate}}</b><br> {{item.Time}}
+                  </div>
+                  <div class="col-md-8" style="padding-right:5px; font-size: 12px;">
+                    <b> {{item.Subject == ''? 'NA' : item.Subject}} </b><br> <span placement="top"
+                      ngbTooltip="{{item.Comment}}">{{item.Comment | slice:0:40}}{{ item.Comment.length > 40 ? '...' :
+                      ''}} </span>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <div *ngIf="!activity.length" style="text-align: center;font-size: 20px;color: #4a79e4;
+            position: absolute;
+            bottom: 47%;
+            right: 10%;">No Data Found</div>
+            <div class="campaign-follup-task-fixed">
+              <div class="campaign-follup-follow"><i class="fa fa-circle"></i>Follow Up</div>
+              <div class="campaign-follup-task"><i class="fa fa-circle"></i>Task</div>
+              <div class="campaign-follup-event"><i class="fa fa-circle"></i>Event</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+
+</section>
+
+
+
+<ng-template #eventModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Add Event</h4>
+    <span class="figma-screen-close" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="modal.dismiss('Cross click')"></span>
+  </div>
+  <form  #f="ngForm" name="theForm" class="figma-cards-activity-modal-form">
+    <div class="figma-cards-activity-modal-body">
+      <div class="figma-activity-content-wrapper">
+        <label for="">Name of Event</label>
+        <input type="text" class="input-fld required-fld" name="Title" [(ngModel)]="Activitys.Title" placeholder="Name of Event" autocomplete="off" required>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">Opportunity</label>
+        <select type="text" class="input-fld required-fld" name="SourceID" [(ngModel)]="Activitys.SourceID" autocomplete="off" required>
+        <option value="">Select Opportunity</option>
+        <option *ngFor="let item of opportunitys" value="{{item.id}}">{{item.OpportunityName}}</option>
+        </select>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">Start Date</label>
+        <div class="figma-custom-date-time">
+          <input type="date" class="input-fld required-fld" name="From" [(ngModel)]="Activitys.From" required>
+          <!-- <span [innerHTML]="'figma-date-ico' | svgIcons:''"></span> -->
+        </div>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">Start Time</label>
+        <div class="figma-custom-date-time">
+          <input type="time" class="input-fld required-fld"  name="Time" [(ngModel)]="Activitys.Time" required>
+          <!-- <span [innerHTML]="'figma-time-ico' | svgIcons:''"></span> -->
+        </div>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">End Date</label>
+        <div class="figma-custom-date-time">
+          <input type="date" class="input-fld required-fld"  name="To" [(ngModel)]="Activitys.To" required>
+        </div>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">End Time</label>
+        <div class="figma-custom-date-time">
+          <input type="time" class="input-fld required-fld"  name="ToTime" [(ngModel)]="Activitys.ToTime" required>
+        </div>
+      </div>
+
+      <div class="figma-text-area-container">
+        <label for="">Description</label>
+        <textarea class="figma-text-area" placeholder="Describe the Event ......" name="Description" [(ngModel)]="Activitys.Description"></textarea>
+      </div>
+    </div>
+    <div class="figma-modal-fotter">
+      <button class="figma-prim-btn" (click)="addActivityEvents(f)">Save</button>
+    </div>
+  </form>
+
+</ng-template>

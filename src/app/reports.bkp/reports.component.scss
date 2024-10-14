@@ -1,0 +1,91 @@
+
+.custom-outter-body-lead-list-c9 .custom-table-select-icons{
+  border-bottom: 1px solid #c0c0c0;
+  padding-left: 0;
+}
+
+.reportsall.active{
+    border-bottom: 2px solid #4a79e4;
+    color: #4a79e4;
+}
+
+
+.reportsall{
+  cursor: pointer;
+  font-size: 14px;
+    padding: 6px 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+div#EditModalNew
+{
+  margin: 0;
+  padding-top: 100px;
+  left: -200px;
+.modal-dialog{
+  ul{
+    line-height: 35px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+  }
+  li{
+    cursor: pointer;
+    list-style-type: none;
+  }
+  li:hover{
+    color: #4a79e4;
+  }
+  li.active{
+    color: #4a79e4;
+  }
+}
+}
+
+.new-tabl{
+  border-top: 1px solid #e7e7e7;
+}
+
+.custom-outter-body-lead-list-c9{
+  border-bottom: none;
+}
+
+.ModuleItem{
+  padding-left: 10px;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+
+
+.MultiSelectSec{
+  border-bottom: 1px solid #e7e7e7;
+  margin-bottom: 5px;
+  padding-left: 10px;
+    padding-bottom: 5px;
+    font-weight: 600;
+    .tabs.active{
+      border: 1px solid #4a79e4;
+    }
+    .tabs {
+      cursor: pointer;
+      border: 1px solid #e7e7e7;
+      color: #4E4E56;
+      font-weight: 500;
+      font-size: 12px;
+      margin-right: 10px;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    i{
+      cursor: pointer;
+    }
+}
+
+
+.reportdwd{
+  float: right;
+  font-size: 12px;
+  padding-right: 10px;
+  color: #4a79e4;
+  cursor: pointer;
+}

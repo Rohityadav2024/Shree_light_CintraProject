@@ -1,0 +1,85 @@
+.bridge-nav{
+    background-color: #fafafa;
+    height: 65px;
+}
+.img-logo{
+    width: 60px;
+    height: 50px;
+}
+.mt-20{
+    margin-top: 20px !important;
+}
+.mt-10{
+    margin-top: 20px !important;
+}
+.pt-20{
+    padding-top: 20px !important;
+}
+.pt-10{
+    padding-top: 10px !important;
+}
+
+.login-btn{
+    text-decoration: none;
+    margin-right: 20px;
+    color: #515151;
+    font-weight: 600;
+
+}
+.register-btn{
+    text-decoration: none;
+    background: #407bff;
+    padding: 9px 38px;
+    color: #fff;
+    margin-left: 20px;
+    font-weight: 500;
+    border-radius: 15px;
+}
+
+.bridge-bann-sec{
+    background-color: #fafafa;
+    height: 550px;
+}
+.install-now-btn{
+    text-decoration: none;
+    background: #407bff;
+    padding: 10px 30px;
+    color: #fff;
+    border-radius: 25px;
+}
+.bann-con-para{
+    margin-top: 15px;
+    margin-bottom: 2rem;
+}
+.are-new{
+    width: 65%;
+    margin-top: 40px;
+}
+.new-rahul-last{
+    text-align: center;
+    background: #c9d9fc;
+    height: 300px;
+    border-radius: 10px;
+    padding-top: 20px;
+}
+
+.home-para{
+    font-size: 14px;
+}
+
+@media screen and (max-width: 600px) {
+    .are-new{
+        width: 100%;
+        margin-top: 180px;
+    }
+    .bridge-logo{
+        float: left;
+        width: 50%;
+    }
+    .bridge-menu{
+        float: right;
+    width: 50%;
+    }
+}
+
+/* ouw clouser */

@@ -1,0 +1,285 @@
+.col-lg-6{
+  float: left;
+}
+.col-md-3{
+   font-size: 14px;
+}
+
+.input-add-note{
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid #7c7c7c;
+  border-radius: 8px;
+  color: #7c7c7c;
+}
+
+
+.col-md-1,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-10{
+  float: left;
+}
+
+
+.col-lg-6 b{
+  font-size: 16px;
+  line-height: 44px;
+}
+.col-lg-6 i{
+  font-size: 20px;
+  line-height: 42px;
+  font-weight: 900;
+}
+.col-lg-6 img{
+  width: 60%;margin-top: 6px;
+}
+.mt-20{
+  margin-top: 20px;
+}
+
+
+.border-bb{
+  border-bottom: 3px solid #4A79E4;
+  color: #4a79e4;
+}
+.coment-box{
+  /* width: 220px; */
+  height: 100%;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.bg-orange{
+  background: #fdecb1;
+}
+.bg-blue{
+  background: #DBE6FF;
+}
+
+.bg-followup{
+  background: #DBE6FF;
+}
+.coment-box p{
+font-weight: 600;
+margin-bottom: 5px;
+font-size: 12px;
+}
+
+input[type="checkbox"]{
+  width: 17px;
+    height: 17px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+div.circull{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #FF6161;
+  border: 5px solid #FFC8C8;
+}
+
+.center-middle{
+  text-align: center;
+  padding: 10px 0;
+}
+
+.up-evn{
+  border: 1px solid #CDCDCD;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+
+.clos-pop-btn {
+background: transparent !important;
+border: none !important;
+font-size: 30px !important;
+color: #7C7C7C !important;
+
+}
+.modal-header{
+border-bottom: none;
+padding: 20px!important;
+}
+.modal-body{
+padding: 0 20px 20px !important;
+}
+.input-fld{
+background: #F4F7FE;
+  color: #6c6c6c;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin: 7px 0;
+  width: 100%;
+}
+.modal-body label{
+font-weight: 800;
+  margin: 0px;
+}
+.add-invent{
+background: #4A79E4;
+border: none;
+color: #fff;
+padding: 2% 45%;
+margin: 10px 0;
+border-radius: 8px;
+}
+.modal-dialog{
+max-width: 550px !important;
+}
+.col-md-6{
+  padding: 0 7px;
+  }
+  input[type='radio'] {
+    -webkit-appearance:none;
+    width:20px;
+    height:20px;
+    border:1px solid #4A79E4;
+    border-radius:50%;
+    outline:none;
+  }
+  
+  input[type='radio']:before {
+    content:'';
+    display:block;
+    width: 13px;
+    height: 14px;
+    margin: 2px;
+    border-radius:50%;    
+  }
+  input[type='radio']:checked:before {
+    background:#4A79E4;
+    cursor: pointer;
+  }
+
+
+  input[type='checkbox'] {
+    width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  cursor: pointer;
+  }
+
+  #selectAll1, #selectAll12{
+    position: relative;
+    top: 4px;
+  }
+.close{
+outline: none;
+}
+
+
+.hover-show{
+border-radius: 8px;
+  position: absolute;
+  background: #fff;
+  padding: 10px 20px;
+  right: 40%;
+  color: #4a79e4;
+  box-shadow: 0px 2px 20px rgb(0 0 0 / 10%);
+  width: 175px;
+  line-height: 30px;
+  text-align: left;
+}
+.hover-show-active{
+display: block;
+}
+.hover-show-inactive{
+  display: none;
+  }
+.edit-delete{
+cursor: pointer;
+}
+
+
+
+.hover-show2{
+border-radius: 8px;
+  position: absolute;
+  background: #fff;
+  padding: 10px 20px;
+  right: 70%;
+  color: #4a79e4;
+  box-shadow: 0px 2px 20px rgb(0 0 0 / 10%);
+  width: 250px;
+  line-height: 30px;
+  text-align: left;
+}
+.hover-show-active{
+display: block;
+}
+.hover-show-inactive{
+  display: none;
+  }
+.edit-delete2{
+cursor: pointer;
+}
+
+.sho-high{
+  display: none;
+}
+.hide-details{
+  cursor: pointer;
+  display: none;
+}
+.show-details{
+  cursor: pointer;
+}
+
+
+.bg-green{
+color: #47c758 !important;
+}
+
+.bg-blue{
+color: #4a79e4 !important;
+}
+
+.bg-orange2{
+color: #f3b323 !important;
+}
+
+
+.bg-red{
+color: #d93025 !important;
+}
+.fc .fc-daygrid-day-frame{
+
+  position: initial;
+  min-height: 0%;
+}
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events{
+  position: relative !important;
+  /* min-height: 0em !important; */
+  /* display: none !important; */
+}
+.fc .fc-daygrid-day-number{
+  padding: 0px;
+}
+
+.caland{
+  position: inherit;
+    width: 100%;
+    max-height: 350px;
+}
+
+
+.caland::-webkit-scrollbar {
+  width: 12px;
+  /* width of the entire scrollbar */
+}
+
+.caland::-webkit-scrollbar-track {
+  background: #fff;
+  /* color of the tracking area */
+}
+
+.caland::-webkit-scrollbar-thumb {
+  background-color: #eeeeee;
+  /* color of the scroll thumb */
+  border-radius: 20px;
+  /* roundness of the scroll thumb */
+  border: 3px solid #fff;
+  /* creates padding around scroll thumb */
+}

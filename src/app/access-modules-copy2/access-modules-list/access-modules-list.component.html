@@ -1,0 +1,118 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+      <div class="figma-detail-header">
+        <div class="figma-left-part">
+          <i class="fa-regular fa-arrow-left cursor-pointer" (click)="backClicked()"></i>
+          <p class="custom-search-head-name">User Management</p>
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes">
+
+      <div class="recent-sales box">
+        <div class="row">
+          <div class="role-container">
+            <h6 class="role-header">Add New Role Information</h6>
+            
+            <div class="role-form">
+              <label class="role-label">Role</label>
+              <input type="text" name="Role" class="role-input" [value]="role_name" readonly>
+            </div>
+            
+            <hr class="role-divider">
+          </div>
+          <div class="container">
+            <form #f="ngForm" name="theForm" (submit)="saveSettings(f)">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Module Permissions</h3>
+                </div>
+                <div class="card-body">
+                  <!-- Parent Table -->
+                  <table class="table table-bordered">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th>Modules</th>
+                        <th>Add</th>
+                        <th>View</th>
+                        <th>Edit</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let module of (!!payloadModule.length ? payloadModule : Module); let moduleIndex = index">
+                        <tr>
+                          <td>{{ module.module_name }}</td>
+                          <td>
+                            <input type="checkbox" [name]="'add_status_' + (module.id || moduleIndex)" [(ngModel)]="module.is_add"
+                              (change)="moduleUpdator(module, $event.target.checked, 'add')">
+                          </td>
+                          <td>
+                            <input type="checkbox" [name]="'view_status_' + (module.id || moduleIndex)" [(ngModel)]="module.is_view"
+                              (change)="moduleUpdator(module, $event.target.checked, 'view')">
+                          </td>
+                          <td>
+                            <input type="checkbox" [name]="'edit_status_' + (module.id || moduleIndex)" [(ngModel)]="module.is_edit"
+                              (change)="moduleUpdator(module, $event.target.checked, 'edit')">
+                          </td>
+                          <td class="text-center">
+                            <i [ngClass]="{
+                              'fa fa-caret-down': isShow && openId === moduleIndex,
+                              'fa fa-caret-right': !isShow || openId !== moduleIndex
+                            }" (click)="showhid(moduleIndex)"></i>
+                          </td>
+                        </tr>
+          
+                        <tr *ngIf="isShow && openId == moduleIndex">
+                          <td></td>
+                          <td class="text-center">
+                            <input type="checkbox" [(ngModel)]="module.selectAllView" [ngModelOptions]="{standalone: true}"
+                              (change)="toggleAll(module, $event.target.checked, 'view')">
+                            <label class="ml-2">Select All View</label>
+                          </td>
+                          <td class="text-center">
+                            <input type="checkbox" [(ngModel)]="module.selectAllEdit" [ngModelOptions]="{standalone: true}"
+                              (change)="toggleAll(module, $event.target.checked, 'edit')">
+                            <label class="ml-2">Select All Edit</label>
+                          </td>
+                        </tr>
+          
+                        <ng-container *ngIf="isShow && openId == moduleIndex">
+                          <tr *ngFor="let item2 of module.data; let item2Index = index">
+                            <td class="pl-5" style="transform: translateX(110px);">{{ item2.label }}</td>
+                            <td class="text-center">
+                              <input type="checkbox" [name]="'view' + moduleIndex + item2Index" [(ngModel)]="item2.view"
+                                [ngModelOptions]="{standalone: true}"
+                                (change)="updateChildItem(module, $event.target.checked, 'view', item2, moduleIndex, item2Index)">
+                            </td>
+                            <td class="text-center">
+                              <input type="checkbox" [name]="'edit' + moduleIndex + item2Index" [(ngModel)]="item2.edit"
+                                [ngModelOptions]="{standalone: true}"
+                                (change)="updateChildItem(module, $event.target.checked, 'edit', item2, moduleIndex, item2Index)">
+                            </td>
+                          </tr>
+                        </ng-container>
+          
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-footer text-center">
+                  <button class="btn btn-primary" [disabled]="f.invalid">Save</button>
+                </div>
+              </div>
+          
+              <div class="text-center my-3" *ngIf="isLoading">
+                <img src="../../assets/img/loder.gif" style="height: 100%; width: 10%;">
+              </div>
+            </form>
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

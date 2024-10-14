@@ -1,0 +1,67 @@
+<!-- <app-left-menu></app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+    <div class="home-content">
+
+
+        <div class="sales-boxes">
+            <div class="recent-sales box">
+                <div class="row">
+                    <div class="col-md-7 title">
+                        <h4 style="text-align: 1.4rem;">
+                            <strong>Add Industry</strong>
+                        </h4>
+                    </div>
+                </div>
+                <br>
+
+
+                <div class="alert alert-primary success-box alert-dismissible fade show" role="alert">
+                    Industry Added Successfully !
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-10">
+                        <form #f="ngForm" name="theForm" (submit)="addIndustry(f)">
+                            <div class="row">
+                                <div class="col-md-6" style="padding-left:0">
+                                    <div class="col-sm-5">
+                                        <label>Industry Name</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <input type="text" required class="input-fld required-fld" name="IndustryName" [(ngModel)]="indus.IndustryName" #IndustryName="ngModel" placeholder="Industry Name">
+                                        <span class="help-block danger" *ngIf="IndustryName.errors?.required && IndustryName.touched">
+                                            The Industry Name is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6" style="padding-right:0">
+                                    <div class="col-sm-5">
+                                        <label>Industry Description</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <textarea class="input-fld required-fld" required name="Industry Description" placeholder="Description" [(ngModel)]="indus.IndustryDescription" name="IndustryDescription" #IndustryDescription="ngModel"></textarea>
+                                        <span class="help-block danger" *ngIf="IndustryDescription.errors?.required && IndustryDescription.touched">
+                                            The Industry Description is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div style="text-align: center;" *ngIf="isLoading">
+                                    <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;"></div>
+
+                                <div class="col-md-12" style="text-align: right;" *ngIf="!isLoading">
+                                    <button class="add-invent" [disabled]="f.invalid">Create</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

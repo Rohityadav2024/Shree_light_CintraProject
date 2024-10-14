@@ -1,0 +1,304 @@
+<div class="figma-sidebar" #leftNavbar>
+  <div class="logo-details">
+    <!-- <i class=' fa fa-bars' (click)="burgerToggle(leftNavbar)"></i> -->
+    <span class="logo_name">
+      <a routerLink="/dashboard">
+        <img src="../../assets/img/newBridgelogo.png" title="Logo">
+      </a>
+    </span>
+  </div>
+  <ul class="figma-ul-sidebar">
+    <li routerLink="/dashboard" [routerLinkActive]="['active']" (click)="falseDropdown()" title ="{{Headingss[0].leftheading}}">
+      <i class="fa fa-th-large"> </i>
+      <span class="links_name" >{{Headingss[0].leftheading}}</span>
+    </li>
+    <li *ngIf="role == 'admin'" routerLink="/employees" [routerLinkActive]="['active']" (click)="falseDropdown()" title ="{{Headingss[1].leftheading}}">
+      <i class='fa fa-user'></i>
+      <span class="links_name" >{{Headingss[1].leftheading}}</span>
+    </li>
+    <li style="display: block;" (click)="sublist3()" [routerLinkActive]="['active']" class="Inventory3" style="cursor:pointer;" [ngClass]="isLead?'active':''" title ="{{Headingss[2].leftheading}}" *ngIf="isModuleView(1)">
+      <i class='fa fa-users'></i>
+      <span class="links_name" style="width: 100%;" >{{Headingss[2].leftheading}}</span>
+      <i class='fa fa-caret-down fa-down' style="float: right;"></i>
+    </li>
+    <div class="dropdown-container3" [ngClass]="isLead?'active':''" *ngIf="isModuleView(1)">
+      <ul>
+        <li routerLink="/leads/table" [routerLinkActive]="['active']" title ="{{Headingss[2].SubHeading1}}">
+          <i class='fa fa-users'></i>
+          <span class="links_name" >{{Headingss[2].SubHeading1}}</span>
+        </li>
+        <!-- <li routerLink="/leads/split" [routerLinkActive]="['active']">
+                <i class='fa fa-users'></i>
+                <span class="links_name">Split</span>
+              </li>
+              <li routerLink="/leads/karban" [routerLinkActive]="['active']">
+                <i class='fa fa-users'></i>
+                <span class="links_name">Kanban</span>
+              </li> -->
+        <li routerLink="/leads/junk" [routerLinkActive]="['active']" title ="{{Headingss[2].SubHeading2}}">
+          <i class="fa fa-bar-chart"></i>
+          <span class="links_name" >{{Headingss[2].SubHeading2}}</span>
+        </li>
+        <!-- <li routerLink='/leads/linkedin' [routerLinkActive]="['active']">
+          <i class="fa fa-linkedin" aria-hidden="true"></i>
+          <span class="links_name">Linkedin</span>
+        </li> -->
+        <!-- <li routerLink="/facebook-campaign" [routerLinkActive]="['active']">
+          <i class='fa fa-facebook-square'></i>
+          <span class="links_name">Facebook</span>
+        </li> -->
+        <!-- <li routerLink='/india-mart' [routerLinkActive]="['active']">
+          <i class="fa-duotone fa-snowflake"> </i>
+          <span class="links_name">India Mart</span>
+        </li>
+        <li routerLink='/trade-india' [routerLinkActive]="['active']">
+          <i class="fas fa-wallet"></i>
+          <span class="links_name">Trade India</span>
+        </li> -->
+      </ul>
+    </div>
+
+    <li routerLink="/campaign" [routerLinkActive]="['active']" (click)="falseDropdown()" title ="Campaign" *ngIf="isModuleView(2)">
+      <i class='fa fa-users'></i>
+      <span class="links_name" >{{Headingss[14].leftheading}}</span>
+    </li>
+    <li routerLink="/calendar" (click)="falseDropdown()" [routerLinkActive]="['active']" title ="Calendar">
+      <i class='fa fa-calendar'></i>
+      <span class="links_name" >Calendar</span>
+    </li>
+    <li routerLink="/customer" (click)="falseDropdown()" [routerLinkActive]="['active']" title ="{{Headingss[3].leftheading}}"*ngIf="isModuleView(3)">
+      <i class='fa fa-users'></i>
+      <span class="links_name">{{Headingss[3].leftheading}}</span>
+    </li>
+    <!-- <li routerLink="/campaign" (click)="falseDropdown()" [routerLinkActive]="['active']">
+      <i class='fa fa-envelope'></i>
+      <span class="links_name">Campaign</span>
+    </li> -->
+    <!-- <li (click)="closeall()"> -->
+    <!-- <li routerLink="/announcement" [routerLinkActive]="['active']">
+      <i class='fa fa-bullhorn'></i>
+      <span class="links_name">Announcement</span>
+    </li>
+    <li style="display: none;" (click)="sublist()" class="Inventory">
+      <i class='fa fa-users'></i>
+      <span class="links_name" style="width: 100%;">LMS </span>
+      <i class='fa fa-caret-down fa-down' style="float: right;"></i>
+    </li>-->
+    <li routerLink="/opportunity" (click)="falseDropdown()" [routerLinkActive]="['active']" title ="{{Headingss[4].leftheading}}"*ngIf="isModuleView(4)">
+      <i class='fa fa-tasks'></i>
+      <span class="links_name" >{{Headingss[4].leftheading}}</span>
+    </li>
+
+    <li routerLink="/quotation" (click)="falseDropdown()" [routerLinkActive]="['active']" title="{{Headingss[5].leftheading}}"*ngIf="isModuleView(5)">
+      <i class='fa fa-quote-left'></i>
+      <span class="links_name" >{{Headingss[5].leftheading}}</span>
+    </li>
+    <li routerLink="/Directory-Partner" (click)="falseDropdown()" [routerLinkActive]="['active']" title="Directory-Partner"*ngIf="isModuleView(5)">
+      <i class='fa fa-quote-left'></i>
+      <span class="links_name" >Directory Partner</span>
+    </li>
+    <li (click)="falseDropdown()" routerLink="/order" [routerLinkActive]="['active']" title="{{Headingss[6].leftheading}}"*ngIf="isModuleView(6)">
+      <i class='fa fa-shopping-cart'></i>
+      <span class="links_name" >{{Headingss[6].leftheading}}</span>
+    </li>
+
+    <li routerLink="/delivery" (click)="falseDropdown()" [routerLinkActive]="['active']" title="{{Headingss[7].leftheading}}"*ngIf="isModuleView(7)">
+      <i class='fa fa-truck'></i>
+      <span class="links_name" >{{Headingss[7].leftheading}}</span>
+    </li>
+    <li (click)="falseDropdown()" routerLink="/invoice" [routerLinkActive]="['active']" title="{{Headingss[8].leftheading}}"*ngIf="isModuleView(8)">
+      <i class='fa fa-file'></i>
+      <span class="links_name" >{{Headingss[8].leftheading}}</span>
+    </li>
+
+    <li routerLink="/payment-collection/" (click)="falseDropdown()" [routerLinkActive]="['active']" title="{{Headingss[9].leftheading}}"*ngIf="isModuleView(9)">
+      <i class='fa fa-inr'></i>
+      <span class="links_name" >{{Headingss[9].leftheading}}</span>
+    </li>
+    <!-- <li routerLink="/product" [routerLinkActive]="['active']">
+      <i class='fa fa-database'></i>
+      <span class="links_name">Product</span>
+    </li>
+    <li routerLink="/warehouse" [routerLinkActive]="['active']">
+      <i class='fa fa-database'></i>
+      <span class="links_name">Warehouse</span>
+    </li> -->
+    <!-- <li *ngIf="role == 'admin'" (click)="falseDropdown()" routerLink="/inventory" [routerLinkActive]="['active']" title="Inventory">
+      <i class="fa fa-list-alt" aria-hidden="true"></i>
+      <span class="links_name" >Inventory</span>
+    </li> -->
+    <li *ngIf="role == 'admin'" (click)="falseDropdown()" routerLink="/newinventory/1/0" [routerLinkActive]="['active']" title="Inventory New">
+      <i class="fa fa-list-alt" aria-hidden="true"></i>
+      <span class="links_name" >Inventory</span>
+    </li>
+    <li (click)="CardcodeRemoveFilter()" routerLink="/reports" [routerLinkActive]="['active']" title="{{Headingss[10].leftheading}}">
+      <i class="fa fa-file" aria-hidden="true"></i>
+      <span class="links_name" >{{Headingss[10].leftheading}}</span>
+    </li>
+
+    <!-- <li (click)="CardcodeRemoveFilter()" routerLink="/price-list" [routerLinkActive]="['active']" title="{{'Price List'}}">
+      <i class="fa fa-file" aria-hidden="true"></i>
+      <span class="links_name" >Price List</span>
+    </li> -->
+
+
+
+    <!-- <li routerLink="/generatereports" [routerLinkActive]="['active']" title="Generated Reports">
+      <i class="fa fa-file" aria-hidden="true"></i>
+      <span class="links_name" >Generated Reports</span>
+    </li> -->
+    <!-- <li (click)="CardcodeRemoveFilter()" routerLink="/projectmanagment" [routerLinkActive]="['active']">
+      <i class="fa fa-list-alt" aria-hidden="true"></i>
+      <span class="links_name">Project Management</span>
+    </li> -->
+
+   <li routerLink="/target-assisment" (click)="falseDropdown()" [routerLinkActive]="['active']">
+      <i class='fa fa-truck'></i>
+      <span class="links_name" title="{{Headingss[11].leftheading}}">{{Headingss[11].leftheading}} </span>
+    </li>
+    <!-- <li (click)="querysParam('isList',true)" [routerLinkActive]="['active']" [ngClass]="isLocation?'active':''">
+      <i class='fa fa-map-marker'></i>
+      <span class="links_name">Location Tracking</span>
+    </li> -->
+    <!--  <li *ngIf="role == 'admin'" routerLink='/locationTracking' [routerLinkActive]="['active']">
+      <i class="fa fa-map-marker" aria-hidden="true"></i>
+      <span class="links_name">Location Tracking</span>
+    </li>
+    <li routerLink='/Mylocationlocation/one/{{UserId}}' (click)="MyLocation()" [routerLinkActive]="['active']">
+      <i class="fa fa-map-marker" aria-hidden="true"></i>
+      <span class="links_name">My Location</span>
+    </li> -->
+    <!-- <li routerLink="/route" [routerLinkActive]="['active']">
+      <i class="fa fa-map-signs" aria-hidden="true"></i>
+      <span class="links_name">Routes</span>
+    </li>
+    <li routerLink='/videos' [routerLinkActive]="['active']">
+      <i class="fas fa-compact-disc" aria-hidden="true"></i>
+      <span class="links_name">Videos</span>
+    </li> -->
+    <li *ngIf="role == 'admin'" style="display: block;" (click)="sublist2()" class="Inventory2" [routerLinkActive]="['active']" style="cursor:pointer;">
+      <i class='fa fa-cog'></i>
+      <span class="links_name" style="width: 100%;" title="Setting">Setting </span>
+      <i class='fa fa-caret-down fa-down2' style="float: right;"></i>
+    </li>
+    <div class="dropdown-container2">
+      <ul>
+        <!-- <li  routerLink="/customer-segment" [routerLinkActive]="['active']" title="{{'customer segment'}}">
+          <i class="fa fa-file" aria-hidden="true"></i>
+          <span class="links_name" >{{'customer segment'}}</span>
+        </li> -->
+
+        <li routerLink='/customer-segment' [routerLinkActive]="['active']">
+          <i class="fa fa-industry" aria-hidden="true"></i>
+          <span class="links_name" title="Industry">Customer Segment</span>
+        </li>
+
+
+        <li routerLink='/project-type' [routerLinkActive]="['active']">
+          <i class="fa fa-industry" aria-hidden="true"></i>
+          <span class="links_name" title="Industry">Project Type</span>
+        </li>
+        <!-- <li routerLink="/form" [routerLinkActive]="['active']">
+          <i class="fa fa-industry" title="Form"></i>
+          <span class="links_name">Survey Form</span>
+        </li> -->
+        <li routerLink='/industry' [routerLinkActive]="['active']">
+          <i class="fa fa-industry" aria-hidden="true"></i>
+          <span class="links_name" title="Industry">Industry</span>
+        </li>
+        <li routerLink='/customertype' [routerLinkActive]="['active']">
+          <i class="fa fa-users" aria-hidden="true"></i>
+          <span class="links_name" title="BP Type">BP Type</span>
+        </li>
+        <li routerLink='/opportunitytype' [routerLinkActive]="['active']">
+          <i class="fa fa-tasks" aria-hidden="true"></i>
+          <span class="links_name" title="Opp Type">Opp Type</span>
+        </li>
+        <li routerLink='/paymentmaster' [routerLinkActive]="['active']">
+          <i class='fa fa-shopping-bag'></i>
+          <span class="links_name" title="Payment Term">Payment Term</span>
+        </li>
+        <li routerLink='/zonemaster' [routerLinkActive]="['active']">
+          <i class='fa fa-shopping-bag'></i>
+          <span class="links_name" title="Zone Master">Zone Master</span>
+        </li>
+        <li routerLink='/departmentmaster' [routerLinkActive]="['active']">
+          <i class='fa fa-shopping-bag'></i>
+          <span class="links_name" title="Department Master">Department Master</span>
+        </li>
+
+        <!--change by me -->
+        <li routerLink='/competitors' [routerLinkActive]="['active']">
+          <i class='fa fa-shopping-bag'></i>
+          <span class="links_name" title="Competitors">Competitors</span>
+        </li>
+        <li routerLink='/rolemaster' [routerLinkActive]="['active']">
+          <i class='fa fa-shopping-bag'></i>
+          <span class="links_name" title="Role Master">Role Master</span>
+        </li>
+        <li routerLink='/company-branch' [routerLinkActive]="['active']">
+          <i class='fa fa-shopping-bag'></i>
+          <span class="links_name" title="Branch Master">Branch Master</span>
+        </li>
+        <li routerLink='/smtp-setting' [routerLinkActive]="['active']">
+          <i class="fa fa-cogs" aria-hidden="true"></i>
+          <span class="links_name" title="Smtp Setting">Smtp Setting</span>
+        </li>
+
+        <li routerLink='/local-setting' [routerLinkActive]="['active']">
+          <i class="fa fa-cogs" aria-hidden="true"></i>
+          <span class="links_name" title="Local Setting">Local Setting</span>
+        </li>
+         <li routerLink='/access-modules' [routerLinkActive]="['active']">
+          <i class="fa fa-tasks" aria-hidden="true"></i>
+          <span class="links_name" title="Access Modules">User Management</span>
+        </li>
+         <li routerLink='/field-management' [routerLinkActive]="['active']">
+          <i class="fa fa-tasks" aria-hidden="true"></i>
+          <span class="links_name" title="Access Modules">Fields Management</span>
+        </li>
+        <li routerLink='/workflow' [routerLinkActive]="['active']">
+          <i class="fa fa-tasks" aria-hidden="true"></i>
+          <span class="links_name" title="Access Modules">Workflow</span>
+        </li>
+        <!--<li routerLink='/language' [routerLinkActive]="['active']">
+          <i class="fa fa-tasks" aria-hidden="true"></i>
+          <span class="links_name">Master Language</span>
+        </li> -->
+        <!-- <li>
+            <i class='fa fa-cog'></i>
+            <span class="links_name">Setting</span>
+        </li> -->
+      </ul>
+    </div>
+    <li style="cursor: pointer;" (click)="deleteAttach(confirmModal)">
+      <i class='fa fa-sign-out'></i>
+      <span class="links_name">Log Out</span>
+    </li>
+  </ul>
+</div>
+
+<div class="showNoti">
+  <div class="shohiclass">
+    <div class="notifyArea" [ngClass]="{'bg-green-bg': item.notification.Read == '1' }" *ngFor="let item of notify">
+      <div (click)="deleteNotification(item.notification)">
+        <strong><i class="fa fa-bell-o"></i> {{item.notification.Title}} !</strong>
+        <br> {{item.notification.Description}}
+      </div>
+    </div>
+    <div class="notifyArea showall" routerLink="/notification" (click)="hidenotification()">
+      <span>Show All Notification</span>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #confirmModal let-modal>
+  <div class="modal-body">
+    <p> Are You Sure Do You Want To Logout ?</p>
+    <div class="confirm-btn">
+      <button class="btn custom-btn-blue" (click)="Logout()">OK</button>
+      <button class="btn custom-btn-outline-blue" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,31 @@
+.sidebar .nav-links li a{
+    font-size: 14px;
+}
+
+
+
+
+.showNoti {
+    cursor: pointer;
+  }
+
+  .showall {
+    font-size: 12px;
+  }
+
+  .showall:hover {
+    color: #4a79e4;
+  }
+
+  .class3 {
+    display: none;
+  }
+
+  .bg-green-bg {
+    background-color: #d0ddf833;
+    display: none;
+  }
+  a:hover {
+    color: #4A79E4 !important;
+}
+  .dropdown-container2{display: none;}

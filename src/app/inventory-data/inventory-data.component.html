@@ -1,0 +1,340 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content" (click)="func2(false)">
+    <div class="custom-search-container">
+      <p class="custom-search-head-name"><span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="backClicked()" style="cursor:pointer;"></span> {{Headingss[0].leftheading}}
+        <span style="font-size: 19px; display: inline-block; transform: translate(-1px, 2px);">></span> <span *ngFor="let itemone of inventoryDetails" style="font-size:16px;"> {{itemone.CategoryName}} </span> </p>
+      <div class="custom-search-wrapper">
+        <div ngbDropdown class="custom-common-search-container">
+          <div class="custom-search-ico-input-container">
+            <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+            <input type="text" name="" id="" placeholder="Search" [(ngModel)]="searchValue" (keyup.enter)="RowPerPage()">
+            <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+              *ngIf="searchValue != ''"></span>
+            <button type="button" class="new-search-btn" (click)="RowPerPage()"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+          <button type="button" class="custom-com-temp-btn" (click)="open(mymodal)"><span
+              class="custom-sp-plus-ft-sz">+</span> {{Headingss[0].heading101}}</button>
+
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales UserManagement">
+        <div class="sales-details">
+          <div class="custom-outter-body-lead-list-c9">
+            <div class="custom-table-select-icons">
+              <!-- <span *ngIf="commonObj.tbCheckM_1 && commonObj.tbCheckM_2"
+                [innerHTML]="'figma-pencil-write' | svgIcons:'figma-template-central'" (click)="openEdit(contentEdit, count,false)"></span>
+              <span *ngIf="commonObj.tbCheckM_1" [innerHTML]="'figma-delete' | svgIcons:'figma-template-central'"
+                (click)="multipleDelete1()"></span>
+              <i *ngIf="commonObj.tbCheckM_2" class="fa-solid fa-eye figma-template-central" (click)="openEdit(contentEdit, count,true)"></i> -->
+              <!-- <i class="fa-solid fa-gear" style="color:#909092;" data-bs-toggle="modal" data-bs-target="#EditModalNew"></i> -->
+              <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span>
+            </div>
+          </div>
+        </div>
+          <table class="new-tabl" id="yourTableId">
+            <thead class="MainUserList">
+            <tr >
+              <th><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+              <th (click)="togglesortType('id')">ID <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+              <th>{{Headingss[0].heading118}} Image </th>
+              <th (click)="togglesortType('ItemName')">{{Headingss[0].heading118}} Code <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+              <th (click)="togglesortType('ItemName')">{{Headingss[0].heading118}} Name <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+
+              <th (click)="togglesortType('Tax')">Tax <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+              <th (click)="togglesortType('Discount')">Discount <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+              <!-- <th (click)="togglesortType('Inventory')">Stock <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+              <th (click)="togglesortType('UoS')">Unit of Size <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+              <th (click)="togglesortType('Packing')">Packing <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+              <th>Category </th> -->
+              <th (click)="togglesortType('UnitPrice')">Unit Price <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> <i class="fa fa-sort"></i> </th>
+              <th class="text-center">{{Headingss[0].heading111}} </th>
+              <!-- <th>Action</th> -->
+
+            </tr>
+            </thead>
+            <!-- <ng-container *ngIf="!isLoading2"> -->
+            <ng-container>
+              <tr class="hover" *ngFor="let item of items;  let i = index">
+                <!-- <td>
+                  <input type="checkbox" id="checkbox{{item.id}}" value="{{item.id}}" class="checkbox"
+                    (click)="checkboxclick(item.id)">
+                </td> -->
+                 <td>
+                  <input type="checkbox" id="checkbox{{item.id}}" value="{{item.id}}" class="checkbox">
+                </td>
+                <td >{{item.id}}</td>
+                <td >
+                  <img *ngIf="item.ItemImageURL == ''" src="../../assets/img/iner-box1.png" alt="" class="figma-inventory-product-img">
+              <img *ngIf="item.ItemImageURL != ''" src="{{bridgeService2.baseUrl2}}{{item.ItemImageURL}}" alt="" class="figma-inventory-product-img">
+                </td>
+                <td >{{item.ItemCode}}</td>
+                <td (dblclick)="func('ItemName',item.id,item,true)"  *ngIf="isItem != 'ItemName' || isItemIndex != item.id">
+                  {{item.ItemName}}
+                  </td>
+                <td *ngIf="isItem == 'ItemName' && isItemIndex == item.id">
+                  <input type="text" class="excludeClass" [(ngModel)]="item.ItemName" name="ItemName_{{item.id}}"  (input)="checkisVaild($event,'ItemName')" (keyup.enter)="func2(false)">
+                </td>
+                <td (dblclick)="func('Tax',item.id,item,true)"  *ngIf="isItem != 'Tax' || isItemIndex != item.id">
+                  {{item.Tax || 0}}
+                  </td>
+                <td *ngIf="isItem == 'Tax' && isItemIndex == item.id">
+                  <input type="number" class="excludeClass" [(ngModel)]="item.Tax" min="0" max="100" name="Tax_{{item.id}}" (input)="checkisVaild($event,'Tax')" style="width: 40px;" (keyup.enter)="func2(false)">
+                </td>
+                <td (dblclick)="func('Discount',item.id,item,true)"  *ngIf="isItem != 'Discount' || isItemIndex != item.id">
+                  {{item.Discount || 0}}
+                  </td>
+                <td *ngIf="isItem == 'Discount' && isItemIndex == item.id">
+                  <input type="number" class="excludeClass" [(ngModel)]="item.Discount" min="0" max="100" name="Discount_{{item.id}}" (input)="checkisVaild($event,'Discount')" style="width: 50px;" (keyup.enter)="func2(false)">
+                </td>
+                <td (dblclick)="func('UnitPrice',item.id,item,true)"  *ngIf="isItem != 'UnitPrice' || isItemIndex != item.id">
+                  {{item.UnitPrice | priceFormat}}
+                  </td>
+                <td *ngIf="isItem == 'UnitPrice' && isItemIndex == item.id">
+                  <input type="number" class="excludeClass" [(ngModel)]="item.UnitPrice" min="0" name="UnitPrice_{{item.id}}" (input)="checkisVaild($event,'UnitPrice')" style="width: 75px;" (keyup.enter)="func2(false)">
+                </td>
+                <td class="text-center">
+                  <span class="edit-delete" (click)="openEdit(contentEdit, item)"> <i class="fa fa-edit" aria-hidden="true" style="width: 50px;"></i></span>
+                </td>
+              </tr>
+
+            </ng-container>
+
+            <tr *ngIf="totalCount == 0">
+              <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No Data Found</td>
+            </tr>
+          <!-- </ng-container> -->
+          </table>
+
+          <div class="LoderGifHere" *ngIf="isLoading2">
+            <img src="../../assets/img/loder.gif">
+          </div>
+        </div>
+      </div>
+
+
+  <div class="figma-pagination-controls">
+    <div class="figma-pagination-rows-total">
+      <div class="figma-rows-per-page">
+        <div class="figma-rows-per-page-label">Row per page</div>
+        <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+          [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+        <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+      </div>
+      <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+        (pageChange)="pageChanged($event)" [(page)]="pagination.PageNo" [maxSize]="5" [rotate]="true"
+        [boundaryLinks]="false" class="figma-pagination">
+        <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+        <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+      </ngb-pagination>
+    </div>
+  </div>
+  </div>
+
+
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title modal-heading" id="modal-basic-title">{{Headingss[0].heading101}} {{Headingss[0].heading118}}</h4>
+      <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')" style="outline: none;">
+        <span aria-hidden="true" style="outline: none;">×</span>
+      </button>
+    </div>
+    <form #f="ngForm" name="theForm" (submit)="addItem(f)">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <label style="font-size:12px">{{Headingss[0].heading118}} Name</label>
+            <input type="text" class="input-fld required-fld" name="ItemName" [(ngModel)]="item.ItemName" #ItemName="ngModel" placeholder="Item Name" required>
+            <span class="help-block danger" *ngIf="ItemName.errors?.required && ItemName.touched">
+              The Item Name is required
+            </span>
+          </div>
+
+          <!-- <div class="col-md-6">
+            <label style="font-size:12px">Item Code</label>
+            <input type="text" class="input-fld required-fld" name="ItemCode" [(ngModel)]="item.ItemCode" #ItemCode="ngModel" placeholder="ITM001" required>
+          </div> -->
+
+          <!-- <div class="col-md-6">
+            <label style="font-size:12px">Inventory</label>
+            <input type="text" class="input-fld required-fld" name="Inventory" [(ngModel)]="item.Inventory" #Inventory="ngModel" placeholder="100" required>
+            <span class="help-block danger" *ngIf="Inventory.errors?.required && Inventory.touched">
+              The Inventory is required
+            </span>
+          </div>
+
+          <div class="col-md-6">
+            <label style="font-size:12px">Unit of Size</label>
+            <input type="text" class="input-fld required-fld" name="UoS" [(ngModel)]="item.UoS" #UoS="ngModel" placeholder="1KG" required>
+            <span class="help-block danger" *ngIf="UoS.errors?.required && UoS.touched">
+              The Unit of Size is required
+            </span>
+          </div>
+
+          <div class="col-md-6">
+            <label style="font-size:12px">Packing</label>
+            <input type="text" class="input-fld required-fld" name="Packing" [(ngModel)]="item.Packing" #Packing="ngModel" placeholder="Strip, Bottle" required>
+            <span class="help-block danger" *ngIf="Packing.errors?.required && Packing.touched">
+              The Packing is required
+            </span>
+          </div> -->
+
+          <div class="col-md-6">
+            <label style="font-size:12px">Unit Price</label>
+            <div class="newrupe">
+              <span class="span9">{{'' | priceFormat:''}}</span>
+            <input type="text" class="input-fld required-fld" name="UnitPrice" [(ngModel)]="item.UnitPrice" #UnitPrice="ngModel" placeholder="Enter Price" required>
+            </div>
+            <span class="help-block danger" *ngIf="UnitPrice.errors?.required && UnitPrice.touched">
+              The Unit Price is required
+            </span>
+            <!-- <span class="help-block danger" *ngIf="UnitPrice.errors?.pattern && UnitPrice.touched">
+              Take Numeric Value Only
+            </span> -->
+          </div>
+
+          <div class="col-md-6">
+            <label style="font-size:12px">Tax (%)</label>
+            <input type="number" class="input-fld required-fld" name="Tax" [(ngModel)]="item.Tax" pattern="^[0-9]*$" #TaxCode="ngModel" placeholder="18" min="0" max="100" required>
+            <span class="help-block danger" *ngIf="TaxCode.errors?.required && TaxCode.touched">
+              The Tax is required
+            </span>
+            <span class="help-block danger" *ngIf="TaxCode.errors?.min || TaxCode.errors?.max">
+              The Tax between 0 to 100
+            </span>
+            <span class="help-block danger" *ngIf="TaxCode.errors?.pattern && TaxCode.touched">
+              Take Numeric Value Only
+            </span>
+          </div>
+
+          <div class="col-md-6">
+            <label style="font-size:12px">Discount (%)</label>
+            <input type="number" class="input-fld required-fld" name="Discount" [(ngModel)]="item.Discount" pattern="^[0-9]*$" #Discount="ngModel" placeholder="10" min="0" max="100" required>
+            <span class="help-block danger" *ngIf="Discount.errors?.required && Discount.touched">
+              The Discount is required
+            </span>
+            <span class="help-block danger" *ngIf="Discount.errors?.min || Discount.errors?.max">
+              The Discount between 0 to 100
+            </span>
+            <span class="help-block danger" *ngIf="Discount.errors?.pattern && Discount.touched">
+              Take Numeric Value Only
+            </span>
+          </div>
+
+          <div class="col-md-12">
+            <label style="font-size:12px">Description</label>
+            <input type="text" class="input-fld" name="Description" [(ngModel)]="item.Description" #Description="ngModel" placeholder="Description">
+            <span class="help-block danger" *ngIf="Description.errors?.required && Description.touched">
+              The Description is required
+            </span>
+          </div>
+          <div class="col-md-12">
+            <label>Image</label>
+            <input type="file" class="input-fld required-fld"  (change)="onFileChanged($event)" name="ItemImageURL" >
+
+          </div>
+          <div class="col-md-12 text-center mt-2">
+            <!-- <button class="add-invent1" [disabled]="f.invalid">Save</button> -->
+            <button class="add-invent1">{{Headingss[0].heading105}}</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+</section>
+
+<div class="alert alert-primary success-box alert-dismissible fade show" role="alert">
+  Inventory Created Successfully !
+</div>
+
+
+
+<ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Edit Item</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')" style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <form #f="ngForm" name="theForm" (submit)="editItem(f)">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <label style="font-size:12px">Item Name</label>
+          <input type="text" class="input-fld required-fld" name="ItemName" [(ngModel)]="EditItem.ItemName" #ItemName="ngModel" placeholder="Item Name" required>
+          <span class="help-block danger" *ngIf="ItemName.errors?.required && ItemName.touched">
+            The Item Name is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label style="font-size:12px">Unit Price</label>
+          <div class="newrupe">
+            <span class="span9">{{'' | priceFormat:''}} </span>
+          <input type="text" class="input-fld required-fld" name="UnitPrice" [(ngModel)]="EditItem.UnitPrice" #UnitPrice="ngModel" placeholder="100" required>
+          </div>
+          <span class="help-block danger" *ngIf="UnitPrice.errors?.required && UnitPrice.touched">
+            The Unit Price is required
+          </span>
+          <!-- <span class="help-block danger" *ngIf="UnitPrice.errors?.pattern && UnitPrice.touched">
+            Take Numeric Value Only
+          </span> -->
+        </div>
+
+
+        <div class="col-md-6">
+          <label style="font-size:12px">Tax</label>
+          <input type="number" class="input-fld required-fld" name="Tax" [(ngModel)]="EditItem.Tax" pattern="^[0-9]*$" #TaxCode="ngModel" placeholder="18" min="0" max="100" required>
+          <span class="help-block danger" *ngIf="TaxCode.errors?.required && TaxCode.touched">
+            The Tax is required
+          </span>
+          <span class="help-block danger" *ngIf="TaxCode.errors?.min || TaxCode.errors?.max">
+            The Tax between 0 to 100
+          </span>
+          <span class="help-block danger" *ngIf="TaxCode.errors?.pattern && TaxCode.touched">
+            Take Numeric Value Only
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label style="font-size:12px">Discount</label>
+          <input type="number" class="input-fld required-fld" name="Discount" [(ngModel)]="EditItem.Discount" pattern="^[0-9]*$" #Discount="ngModel" placeholder="10" min="0" max="100" required>
+          <span class="help-block danger" *ngIf="Discount.errors?.required && Discount.touched">
+            The Discount is required
+          </span>
+          <span class="help-block danger" *ngIf="Discount.errors?.min || Discount.errors?.max">
+            The Discount between 0 to 100
+          </span>
+          <span class="help-block danger" *ngIf="Discount.errors?.pattern && Discount.touched">
+            Take Numeric Value Only
+          </span>
+        </div>
+
+        <div class="col-md-12">
+          <label style="font-size:12px">Description</label>
+          <input type="text" class="input-fld" name="Description" [(ngModel)]="EditItem.Description" #Description="ngModel" placeholder="Description">
+          <span class="help-block danger" *ngIf="Description.errors?.required && Description.touched">
+            The Description is required
+          </span>
+        </div>
+        <div class="col-md-12">
+          <label>Image</label>
+          <input type="file" class="input-fld required-fld"  (change)="onFileChanged($event)" name="ItemImageURL" >
+
+        </div>
+        <div class="col-md-12 mt-3" style="text-align: center;">
+          <!-- <button class="add-invent1" [disabled]="f.invalid">Save</button> -->
+          <button class="add-invent1">Save</button>
+        </div>
+
+
+      </div>
+    </div>
+  </form>
+</ng-template>

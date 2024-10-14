@@ -1,0 +1,90 @@
+
+.act-arr{
+    border: 1px solid #A3AED0;
+    padding: 2px 20px;
+    border-radius: 8px;
+    color: #A3AED0;
+  }
+  
+  
+  
+  .clos-pop-btn {
+  background: transparent !important;
+  border: none !important;
+  font-size: 30px !important;
+  color: #7C7C7C !important;
+  
+  }
+  .modal-header{
+  border-bottom: none;
+  padding: 10px 20px!important;
+  }
+  .modal-body{
+  padding: 0 20px 20px !important;
+  }
+  .input-fld{
+  background: #F4F7FE;
+    color: #6c6c6c;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin: 3px 0;
+    width: 100%;
+  }
+  .modal-body label{
+  font-weight: 600;
+    margin: 5px 0px 5px;
+    font-size:14px;
+  }
+  .add-invent{
+  background: #4A79E4;
+  border: none;
+  color: #fff;
+  padding: 2% 45%;
+  margin: 10px 0;
+  border-radius: 8px;
+  }
+  
+  
+  /* up down area */
+  
+  
+  .new-tabl .active{
+  padding:10px 20px;
+  }
+  
+  .hover-show{
+    border-radius: 8px;
+      position: absolute;
+      background: #fff;
+      padding: 10px 20px;
+      right: 8%;
+      color: #4a79e4;
+      box-shadow: 0px 2px 20px rgb(0 0 0 / 10%);
+      width: 150px;
+      line-height: 30px;
+      text-align: left;
+      width: 180px;
+    }
+    .hover-show-active{
+    display: block;
+    }
+    .hover-show-inactive{
+      display: none;
+      }
+    .edit-delete{
+    cursor: pointer;
+    }
+    
+  .hover-show span{
+  cursor: pointer;
+  }
+  .col-md-6{
+  padding: 0 7px;
+  }
+  
+  th:first-child, td:first-child {
+    padding-left: 7px !important;
+  }
+
+    

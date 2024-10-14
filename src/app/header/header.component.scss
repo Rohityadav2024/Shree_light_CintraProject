@@ -1,0 +1,86 @@
+#myProfilepanel {
+  min-height: auto;
+  max-height: fit-content !important;
+  width: 0;
+  /* 0 width - change this with JavaScript */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Stay on top */
+  top:46px;
+  right: -500px;
+  background-color: #fff;
+  /* Black*/
+  box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 23%);
+  overflow-x: hidden;
+  padding: 0px 0px 32px 0px;
+  display: none;
+  border-radius: 3px;
+}
+.figma-header{
+  position: relative;
+  z-index: 6;
+}
+#myProfilepanel .UserProfile{
+  text-align: center;
+  padding: 10px;
+
+}
+
+#myProfilepanel .UserProfile .Pro-Img img{
+  width:50px;
+}
+#myProfilepanel .UserProfile .AllContent li{
+  list-style-type:none;
+  font-size: 13px;
+}
+#myProfilepanel .AllProduct_img .Box-1{
+  margin-top:15px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+  border: 1px solid  #dddddd;
+}
+#myProfilepanel .AllProduct_img .Box-1 img{
+  width: 50px;
+}
+#myProfilepanel .AllProduct_img .Box-1 li{
+  font-size: 13px;
+  color: #000;
+  list-style: none;
+  margin: auto;
+  margin-top: 10px;
+}
+.Box-1.active::before{
+  content: "";
+  position: absolute;
+  background-color: #3dd100;
+  top: 8px;
+  right: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50px;
+}
+#myProfilepanel .AllProduct_img .Box-1:hover{
+  background-color: #dddddd;
+  padding: 10px;
+  border-radius: 5px;
+}
+#myProfilepanel .AllProduct_img {
+  padding: 20px 10px;
+  text-align: center;
+}
+#myProfilepanel li.profile-icon{
+  width: 37px;
+  height: 37px;
+  align-items: center;
+  background-color: rgb(162, 176, 255);
+  border-radius: 50px;
+  list-style: none;
+  text-align: center !important;
+  line-height: 36px;
+  font-size: 10px;
+  font-weight: 500;
+  color:#fff;
+}

@@ -1,0 +1,307 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <!-- <app-header><span *ngIf="commonObj.fromDashboard"><em class="fa fa-solid fa-arrow-left" (click)="_CommonService.back()"></em></span>{{UrlType}} Tickets</app-header> -->
+  <div class="home-content">
+    <ng-container [ngSwitch]="location.showTypekey">
+      <ng-container *ngSwitchCase="'isList'">
+
+        <div class="custom-search-container">
+          <p class="custom-search-head-name">Location Tracking</p>
+          <div class="custom-search-wrapper">
+            <div class="custom-table-view-switch">
+              <span class="custom-table-view-switch-box-list-ico" [class.active]="location.isList" (click)="querysParam('isList',true)" [innerHTML]="'figma-calendar-6-box-ico' | svgIcons:''"></span>
+              <span class="custom-table-view-switch-box-list-ico" [class.active]="!location.isList" (click)="querysParam('isList',false)" [innerHTML]="'figma-calendar-4-box-ico' | svgIcons:''"></span>
+            </div>
+            <div ngbDropdown class="custom-common-search-container">
+              <button type="button" class="custom-action-btn openbtn" (click)="querysParam('location','view-my-location')">My Location</button>
+              <button type="button" class="custom-com-temp-btn" (click)="querysParam('view','map-view')">Map View</button>
+              <div class="custom-search-ico-input-container">
+                <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+                <input type="text" name="" id="" placeholder="Search" [(ngModel)]="searchValue" (keyup.enter)="RowPerPage()">
+                <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+                  *ngIf="searchValue != ''"></span>
+                <button type="button" class="new-search-btn" (click)="RowPerPage()"><i class="fa-solid fa-magnifying-glass"></i></button>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <ng-container *ngIf="location.isList else listBox">
+          <div class="sales-boxes">
+          <div class="recent-sales UserManagement">
+            <div class="sales-details">
+              <div class="custom-outter-body-lead-list-c9">
+                <div class="custom-table-select-icons">
+                 <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'"></span>
+                </div>
+              </div>
+            </div>
+              <table class="new-tabl">
+                <thead class="MainUserList">
+                <tr>
+                  <th><input id="selectAll1" type="checkbox"></th>
+                  <th>Sr No. <span [innerHTML]="'figma-table-sort' | svgIcons : ''"></span></th>
+                  <th>Employee Name <span [innerHTML]="'figma-table-sort' | svgIcons : ''"></span></th>
+                  <th>Role <span [innerHTML]="'figma-table-sort' | svgIcons : ''"></span></th>
+                  <th>Live Address <span [innerHTML]="'figma-table-sort' | svgIcons : ''"></span></th>
+                  <th>Contact No.</th>
+                  <th class="text-center">View on Map</th>
+
+                </tr>
+              </thead>
+              <tr class="custom-grid-table-body-inner" *ngFor="let commonList of location.locationTracking | paginate: { itemsPerPage: pagination.rows, currentPage: pagination.page,totalItems: location.locationTracking.length };">
+                <td> <input type="checkbox" class="checkbox"> </td>
+                <td>{{_BridgeService.isTicketsValue(commonList.id)}}</td>
+                <td>{{_BridgeService.isTicketsValue(commonList.SalesEmployeeName)}}</td>
+                <td>{{_BridgeService.isTicketsValue(commonList.role)}}</td>
+                <td>{{_BridgeService.isTicketsValue(commonList.DocDueDate | date: 'EEE MMM dd y')}}</td>
+                <td class="custom-link">{{_BridgeService.isTicketsValue(commonList.Mobile)}}</td>
+                <td class="text-center custom-link"><i class="fa-solid fa-location-dot"></i></td>
+              </tr>
+                <!-- </ng-container> -->
+                <tr *ngIf="totalCount == 0">
+                  <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No Data Found</td>
+                </tr>
+              </table>
+
+      <div class="LoderGifHere" *ngIf="isLoading2">
+        <img src="../../assets/img/loder.gif">
+      </div>
+          </div>
+          </div>
+          <div class="figma-pagination-controls">
+            <div class="figma-pagination-rows-total">
+              <div class="figma-rows-per-page">
+                <div class="figma-rows-per-page-label">Row per page</div>
+                <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+                  [(ngModel)]="pagination.maxItem"></ng-select>
+                <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+              </div>
+              <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+                 [(page)]="pagination.PageNo" [maxSize]="5" [rotate]="true"
+                [boundaryLinks]="false" class="figma-pagination">
+                <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+                <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+              </ngb-pagination>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #listBox>
+          <div class="location-tracking-boxes-view">
+            <div class="location-tracking-boxes-card-wrapper-container">
+              <div class="location-tracking-boxes-card" *ngFor="let commonList of location.locationTracking | paginate: { itemsPerPage: pagination.rows, currentPage: pagination.page,totalItems: location.locationTracking.length };">
+                <div class="location-tracking-boxes-card-map-view-img">
+                  <img src="../../../assets/img/map-view-img-1.png" alt="">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="location-tracking-boxes-card-map-view-detail-container">
+                  <div class="location-tracking-boxes-card-map-view-detail">
+                    <div class="location-tracking-boxes-card-name-title">{{commonList.SalesEmployeeName}}</div>
+                    <div class="location-tracking-boxes-card-name-role">{{commonList.role}}</div>
+                    <div class="location-tracking-boxes-card-name-address">
+                      Live Address:
+                      <span>E-138, E Block, Sector 63, Noida, Uttar Pradesh 201301, India</span>
+                    </div>
+                    <ul class="location-tracking-boxes-control-types">
+                      <li><i class="fa-solid fa-phone"></i> Call</li>
+                      <li><i class="fa-solid fa-location-dot"></i> View on Map</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-container [ngTemplateOutlet]="paginationViewModalControls"></ng-container>
+          </div>
+
+          <div class="figma-pagination-controls">
+            <div class="figma-pagination-rows-total">
+              <div class="figma-rows-per-page">
+                <div class="figma-rows-per-page-label">Row per page</div>
+                <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+                  [(ngModel)]="pagination.maxItem"></ng-select>
+                <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+              </div>
+              <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+                 [(page)]="pagination.PageNo" [maxSize]="5" [rotate]="true"
+                [boundaryLinks]="false" class="figma-pagination">
+                <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+                <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+              </ngb-pagination>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+      <ng-container *ngSwitchCase="'location'">
+        <div class="figma-location-tracking-location-container">
+          <div class="figma-detail-header">
+            <div class="figma-left-part">
+              <i class="fa-regular fa-arrow-left cursor-pointer" (click)="querysParam('isList',location.isList)"></i>
+              <div class="figma-heading-ref-wrap">
+                <span class="figma-main-head">Location Tracking</span>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span class="figma-lead-ref-name">Cinntra Infotech Pvt. Ltd</span>
+              </div>
+            </div>
+            <div class="figma-right-part">
+              <input type="date" class="figma-outline-btn">
+              <button class="figma-outline-btn">Filter</button>
+              <button class="figma-prim-btn" (click)="querysParam('view','map-view')">Map View</button>
+              <!-- <button class="figma-outline-btn">Follow up</button>
+              <button class="figma-prim-btn">Convert</button> -->
+            </div>
+          </div>
+          <div class="figma-location-tracking-location-content">
+            <div class="figma-location-tracking-location-details">
+              <button class="figma-location-tracking-location-btn">Active</button>
+              <div class="figma-location-trackng-user-details">
+                <img class="figma-location-trackng-user-img" src="../../assets/img/user-demo-profile-img.png" />
+                <div class="figma-location-trackng-user-texts">
+                  <span class="figma-location-trackng-user-name">Vishal Dubey</span>
+                  <span class="figma-location-trackng-user-role">Backend Developer</span>
+                </div>
+              </div>
+              <ul class="figma-location-tracking-icos">
+                <li class="figma-location-tracking-phone-ico"><span [innerHTML]="'figma-call-log-ico' | svgIcons:''"></span>9876757787</li>
+                <li class="figma-location-tracking-mail-ico"><span [innerHTML]="'figma-mail-log-ico' | svgIcons:''"></span>Vishaldubey@gmail.com</li>
+                <li class="figma-location-tracking-location-ico"><i class="fa-solid fa-location-dot"></i>Noida sector 63, C-138, Cinntra Info Tech Solutions Pvt Ltd</li>
+              </ul>
+              <div class="figma-detail-view-tabs">
+                <div class="figma-detail-view-tabs-container">
+                  <span class="figma-detail-view-tab-name"> More Details </span>
+                  <i class="fa-solid fa-chevron-up figma"></i>
+                </div>
+                <div class="figma-detail-view-grid-wrapper">
+                  <span class="figma-detail-view-name">Employee ID</span>
+                  <span class="figma-detail-view-val">1</span>
+                  <span class="figma-detail-view-name">Employee Status</span>
+                  <span class="figma-detail-view-val">Active</span>
+                  <span class="figma-detail-view-name">Employee Type</span>
+                  <span class="figma-detail-view-val">Full Time</span>
+                  <span class="figma-detail-view-name">Designation</span>
+                  <span class="figma-detail-view-val">Backend Developer</span>
+                  <span class="figma-detail-view-name">Reporting To</span>
+                  <span class="figma-detail-view-val">Bhoopendra Mohan Pal</span>
+                </div>
+              </div>
+            </div>
+<div>
+            <div class="sales-boxes">
+              <div class="recent-sales UserManagement">
+                <div class="sales-details">
+                  <div class="custom-outter-body-lead-list-c9">
+                    <div class="custom-table-select-icons">
+                     <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'"></span>
+                    </div>
+                  </div>
+                </div>
+                  <table class="new-tabl">
+                    <thead class="MainUserList">
+                    <tr>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Address</th>
+                      <th>Remark</th>
+                      <th>Status</th>
+                      <th>Location</th>
+
+                    </tr>
+                  </thead>
+                  <tr class="figma-location-tracking-table-row" *ngFor="let tableData of [1,2,1,1,1,1,1,1,1,1,1,1];let tableDataOdd = odd">
+                    <td>23/7/2023</td>
+                    <td>8:00 PM</td>
+                    <td style="width: 250px;">E-138, E Block, Sector 63, Noida, Uttar Pradesh 201301, India</td>
+                    <td>Remarks</td>
+                    <td><span [class]="'location-tracking-check-' + (tableDataOdd ? 'in' : 'out')">Check In</span></td>
+                    <td class="location-tracking-ico-track"><i class="fa-solid fa-location-dot"></i></td>
+                  </tr>
+                    <!-- </ng-container> -->
+                    <tr *ngIf="totalCount == 0">
+                      <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No Data Found</td>
+                    </tr>
+                  </table>
+
+          <div class="LoderGifHere" *ngIf="isLoading2">
+            <img src="../../assets/img/loder.gif">
+          </div>
+              </div>
+              </div>
+              <div class="figma-pagination-controls">
+                <div class="figma-pagination-rows-total">
+                  <div class="figma-rows-per-page">
+                    <div class="figma-rows-per-page-label">Row per page</div>
+                    <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+                      [(ngModel)]="pagination.maxItem"></ng-select>
+                    <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+                  </div>
+                  <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+                     [(page)]="pagination.PageNo" [maxSize]="5" [rotate]="true"
+                    [boundaryLinks]="false" class="figma-pagination">
+                    <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+                    <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+                  </ngb-pagination>
+                </div>
+              </div>
+              </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="'view'">
+        <div class="figma-location-tracking-location-container">
+          <div class="figma-detail-header">
+            <div class="figma-left-part">
+              <i class="fa-regular fa-arrow-left cursor-pointer" (click)="querysParam('isList',location.isList)"></i>
+              <div class="figma-heading-ref-wrap">
+                <span class="figma-main-head">Location Tracking</span>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span class="figma-lead-ref-name">Cinntra Infotech Pvt. Ltd</span>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span class="figma-lead-ref-name" (click)="querysParam('view','map-view')">Map view</span>
+              </div>
+            </div>
+            <div class="figma-right-part">
+              <input type="date" class="figma-outline-btn">
+              <button class="figma-outline-btn">Filter</button>
+              <div class="custom-search-container m-0">
+                <div class="custom-search-wrapper">
+                  <div class="custom-common-search-container">
+                    <div class="custom-search-ico-input-container">
+                      <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span>
+                      <input type="text" name="" id="" placeholder="Search">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="figma-location-view-location-map">
+            <agm-map [latitude]="lat1" [longitude]="lng1" [zoom]="zoom" [disableDefaultUI]="false">
+              <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat1" [longitude]="m.lng1" [label]="m.label" [markerDraggable]="m.draggable">
+                <agm-info-window>
+                  <strong><b>{{m.Emp_Name}}</b></strong><br>
+                  <strong>{{m.Address}}</strong>
+                </agm-info-window>
+              </agm-marker>
+            </agm-map>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</section>
+
+<!-- <ng-template #paginationViewModalControls>
+  <div class="figma-pagination-controls">
+    <div class="figma-pagination-rows-total">
+      <div class="figma-rows-per-page">
+        <div class="figma-rows-per-page-label">Row per page</div>
+        <ng-select [items]="[10,20,50,100]" class="figma-row-per-page-ng-select" [(ngModel)]="pagination.rows"></ng-select>
+        <div class="figma-rows-per-page-total">Total 1-10 of {{location.locationTracking.length}}</div>
+      </div>
+      <ngb-pagination [collectionSize]="location.locationTracking.length" [(page)]="pagination.page" [pageSize]="pagination.rows" [rotate]="true" [boundaryLinks]="false" class="figma-pagination">
+        <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+        <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+      </ngb-pagination>
+    </div>
+  </div>
+</ng-template> -->

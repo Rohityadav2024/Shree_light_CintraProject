@@ -1,0 +1,1057 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="figma-detial-home-sec-spliter">
+      <div class="figma-left-main-container" *ngFor="let item of opportunitys">
+        <div class="figma-detail-header">
+          <div class="figma-left-part">
+            <i class="fa-regular fa-arrow-left cursor-pointer" (click)="backClicked()"></i>
+            <div class="figma-heading-ref-wrap">
+              <span class="figma-main-head">{{Headingss[0].leftheading}}</span>
+              <i class="fa-solid fa-chevron-right"></i>
+              <span class="figma-lead-ref-name">{{Headingss[0].heading116}}</span>
+            </div>
+          </div>
+          <div class="figma-right-part">
+            <!-- <button class="figma-outline-btn">Remind</button> -->
+            <button class="figma-prim-btn" (click)="createQuptation(item.id,'Quotation')" style="cursor: pointer;" *ngIf="isModuleViewadd(5)">{{Headingss[0].heading101}} {{Headingss[0].heading12}}</button>
+            <button class="figma-prim-btn" (click)="createQuptation(item.id,'Order')" style="cursor: pointer;" *ngIf="isModuleViewadd(6)">{{Headingss[0].heading101}} {{Headingss[3].quicklink4}}</button>
+          </div>
+        </div>
+
+        <div class="figma-detail-main-info">
+          <div class="figma-detail-info-split-two">
+            <div class="figma-detail-info-header">
+              <div class="cardnameicon">{{item.CardName[0]}}</div>
+              <div class="figma-info-contain">
+                <div class="figma-info-name--address">
+                  <div class="figma-info-name">{{item.CardName}}</div>
+                </div>
+                <span class="figma-info-role2">{{Headingss[0].heading4}} : {{ item.ContactPersonName || "NA" }}</span>
+                <div class="figma-info-num-email" *ngFor="let item2 of customers">
+
+                  <span class="figma-info-email">
+                    <i class="fa-solid fa-envelope"></i>
+                    {{item2.EmailAddress}}
+                  </span>
+                  <span class="figma-info-num">
+                    <i class="fa-solid fa-phone"></i>
+                    {{item2.Phone1}}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="figma-info-spi-buttn">
+              <div class="figma-info-button">
+                <!-- <span class="figma-status">Status: New</span> -->
+                <span class="figma-outline-btn" [innerHTML]="'figma-edit-ico' | svgIcons:''" routerLink="/opportunity/edit-opportunity/{{idd}}" style="cursor:pointer" *ngIf="isModuleViewedit(4)"></span>
+                <!-- <span class="figma-outline-btn" [innerHTML]="'figma-hr-trip-dots' | svgIcons:''"></span> -->
+              </div>
+              <div class="figma-dates-info">
+                <span>Last Updated: <span class="small-box">{{item.UpdateDate | customDate}} {{item.UpdateTime}}</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="figma-detail-properties">
+            <!-- <div class="figma-detail-proper">Customer: <span>{{item.CardName}}</span></div> -->
+             <div class="figma-detail-proper"><span>{{Headingss[0].heading6}} :</span> {{item.SalesPersonName}}</div>
+            <div class="figma-detail-proper"><span>{{Headingss[0].heading9}} : </span>{{item.U_LSOURCE}}</div>
+            <div class="figma-detail-proper" *ngIf="isModulefieldview(4, 'U_PROBLTY')"><span>{{Headingss[0].heading8}} : </span>{{item.U_PROBLTY == ''?'0 %': item.U_PROBLTY + ' %'}}</div>
+            <div class="figma-detail-proper"><span>{{Headingss[0].heading13}} : </span>{{current_active_stage}}</div>
+            <div class="figma-detail-proper"><span>{{Headingss[0].heading5}} : </span>{{item.ClosingDate | customDate}}</div>
+            <div class="figma-detail-proper" *ngIf="isModulefieldview(4, 'DocTotal')"><span>{{Headingss[0].heading11}} : </span>{{total_Amount | priceFormat}}</div>
+            <!--<div class="figma-detail-proper">Frequency: <span>{{getFreqnacyt(item.Frequency)}}</span></div>
+            <div class="figma-detail-proper">Assign To: <span>{{item.AssignByDetails[0].SalesEmployeeName || 'NA'}}</span></div> -->
+          </div>
+          <div class="figma-ul-types-container">
+            <ul class="figma-ul-types">
+              <li [class.active]="commonObj.detailTab == 'Items'" (click)="commonObj.detailTab = 'Items'"><span [innerHTML]="'figma-product-bag-ico' | svgIcons:''"></span>{{Headingss[0].heading118}}</li>
+              <li [class.active]="commonObj.detailTab == 'detail'" (click)="commonObj.detailTab = 'detail'"><span [innerHTML]="'figma-detail-file-ico' | svgIcons:''"></span>{{Headingss[0].heading107}}</li>
+              <li [class.active]="commonObj.detailTab == 'attachment'" (click)="commonObj.detailTab = 'attachment'"><span [innerHTML]="'figma-attachment-file-ico' | svgIcons:''"></span>{{Headingss[0].heading108}}</li>
+            </ul>
+          </div>
+
+          <ng-container *ngIf="commonObj.detailTab == 'Items'">
+            <div class="figma-collapse-product-info">
+              <div class="figma-collapse-product-header">
+                <div class="figma-collapse-product-left-content">
+                  <span class="figma-product-head-data-count">Item ({{Items.length}})</span>
+                </div>
+                <div class="figma-collapse-product-right-content">
+                  <!-- <button class="figma-outline-btn">Add Item</button> -->
+                  <i class="fa-solid fa-chevron-up figma-collapse-arrow-chev-font-awe-icon" (click)="collapse3.toggle()"
+                  [attr.aria-expanded]="!isCollapsed3" [ngClass]="{'fa-chevron-up': isCollapsed3, 'fa-chevron-down': !isCollapsed3}"></i>
+                </div>
+              </div>
+              <div class="figma-product-table-container" style="padding: 0;" #collapse3="ngbCollapse" [(ngbCollapse)]="isCollapsed3">
+                <table class="new-tabl">
+                  <thead  class="MainUserList" style="top:0px !important">
+                    <tr>
+                    <th>{{Headingss[1].heading}}</th>
+                    <th>{{Headingss[1].heading0}}</th>
+                    <th>{{Headingss[1].heading2}} </th>
+                    <th>{{Headingss[1].heading7}}</th>
+                    <th>{{Headingss[1].heading8}}</th>
+                    <th>{{Headingss[1].heading6}}</th>
+                    </tr>
+                  </thead>
+                      <tr *ngFor="let item3 of Items">
+                      <td>{{item3.ItemCode}}</td>
+                      <td>{{item3.ItemDescription}} </td>
+                      <td>{{item3.UnitPrice | priceFormat}}</td>
+                      <td>{{item3.Tax}}</td>
+                      <td>{{item3.DiscountPercent}}</td>
+                      <td>{{item3.Quantity}}</td>
+                      <!-- <td [innerHTML]="'table-v-dots' | svgIcons:'figma-template-central'" class="table-v-dots"></td> -->
+                      </tr>
+                      <tr>
+                        <td colspan="6" style="border-top: 1px solid #e0e0e0;
+                        padding: 0px !important;">
+                          <div class="figma-product-account-detail-container">
+                            <div class="figma-product-account-details">
+
+                              <span class="figma-product-account-detail-label">{{Headingss[0].heading11}} :</span>
+                              <span class="figma-product-account-detail-total-val"> {{total_Amount | priceFormat}}</span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                </table>
+
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="commonObj.detailTab == 'detail'">
+            <div class="figma-collapse-common-info">
+              <div class="figma-collapse-head-tab">
+                <p class="figma-collapse-head-name" style="border-bottom: 2px solid #4a79e4;">General Information</p>
+                <i class="fa-solid fa-chevron-up figma-collapse-arrow-chev-font-awe-icon" (click)="collapse4.toggle()"
+                  [attr.aria-expanded]="!isCollapsed4" [ngClass]="{'fa-chevron-up': isCollapsed4, 'fa-chevron-down': !isCollapsed4}"></i>
+              </div>
+              <div class="figma-collapse-common-info-detail">
+                <div class="figma-collapse-common-info-detail-wrapper-new" #collapse4="ngbCollapse" [(ngbCollapse)]="isCollapsed4">
+
+                  <div class="customer-details-grid" style="margin-top:0px;">
+
+                    <div>
+                      <p class="grey1">Lead</p>
+                    </div>
+                    <div>
+                      <p class="dtl">{{ item.U_LEADNM || "NA" }}</p>
+                    </div>
+
+                    <div>
+                      <p class="grey1">Type</p>
+                    </div>
+                    <div>
+                      <span *ngFor="let type of item.U_TYPE">
+                        <p>{{ type.Type }}</p>
+                      </span>
+                    </div>
+                    <div>
+                      <p class="grey1">Created on</p>
+                    </div>
+                    <div>
+                      <p class="dtl">{{ item.StartDate | customDate }}</p>
+                    </div>
+
+                    <div>
+                      <p class="grey1">Modified on</p>
+                    </div>
+                    <div>
+                      <p class="dtl">{{ item.UpdateDate | customDate }}</p>
+                    </div>
+
+                    <ng-container *ngIf="isModulefieldview(4, 'Remarks')">
+                    <div>
+                      <p class="grey1">Description</p>
+                    </div>
+                    <div>
+                      <p class="dtl">{{ item.Remarks || "NA" }}</p>
+                    </div>
+                  </ng-container>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+          </ng-container>
+          <ng-container *ngIf="commonObj.detailTab == 'attachment'">
+            <div class="figma-attachment-container">
+              <div class="figma-attachment-add-wrapper">
+                <div class="figma-attachment-add-content">
+                  <div class="figma-attachment-title">Attach File</div>
+                  <div class="figma-attachment-txt">Click on attach file button on the right corner to upload your files</div>
+                </div>
+                <!-- <button class="figma-outline-btn"><span class="custom-sp-plus-ft-sz">+</span> Attach Files</button> -->
+                <div class="fileupload-container" appDnd (fileDropped)="oneditFileDropped($event)">
+                  <input type="file" class="fileuploadref" #fileDropRef1 id="fileDropRef1" multiple
+                    (change)="fileeditBrowseHandler($event)" />
+
+                  <label class="fw-600">+ Attach Files </label>
+                  <!-- <label for="fileDropRef"> &nbsp; or drag it here</label> -->
+                </div>
+              </div>
+              <div class="figma-attachment-list-container">
+                <!-- <div class="figma-attachment-list-date">June 8 2023</div> -->
+                <div class="figma-attachment-list-card-content-wrapper">
+                  <div class="figma-attachment-list-card">
+                    <div class="figma-attachment-list" *ngFor="let file of getoppoAttach; let i = index">
+                      <a href="{{ this.baseUrl2 }}{{ file.File }}" target="_blank">
+                        <span [innerHTML]="'figma-file-img-frame' | svgIcons:''"></span>
+                        </a>
+                      <div class="figma-attachment-list-file-name">{{
+                        file.File.substr(file.File.lastIndexOf("/") + 1)
+                        }}</div>
+                      <!-- <div class="figma-attachment-list-file-by">By Yogita Mer</div> -->
+                      <div class="figma-attachment-list-file-date">{{ file.CreateDate | customDate}}</div>
+                      <div class="figma-attachment-list-file-date">{{ file.CreateTime}}</div>
+                      <!-- <div class="figma-attachment-list-file-date">Need Analysis</div> -->
+                      <span [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="deleteAttach(confirmModal,file.id)"></span>
+                    </div>
+                    <div *ngIf="getoppoAttach.length == 0" style="text-align: center;font-size: 20px;color: #4A79E4;">No Data Found</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <div class="figma-lead-status-stages">
+          <div class="figma-lead-stage-info">
+            <div class="figma-lead-stage-head">
+              <i class="fa-solid figma-main-box-arrow-chev-font-awe-icon" (click)="collapse.toggle()"
+              [attr.aria-expanded]="!isCollapsed" [ngClass]="{'fa-chevron-up': isCollapsed, 'fa-chevron-down': !isCollapsed}"></i>
+              <span class="figma-lead-head-name">Stage Details</span>
+              <button class="figma-add-stage" *ngIf="!!current_stage_name" (click)="openEdit(contentEdit)"><span [innerHTML]="'figma-plus-ico' | svgIcons:''"></span>Add Stages</button>
+            </div>
+            <div class="figma-leads-stages-tabs">
+           <div>
+            <!-- <div style="width: 90%;float: left;"> -->
+              <ul class="figma-leads-ul-tabs" style="margin-bottom: 20px;">
+                <li *ngFor="let stage of stages; let i = index"  [ngClass]="{'figma-stage-complete': stage.Status == 2, 'figma-stage-active': stage.Status == 1, '': stage.Status == 0}" title="{{ stage.Name }}" (click)="openEdit2(contentEdit2, stage)"> <i class="fa fa-check-circle" *ngIf="stage.Status == 2"></i> {{ stage.Name }}</li>
+              </ul>
+            </div>
+            <!-- <button class="add-invent" style="width: 10%;height:34px;border-radius: 22px;line-height: 10px;float: left;margin: 0;padding: 0;"><span [innerHTML]="'figma-check-done-icon' | svgIcons:'':{w:20,h:20}"></span></button> -->
+            <div class="clearfix"></div>
+            <div  #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+
+              <ng-container *ngIf="current_stage_Status == 2">
+              <b>{{Sname}}</b>
+              <div class="figma-mark-status" style="width:60%">
+                <!-- <div class="figma-mark-status-remark">
+                  <span class="figma-remark-name">Assign To: </span>
+                  <span class="figma-remark-val">Stage Assignee Name</span>
+                </div> -->
+                <div class="figma-mark-status-remark">
+                  <span class="figma-remark-name">Start Date: </span>
+                  <span class="figma-remark-val">{{current_stage_StartDate || 'NA'}}</span>
+                </div>
+                <div class="figma-mark-status-remark">
+                  <span class="figma-remark-name">End Date: </span>
+                  <span class="figma-remark-val">{{current_stage_EndDate || 'NA'}}</span>
+                </div>
+              </div>
+              <div class="figma-mark-status">
+                <div class="figma-mark-status-remark">
+                  <span class="figma-remark-val">Comments: {{current_stage_comment || 'NA'}}</span>
+                </div>
+              </div>
+              <div class="figma-detail-main-info" style="padding: 0 0 16px 0;display: none;">
+              <div class="figma-attachment-container">
+                <div class="figma-attachment-list-container">
+                  <!-- <div class="figma-attachment-list-date">June 8 2023</div> -->
+                  <div class="figma-attachment-list-card-content-wrapper">
+                    <div class="figma-attachment-list-card">
+                      <div class="figma-attachment-list" *ngFor="let file of getoppoAttach; let i = index">
+                        <a href="{{ this.baseUrl2 }}{{ file.File }}" target="_blank">
+                          <span [innerHTML]="'figma-file-img-frame' | svgIcons:''"></span>
+                          </a>
+                        <div class="figma-attachment-list-file-name">{{
+                          file.File.substr(file.File.lastIndexOf("/") + 1)
+                          }}</div>
+                        <div class="figma-attachment-list-file-by">By Yogita Mer</div>
+                        <div class="figma-attachment-list-file-date">{{ file.CreateDate | customDate}}</div>
+                        <div class="figma-attachment-list-file-date">Need Analysis</div>
+                        <span [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="deletefileapi(file.id, i)"></span>
+                      </div>
+                      <div *ngIf="getoppoAttach.length == 0" style="text-align: center;font-size: 20px;color: #4A79E4;">No Data Found</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </ng-container>
+            </div>
+            </div>
+          </div>
+          <div class="figma-activity-panel-content">
+            <i class="fa-solid fa-chevron-down figma-main-box-arrow-chev-font-awe-icon" style="padding-right: 10px;
+            color: #4a79e4;" (click)="collapse2.toggle()"
+              [attr.aria-expanded]="!isCollapsed2" [ngClass]="{'fa-chevron-up': isCollapsed2, 'fa-chevron-down': !isCollapsed2}"></i>
+            <span class="figma-activity-head-name">Activities</span>
+            <div class="figma-activities-tabs">
+              <ul class="figma-activities-ul-tabs">
+                <!-- <li (click)="commonObj.activityTab = 'note'" [ngClass]="{'active':commonObj.activityTab == 'note'}"><span [innerHTML]="'figma-note-ico' | svgIcons:''" data-activity-type="note"></span>Note</li>
+                <li (click)="commonObj.activityTab = 'calllog'" [ngClass]="{'active':commonObj.activityTab == 'calllog'}"><span [innerHTML]="'figma-call-log-ico' | svgIcons:''" data-activity-type="calllog"></span>Call Log</li>
+                <li (click)="commonObj.activityTab = 'mail'" [ngClass]="{'active':commonObj.activityTab == 'mail'}"><span [innerHTML]="'figma-mail-log-ico' | svgIcons:''" data-activity-type="mail"></span>Mail Log</li> -->
+                <li (click)="commonObj.activityTab = 'event'" [ngClass]="{'active':commonObj.activityTab == 'event'}"><span [innerHTML]="'figma-event-ico' | svgIcons:''" data-activity-type="event"></span>Event</li>
+                <li (click)="commonObj.activityTab = 'task'" [ngClass]="{'active':commonObj.activityTab == 'task'}"><span [innerHTML]="'figma-task-ico' | svgIcons:''" data-activity-type="task"></span>Task</li>
+              </ul>
+            </div>
+            <div #collapse2="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
+            <ng-container [ngSwitch]="commonObj.activityTab">
+              <div class="figma-notes-section-container" *ngSwitchCase="'note'">
+                <div class="text-right"><button class="figma-outline-btn" (click)="open(addNote,'note')">Add Notes</button></div>
+                <div class="figma-notes-head">June 2023</div>
+                <div class="figma-notes-content-wrapper">
+                  <div class="figma-notes-content-card">
+                    <div class="figma-notes-head-title-date">
+                      <div class="figma-notes-title">
+                        <i class="fa-solid fa-chevron-right figma-notes-arrow-chev-font-awe-icon"></i>
+                        <span [innerHTML]="'figma-note-ico' | svgIcons:''" class="figma-acitvity-com-icon figma-note-ico"></span>
+                        <span class="figma-note-main-title"><span class="figma-note-main-title-bold">Note</span> by Yogita Mer</span>
+                      </div>
+                      <div class="figma-notes-date">
+                        <span class="figma-date"> June 8 2023 at 10 AM </span>
+                        <span class="figma-hr-trip-dots" [innerHTML]="'figma-hr-trip-dots'| svgIcons:''"></span>
+                      </div>
+                    </div>
+                    <p class="figma-note-main-text">Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.onsectetur adipiscing elit. Nunc vulputate libero</p>
+                  </div>
+                  <div class="figma-notes-content-card">
+                    <div class="figma-notes-head-title-date">
+                      <div class="figma-notes-title">
+                        <i class="fa-solid fa-chevron-right figma-notes-arrow-chev-font-awe-icon"></i>
+                        <span [innerHTML]="'figma-note-ico' | svgIcons:''" class="figma-acitvity-com-icon figma-note-ico"></span>
+                        <span class="figma-note-main-title"><span class="figma-note-main-title-bold">Note</span> by Yogita Mer</span>
+                      </div>
+                      <div class="figma-notes-date">
+                        <span class="figma-date"> June 8 2023 at 10 AM </span>
+                        <span class="figma-hr-trip-dots" [innerHTML]="'figma-hr-trip-dots'| svgIcons:''"></span>
+                      </div>
+                    </div>
+                    <p class="figma-note-main-text">Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.onsectetur adipiscing elit. Nunc vulputate libero</p>
+                  </div>
+                </div>
+              </div>
+              <div class="figma-notes-section-container" *ngSwitchCase="'calllog'">
+                <div class="text-right"><button class="figma-outline-btn" (click)="open(addCallLog,'calllog')">Add Call Log</button></div>
+                <div class="figma-notes-head">June 2023</div>
+                <div class="figma-notes-content-wrapper">
+                  <div class="figma-notes-content-card" *ngFor="let calllog of [1,2]">
+                    <div class="figma-notes-head-title-date">
+                      <div class="figma-notes-title">
+                        <i class="fa-solid fa-chevron-right figma-notes-arrow-chev-font-awe-icon"></i>
+                        <span [innerHTML]="'figma-call-log-ico' | svgIcons:''" class="figma-acitvity-com-icon figma-log-ico"></span>
+                        <span class="figma-note-main-title"><span class="figma-note-main-title-bold">Call log </span> by Nishita Arora</span>
+                      </div>
+                      <div class="figma-notes-date">
+                        <span class="figma-date"> June 8 2023 at 10 AM </span>
+                        <span class="figma-hr-trip-dots" [innerHTML]="'figma-hr-trip-dots'| svgIcons:''"></span>
+                      </div>
+                    </div>
+                    <p class="figma-note-main-text">Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.onsectetur adipiscing elit. Nunc vulputate libero</p>
+                    <div class="figma-detail-properties">
+                      <div class="figma-detail-proper">Lead: <span>Shreya Shaw</span></div>
+                      <div class="figma-detail-proper">Status: <span>Contacted</span></div>
+                      <div class="figma-detail-proper">Direction: <span>Outgoing</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="figma-notes-section-container" *ngSwitchCase="'mail'">
+                <div class="text-right"><button class="figma-outline-btn" (click)="open(mailLog,'calllog')">Add Mail Log</button></div>
+                <div class="figma-notes-head">June 2023</div>
+                <div class="figma-notes-content-wrapper">
+                  <div class="figma-notes-content-card" *ngFor="let calllog of [1,2]">
+                    <div class="figma-notes-head-title-date">
+                      <div class="figma-notes-title">
+                        <i class="fa-solid fa-chevron-right figma-notes-arrow-chev-font-awe-icon"></i>
+                        <span [innerHTML]="'figma-mail-log-ico' | svgIcons:''" class="figma-acitvity-com-icon figma-mail-ico"></span>
+                        <span class="figma-note-main-title"><span class="figma-note-main-title-bold">Mail log</span> by Nishita Arora</span>
+                      </div>
+                      <div class="figma-notes-date">
+                        <span class="figma-date"> June 8 2023 at 10 AM </span>
+                        <span class="figma-hr-trip-dots" [innerHTML]="'figma-hr-trip-dots'| svgIcons:''"></span>
+                      </div>
+                    </div>
+                    <p class="figma-note-main-text">Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.onsectetur adipiscing elit. Nunc vulputate libero</p>
+                    <div class="figma-detail-properties">
+                      <div class="figma-detail-proper">Lead: <span>Shreya Shaw</span></div>
+                      <div class="figma-detail-proper">Status: <span>Contacted</span></div>
+                      <div class="figma-detail-proper">Direction: <span>Outgoing</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="figma-notes-section-container" *ngSwitchCase="'event'">
+                <div class="text-right"><button class="figma-outline-btn" (click)="open(eventModal,'Event')">Add Event</button></div>
+                <!-- <div class="figma-notes-head">June 2023</div> -->
+                <div class="figma-notes-content-wrapper">
+                  <ng-container *ngFor="let calllog of activity">
+                  <div class="figma-notes-content-card" *ngIf="calllog.Type == 'Event'">
+                    <div class="figma-notes-head-title-date">
+                      <div class="figma-notes-title">
+                        <!-- <i class="fa-solid fa-chevron-right figma-notes-arrow-chev-font-awe-icon"></i> -->
+                        <span [innerHTML]="'figma-event-ico' | svgIcons:''" class="figma-acitvity-com-icon figma-event-ico"></span>
+                        <span class="figma-note-main-title"><span class="figma-note-main-title-bold">Event</span> {{calllog.Title || 'NA'}}</span>
+                      </div>
+                      <div class="figma-notes-date">
+                        <!-- <span class="figma-date"> June 8 2023 at 10 AM </span> -->
+                        <!-- <span class="figma-hr-trip-dots" [innerHTML]="'figma-hr-trip-dots'| svgIcons:''"></span> -->
+                      </div>
+                    </div>
+
+                    <div class="figma-status-types-details" style="grid-template-columns: repeat(auto-fit, minmax(100px, 450px));">
+                      <div class="figma-detail-proper">Start Date: <span>{{calllog.From | customDate}} at {{calllog.Time || 'NA'}}</span></div>
+                      <div class="figma-detail-proper">End Date: <span>{{calllog.To | customDate}} at {{calllog.ToTime || 'NA'}}</span></div>
+                    </div>
+                    <p class="figma-note-main-text">Description: {{calllog.Description || 'NA'}}</p>
+                  </div>
+                    </ng-container>
+                </div>
+              </div>
+              <div class="figma-notes-section-container" *ngSwitchCase="'task'">
+                <div class="text-right"><button class="figma-outline-btn" (click)="open(taskModal,'Task')">Add Task</button></div>
+
+                <div class="figma-notes-content-wrapper">
+                  <ng-container *ngFor="let calllog of activity">
+                  <div class="figma-notes-content-card" *ngIf="calllog.Type == 'Task'">
+                    <div class="figma-notes-head-title-date">
+                      <div class="figma-notes-title">
+                        <!-- <i class="fa-solid fa-chevron-right figma-notes-arrow-chev-font-awe-icon"></i> -->
+                        <span [innerHTML]="'figma-task-ico' | svgIcons:''" class="figma-acitvity-com-icon figma-task-ico"></span>
+                        <span class="figma-note-main-title"><span class="figma-note-main-title-bold">Task</span> {{calllog.Title || 'NA'}}</span>
+                      </div>
+                      <div class="figma-notes-date">
+                        <!-- <span class="figma-date"> June 8 2023 at 10 AM </span> -->
+                        <!-- <span class="figma-hr-trip-dots" [innerHTML]="'figma-hr-trip-dots'| svgIcons:''"></span> -->
+                      </div>
+                    </div>
+
+                    <div class="figma-status-types-details" style="grid-template-columns: repeat(auto-fit, minmax(100px, 450px));">
+                      <div class="figma-detail-proper">Due Date: <span>{{calllog.To | customDate}} at {{calllog.Time || 'NA'}}</span></div>
+                      <!-- <div class="figma-detail-proper">Assign To: <span>{{calllog.To | customDate}} at {{calllog.ToTime || 'NA'}}</span></div> -->
+                      <div class="figma-detail-proper">Participants: <span placement="bottom" ngbTooltip="{{calllog.Participants}}">{{calllog.Participants |
+                        slice:0:50}}{{ calllog.Participants.length > 50 ? '...' : ''}}</span></div>
+                    </div>
+                    <p class="figma-note-main-text">Description: {{calllog.Description || 'NA'}}</p>
+                  </div>
+                    </ng-container>
+
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="figma-recent-activities-container" *ngIf="commonObj.addonsTabsActivity == 'recent activity'">
+        <div class="figma-recent-activities-header">
+          <span class="figma-recent-head-name">Recent Activities</span>
+          <span class="cursor-pointer" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="commonObj.addonsTabsActivity = false"></span>
+        </div>
+        <div class="figma-recent-activities-search-filter-container">
+          <input type="text" class="figma-recent-activities-search-input">
+          <span class="figma-recent-se-fil-ico" [innerHTML]="'figma-search-ico' | svgIcons:''"></span>
+          <span class="figma-recent-se-fil-ico" [innerHTML]="'figma-filter-ico' | svgIcons:''"></span>
+        </div>
+        <div class="figma-recent-activities-wrapper">
+          <div class="figma-recent-activities-wrap-card" *ngFor="let activity of [1,2,3,4,5]">
+            <div class="figma-recent-activities-wrap-date">June 8 2023</div>
+            <div class="figma-recent-activities-content-detail">
+              <span class="figma-note-ico" [innerHTML]="'figma-note-ico' | svgIcons:''"></span>
+              <div class="figma-recent-activities-content">
+                <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold">Note</span> by Yogita Mer </div>
+                <span class="figma-recent-activity-message">I have changed the order address</span>
+              </div>
+              <div class="figma-recent-activity-time-tags">
+                <span class="figma-recent-activity-time"> 10 AM </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="figma-recent-activities-container" *ngIf="commonObj.addonsTabsActivity == 'Contact'">
+        <div class="figma-recent-activities-header bor-mar">
+          <span class="figma-recent-head-name">{{Headingss[3].quicklink2}}</span>
+          <span class="cursor-pointer" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="commonObj.addonsTabsActivity = false"></span>
+        </div>
+        <!-- <div class="figma-recent-activities-search-filter-container">
+          <input type="text" class="figma-recent-activities-search-input">
+          <span class="figma-recent-se-fil-ico" [innerHTML]="'figma-search-ico' | svgIcons:''"></span>
+          <span class="figma-recent-se-fil-ico" [innerHTML]="'figma-filter-ico' | svgIcons:''"></span>
+        </div> -->
+        <div class="figma-recent-activities-wrapper">
+          <div class="figma-recent-activities-wrap-card" *ngFor="let tickets of contactPersoneList;">
+            <!-- <div class="figma-recent-activities-wrap-date">June 8 2023</div> -->
+            <div class="figma-recent-activities-content-detail-new2">
+              <div class="figma-recent-activities-content">
+                <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"> <i class="fa-solid fa-user"></i> <span style="
+                  font-size: 14px;
+                  font-weight: 600;
+              "> {{tickets.FirstName}} </span></span> </div>
+                <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"> <i class="fa-solid fa-phone"></i> {{tickets.MobilePhone}} </span> </div>
+                  <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"> <i class="fa-solid fa-envelope"></i> {{tickets.E_Mail || 'NA'}} </span>  </div>
+
+                <!-- <span class="figma-recent-activity-message">I have changed the order address</span> -->
+              </div>
+              <!-- <div class="figma-recent-activity-time-tags" style="text-align: right;">
+                <span class="figma-recent-activity-time" style="font-weight: 800;"> {{tickets.MobilePhone}} </span>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="figma-recent-activities-container" *ngIf="commonObj.addonsTabsActivity == 'Opportunity'">
+        <div class="figma-recent-activities-header bor-mar">
+          <span class="figma-recent-head-name">{{Headingss[3].quicklink1}}</span>
+          <span class="cursor-pointer" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="commonObj.addonsTabsActivity = false"></span>
+        </div>
+        <!-- <div class="figma-recent-activities-search-filter-container">
+          <input type="text" class="figma-recent-activities-search-input">
+          <span class="figma-recent-se-fil-ico" [innerHTML]="'figma-search-ico' | svgIcons:''"></span>
+          <span class="figma-recent-se-fil-ico" [innerHTML]="'figma-filter-ico' | svgIcons:''"></span>
+        </div> -->
+        <div class="figma-recent-activities-wrapper">
+          <div class="figma-recent-activities-wrap-card" *ngFor="let oppo of Allopportunitys;" routerLink="/opportunity/opportunity-details/{{oppo.id}}">
+            <!-- <div class="figma-recent-activities-wrap-date">June 8 2023</div> -->
+            <div class="figma-recent-activities-content-detail-new2">
+              <div class="figma-recent-activities-content">
+                <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"><span style="font-size: 14px;font-weight: 600;"> {{oppo.OpportunityName}} </span></span> </div>
+                <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"> Source: {{oppo.U_LSOURCE}} </span> </div>
+                <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"> <span [innerHTML]="'figma-date-ico' | svgIcons:'':{w:15,h:15}"></span> Created Date:  {{oppo.StartDate | customDate }} </span> </div>
+                  <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"> <span class="" [innerHTML]="'figma-potan-amount-icon' | svgIcons:'':{w:15,h:15}"></span><span style="font-size: 14px;font-weight: 600;"> {{oppo.DocTotal || 0 | priceFormat}} </span> </span>  </div>
+
+                <!-- <span class="figma-recent-activity-message">I have changed the order address</span> -->
+              </div>
+              <!-- <div class="figma-recent-activity-time-tags" style="text-align: right;">
+                <span class="figma-recent-activity-time" style="font-weight: 800;"> {{tickets.MobilePhone}} </span>
+              </div> -->
+            </div>
+          </div>
+          <div *ngIf="Allopportunitys.length == 0" style="text-align: center;padding: 150px 0px;"> No Data Found</div>
+        </div>
+      </div>
+      <div class="figma-recent-activities-container" *ngIf="commonObj.addonsTabsActivity == 'Quotation'">
+        <div class="figma-recent-activities-header bor-mar">
+          <span class="figma-recent-head-name">{{Headingss[3].quicklink3}}</span>
+          <span class="cursor-pointer" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="commonObj.addonsTabsActivity = false"></span>
+        </div>
+        <!-- <div class="figma-recent-activities-search-filter-container">
+          <input type="text" class="figma-recent-activities-search-input">
+          <span class="figma-recent-se-fil-ico" [innerHTML]="'figma-search-ico' | svgIcons:''"></span>
+          <span class="figma-recent-se-fil-ico" [innerHTML]="'figma-filter-ico' | svgIcons:''"></span>
+        </div> -->
+        <div class="figma-recent-activities-wrapper" >
+          <div class="figma-recent-activities-wrap-card" *ngFor="let oppo of AllQuotations;" routerLink="/quotation/quotation-details/{{oppo.id}}">
+            <!-- <div class="figma-recent-activities-wrap-date">June 8 2023</div> -->
+            <div class="figma-recent-activities-content-detail-new2">
+              <div class="figma-recent-activities-content">
+                <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"><span style="font-size: 14px;font-weight: 600;"> {{oppo.U_QUOTNM}} </span></span> </div>
+                <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"> <span [innerHTML]="'figma-date-ico' | svgIcons:'':{w:15,h:15}"></span> Created Date:  {{oppo.CreateDate | customDate }} </span> </div>
+                <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"> <span [innerHTML]="'figma-date-ico' | svgIcons:'':{w:15,h:15}"></span> Valid Date:  {{oppo.DocDueDate | customDate }} </span> </div>
+                  <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"> <span class="" [innerHTML]="'figma-potan-amount-icon' | svgIcons:'':{w:15,h:15}"></span><span style="font-size: 14px;font-weight: 600;"> {{oppo.DocTotal || 0 | priceFormat}} </span> </span>  </div>
+
+                <!-- <span class="figma-recent-activity-message">I have changed the order address</span> -->
+              </div>
+              <!-- <div class="figma-recent-activity-time-tags" style="text-align: right;">
+                <span class="figma-recent-activity-time" style="font-weight: 800;"> {{tickets.MobilePhone}} </span>
+              </div> -->
+            </div>
+          </div>
+          <div *ngIf="AllQuotations.length == 0" style="text-align: center;padding: 150px 0px;"> No Data Found</div>
+        </div>
+      </div>
+      <div class="figma-recent-activities-container" *ngIf="commonObj.addonsTabsActivity == 'Order'">
+        <div class="figma-recent-activities-header bor-mar">
+          <span class="figma-recent-head-name">{{Headingss[3].quicklink4}}</span>
+          <span class="cursor-pointer" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="commonObj.addonsTabsActivity = false"></span>
+        </div>
+        <!-- <div class="figma-recent-activities-search-filter-container">
+          <input type="text" class="figma-recent-activities-search-input">
+          <span class="figma-recent-se-fil-ico" [innerHTML]="'figma-search-ico' | svgIcons:''"></span>
+          <span class="figma-recent-se-fil-ico" [innerHTML]="'figma-filter-ico' | svgIcons:''"></span>
+        </div> -->
+        <div class="figma-recent-activities-wrapper">
+          <div class="figma-recent-activities-wrap-card" *ngFor="let oppo of AllOrders;" routerLink="/order/order-details/{{oppo.id}}">
+            <!-- <div class="figma-recent-activities-wrap-date">June 8 2023</div> -->
+            <div class="figma-recent-activities-content-detail-new2">
+              <div class="figma-recent-activities-content">
+                <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"><span style="font-size: 14px;font-weight: 600;"> {{oppo.CardName}}</span></span> </div>
+                <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"> <span [innerHTML]="'figma-date-ico' | svgIcons:'':{w:15,h:15}"></span> Created Date:  {{oppo.CreateDate | customDate }} </span> </div>
+                <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"> <span [innerHTML]="'figma-date-ico' | svgIcons:'':{w:15,h:15}"></span> Valid Date:  {{oppo.DocDueDate | customDate }} </span> </div>
+                  <div class="figma-recent-activity-head"> <span class="figma-recent-activity-head-bold"> <span class="" [innerHTML]="'figma-potan-amount-icon' | svgIcons:'':{w:15,h:15}"></span><span style="font-size: 14px;font-weight: 600;"> {{oppo.DocTotal || 0 | priceFormat}} </span> </span>  </div>
+
+                <!-- <span class="figma-recent-activity-message">I have changed the order address</span> -->
+              </div>
+              <!-- <div class="figma-recent-activity-time-tags" style="text-align: right;">
+                <span class="figma-recent-activity-time" style="font-weight: 800;"> {{tickets.MobilePhone}} </span>
+              </div> -->
+            </div>
+          </div>
+          <div *ngIf="AllOrders.length == 0" style="text-align: center;padding: 150px 0px;"> No Data Found</div>
+        </div>
+      </div>
+      <div class="figma-navigator-tabs" *ngFor="let item of opportunitys">
+        <ul class="figma-navigator-ul">
+          <!-- <li [class.active]="commonObj.addonsTabsActivity=='recent activity'" (click)="commonObj.addonsTabsActivity='recent activity'">
+            <span class="figma-navigate-icon figma-nav-recent" [innerHTML]="'figma-recent-activity-ico' | svgIcons:''"></span>
+            <span class="figma-navigate-text">Activities</span>
+          </li> -->
+          <li [class.active]="commonObj.addonsTabsActivity=='Opportunity'" (click)="commonObj.addonsTabsActivity='Opportunity'">
+            <!-- <li (click)="openLinkHitter(item.CardCode)"> -->
+            <span class="figma-navigate-icon figma-nav-opportunity" [innerHTML]="'figma-opportunity-ico' | svgIcons:''"></span>
+            <span class="figma-navigate-text">{{Headingss[3].quicklink1}}
+              <!-- <span class="custom-link">(2)</span> -->
+            </span>
+          </li>
+          <li [class.active]="commonObj.addonsTabsActivity=='Contact'" (click)="commonObj.addonsTabsActivity='Contact'">
+            <span class="figma-navigate-icon figma-nav-contact" [innerHTML]="'figma-contact-ico' | svgIcons:''"></span>
+            <span class="figma-navigate-text">{{Headingss[3].quicklink2}}
+              <!-- <span class="custom-link">(2)</span> -->
+            </span>
+          </li>
+
+          <li [class.active]="commonObj.addonsTabsActivity=='Quotation'" (click)="commonObj.addonsTabsActivity='Quotation'">
+            <!-- <li (click)="OppQuotation()"> -->
+            <span class="figma-navigate-icon figma-nav-quote" [innerHTML]="'figma-quote-ico' | svgIcons:''"></span>
+            <span class="figma-navigate-text">{{Headingss[3].quicklink3}}
+              <!-- <span class="custom-link">(2)</span> -->
+            </span>
+          </li>
+          <li [class.active]="commonObj.addonsTabsActivity=='Order'" (click)="commonObj.addonsTabsActivity='Order'">
+            <!-- <li (click)="OppOrder()"> -->
+            <span class="figma-navigate-icon figma-nav-order" [innerHTML]="'figma-order-ico' | svgIcons:''"></span>
+            <span class="figma-navigate-text">{{Headingss[3].quicklink4}}
+              <!-- <span class="custom-link">(0)</span> -->
+            </span>
+          </li>
+          <!-- <li>
+            <span class="figma-navigate-icon figma-nav-campaign" [innerHTML]="'figma-campaign-ico' | svgIcons:''"></span>
+            <span class="figma-navigate-text">Campaign <span class="custom-link">(2)</span></span>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #addNote let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Add Notes</h4>
+    <span class="figma-screen-close" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="modal.dismiss('Cross click')"></span>
+  </div>
+  <!-- <p class="figma-modal-inner-heading">Personal Details</p> -->
+  <form #f="ngForm" name="theForm" class="figma-cards-activity-modal-form">
+    <div class="figma-cards-activity-modal-body">
+      <div class="figma-text-area-container">
+        <textarea class="figma-text-area" placeholder="Write Note...."></textarea>
+      </div>
+      <div class="figma-notes-attachment">
+        <span [innerHTML]="'figma-attactment' | svgIcons:''" class="cursor-pointer"> </span>
+        <input type="file" class="figma-attch-file cursor-pointer">
+      </div>
+    </div>
+    <div class="figma-modal-fotter">
+      <button class="figma-prim-btn" (click)="addLeads(f)">Save</button>
+    </div>
+  </form>
+
+</ng-template>
+<ng-template #addCallLog let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Add Call Log</h4>
+    <span class="figma-screen-close" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="modal.dismiss('Cross click')"></span>
+  </div>
+  <!-- <p class="figma-modal-inner-heading">Personal Details</p> -->
+  <form #f="ngForm" name="theForm" class="figma-cards-activity-modal-form">
+    <div class="figma-cards-activity-modal-body">
+      <div class="figma-activity-content-wrapper figma-activity-content-full">
+        <label for="">Lead Name</label>
+        <input type="text" class="input-fld" name="leadName" placeholder="Enter Lead Name" autocomplete="off" value="Shreya Shaw">
+      </div>
+      <div class="figma-activity-content-wrapper figma-activity-content-full">
+        <label for="">Lead Name</label>
+        <ng-select class="ngsearch-dropdown input-fld figma-activity-ng-select" [items]="commonObj.callOutCome"> </ng-select>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">Date</label>
+        <div class="figma-custom-date-time">
+          <input type="date" class="input-fld" name="dateName" value="6/25/2023">
+          <span [innerHTML]="'figma-date-ico' | svgIcons:''"></span>
+        </div>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">Time</label>
+        <div class="figma-custom-date-time">
+          <input type="time" class="input-fld" name="dateName" value="6/25/2023">
+          <span [innerHTML]="'figma-time-ico' | svgIcons:''"></span>
+        </div>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">Direction</label>
+        <ng-select class="ngsearch-dropdown input-fld figma-activity-ng-select" [items]="commonObj.dirction"> </ng-select>
+      </div>
+      <div class="figma-activity-hr-line"></div>
+      <div class="figma-text-area-container">
+        <label for="">Description</label>
+        <textarea class="figma-text-area" placeholder="Describe the call ......"></textarea>
+      </div>
+    </div>
+    <div class="figma-modal-fotter">
+      <button class="figma-prim-btn" (click)="addLeads(f)">Save</button>
+    </div>
+  </form>
+
+</ng-template>
+<ng-template #mailLog let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Add Mail Log</h4>
+    <span class="figma-screen-close" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="modal.dismiss('Cross click')"></span>
+  </div>
+  <!-- <p class="figma-modal-inner-heading">Personal Details</p> -->
+  <form #f="ngForm" name="theForm" class="figma-cards-activity-modal-form">
+    <div class="figma-cards-activity-modal-body">
+      <div class="figma-activity-content-wrapper figma-activity-content-full">
+        <label for="">Contacted</label>
+        <input type="text" class="input-fld" name="leadName" placeholder="Enter Lead Name" autocomplete="off" value="Shreya Shaw">
+      </div>
+      <div class="figma-activity-content-wrapper figma-activity-content-full">
+        <label for="">Related to Business Partner</label>
+        <input type="text" class="input-fld" name="leadName" placeholder="Enter Lead Name" autocomplete="off" value="Cinntra Infotect Pvt Ltd">
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">Date</label>
+        <div class="figma-custom-date-time">
+          <input type="date" class="input-fld" name="dateName" value="6/25/2023">
+          <span [innerHTML]="'figma-date-ico' | svgIcons:''"></span>
+        </div>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">Time</label>
+        <div class="figma-custom-date-time">
+          <input type="time" class="input-fld" name="dateName" value="6/25/2023">
+          <span [innerHTML]="'figma-time-ico' | svgIcons:''"></span>
+        </div>
+      </div>
+      <div class="figma-activity-hr-line"></div>
+      <div class="figma-text-area-container">
+        <label for="">Description</label>
+        <textarea class="figma-text-area" placeholder="Describe the call ......"></textarea>
+      </div>
+    </div>
+    <div class="figma-modal-fotter">
+      <button class="figma-prim-btn" (click)="addLeads(f)">Save</button>
+    </div>
+  </form>
+
+</ng-template>
+<ng-template #eventModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Add Event</h4>
+    <span class="figma-screen-close" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="modal.dismiss('Cross click')"></span>
+  </div>
+  <form  #f="ngForm" name="theForm" class="figma-cards-activity-modal-form">
+    <div class="figma-cards-activity-modal-body">
+      <div class="figma-activity-content-wrapper figma-activity-content-full">
+        <label for="">Name of Event</label>
+        <input type="text" class="input-fld required-fld" name="Title" [(ngModel)]="Activitys.Title" placeholder="Name of Event" autocomplete="off" required>
+      </div>
+
+      <div class="figma-activity-content-wrapper">
+        <label for="">Start Date</label>
+        <div class="figma-custom-date-time">
+          <input type="date" class="input-fld required-fld" name="From" [(ngModel)]="Activitys.From" required>
+          <!-- <span [innerHTML]="'figma-date-ico' | svgIcons:''"></span> -->
+        </div>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">Start Time</label>
+        <div class="figma-custom-date-time">
+          <input type="time" class="input-fld required-fld"  name="Time" [(ngModel)]="Activitys.Time" required>
+          <!-- <span [innerHTML]="'figma-time-ico' | svgIcons:''"></span> -->
+        </div>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">End Date</label>
+        <div class="figma-custom-date-time">
+          <input type="date" class="input-fld required-fld"  name="To" [(ngModel)]="Activitys.To" required>
+        </div>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">End Time</label>
+        <div class="figma-custom-date-time">
+          <input type="time" class="input-fld required-fld"  name="ToTime" [(ngModel)]="Activitys.ToTime" required>
+        </div>
+      </div>
+
+      <div class="figma-text-area-container">
+        <label for="">Description</label>
+        <textarea class="figma-text-area" placeholder="Describe the Event ......" name="Description" [(ngModel)]="Activitys.Description"></textarea>
+      </div>
+    </div>
+    <div class="figma-modal-fotter">
+      <button class="figma-prim-btn" (click)="addActivityEvents(f)">Save</button>
+    </div>
+  </form>
+
+</ng-template>
+<ng-template #taskModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Add Task</h4>
+    <span class="figma-screen-close" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="modal.dismiss('Cross click')"></span>
+  </div>
+  <form #f="ngForm" name="theForm" class="figma-cards-activity-modal-form">
+    <div class="figma-cards-activity-modal-body">
+      <div class="figma-activity-content-wrapper figma-activity-content-full">
+        <label for="">Name of Task</label>
+        <input type="text" class="input-fld required-fld" name="Title" [(ngModel)]="Activitys.Title" placeholder="Name of Task" autocomplete="off">
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">Type</label>
+        <select class="ngsearch-dropdown input-fld figma-activity-ng-select required-fld" name="ParticipantsType" [(ngModel)]="Activitys.ParticipantsType" (change)="selectYpe()">
+        <option value="">Select Type</option>
+        <option value="Employee">Employee</option>
+        <option value="ContactPerson">Contact Person</option>
+        </select>
+      </div>
+      <div class="figma-activity-content-wrapper">
+        <label for="">Due Date</label>
+        <div class="figma-custom-date-time">
+          <input type="date" class="input-fld required-fld" name="To" [(ngModel)]="Activitys.To">
+        </div>
+      </div>
+      <div class="figma-activity-content-wrapper figma-activity-content-full" *ngIf="Activitys.ParticipantsType != ''">
+        <label for="">Assign To</label>
+
+        <div class="figma-custom-date-time" *ngIf="Activitys.ParticipantsType == 'Employee'">
+          <ng-select id="CustomDesignInput" [items]="bridgess" [multiple]="true"
+          bindValue="Email"
+          bindLabel="firstName"
+          placeholder="Select Assign To"
+          class="ngsearch-dropdown input-fld figma-activity-ng-select"
+          [(ngModel)]="ActivitysParticipants" name="ActivitysParticipants">
+          </ng-select>
+        </div>
+
+        <div class="figma-custom-date-time" *ngIf="Activitys.ParticipantsType == 'ContactPerson'">
+          <ng-select id="CustomDesignInput" [items]="contactPersoneList" [multiple]="true"
+          bindValue="E_Mail"
+          bindLabel="FirstName"
+          placeholder="Select Assign To"
+          class="ngsearch-dropdown input-fld figma-activity-ng-select"
+          [(ngModel)]="ActivitysParticipants" name="ActivitysParticipants">
+          </ng-select>
+        </div>
+      </div>
+      <!-- <div class="figma-activity-content-wrapper figma-activity-content-full">
+        <label for="">Participants</label>
+        <input type="text" class="input-fld" name="owner" placeholder="Participants" autocomplete="off" value="Nishita Arora">
+      </div> -->
+
+      <div class="figma-text-area-container">
+        <label for="">Description</label>
+        <textarea class="figma-text-area" placeholder="Describe the Event ......" name="Description" [(ngModel)]="Activitys.Description"></textarea>
+      </div>
+    </div>
+    <div class="figma-modal-fotter">
+      <button class="figma-prim-btn" (click)="addActivityEvents(f)">Save</button>
+    </div>
+  </form>
+
+</ng-template>
+
+
+<ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="
+        width: 100%;
+        text-align: center;
+        color: #4a79e4;
+        font-size: 20px;
+      ">
+      Add Stage
+    </h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none">
+      <span aria-hidden="true" style="outline: none">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm" (submit)="addStage(f)">
+      <div class="row">
+        <div class="col-md-12">
+          <label>Stage Name</label><br />
+          <input type="text" class="input-fld required-fld" name="Name" [(ngModel)]="Createstage.Name"
+            placeholder="Stage Name" required />
+
+          <label>Previous Stage</label><br />
+          <select class="selectbox input-fld required-fld" name="Stageno" required
+            [(ngModel)]="Createstage.Stageno">
+            <option value="" disabled>Select Previous Stage</option>
+            <option *ngFor="let item of stages" value="{{ item.Stageno }}">
+              {{ item.Name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-12" style="text-align: center">
+          <button class="add-invent">Create</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #contentEdit2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="
+        width: 100%;
+        text-align: center;
+        color: #4a79e4;
+        font-size: 20px;
+      ">
+      {{ Sname || 'Complete Stage' }}
+    </h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none">
+      <span aria-hidden="true" style="outline: none">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm" (submit)="ChangeStage(f)">
+      <div class="row">
+        <div class="col-md-12" *ngIf="current_stage_name == 'Lead'">
+          <label>Lead</label><br />
+          <div>
+            <ng-select #selectbusinesspartner [clearOnBackspace]="false" [searchable]="false" name="DocId" #DocId="ngModel" [(ngModel)]="Changestage.DocId" required class="ngsearch-dropdown input-fld required-fld">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                  type="text" (input)="selectbusinesspartner.filter($event.target.value)" />
+              </ng-template>
+              <ng-option value="" disable selected>Select Lead</ng-option>
+              <ng-option *ngFor="let item of bridges2" value="{{item.id}}">{{item.companyName}}</ng-option>
+            </ng-select>
+            <span class="help-block danger" *ngIf="(DocId.errors?.required && f.submitted)||(DocId.errors?.required && DocId.touched)">
+              Select Lead is required
+            </span>
+          </div>
+        </div>
+        <div class="col-md-12" *ngIf="current_stage_name == 'Quotation' || current_stage_name ==  'Negotiation'">
+          <label>Quotation</label><br />
+          <div>
+            <ng-select #selectbusinesspartner [clearOnBackspace]="false" [searchable]="false" name="DocId" #DocId="ngModel" [(ngModel)]="Changestage.DocId" required class="ngsearch-dropdown input-fld required-fld">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                  type="text" (input)="selectbusinesspartner.filter($event.target.value)" />
+              </ng-template>
+              <ng-option value="" disable selected>Select Quotation</ng-option>
+              <ng-option *ngFor="let item of quotationsList" value="{{item.id}}">{{item.U_QUOTNM}}</ng-option>
+            </ng-select>
+            <span class="help-block danger" *ngIf="(DocId.errors?.required && f.submitted)||(DocId.errors?.required && DocId.touched)">
+              Select Quotation is required
+            </span>
+          </div>
+        </div>
+        <div class="col-md-12" *ngIf="current_stage_name == 'Order'">
+          <label>Order</label><br />
+          <div>
+            <ng-select #selectbusinesspartner [clearOnBackspace]="false" [searchable]="false" name="DocId" #DocId="ngModel" [(ngModel)]="Changestage.DocId" required class="ngsearch-dropdown input-fld required-fld">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                  type="text" (input)="selectbusinesspartner.filter($event.target.value)" />
+              </ng-template>
+              <ng-option value="" disable selected>Select Order</ng-option>
+              <ng-option *ngFor="let item of ordersList" value="{{item.id}}">{{item.CardName}} (#ORD{{item.id}})</ng-option>
+            </ng-select>
+            <span class="help-block danger" *ngIf="(DocId.errors?.required && f.submitted)||(DocId.errors?.required && DocId.touched)">
+              Select Order is required
+            </span>
+          </div>
+        </div>
+        <!-- <div class="col-md-12" *ngIf="current_stage_name == 'Order'">
+          <label>Status {{Changestage.Status}}</label><br />
+          <select class="input-fld required-fld" name="Status" [(ngModel)]="Changestage.Status">
+            <option value="">Select Status</option>
+            <option value="{{stage.key}}" *ngFor="let stage of OrderStage">{{stage.name}}</option>
+           <option value="sos_Sold">sos_Sold</option>
+            <option value="sos_Won">sos_Won</option>
+          </select>
+        </div> -->
+        <div class="col-md-6">
+          <label>Start Date</label><br />
+          <input type="date" class="input-fld required-fld" name="EndDate"
+            [(ngModel)]="Changestage.StartDate" placeholder="Start Date" required>
+        </div>
+        <div class="col-md-6">
+          <label>End Date</label><br />
+          <input type="date" class="input-fld required-fld" name="EndDate"
+            [(ngModel)]="Changestage.EndDate" placeholder="End Date" required>
+        </div>
+        <div class="col-md-12">
+          <label>Add Comments</label><br />
+          <textarea type="text" class="input-fld required-fld" name="Comment"
+            [(ngModel)]="Changestage.Comment" placeholder="Add Comments" required></textarea>
+        </div>
+
+        <div class="col-md-12" style="text-align: center">
+          <button class="add-invent">Done</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #contentEdit22 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="width: 100%; text-align: center; color: #4a79e4">
+      {{ Sname }}
+    </h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none">
+      <span aria-hidden="true" style="outline: none">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm" (submit)="CompleteStage(f)">
+      <div class="row">
+        <div class="col-md-12">
+          <label>Stage</label><br />
+          <select class="input-fld required-fld" name="Status" [(ngModel)]="Completetage.Status">
+            <option value="{{stage.key}}" *ngFor="let stage of OrderStage">{{stage.name}}</option>
+            <!-- <option value="sos_Sold">sos_Sold</option>
+            <option value="sos_Won">sos_Won</option> -->
+          </select>
+        </div>
+        <div class="col-md-12">
+          <label>Add Comments</label><br />
+          <textarea type="text" class="input-fld required-fld" name="Remarks"
+            [(ngModel)]="Completetage.Remarks" placeholder="Add Comments" required></textarea>
+        </div>
+
+        <div class="col-md-12" style="text-align: center">
+          <button class="add-invent" [disabled]="f.invalid">
+            Done
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<ng-template #confirmModal let-modal>
+  <div class="modal-body">
+    <p> Are You Sure Do You Want To Delete File ?</p>
+    <div class="confirm-btn">
+      <button class="btn custom-btn-blue" (click)="deletefileapi(deletebranch1)">OK</button>
+      <button class="btn custom-btn-outline-blue" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>

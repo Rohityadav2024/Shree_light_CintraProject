@@ -1,0 +1,500 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="TopbarAllComponentDivs">
+      <div class="Innerpagename">
+        <span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="backClicked()" style="cursor: pointer;"></span><h2>{{Headingss[0].heading102}} {{Headingss[0].leftheading}}</h2>
+    </div>
+    <div class="SideBTnAllstyle"></div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales box">
+        <div class="row">
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <form #f="ngForm" name="theForm" (submit)="EditCustomer(f)">
+              <div class="lead-update-container">
+                <h6 class="label-mark label-mark-first">{{Headingss[0].SubHeading2}}</h6>
+
+                <div class="lead-update-wrapper" *ngIf="isModulefieldview(3, 'U_LEADNM')">
+                  <label>{{Headingss[0].heading1}}</label>
+                  <div class="customermatch-sign">
+
+                    <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(3, 'U_LEADNM')" [class.disable-fld]="!isModulefieldedit(3, 'U_LEADNM')" [(ngModel)]="editcustomer.U_LEADNM" name="leadName" #U_LEADNM="ngModel"
+                      disabled="" [class.disable-fld]="!isModulefieldedit(3, 'U_LEADNM')" [disabled]="!isModulefieldedit(3, 'U_LEADNM')" [required]="HeadingServices.isModulefieldMendetory(3, 'U_LEADNM')">
+                  </div>
+                  <ng-container *ngIf="HeadingServices.isModulefieldMendetory(3, 'U_LEADNM')">
+                    <span class="help-block danger"
+                      *ngIf="(U_LEADNM.errors?.required && f.submitted)||(U_LEADNM.errors?.required && U_LEADNM.touched)">
+                      The {{Headingss[0].heading5}} is required
+                    </span>
+                  </ng-container>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[0].heading2}}</label>
+                  <div>
+                    <input type="text" class="input-fld required-fld" name="CardName"
+                      [(ngModel)]="editcustomer.CardName" placeholder="Enter {{Headingss[0].heading2}}" #CardName="ngModel" required><br>
+                    <span class="help-block danger" *ngIf="CardName.errors?.required && CardName.touched">
+                      The {{Headingss[0].heading2}} is required
+                    </span>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper" *ngIf="isModulefieldview(3, 'Website')">
+                  <label>{{Headingss[0].heading3}}</label>
+                  <div>
+                    <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(3, 'Website')" name="Website" [(ngModel)]="editcustomer.Website"
+                      placeholder="Enter {{Headingss[0].heading3}}" #Website="ngModel" [class.disable-fld]="!isModulefieldedit(3, 'Website')" [disabled]="!isModulefieldedit(3, 'Website')" [required]="HeadingServices.isModulefieldMendetory(3, 'Website')"><br>
+                    <!-- <span class="help-block danger" *ngIf="Website.errors?.required && Website.touched">
+                      The Website is required
+                    </span> -->
+                  </div>
+                  <ng-container *ngIf="HeadingServices.isModulefieldMendetory(3, 'Website')">
+                    <span class="help-block danger"
+                      *ngIf="(Website.errors?.required && f.submitted)||(Website.errors?.required && Website.touched)">
+                      The {{Headingss[0].heading3}} is required
+                    </span>
+                  </ng-container>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[0].heading4}}</label>
+                  <div>
+                    <input type="text" class="input-fld required-fld" name="Phone1" [(ngModel)]="editcustomer.Phone1"
+                      placeholder="Enter {{Headingss[0].heading4}}" maxlength="15" pattern="^((\\+91-?)|0)?[0-9]{7,15}$" #Phone1="ngModel"
+                      required><br>
+                    <span class="help-block danger" *ngIf="Phone1.errors?.required ">
+                      The {{Headingss[0].heading4}} is required
+                    </span>
+                    <span class="help-block danger" *ngIf="Phone1.errors?.pattern">
+                      Invalid {{Headingss[0].heading4}}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper" >
+                  <label>{{Headingss[0].heading5}}</label>
+                  <div>
+                    <input type="text" email="true" class="input-fld required-fld" name="EmailAddress"
+                      [(ngModel)]="editcustomer.EmailAddress" placeholder="Enter {{Headingss[0].heading5}}" #Email="ngModel" required
+                      ><br>
+                    <span class="help-block danger" *ngIf="Email.errors?.required">
+                      The {{Headingss[0].heading5}} is required
+                    </span>
+                    <span class="help-block danger" *ngIf="Email.errors?.email">
+                      Invalid {{Headingss[0].heading5}}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- <div class="lead-update-wrapper">
+                  <label>Contact Person</label>
+                  <div>
+                    <ng-select #selectcontactperson [clearOnBackspace]="false" [searchable]="false" name="U_CONTOWNR"
+                      required #U_CONTOWNR="ngModel" [(ngModel)]="editcustomer.U_CONTOWNR"
+                      class="ngsearch-dropdown input-fld required-fld">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectcontactperson.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select Contact Person</ng-option>
+                      <ng-option *ngFor="let item of contactPersoneList"
+                        value="{{item.FirstName}}">{{item.FirstName}}</ng-option>
+                    </ng-select>
+                    <span class="help-block danger"
+                      *ngIf="(U_CONTOWNR.errors?.required && f.submitted)||(U_CONTOWNR.errors?.required && U_CONTOWNR.touched)">
+                      Contact Person is required
+                    </span>
+                  </div>
+                </div> -->
+
+                <div class="lead-update-wrapper" *ngIf="isModulefieldview(3, 'U_ANLRVN')">
+                  <label>{{Headingss[0].heading6}} </label>
+                  <div class="newrupe">
+                    <span class="span10">{{'' | priceFormat:''}}</span>
+                    <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(3, 'U_ANLRVN')" name="U_ANLRVN" #Annual="ngModel"
+                      [(ngModel)]="editcustomer.U_ANLRVN" placeholder="Enter {{Headingss[0].heading6}}" pattern="^[0-9]*$"
+                      [class.disable-fld]="!isModulefieldedit(3, 'U_ANLRVN')" [disabled]="!isModulefieldedit(3, 'U_ANLRVN')" [required]="HeadingServices.isModulefieldMendetory(3, 'U_ANLRVN')">
+                    <!-- <span class="help-block danger" *ngIf="Annual.errors?.required">
+            Turnover  is required
+          </span> -->
+                    <span class="help-block danger" *ngIf="Annual.errors?.pattern && Annual.touched">
+                      Take Numeric Value only
+                    </span>
+                    <ng-container *ngIf="HeadingServices.isModulefieldMendetory(3, 'U_ANLRVN')">
+                      <span class="help-block danger"
+                        *ngIf="(Annual.errors?.required && f.submitted)||(Annual.errors?.required && Annual.touched)">
+                        The {{Headingss[0].heading6}} is required
+                      </span>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper" *ngIf="isModulefieldview(3, 'Industry')">
+                  <label>{{Headingss[0].heading7}}</label>
+                  <div>
+                    <ng-select #selectindustry [clearOnBackspace]="false" [searchable]="false" name="Industry"
+                      #Industry="ngModel" [(ngModel)]="editcustomer.Industry"
+                      class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(3, 'Industry')" [class.disable-fld]="!isModulefieldedit(3, 'Industry')" [disabled]="!isModulefieldedit(3, 'Industry')" [required]="HeadingServices.isModulefieldMendetory(3, 'Industry')">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectindustry.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select {{Headingss[0].heading7}}</ng-option>
+                      <ng-option *ngFor="let item of industorys"
+                        value="{{item.IndustryCode}}">{{item.IndustryName}}</ng-option>
+                    </ng-select>
+                    <ng-container *ngIf="HeadingServices.isModulefieldMendetory(3, 'Industry')">
+                      <span class="help-block danger"
+                        *ngIf="(Industry.errors?.required && f.submitted)||(Industry.errors?.required && Industry.touched)">
+                        The {{Headingss[0].heading7}} is required
+                      </span>
+                    </ng-container>
+                    <!-- <select class="input-fld required-fld" name="Industry" required #Industry="ngModel" [(ngModel)]="editcustomer.Industry">
+                      <option *ngFor="let item of industorys" value="{{item.IndustryCode}}">{{item.IndustryName}}</option>
+                    </select> -->
+                    <!-- <span class="help-block danger"
+                      *ngIf="(Industry.errors?.required && f.submitted)||(Industry.errors?.required && Industry.touched)">
+                      Industry Select is required
+                    </span> -->
+                    <!-- <span class="help-block danger" *ngIf="Industry.errors?.pattern && Industry.touched">
+                      Select Industry
+                    </span> -->
+                  </div>
+                </div>
+
+
+                <!-- <strong>General Details</strong><br> -->
+                <h6 class="label-mark">{{Headingss[0].SubHeading3}}</h6>
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[0].heading8}}</label>
+                  <div>
+                    <div>
+                      <ng-select #selectsalesemp [clearOnBackspace]="false" [searchable]="false" name="SalesPersonCode"
+                        [(ngModel)]="editcustomer.SalesPersonCode" #SalesPersonCode="ngModel" class="ngsearch-dropdown input-fld required-fld">
+                        <ng-template ng-header-tmp>
+                          <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                            type="text" (input)="selectsalesemp.filter($event.target.value)" />
+                        </ng-template>
+                        <ng-option value="" disable selected>Select {{Headingss[0].heading8}}</ng-option>
+                        <ng-option *ngFor="let item of bridgess"
+                          value="{{item.SalesEmployeeCode}}">{{item.firstName}}</ng-option>
+                      </ng-select>
+
+                      <!-- <p>{{salep.SalesEmployeeName}}</p> -->
+                      <!-- <select class="input-fld required-fld" name="SalesPersonCode" [(ngModel)]="editcustomer.SalesPersonCode">
+                        <option value="{{editcustomer.SalesPersonCode[0].SalesEmployeeCode}}" selected>{{editcustomer.SalesPersonCode[0].SalesEmployeeName}}</option>
+                        <option *ngFor="let item of bridgess" value="{{item.SalesEmployeeCode}}">{{item.firstName}}</option>
+                      </select> -->
+                    </div>
+                    <!-- <select class="input-fld required-fld" name="SalesPersonCode" required #SalesPersonCode=ngModel [(ngModel)]="editcustomer.SalesPersonCode">
+                      <option value="" selected>Choose Select</option>
+                      <option *ngFor="let item of bridgess" value="{{item.SalesEmployeeCode}}">{{item.firstName}}</option>
+                     </select>-->
+                    <span class="help-block danger" *ngIf="(SalesPersonCode.errors?.required && f.submitted)||(SalesPersonCode.errors?.required && SalesPersonCode.touched)">
+                      Select {{Headingss[0].heading8}} is required
+                    </span>
+                  </div>
+                </div>
+
+                <!-- <div class="lead-update-wrapper">
+                  <label>Credit Limit</label>
+                  <div>
+                    <input type="text" class="input-fld" name="CreditLimit" #CreditLimit=ngModel
+                      [(ngModel)]="editcustomer.CreditLimit" pattern="^[0-9]*$" placeholder="Credit Limit">
+
+                  </div>
+                </div> -->
+
+                <div class="lead-update-wrapper" *ngIf="isModulefieldview(3, 'Type')">
+                  <label>{{Headingss[0].heading9}}</label>
+                  <div>
+                    <ng-select #selecttype [clearOnBackspace]="false" [searchable]="false" [items]="cstmrtype"
+                      bindLabel="Type" bindValue="id" placeholder="Select {{Headingss[0].heading9}}" [(ngModel)]="editcustomer.U_TYPE"
+                      name="U_TYPE" #U_TYPE="ngModel" class="ngsearch-dropdown input-fld "
+                      [class.disable-fld]="!isModulefieldedit(3, 'Type')" [disabled]="!isModulefieldedit(7, 'Type')">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selecttype.filter($event.target.value)" />
+                      </ng-template>
+                      <!-- <ng-option value="" disable selected>Select Type</ng-option>
+                      <ng-option *ngFor="let item of cstmrtype " value="{{item.id}}">{{item.Type}}</ng-option> -->
+                    </ng-select>
+                    <!-- <select class="input-fld" [(ngModel)]="editcustomer.U_TYPE" name="U_TYPE" #U_TYPE=ngModel>
+                      <option value="" selected>Choose Select</option>
+                      <option *ngFor="let item of cstmrtype " value="{{item.id}}" selected>{{item.Type}}</option>
+                    </select> -->
+                  </div>
+                </div>
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[0].heading10}}</label>
+                  <div>
+                    <ng-select #selectpayterms [clearOnBackspace]="false" [searchable]="false" name="PayTermsGrpCode"
+                      #PayTermsGrpCode=ngModel [(ngModel)]="editcustomer.PayTermsGrpCode" required
+                      class="ngsearch-dropdown input-fld required-fld">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectpayterms.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select {{Headingss[0].heading10}}</ng-option>
+                      <ng-option *ngFor="let item of paymentterms"
+                        value="{{item.GroupNumber}}">{{item.PaymentTermsGroupName}}</ng-option>
+                    </ng-select>
+                    <!-- <select class="input-fld required-fld " name="PayTermsGrpCode" #PayTermsGrpCode=ngModel
+                      [(ngModel)]="editcustomer.PayTermsGrpCode" required>
+
+                      <option *ngFor="let item of paymentterms" value="{{item.GroupNumber}}">
+                        {{item.PaymentTermsGroupName}}</option>
+                    </select> -->
+                    <span class="help-block danger" *ngIf="(PayTermsGrpCode.errors?.required && f.submitted)||(PayTermsGrpCode.errors?.required && PayTermsGrpCode.touched)">
+                      {{Headingss[0].heading10}} is required
+                    </span>
+                  </div>
+                </div>
+
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[0].heading11}} </label>
+                  <div>
+                  <select required class="input-fld required-fld" [(ngModel)]="editcustomer.zone" #zone="ngModel"
+                    placeholder="Select zone" name="zone">
+
+                    <option value="" disable selected>Select {{Headingss[0].heading11}}</option>
+                    <option value="{{role.id}}" *ngFor="let role of UserZone">{{role.Name}}</option>
+                  </select>
+                  <span class="help-block danger"
+                  *ngIf="(zone.errors?.required && f.submitted)||(zone.errors?.required && zone.touched)">
+                  The {{Headingss[0].heading11}} is required
+                </span>
+                </div>
+                </div>
+
+                <div class="lead-update-wrapper" *ngIf="isModulefieldview(3, 'U_PARENTACC')">
+                  <label>{{Headingss[0].heading12}}</label>
+                  <div>
+                    <!-- <input type="text" class="input-fld" name="U_PARENTACC" #U_PARENTACC=ngModel
+                      [(ngModel)]="editcustomer.U_PARENTACC" placeholder="Parent Account"> -->
+                      <ng-select #selectaddbusinesspartner [clearOnBackspace]="false" [searchable]="false" id="BusinessPartner" name="BusinessPartner"
+                      #BusinessPartner="ngModel" [(ngModel)]="editcustomer.U_PARENTACC"
+                     class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(3, 'U_PARENTACC')" placeholder="Select {{Headingss[0].heading12}}"
+                     [class.disable-fld]="!isModulefieldedit(3, 'U_PARENTACC')" [disabled]="!isModulefieldedit(3, 'U_PARENTACC')" [required]="HeadingServices.isModulefieldMendetory(3, 'U_PARENTACC')">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectaddbusinesspartner.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select {{Headingss[0].heading12}}</ng-option>
+                      <ng-option *ngFor="let item of businesspartners" value="{{item.CardName}}">{{item.CardName}}</ng-option>
+                    </ng-select>
+                    <ng-container *ngIf="HeadingServices.isModulefieldMendetory(3, 'U_PARENTACC')">
+                      <span class="help-block danger"
+                        *ngIf="(BusinessPartner.errors?.required && f.submitted)||(BusinessPartner.errors?.required && BusinessPartner.touched)">
+                        The {{Headingss[0].heading12}} is required
+                      </span>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper" *ngIf="isModulefieldview(3, 'GSTIN')">
+                  <label>{{Headingss[0].heading13}}</label>
+                  <div>
+                    <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(3, 'GSTIN')" name="U_INVNO" #U_INVNO=ngModel
+                      [(ngModel)]="editcustomer.U_INVNO" pattern="^[a-zA-Z0-9]*$" placeholder="Enter {{Headingss[0].heading13}}"
+                      [class.disable-fld]="!isModulefieldedit(3, 'GSTIN')" [disabled]="!isModulefieldedit(3, 'GSTIN')" [required]="HeadingServices.isModulefieldMendetory(3, 'GSTIN')">
+                    <span class="help-block danger" *ngIf="U_INVNO.errors?.required && U_INVNO.touched">
+                      {{Headingss[0].heading13}} is required
+                    </span>
+                    <span class="help-block danger" *ngIf="U_INVNO.errors?.pattern">
+                      take numeric value
+                    </span>
+                    <ng-container *ngIf="HeadingServices.isModulefieldMendetory(3, 'GSTIN')">
+                      <span class="help-block danger"
+                        *ngIf="(U_INVNO.errors?.required && f.submitted)||(U_INVNO.errors?.required && U_INVNO.touched)">
+                        The {{Headingss[0].heading13}} is required
+                      </span>
+                    </ng-container>
+                  </div>
+                </div>
+
+
+
+                <div class="lead-update-wrapper" *ngIf="isModulefieldview(3, 'Remarks1')">
+                  <label>{{Headingss[0].heading14}}</label>
+                  <div>
+                    <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(3, 'Remarks1')" #Notes="ngModel" name="Notes" [(ngModel)]="editcustomer.Notes"
+                      placeholder="Enter {{Headingss[0].heading14}}" [class.disable-fld]="!isModulefieldedit(3, 'Remarks1')" [disabled]="!isModulefieldedit(3, 'Remarks1')" [required]="HeadingServices.isModulefieldMendetory(3, 'Remarks1')">
+                  </div>
+                  <ng-container *ngIf="HeadingServices.isModulefieldMendetory(3, 'Remarks1')">
+                    <span class="help-block danger"
+                      *ngIf="(Notes.errors?.required && f.submitted)||(Notes.errors?.required && Notes.touched)">
+                      The {{Headingss[0].heading14}} is required
+                    </span>
+                  </ng-container>
+                </div>
+                <!-- <strong>Address</strong><br> -->
+                <h6 class="label-mark">{{Headingss[2].heading}}</h6>
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[2].SubHeading1}} {{Headingss[2].heading0}}</label>
+                  <div>
+                    <textarea type="text" required class="input-fld required-fld" name="AddressName" #AddressName="ngModel"
+                      [(ngModel)]="editcustomer.BPAddresses[0].AddressName" placeholder="Enter {{Headingss[2].SubHeading1}} {{Headingss[2].heading0}}"></textarea>
+                    <span class="help-block danger" *ngIf="AddressName.errors?.required && AddressName.touched">
+                      {{Headingss[2].SubHeading1}} {{Headingss[2].heading0}} is required
+                    </span>
+                  </div>
+                </div>
+
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[2].SubHeading1}} {{Headingss[2].heading1}}</label>
+                  <div>
+                    <textarea class="input-fld required-fld" placeholder="Address" placeholder="Enter {{Headingss[2].SubHeading1}} {{Headingss[2].heading1}}" required
+                      name="Street" #Street=ngModel [(ngModel)]="editcustomer.BPAddresses[0].Street" maxlength="1000"></textarea>
+                    <span class="help-block danger" *ngIf="Street.errors?.required">
+                      Enter {{Headingss[2].SubHeading1}} {{Headingss[2].heading1}} is required
+                    </span>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[2].heading2}}</label>
+                  <div>
+                    <input type="text" required class="input-fld required-fld" name="{{Headingss[2].heading2}}" #City="ngModel"
+                      [(ngModel)]="editcustomer.BPAddresses[0].City" placeholder="Enter {{Headingss[2].heading2}}" maxlength="1000">
+                    <span class="help-block danger" *ngIf="City.errors?.required">
+                      {{Headingss[2].heading2}} is required
+                    </span>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[2].heading3}}</label>
+                  <div>
+                    <ng-select #selectstate [clearOnBackspace]="false" [searchable]="false" name="State"
+                      #State="ngModel" (change)="selectChangeHandlerState($event)"
+                      [(ngModel)]="editcustomer.BPAddresses[0].State" required
+                      class="ngsearch-dropdown input-fld required-fld">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectstate.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select {{Headingss[2].heading3}}</ng-option>
+                      <ng-option *ngFor="let item of statess" value="{{item.Code}}">{{item.Name}}</ng-option>
+                    </ng-select>
+
+                    <!-- <select class="input-fld required-fld" name="State" #State="ngModel"
+                      (change)="selectChangeHandlerState($event)" [(ngModel)]="editcustomer.BPAddresses[0].State">
+
+                      <option value="" selected>Choose Select</option>
+                      <option *ngFor="let item of statess" value="{{item.Code}}">{{item.Name}}</option>
+                    </select> -->
+                    <span class="help-block danger" *ngIf="(State.errors?.required && f.submitted)||(State.errors?.required && State.touched)">
+                      {{Headingss[2].heading3}} is required
+                    </span>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[2].heading4}}</label>
+                  <div>
+                    <ng-select #selectcountry [clearOnBackspace]="false" [searchable]="false" name="Country"
+                      #Country="ngModel" (change)="selectChangeHandler($event)"
+                      [(ngModel)]="editcustomer.BPAddresses[0].Country" required
+                      class="ngsearch-dropdown input-fld required-fld">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectcountry.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select {{Headingss[2].heading4}}</ng-option>
+                      <ng-option *ngFor="let item of countrys" [value]="item.Code">{{item.Name}}</ng-option>
+                    </ng-select>
+
+                    <!-- <select class="input-fld required-fld" name="Country" #Country="ngModel"
+                      (change)="selectChangeHandler($event)" [(ngModel)]="editcustomer.BPAddresses[0].Country" required>
+
+                      <option *ngFor="let item of countrys" [value]="item.Code">
+                        {{item.Name}}</option>
+                    </select> -->
+                    <span class="help-block danger" *ngIf="(Country.errors?.required && f.submitted)||(Country.errors?.required && Country.touched)">
+                      {{Headingss[2].heading4}} is required
+                    </span>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[2].heading5}}</label>
+                  <div>
+                    <input type="text" required class="input-fld required-fld" name="ZipCode" #ZipCode=ngModel
+                      [(ngModel)]="editcustomer.BPAddresses[0].ZipCode" placeholder="Enter {{Headingss[2].heading5}}" pattern="^[0-9]*$">
+                    <span class="help-block danger" *ngIf="ZipCode.errors?.required && ZipCode.touched">
+                      {{Headingss[2].heading5}} is required
+                    </span>
+                    <span class="help-block danger" *ngIf="ZipCode.errors?.pattern">
+                      take numeric value
+                    </span>
+                  </div>
+                </div>
+
+
+                <div class="lead-update-wrapper" *ngIf="isModulefieldview(3, 'U_SHPTYP')">
+                  <label>{{Headingss[2].heading6}}</label>
+                  <div>
+                    <ng-select #selectshiptype [clearOnBackspace]="false" [searchable]="false"
+                      [(ngModel)]="editcustomer.BPAddresses[0].U_SHPTYP" name="U_SHPTYP" #U_SHPTYP=ngModel
+                      class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(3, 'U_SHPTYP')" [class.disable-fld]="!isModulefieldedit(3, 'U_SHPTYP')" [disabled]="!isModulefieldedit(3, 'U_SHPTYP')" [required]="HeadingServices.isModulefieldMendetory(3, 'U_SHPTYP')">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectshiptype.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select {{Headingss[2].heading6}}</ng-option>
+                      <ng-option value="{{type}}" *ngFor="let type of ShippingType">{{type}}</ng-option>
+                    </ng-select>
+
+                    <!-- <select class="input-fld required-fld" [(ngModel)]="editcustomer.BPAddresses[0].U_SHPTYP"
+                      name="U_SHPTYP" #U_SHPTYP=ngModel>
+                      <option value="" selected>Choose Select</option>
+                      <option value="{{type}}" *ngFor="let type of ShippingType">{{type}}</option>
+
+                    </select> -->
+                    <ng-container *ngIf="HeadingServices.isModulefieldMendetory(3, 'U_SHPTYP')">
+                      <span class="help-block danger"
+                        *ngIf="(U_SHPTYP.errors?.required && f.submitted)||(U_SHPTYP.errors?.required && U_SHPTYP.touched)">
+                        The {{Headingss[2].heading6}} is required
+                      </span>
+                    </ng-container>
+                  </div>
+                </div>
+
+
+
+                <div style="text-align: center;" *ngIf="isLoading">
+                  <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+                </div>
+
+              </div>
+              <div class="col-md-12 text-center" *ngIf="!isLoading">
+                <button class="add-invent">Save</button>
+                <!-- <button class="add-invent"  [disabled]="f.invalid">Update</button> -->
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="loadercss" style="text-align: center;" *ngIf="isdataLoading">
+      <img src="../../assets/img/loder.gif">
+    </div>
+
+  </div>
+</section>
+<div class="alert alert-primary edit-success-box alert-dismissible fade show" role="alert">
+  Business Partner Updated Successfully !
+</div>

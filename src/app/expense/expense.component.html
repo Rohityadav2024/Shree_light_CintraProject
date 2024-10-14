@@ -1,0 +1,1516 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+
+  <div class="home-content">
+    <div class="sales-boxes">
+      <div class="recent-sales box position-relative">
+        <div class="em-search-wrapper">
+          <div class="col-md-3 mt-1">
+            <h5 class="fs-15" style="font-weight:600; margin-left: 8px; color:#4a79e4;"> Expense </h5>
+
+
+
+
+          </div>
+          <div class="em-search-container">
+            <!-- <button class="openbtn btn-skyblue openbtn" (click)="openNav()"><i class="fa fa-filter" aria-hidden="true"></i>
+              Filters</button> -->
+            <button class="openbtn btn-skyblue openbtn" (click)="openNav()"><i class="fa fa-filter" aria-hidden="true"></i>
+              Filters</button>
+            <div class="em-search">
+              <span [innerHTML]="'search-icon' | svgIcons:''" class="quick-search"></span>
+              <!-- <input class="sear-are"
+              [(ngModel)]="filterString" (ngModelChange)="getExpense()" placeholder="Search"> -->
+              <input class="sear-are" [(ngModel)]="searchValue" placeholder="Search ">
+            </div>
+            <div class="title me-3"><a class="btn btn-sm" (click)="open(mymodal)"><span>+</span> New</a></div>
+          </div>
+
+          <!-- <div class="col-md-1 title"><a class="btn btn-sm" (click)="open(mymodal)"><span>+</span> New</a></div> -->
+
+          <!-- added by millan on 05-May-2022 -->
+        </div>
+
+
+        <div id="mySidepanel" class="sidepanel sidepanel2 px-0 ">
+          <!-- <a class="closebtn" (click)="closeNav()">&times;</a> -->
+          <div class="row ">
+            <div class="col-4 d-flex align-items-center">
+              <span class="filter_title ms-3">Filter</span>
+            </div>
+            <div class="col-8">
+              <div class="d-flex align-items-center justify-content-end">
+                <!-- <a (click)="resetfilter()" class="clearall me-3">Clear all</a> -->
+                <a class="cancel-btn me-3" style="font-size:26px !important;" (click)="closeNav()">&times;</a>
+              </div>
+            </div>
+            <hr />
+            <form name="form" (ngSubmit)="apply()" #f="ngForm" novalidate>
+              <!-- <div class="row">
+                <div class="col-4 mb-3">
+                  <label class="ms-3 filtersize">Type Of Expense</label>
+                </div>
+                <div class="col-8 mb-3 pe-3">
+
+
+                  <ng-multiselect-dropdown class="w-100 filtersize" style="font-size:14px !important"
+                    [(ngModel)]="filterLead.typeofexpense" [placeholder]="'Select Type Of Expense'" [settings]="dropdownSettings1"
+                    [data]="dropdownList1" name="typeofexpense" (onSelect)="onItemSelect1($event)"
+                    (onDeSelect)="onDeSelect1($event)" (onSelectAll)="onSelectAll1($event)"
+                    (onDeSelectAll)="onDeSelectAll1($event)">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div> -->
+
+              <div class="row">
+                <div class="col-4 mb-3">
+                  <label class="ms-3 filtersize">From Date</label>
+                </div>
+                <div class="col-8 mb-3 pe-3">
+                  <input type="date" class="form-control form-control-sm filtersize" id="fromDate"
+                    (change)="SendDatetoFunction($event)" [(ngModel)]="filterLead.expense_from" name="expense_from"
+                    style="height:32px !important;" />
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-4 mb-3">
+                  <label class="ms-3 filtersize">To Date</label>
+                </div>
+                <div class="col-8 mb-3 pe-3">
+                  <input type="date" class="form-control form-control-sm filtersize" id="toDate"
+                    [(ngModel)]="filterLead.expense_to" name="expense_to" style="height:32px !important;" />
+
+                </div>
+              </div>
+
+
+
+
+              <div class="row">
+                <div class="col-6 text-center mb-3">
+                  <a class="me-3"
+                    style="background: transparent;border: 1px solid #4a79e4;padding: 6px 20px;color: #4a79e4;border-radius: 6px;font-size: 13px;"
+                    (click)="resetfilter()">Reset</a>
+                </div>
+                <div class="col-6 mb-3">
+                  <button
+                    style=" border: 1px solid #4a79e4; padding: 6px 20px; background: #4a79e4; color: #fff;border-radius: 6px; font-size: 13px;">Apply</button>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-5  mb-3">
+                <button class="ms-md-3"
+                  style=" border: 1px solid #001E78; padding: 6px 20px; background: #001E78; color: #fff;border-radius: 6px; font-size: 13px;"
+                  (click)="apply()">Filter</button>
+              </div> -->
+            </form>
+
+          </div>
+        </div>
+
+
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="width: 10%;margin: 10%;">
+        </div>
+        <div class="sales-details" *ngIf="!isLoading">
+          <table class="new-tabl" id="assigntable">
+            <tr>
+              <td colspan="11" class="extra-area">
+                <span style="float: right;">
+                  <a class="btn btn-sm btn-primary" (click)="reload()"><i class="fa fa-refresh"
+                      aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <a class="btn btn-sm btn-primary" (click)="multipleDelete1()"><i class="fa fa-trash"
+                      aria-hidden="true"></i></a>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+              <!-- <th (click)="togglesortType('id')"> Name <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span>
+              </th> -->
+              <th (click)="togglesortType('trip_name')" style="width: 150px;">Trip Name <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span></th>
+              <th (click)="togglesortType('type_of_expense')">Type of Expense <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span></th>
+              <th (click)="togglesortType('firstName')">Expense Employee
+                <!-- <span
+                    [innerHTML]="'up-down-arrow' | svgIcons:''"></span> -->
+              </th>
+              <th (click)="togglesortType('expense_from')">From <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span></th>
+              <th (click)="togglesortType('expense_to')">To <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span>
+              </th>
+              <th (click)="togglesortType('totalAmount')">Total Amount
+                <!-- <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> -->
+              </th>
+
+              <th class="text-right">Action</th>
+            </tr>
+
+            <ng-container
+              *ngFor="let item of selectedData  | expenseSearch:searchValue | sortEmployee : sortedColumn |  paginate: { itemsPerPage: pagelimit, currentPage: p };">
+              <!-- | leadstatusfilter:status | leadtypefilter: assignedTo | leadcatefilter:source | leadpriority:leadpriority | leadgenerated:leadgenerated -->
+              <tr class="hover">
+                <td><input type="checkbox" id="checkbox{{item.id}}" value="{{item.id}}" class="checkbox"
+                    (click)="checkboxclick(item.id)"></td>
+                <!-- <td (click)="suplier(item.id)">{{item.invoiceNO}}</td> -->
+                <td >{{item.trip_name}}</td>
+                <td >{{item.type_of_expense}}</td>
+                <td >{{item.employeeId.length == 0? 'NA' :
+                  item.employeeId[0].firstName}} {{item.employeeId.length == 0? '' : item.employeeId[0].lastName}}</td>
+                <td >{{item.expense_from | customDate}}</td>
+                <td >{{item.expense_to | customDate}}</td>
+                <td >{{item.totalAmount}}</td>
+                <td style="padding: 0 15px; " class="text-right">
+                  <span class="edit-delete edit-delete{{item.id}}" (click)="editdeletepop(item)"
+                    [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                  <div class="hover-show hover-show{{item.id}} hover-show-inactive">
+                    <!-- <span (click)="openView(contentView, item)"> View Payment</span><br> -->
+                    <span (click)="openEdit(mymodal1,item)"> <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                      Expense</span><br>
+                    <span (click)="deleteLeads(item.id? item.id:0)"> <i class="fa fa-trash" aria-hidden="true"></i>
+                      Delete Expense</span><br>
+                    <!-- <span (click)="deleteLeads(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                    Suspend Lead</span><br>
+                  <span (click)="CreateLeadstoBp(item.id? item.id:0)"><i class="fa fa-plus" aria-hidden="true"></i>
+                     Create BP</span><br>
+                  <span (click)="openfollowup(followup, item)"><i class="fa fa-hand-o-up" aria-hidden="true"></i>
+                    Follow Up</span><br>
+                    <span (click)="assingEdit(contentAssignEdit, item)"><i class="fa fa-user" aria-hidden="true"></i>
+                      Assign Lead</span><br> -->
+
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+
+
+
+            <tr id="noDataFound">
+              <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;">No Data Found</td>
+            </tr>
+          </table>
+
+          <div id="DataFound" class="pagination-controls px-2">
+            <div class="pagination-details">Showing {{startind}} to {{endind}} of {{bridges2.length}} entries</div>
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+            <div class="pagelimit">
+              <label class="pagelimitmargin">Rows Per Page</label>
+              <select (change)="clearFilter($event)">
+                <option value="{{page.value}}" *ngFor="let page of paginationOption">{{page.name}}</option>
+                <!-- <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="1000">All</option> -->
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- <app-phone></app-phone> -->
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" style="color: #000; font-size:14px; font-weight:600;" id="modal-basic-title">
+      Add Expense</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm" (submit)="addExpense(f)">
+      <div class="row">
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Trip Name</label>
+            </div>
+            <div class="col-md-8">
+              <input type="text" placeholder="Trip Name" class="input-fld usermodal required-fld" name="tripName"
+                [(ngModel)]="bridges.trip_name" #tripName="ngModel" required>
+              <span class="help-block d-block danger" *ngIf="(tripName.errors?.required && f.submitted)||(tripName.errors?.required && tripName.touched)">
+                Trip Name is required
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Expense Employee Name</label>
+            </div>
+            <div class="col-md-8">
+              <ng-select #selectEmpname [clearOnBackspace]="false" [searchable]="false" [(ngModel)]="bridges.employeeId" name="employeeId" #employeeId="ngModel"
+                required class="ngsearch-dropdown input-fld required-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selectEmpname.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" disable selected>Select Expense Employee</ng-option>
+                <ng-option value="{{emp.id}}" *ngFor="let emp of expenseUser">{{emp.userName}} (
+                  {{emp.role}})</ng-option>
+              </ng-select>
+
+              <!-- <select class="input-fld usermodal required-fld" [(ngModel)]="bridges.employeeId" name="employeeId"
+                #employeeId="ngModel" required>
+                <option value="" selected>Select Expense Employee</option>
+                <option value="{{emp.id}}" *ngFor="let emp of expenseUser">{{emp.userName}} ( {{emp.role}})</option>
+              </select> -->
+
+              <span class="help-block danger" *ngIf="(employeeId.errors?.required && f.submitted)||(employeeId.errors?.required && employeeId.touched)">
+                Expense Employee is required
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Type of Expense</label>
+            </div>
+            <div class="col-md-8">
+              <ng-select #selecttypeofexpense [clearOnBackspace]="false" [searchable]="false" [(ngModel)]="bridges.type_of_expense" name="type_of_expense"
+                #type_of_expense="ngModel" required class="ngsearch-dropdown input-fld required-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selecttypeofexpense.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" disable selected>Select the Type of Expense</ng-option>
+                <ng-option value="{{type}}" *ngFor="let type of typeOfExpense">{{type}}</ng-option>
+              </ng-select>
+              <!-- <select class="input-fld usermodal required-fld" [(ngModel)]="bridges.type_of_expense"
+                name="type_of_expense" #type_of_expense="ngModel" required>
+                <option value="" selected>Select the Type of Expense</option>
+                <option value="{{type}}" *ngFor="let type of typeOfExpense">{{type}}</option>
+
+              </select> -->
+              <span class="help-block danger" *ngIf="(type_of_expense.errors?.required && f.submitted)||(type_of_expense.errors?.required && type_of_expense.touched)">
+                Type of Expense is required
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Date of Expense</label>
+            </div>
+            <div class="col-md-8">
+              <div class="date-wrapper">
+                <input type="date" [min]="newdate" class="input-fld usermodal" name="expense_from"
+                  [(ngModel)]="bridges.expense_from" #expense_from="ngModel">
+                <Span>To</Span>
+                <input type="date" [min]="newdate" class="input-fld usermodal" name="expense_to"
+                  [(ngModel)]="bridges.expense_to" #expense_to="ngModel" placeholder="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Total Amount</label>
+            </div>
+            <div class="col-md-8">
+              <input type="number" onKeyPress="if(this.value.length==9) return false;" class="input-fld usermodal"
+                name="totalAmount" [(ngModel)]="bridges.totalAmount" #totalAmount="ngModel"  (input)="payTotalAmount($event)" required>
+                <span class="help-block danger" *ngIf="totalAmount.errors?.required && totalAmount.touched">
+                  Total Amount is required
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Remarks</label>
+            </div>
+            <div class="col-md-8"> <textarea rows="2" cols="5" class="input-fld " name="remarks"
+                [(ngModel)]="bridges.remarks" #remarks="ngModel"></textarea>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Attachments</label>
+            </div>
+          </div>
+
+
+        </div>
+        <!-- <div class="fileupload-container m-4" appDnd (fileDropped)="onFileDropped($event)">
+          <input type="file" class="fileuploadref" #fileDropRef id="fileDropRef" multiple
+            (change)="fileBrowseHandler($event)" />
+
+
+          <label class="bold"> <b>Choose a file </b></label>&nbsp;
+          <label for="fileDropRef" style="font-weight: 200;"> or drag it here</label>
+        </div> -->
+
+        <div class="files-list">
+          <div class="single-file" *ngFor="let file of files ; let i = index">
+            <div class="file-icon" style="width: 30px">
+              <span [innerHTML]="'file-icon' | svgIcons:''"></span>
+
+            </div>
+            <div class="info d-flex align-items-center justify-content-between me-3">
+              <h4 class="name">
+                {{ file?.name }}
+              </h4>
+              <p class="size mb-0">
+                {{ formatBytes(file?.size,null) }}
+              </p>
+              <!-- <div class="progress-cont">
+                <div class="progress" [style.width]="progress + '%'">
+                </div>
+              </div> -->
+
+            </div>
+
+            <div class="delete" (click)="deleteFile(i)">
+              <span [innerHTML]="'delete' | svgIcons:''"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fileupload-container" appDnd (fileDropped)="onFileDropped($event)">
+          <input type="file" class="fileuploadref" #fileDropRef id="fileDropRef" multiple
+            (change)="fileBrowseHandler($event)" />
+
+
+          <label class="fw-600"> Choose a file </label>
+          <label for="fileDropRef">&nbsp; or drag it here</label>
+        </div>
+
+
+
+
+
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading">
+          <!-- <button class="add-invent1" [disabled]="f.invalid">Save</button> -->
+          <div class="button-wrapper">
+
+            <button type="button" (click)="modal.dismiss('Cross click')" class="add-inventn">Cancel</button>
+            <button class="add-invent1">Save</button>
+          </div>
+        </div>
+        <!-- <div *ngIf="isLoading"><img src="../../assets/img/loder.gif"></div> -->
+
+
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+
+<ng-template #mymodal1 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" style="color: #000; font-size:13px; font-weight:600;" id="modal-basic-title">
+      Edit Expense</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm" (submit)="editExpenseform(f)">
+      <div class="row">
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Trip Name</label>
+            </div>
+            <div class="col-md-8">
+              <input type="text" class="input-fld usermodal required-fld" name="trip_name"
+                [(ngModel)]="editExpense.trip_name" #trip_name="ngModel" required>
+              <span class="help-block d-block danger" *ngIf="(trip_name.errors?.required && f.submitted)||(trip_name.errors?.required && trip_name.touched)">
+                Trip Name is required
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Expense Employee Name</label>
+            </div>
+            <div class="col-md-8">
+              <ng-select #selectempname [clearOnBackspace]="false" [searchable]="false" [items]="expenseUser"
+              bindLabel="userName" bindValue="id" [(ngModel)]="editExpense.employeeId" name="employeeId" #employeeId="ngModel"
+                required class="ngsearch-dropdown input-fld required-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selectempname.filter($event.target.value)" />
+                </ng-template>
+                <!-- <ng-option value="" disable selected>Select Expense Employee</ng-option>
+                <ng-option value="{{emp.id}}" *ngFor="let emp of expenseUser">{{emp.userName}}
+                  ({{emp.role}})</ng-option> -->
+              </ng-select>
+              <!-- <select class="input-fld usermodal required-fld" [(ngModel)]="editExpense.employeeId" name="employeeId"
+                #employeeId="ngModel" required>
+                <option value="" selected>Select Expense Employee</option>
+                <option value="{{emp.id}}" *ngFor="let emp of expenseUser">{{emp.userName}} ({{emp.role}})</option>
+              </select> -->
+
+              <span class="help-block danger" *ngIf="(employeeId.errors?.required && f.submitted)||(employeeId.errors?.required && employeeId.touched)">
+                Expense Employee is required
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Type of Expense</label>
+            </div>
+            <div class="col-md-8">
+              <ng-select #selecttypeofexp [clearOnBackspace]="false" [searchable]="false" [(ngModel)]="editExpense.type_of_expense" name="type_of_expense"
+                #type_of_expense="ngModel" required class="ngsearch-dropdown input-fld required-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selecttypeofexp.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" disable selected>Select the Type of Expense</ng-option>
+                <ng-option value="{{type}}" *ngFor="let type of typeOfExpense">{{type}}</ng-option>
+              </ng-select>
+
+              <!-- <select class="input-fld usermodal required-fld" [(ngModel)]="editExpense.type_of_expense"
+                name="type_of_expense" #type_of_expense="ngModel" required>
+                <option value="" selected>Select the Type of Expense</option>
+                <option value="{{type}}" *ngFor="let type of typeOfExpense">{{type}}</option>
+
+              </select> -->
+              <span class="help-block danger" *ngIf="(type_of_expense.errors?.required && f.submitted)||(type_of_expense.errors?.required && type_of_expense.touched)">
+                Type of Expense is required
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Date of Expense</label>
+            </div>
+            <div class="col-md-8">
+              <div class="date-wrapper">
+                <input type="date" [min]="newdate" class="input-fld usermodal" name="expense_from"
+                  [(ngModel)]="editExpense.expense_from" #expense_from="ngModel">
+                <Span>To</Span>
+                <input type="date" [min]="newdate" class="input-fld usermodal" name="expense_to"
+                  [(ngModel)]="editExpense.expense_to" #expense_to="ngModel" placeholder="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Total Amount</label>
+            </div>
+            <div class="col-md-8">
+              <input type="number" onKeyPress="if(this.value.length==9) return false;" class="input-fld usermodal"
+                name="totalAmount" [(ngModel)]="editExpense.totalAmount" #totalAmount="ngModel" (input)="editpayTotalAmount($event)">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Remarks</label>
+            </div>
+            <div class="col-md-8"> <textarea rows="2" cols="5" class="input-fld " name="remarks"
+                [(ngModel)]="editExpense.remarks" #remarks="ngModel"></textarea>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-2">
+
+          <label>Attachments</label>
+
+
+          <div class="files-list  mt-3">
+            <div class="single-file" *ngFor="let file of editfiles ; let i = index">
+
+              <div class="d-flex justify-content-between w-100" *ngIf="file.File">
+                <div class="file-icon">
+                  <a href="{{this.baseUrl2}}{{file.File}}" class="d-flex align-items-center text-decoration-none"
+                    target="_blank"><i class="fa fa-file" style="padding-left: 10px;font-size: 20px;"></i><span
+                      class="text-dark ms-3">{{file.File.substr(file.File.lastIndexOf("/")+1)}}</span></a>
+
+                </div>
+
+
+                <div class="delete" (click)="deletefileapi(file.id, i)">
+                  <span [innerHTML]="'delete' | svgIcons:''"></span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between w-100" *ngIf="file.name">
+                <div class="file-icon" style="width: 30px">
+                  <span [innerHTML]="'file-icon' | svgIcons:''" *ngIf="file.name"></span>
+
+                </div>
+
+
+                <div class="delete" (click)="deleteeditFile(i)">
+                  <span [innerHTML]="'delete' | svgIcons:''"></span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="fileupload-container" appDnd (fileDropped)="oneditFileDropped($event)">
+            <input type="file" class="fileuploadref" #fileDropRef1 id="fileDropRef1" multiple
+              (change)="fileeditBrowseHandler($event)" />
+
+
+            <label class="fw-600"> Choose a file </label>
+            <label for="fileDropRef">&nbsp; or drag it here</label>
+          </div>
+
+
+        </div>
+        <!-- <div class="fileupload-container m-4" appDnd (fileDropped)="onFileDropped($event)">
+          <input type="file" class="fileuploadref" #fileDropRef id="fileDropRef" multiple
+            (change)="fileBrowseHandler($event)" />
+
+
+          <label class="bold"> <b>Choose a file </b></label>&nbsp;
+          <label for="fileDropRef" style="font-weight: 200;"> or drag it here</label>
+        </div> -->
+
+
+
+
+
+
+
+
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading">
+          <!-- <button class="add-invent1" [disabled]="f.invalid">Save</button> -->
+          <div class="button-wrapper">
+
+            <button type="button" (click)="modal.dismiss('Cross click')" class="add-inventn">Cancel</button>
+            <button class="add-invent1">Save</button>
+          </div>
+        </div>
+        <!-- <div *ngIf="isLoading"><img src="../../assets/img/loder.gif"></div> -->
+
+
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+
+
+<div class="alert alert-primary success-box alert-dismissible fade show" role="alert">
+  Expense Added Successfully !
+</div>
+
+
+<ng-template #expensedetails let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" style="color: #000; font-size:13px; font-weight:600;" id="modal-basic-title">
+      Expense Details</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm">
+      <div class="row">
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Trip Name</label>
+            </div>
+            <div class="col-md-8">
+              <input type="text" class="input-fld usermodal" name="trip_name" [(ngModel)]="editExpense.trip_name"
+                #trip_name="ngModel" disabled>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Expense Employee Name</label>
+            </div>
+            <div class="col-md-8">
+              <select class="input-fld usermodal" [(ngModel)]="editExpense.employeeId" name="employeeId"
+                #employeeId="ngModel" disabled>
+                <option value="" selected>Select Expense Employee</option>
+                <option value="{{emp.id}}" *ngFor="let emp of expenseUser">{{emp.userName}} ({{emp.role}})</option>
+              </select>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Type of Expense</label>
+            </div>
+            <div class="col-md-8">
+              <select class="input-fld usermodal" [(ngModel)]="editExpense.type_of_expense" name="type_of_expense"
+                #type_of_expense="ngModel" disabled>
+                <option value="" selected>Select the Type of Expense</option>
+                <option value="{{type}}" *ngFor="let type of typeOfExpense">{{type}}</option>
+                <!-- <option value="Hotel Stay">Hotel Stay</option>
+              <option value="Travel">Travel</option> -->
+              </select>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Date of Expense</label>
+            </div>
+            <div class="col-md-8">
+              <div class="date-wrapper">
+                <input type="date" class="input-fld usermodal" name="expense_from"
+                  [(ngModel)]="editExpense.expense_from" #expense_from="ngModel" disabled>
+                <Span>To</Span>
+                <input type="date" class="input-fld usermodal" name="expense_to" [(ngModel)]="editExpense.expense_to"
+                  #expense_to="ngModel" placeholder="" disabled>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Total Amount</label>
+            </div>
+            <div class="col-md-8">
+              <input type="number" class="input-fld usermodal" name="totalAmount" [(ngModel)]="editExpense.totalAmount"
+                #totalAmount="ngModel" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Remarks</label>
+            </div>
+            <div class="col-md-8"> <textarea rows="2" cols="5" class="input-fld " name="remarks"
+                [(ngModel)]="editExpense.remarks" #remarks="ngModel" disabled></textarea>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-2">
+
+          <label>Attachments</label>
+
+
+          <div class="files-list mt-3">
+            <div class="single-file" *ngFor="let file of editfiles ; let i = index">
+
+              <div class="d-flex justify-content-between w-100" *ngIf="file.File">
+                <div class="file-icon">
+                  <a href="{{this.baseUrl2}}{{file.File}}" class="d-inline-block text-decoration-none "
+                    target="_blank"><i class="fa fa-file me-3 " style="padding-left: 10px;font-size: 20px;"></i> <span
+                      class="text-dark">{{file.File.substr(file.File.lastIndexOf("/")+1)}}</span></a>
+
+
+                </div>
+
+
+                <!-- <div class="delete" (click)="deletefileapi(file.id, i)">
+                <span [innerHTML]="'delete' | svgIcons:''"></span>
+              </div> -->
+              </div>
+              <!-- <div class="d-flex justify-content-between w-100"  *ngIf="file.name">
+              <div class="file-icon" style="width: 30px">
+                <span [innerHTML]="'file-icon' | svgIcons:''" *ngIf="file.name"></span>
+
+              </div>
+
+
+              <div class="delete" (click)="deleteeditFile(i)">
+                <span [innerHTML]="'delete' | svgIcons:''"></span>
+              </div>
+            </div> -->
+
+            </div>
+          </div>
+
+          <!-- <div class="fileupload-container" appDnd (fileDropped)="oneditFileDropped($event)">
+          <input type="file" class="fileuploadref" #fileDropRef1 id="fileDropRef1" multiple
+            (change)="fileeditBrowseHandler($event)" />
+
+
+          <label class="fw-600"> Choose a file </label>
+          <label for="fileDropRef">&nbsp; or drag it here</label>
+        </div> -->
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <!-- <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading">
+
+          <div class="button-wrapper">
+
+              <button type="button" (click)="modal.dismiss('Cross click')" class="add-inventn">Cancel</button>
+              <button class="add-invent1">Save</button>
+          </div>
+        </div> -->
+
+
+
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+
+
+<ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Edit Payment Detail</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <!-- <div *ngIf="error">{{error}}</div> -->
+  <!-- <div *ngIf="success">{{success}}</div> -->
+  <form #f="ngForm" name="theForm" (submit)="editLeads(f)">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Invoice Number </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <input type="number" class="input-fld required-fld" name="Invoice Number"
+                [(ngModel)]="bridges.Invoicenumber" #Invoicenumber="ngModel" required>
+              <span class="help-block d-block danger" *ngIf="Invoicenumber.errors?.required && Invoicenumber.touched">
+                Invoice number is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Transaction ID </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <input type="text" class="input-fld required-fld" name="Transaction ID"
+                [(ngModel)]="bridges.Transaction_ID" #Invoicenumber="ngModel" required>
+              <span class="help-block d-block danger"
+                *ngIf="Transaction_ID?.errors?.required && Transaction_ID.touched">
+                Transaction ID is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Total Amount </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <input type="number" class="input-fld required-fld" name="Total Amount" [(ngModel)]="bridges.Total_Amount"
+                #Total_Amount="ngModel" required>
+              <span class="help-block d-block danger" *ngIf="Total_Amount.errors?.required && Total_Amount.touched">
+                Total Amount is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Transaction Mode </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <ng-select #selecttransactionmode [clearOnBackspace]="false" [searchable]="false" [(ngModel)]="bridges.Transaction_Mode" name="status"
+                #Transaction_Mode="ngModel" required class="ngsearch-dropdown input-fld required-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selecttransactionmode.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" disable selected>Select Transaction Mode</ng-option>
+                <ng-option value="{{mode}}" *ngFor="let mode of TransactionMode">{{mode}}</ng-option>
+              </ng-select>
+              <!-- <select class="input-fld required-fld" [(ngModel)]="bridges.Transaction_Mode" name="status"
+                #Transaction_Mode="ngModel" required>
+                <option value="{{mode}}" *ngFor="let mode of TransactionMode">{{mode}}</option>
+
+              </select> -->
+              <span class="help-block danger" *ngIf="status.errors?.required && status.touched">
+                Transaction Mode is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Due Amount </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <input type="number" class="input-fld required-fld" name="Due Amount" [(ngModel)]="bridges.Due_Amount"
+                #Due_Amount="ngModel" required>
+              <span class="help-block d-block danger" *ngIf="Due_Amount.errors?.required && Due_Amount.touched">
+                Due Amount is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Payement Date </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <input type="date" class="input-fld required-fld" name="Payement Date" [(ngModel)]="bridges.Payement_Date"
+                #Payement_Date="ngModel" required>
+              <span class="help-block d-block danger" *ngIf="Payement_Date.errors?.required && Payement_Date.touched">
+                Payement Date is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Received Amount </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <input type="text" class="input-fld required-fld" name="Received Amount"
+                [(ngModel)]="bridges.Received_Amount" #Received_Amount="ngModel" required>
+              <span class="help-block d-block danger"
+                *ngIf="Received_Amount.errors?.required && Received_Amount.touched">
+                Received Amount is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Remarks</label>
+            </div>
+            <div class="col-md-8 my-2">
+              <textarea rows="4" cols="5" class="input-fld " name="Remarks" [(ngModel)]="bridges.Remarks"
+                #Remarks="ngModel"></textarea>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+
+          <label class="contactlabel">Attachments</label>
+
+
+          <div class="files-list">
+            <div class="single-file" *ngFor="let file of files">
+              <div class="file-icon" style="width: 30px">
+                <!-- <span [innerHTML]="'file-icon' | svgIcons:''"></span> -->
+                <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M18.1708 9.16035V20.9363C18.1708 21.626 17.8995 22.2874 17.4164 22.7751C16.9334 23.2627 16.2783 23.5367 15.5952 23.5367H3.57562C2.89253 23.5367 2.23741 23.2627 1.75438 22.7751C1.27136 22.2874 1 21.626 1 20.9363V3.60039C1 2.91072 1.27136 2.2493 1.75438 1.76164C2.23741 1.27397 2.89253 1 3.57562 1H9.85371C10.3089 1.00007 9.76625 1.18266 10.0882 1.50762L17.668 9.16035C17.9899 9.48538 18.1708 8.70073 18.1708 9.16035Z"
+                    fill="#F9A2A2" stroke="#F9A2A2" stroke-width="2" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div class="info d-flex align-items-center justify-content-between">
+                <h4 class="name">
+                  {{ file?.name }}
+                </h4>
+                <p class="size mb-0">
+                  {{ formatBytes(file?.size,null) }}
+                </p>
+                <!-- <div class="progress-cont">
+                  <div class="progress" [style.width]="progress + '%'">
+                  </div>
+                </div> -->
+
+              </div>
+
+              <div class="delete" (click)="deleteFile(i)">
+                <span [innerHTML]="'delete' | svgIcons:''"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="fileupload-container" appDnd (fileDropped)="onFileDropped($event)">
+            <input type="file" class="fileuploadref" #fileDropRef id="fileDropRef" multiple
+              (change)="fileBrowseHandler($event)" />
+
+
+            <label class="fw-600"> Choose a file </label>
+            <label for="fileDropRef">&nbsp; or drag it here</label>
+          </div>
+
+
+
+
+
+
+
+          <!-- <div class="d-flex justify-content-between align-items-center my-2" style="font-size: 12px;">
+            <span>
+              <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.1708 9.16035V20.9363C18.1708 21.626 17.8995 22.2874 17.4164 22.7751C16.9334 23.2627 16.2783 23.5367 15.5952 23.5367H3.57562C2.89253 23.5367 2.23741 23.2627 1.75438 22.7751C1.27136 22.2874 1 21.626 1 20.9363V3.60039C1 2.91072 1.27136 2.2493 1.75438 1.76164C2.23741 1.27397 2.89253 1 3.57562 1H9.85371C10.3089 1.00007 9.76625 1.18266 10.0882 1.50762L17.668 9.16035C17.9899 9.48538 18.1708 8.70073 18.1708 9.16035Z"
+                  fill="#219653" stroke="#219653" stroke-width="2" stroke-linejoin="round" />
+              </svg>
+              DataStructure.png
+            </span>
+            <span>
+              3.43 MB
+            </span>
+            <span>
+              Rupal
+            </span>
+            <span [innerHTML]="'delete' | svgIcons:''"></span>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center my-2" style="font-size: 12px;">
+            <span>
+              <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.1708 9.16035V20.9363C18.1708 21.626 17.8995 22.2874 17.4164 22.7751C16.9334 23.2627 16.2783 23.5367 15.5952 23.5367H3.57562C2.89253 23.5367 2.23741 23.2627 1.75438 22.7751C1.27136 22.2874 1 21.626 1 20.9363V3.60039C1 2.91072 1.27136 2.2493 1.75438 1.76164C2.23741 1.27397 2.89253 1 3.57562 1H9.85371C10.3089 1.00007 9.76625 1.18266 10.0882 1.50762L17.668 9.16035C17.9899 9.48538 18.1708 8.70073 18.1708 9.16035Z"
+                  fill="#F9A2A2" stroke="#F9A2A2" stroke-width="2" stroke-linejoin="round" />
+              </svg>
+              DataStructure.pdf
+            </span>
+            <span>
+              4.43 MB
+            </span>
+            <span>
+              Rupal
+            </span>
+            <span [innerHTML]="'delete' | svgIcons:''"></span>
+          </div>
+          <div class="files-list">
+            <div class="single-file" *ngFor="let file of files; let i = index">
+              <div class="file-icon" style="width: 30px">
+                <span [innerHTML]="'file-icon' | svgIcons:''"></span>
+              </div>
+              <div class="info d-flex align-items-center justify-content-between">
+                <h4 class="name">
+                  {{ file?.name }}
+                </h4>
+                <p class="size mb-0">
+                  {{ formatBytes(file?.size,null) }}
+                </p>
+
+
+              </div>
+
+              <div class="delete" (click)="deleteFile(i)">
+                <span [innerHTML]="'delete' | svgIcons:''"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="fileupload-container" appDnd (fileDropped)="onFileDropped($event)">
+            <input type="file" class="fileuploadref" #fileDropRef id="fileDropRef" multiple
+              (change)="fileBrowseHandler($event)" />
+
+
+            <label class="fw-600"> Choose a file </label>
+            <label for="fileDropRef"> or drag it here</label>
+          </div> -->
+
+        </div>
+
+
+
+
+
+
+
+        <div class="col-md-12 d-flex justify-content-center mt-3">
+          <a (click)="modal.dismiss('Cross click')" class="paycancel me-4">cancel</a> <button
+            class="add-invent1">Save</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+</ng-template>
+
+
+<div class="alert alert-primary edit-success-box alert-dismissible fade show" role="alert">
+  Expense Updated Successfully !
+</div>
+
+
+<ng-template #contentView let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Payment Detail</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <!-- <div *ngIf="error">{{error}}</div> -->
+  <!-- <div *ngIf="success">{{success}}</div> -->
+  <form #f="ngForm" name="theForm" (submit)="editLeads(f)">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Invoice Number </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <input type="number" class="input-fld required-fld" name="Invoice Number"
+                [(ngModel)]="bridges.Invoicenumber" #Invoicenumber="ngModel" required>
+              <span class="help-block d-block danger" *ngIf="Invoicenumber.errors?.required && Invoicenumber.touched">
+                Invoice number is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Transaction ID </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <input type="text" class="input-fld required-fld" name="Transaction ID"
+                [(ngModel)]="bridges.Transaction_ID" #Invoicenumber="ngModel" required>
+              <span class="help-block d-block danger"
+                *ngIf="Transaction_ID?.errors?.required && Transaction_ID.touched">
+                Transaction ID is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Total Amount </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <input type="number" class="input-fld required-fld" name="Total Amount" [(ngModel)]="bridges.Total_Amount"
+                #Total_Amount="ngModel" required>
+              <span class="help-block d-block danger" *ngIf="Total_Amount.errors?.required && Total_Amount.touched">
+                Total Amount is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Transaction Mode </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <ng-select #selecttransmode [clearOnBackspace]="false" [searchable]="false" [(ngModel)]="bridges.Transaction_Mode" name="status"
+              #Transaction_Mode="ngModel" required class="ngsearch-dropdown input-fld required-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selecttransmode.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" disable selected>Select Transaction Mode</ng-option>
+                <ng-option value="{{mode}}" *ngFor="let mode of TransactionMode">{{mode}}</ng-option>
+              </ng-select>
+              <!-- <select class="input-fld required-fld" [(ngModel)]="bridges.Transaction_Mode" name="status"
+                #Transaction_Mode="ngModel" required>
+                <option value="{{mode}}" *ngFor="let mode of TransactionMode">{{mode}}</option>
+
+              </select> -->
+              <span class="help-block danger" *ngIf="status.errors?.required && status.touched">
+                Transaction Mode is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Due Amount </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <input type="number" class="input-fld required-fld" name="Due Amount" [(ngModel)]="bridges.Due_Amount"
+                #Due_Amount="ngModel" required>
+              <span class="help-block d-block danger" *ngIf="Due_Amount.errors?.required && Due_Amount.touched">
+                Due Amount is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Payement Date </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <input type="date" class="input-fld required-fld" name="Payement Date" [(ngModel)]="bridges.Payement_Date"
+                #Payement_Date="ngModel" required>
+              <span class="help-block d-block danger" *ngIf="Payement_Date.errors?.required && Payement_Date.touched">
+                Payement Date is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Received Amount </label>
+            </div>
+            <div class="col-md-8 my-2">
+              <input type="text" class="input-fld required-fld" name="Received Amount"
+                [(ngModel)]="bridges.Received_Amount" #Received_Amount="ngModel" required>
+              <span class="help-block d-block danger"
+                *ngIf="Received_Amount.errors?.required && Received_Amount.touched">
+                Received Amount is required
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4 my-2">
+              <label class="contactlabel">Remarks</label>
+            </div>
+            <div class="col-md-8 my-2">
+              <textarea rows="4" cols="5" class="input-fld " name="Remarks" [(ngModel)]="bridges.Remarks"
+                #Remarks="ngModel"></textarea>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+
+          <label class="contactlabel">Attachments</label>
+          <div class="d-flex justify-content-between align-items-center my-2" style="font-size: 12px;">
+            <span>
+              <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.1708 9.16035V20.9363C18.1708 21.626 17.8995 22.2874 17.4164 22.7751C16.9334 23.2627 16.2783 23.5367 15.5952 23.5367H3.57562C2.89253 23.5367 2.23741 23.2627 1.75438 22.7751C1.27136 22.2874 1 21.626 1 20.9363V3.60039C1 2.91072 1.27136 2.2493 1.75438 1.76164C2.23741 1.27397 2.89253 1 3.57562 1H9.85371C10.3089 1.00007 9.76625 1.18266 10.0882 1.50762L17.668 9.16035C17.9899 9.48538 18.1708 8.70073 18.1708 9.16035Z"
+                  fill="#219653" stroke="#219653" stroke-width="2" stroke-linejoin="round" />
+              </svg>
+              DataStructure.png
+            </span>
+            <span>
+              3.43 MB
+            </span>
+            <span>
+              Rupal
+            </span>
+            <span [innerHTML]="'delete' | svgIcons:''"></span>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center my-2" style="font-size: 12px;">
+            <span>
+              <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.1708 9.16035V20.9363C18.1708 21.626 17.8995 22.2874 17.4164 22.7751C16.9334 23.2627 16.2783 23.5367 15.5952 23.5367H3.57562C2.89253 23.5367 2.23741 23.2627 1.75438 22.7751C1.27136 22.2874 1 21.626 1 20.9363V3.60039C1 2.91072 1.27136 2.2493 1.75438 1.76164C2.23741 1.27397 2.89253 1 3.57562 1H9.85371C10.3089 1.00007 9.76625 1.18266 10.0882 1.50762L17.668 9.16035C17.9899 9.48538 18.1708 8.70073 18.1708 9.16035Z"
+                  fill="#F9A2A2" stroke="#F9A2A2" stroke-width="2" stroke-linejoin="round" />
+              </svg>
+              DataStructure.pdf
+            </span>
+            <span>
+              4.43 MB
+            </span>
+            <span>
+              Rupal
+            </span>
+            <span [innerHTML]="'delete' | svgIcons:''"></span>
+          </div>
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="col-md-12 d-flex justify-content-center mt-3">
+          <a (click)="modal.dismiss('Cross click')" class="paycancel me-4">cancel</a> <button
+            class="add-invent1">Save</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+</ng-template>
+
+
+
+
+
+
+<!-- <ng-template #contentAssignEdit let-modal>
+  <div class="modal-header justify-content-center">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Assign</h4>
+
+  </div>
+
+  <form #f="ngForm" name="theForm" (submit)="editLeads(f)">
+  <div ngbDropdown class="d-block mx-3">
+    <button type="button" class="btn btn-assign w-100 text-start assign-dropdown" id="dropdownForm1" ngbDropdownToggle>{{selectedValue ? selectedName : '- Choose Assignee Name -'}}</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownForm1" style="transform: translate(1px, 38px) !important;
+    right: 0;">
+    <div class="d-block p-3">
+      <div class="position-relative search_icon ">
+        <input type="text" class="form-control" placeholder="Search"  (input)="filterDropdown($event)">
+
+        <span><i class="fa fa-search" aria-hidden="true"></i></span>
+      </div>
+
+
+
+      <div id="style-1" class="force-overflow">
+
+        <ul class="scrollbox-content assign-ul"  >
+          <li class="dropdown-item  border-bottom" *ngFor="let item of tereer ">
+            <a (click)="selectValue(item.id? item.id:0)">
+         <span>{{item.firstName | slice:0:2}}</span> {{item.firstName}}
+        </a>
+          </li>
+          <li *ngIf="bridgess.length==0">No data</li>
+
+
+        </ul>
+
+
+      </div>
+
+
+    </div>
+
+
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-6 d-flex justify-content-center p-4 text-center">
+        <button  class="assign-btn" >Assign</button>
+    </div>
+    <div class="col-6 d-flex justify-content-center p-4 text-center">
+        <button  class="cancelbtn" (click)="modal.dismiss('Cross click')" ngbDropdownItem>Cancel</button>
+    </div>
+  </div>
+
+
+</form>
+
+
+
+</ng-template> -->
+<!-- <ng-template #contentMultipleAssignEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"
+      style="width: 100%;text-align: center;color: #4A79E4;text-transform: capitalize;">Multiple Assign Leads</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <form>
+    <div class="modal-body" style="padding:0 20px 20px !important;">
+      <div class="row">
+        <div class="col-md-12" *ngFor="let item of bridgess">
+          <label style="margin: 8px 0;cursor: pointer;" (click)="AssignLeads(item.id? item.id:0)"> {{item.firstName}}
+            {{item.middleName}} {{item.lastName}} ({{item.userName}})</label>
+        </div>
+      </div>
+    </div>
+  </form>
+
+</ng-template> -->
+
+
+<!-- <ng-template #followup let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"
+      style="width: 100%;text-align: center;color: #4A79E4; font-size: 1.2rem;">Follow Up</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #fb="ngForm" name="theForm" (submit)="addFollowUp(fb)">
+      <div class="row">
+        <div class="col-md-6">
+          <label>Date</label>
+          <input type="date" class="input-fld required-fld" name="From" [(ngModel)]="AddFollow2.From" #From="ngModel"
+            required>
+          <span class="help-block danger" *ngIf="From.errors?.required && From.touched">
+            From is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Time</label>
+          <input type="time" class="input-fld required-fld" name="Time" [(ngModel)]="AddFollow2.Time" #Time="ngModel"
+            required>
+          <span class="help-block danger" *ngIf="Time.errors?.required && Time.touched">
+            Time is required
+          </span>
+
+        </div>
+
+        <div class="col-md-12">
+          <label>Mode of Communication</label>
+          <select class="input-fld required-fld" name="Mode" [(ngModel)]="AddFollow2.Mode" #Mode="ngModel" required>
+            <option value="" disabled selected>Select Communication</option>
+            <option value="Call"> Call</option>
+            <option value="Whatsapp"> Whatsapp</option>
+            <option value="SMS"> SMS</option>
+            <option value="E-Mail"> E-Mail</option>
+            <option value="Visit"> Visit</option>
+          </select>
+          <span class="help-block danger" *ngIf="Mode.errors?.required && Mode.touched">
+            Mode is required
+          </span>
+        </div>
+
+
+
+        <div class="col-md-12">
+          <label>Comment</label>
+          <textarea class="input-fld required-fld" placeholder="Message" name="Comment" [(ngModel)]="AddFollow2.Comment"
+            #Comment="ngModel" required></textarea>
+          <span class="help-block danger" *ngIf="Comment.errors?.required && Comment.touched">
+            Comment is required
+          </span>
+        </div>
+
+        <div class="col-md-12 text-center mt-3">
+          <button class="add-invent1">Save</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+<div class="alert alert-primary success-box2 alert-dismissible fade show" role="alert">
+  Add followup Successfully !
+</div> -->
+
+
+
+<div class="alert alert-primary delete-success-box alert-dismissible fade show px-3 py-5" role="alert">
+  Are You Sure Do You Want To Delete ?
+
+  <div class="delet-btn">
+    <button type="button" class="yes-delete" (click)="yesdeleteUser(1)">Yes</button>
+    <button type="button" class="no-delete" (click)="yesdeleteUser(0)">No</button>
+  </div>
+</div>
+
+
+<div class="alert alert-primary delete-success-boxall alert-dismissible fade show px-3 py-5" role="alert">
+  Are You Sure Do You Want To Delete This Data ?
+
+  <div class="delet-btn">
+    <button type="button" class="yes-delete" (click)="deletecheck(1)">Yes</button>
+    <button type="button" class="no-delete" (click)="deletecheck(0)">No</button>
+  </div>
+</div>

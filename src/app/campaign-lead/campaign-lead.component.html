@@ -1,0 +1,131 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="sales-boxes">
+      <div class="recent-sales box">
+        <div class="em-search-wrapper">
+
+          <div class="em-search-heading">Campaign Advertisement</div>
+          <div class="em-search-container">
+            <button class="btn btn-sm" (click)="open(mymodal)"><span>+</span> New</button>
+          </div>
+        </div>
+        <div class="sales-details">
+          <table class="new-tabl mt-0" id="assigntable">
+
+            <tr>
+
+              <th style="width: 150px;">Campaign Name <i class="fa fa-sort"></i></th>
+              <th>Campaign Source <i class="fa fa-sort"></i></th>
+              <th>Add Name <i class="fa fa-sort"></i></th>
+              <th>Form ID <i class="fa fa-sort"></i></th>
+              <th>Lead <i class="fa fa-sort"></i></th>
+
+              <th class="text-center">Action</th>
+            </tr>
+
+            <ng-container *ngFor="let item of campaignList; ">
+              <tr class="hover">
+                <td>{{item.campaignName}}</td>
+                <td>{{item.campaignSource}}</td>
+                <td>{{item.addName}}</td>
+                <td>{{item.formID}}</td>
+                <td><a class="text-decoration-none" routerLink="/campaign-lead-list">{{item.lead}}</a></td>
+                <td class="py-2 text-center">
+                  <a class="" style="cursor: pointer;"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+
+                </td>
+              </tr>
+            </ng-container>
+          </table>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Ad Campaign Leads</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm" (submit)="onSubmit(f)">
+      <div class="row">
+        <div class="col-md-6">
+          <label>Camign Name </label>
+          <input type="text" class="input-fld required-fld" name="campaignName" [(ngModel)]="campaignAd.campaignName"
+            #campaignName="ngModel" placeholder="Enter Campaign Name" required>
+          <span class="help-block danger" *ngIf="(campaignName.errors?.required && f.submitted)||(campaignName.errors?.required && campaignName.touched)">
+            Campaign Name is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Campaign Source </label>
+          <ng-select #select [clearOnBackspace]="false" [searchable]="false"  #campaignSource="ngModel" required
+            class="ngsearch-dropdown input-fld required-fld" [(ngModel)]="campaignAd.campaignSource" placeholder="Select Campaign Source"
+            name="campaignSource">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="select.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select Campaign Source</ng-option>
+            <ng-option value="{{source}}" *ngFor="let source of camSource">{{source}}</ng-option>
+          </ng-select>
+
+
+          <span class="help-block danger" *ngIf="(campaignSource.errors?.required && f.submitted)||(campaignSource.errors?.required && campaignSource.touched)">
+            Campaign Source is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Ad Name </label>
+          <input type="text" class="input-fld required-fld" name="userName" [(ngModel)]="campaignAd.adName"
+            #adName="ngModel" placeholder="Enter user name" required>
+          <span class="help-block danger" *ngIf="(adName.errors?.required && f.submitted)||(adName.errors?.required && adName.touched)">
+            Ad Name is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Form ID </label>
+          <input type="number" class="input-fld required-fld" name="formId" [(ngModel)]="campaignAd.formId"
+            #formId="ngModel" placeholder="Enter user name" required>
+          <span class="help-block danger" *ngIf="(formId.errors?.required && f.submitted)||(formId.errors?.required && formId.touched)">
+            FormID is required
+          </span>
+        </div>
+
+
+
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading">
+          <!-- <button class="add-invent1" [disabled]="f.invalid">Save</button> -->
+          <button class="add-invent1">Save</button>
+        </div>
+        <!-- <div *ngIf="isLoading"><img src="../../assets/img/loder.gif"></div> -->
+
+
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+

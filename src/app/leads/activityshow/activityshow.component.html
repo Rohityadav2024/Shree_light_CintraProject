@@ -1,0 +1,288 @@
+<section class="home-section" appLeftMenuNavbar>
+    <app-header></app-header>
+    <div class="home-content">
+        <div class="GridCaleSystem">
+        <div class="custom-search-container">
+            <p class="custom-search-head-name"><i class="fa-solid fa-arrow-left-long cursor-pointer"></i>Lead > Shreya Shaw <li style="list-style: none; font-size: 12px;background-color: #F4F3EB;color: #FFC700; padding: 7px 20px; border-radius: 5px;">On Hold</li></p>
+            <div class="custom-search-wrapper">
+              <div ngbDropdown class="custom-common-search-container">
+                <ng-template #filter>Filter</ng-template>
+                <button type="button" class="custom-com-temp-btn" routerLink="/customer/add-customer"> Convert</button>
+              </div>
+            </div>
+          </div>
+          <div class="sales-boxes">
+            <div class="recent-sales" style="padding: 10px;">
+        <div class="ProjectDetails">
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <div class="MainProjectLine">
+                <div class="ItemText d-flex">
+                    <li style="background-color:#fff;"><img src="../../../assets/img/contact-person-1.png" alt="" style="width:100%;"></li>
+                    <a href="#!"><span>Shreya Shaw</span>-<br><span style="color:#4E4E56; font-weight: unset;">Sales Manager</span></a>
+                    <a href="#!"> Cinntra Infotect Pvt. Ltd.</a>
+                </div>
+                <div class="ItemText2">
+                  <button>Status:&nbsp; New</button>
+                  <i><span [innerHTML]="'figma-edit-ico' | svgIcons:''" class="figma-edit-ico"></span></i>
+                  <i><span [innerHTML]="'figma-three-dots-ico' | svgIcons:''" class="figma-three-dots-ico"></span></i>
+                </div>
+              </div>
+              <div class="accordion-header" id="flush-headingOne">
+                <div class="grid-container">
+                  <div class="grid-Priority">Lead Priority: <span style="font-weight: 500;">Hot</span></div>
+                  <div class="grid-item"><li>Assign To:</li><span style="font-weight: 500;">Suresh</span></div>
+                  <div class="grid-item"><li>Source:</li> <span style="font-weight: 500;">Instagram</span></div>  
+                </div>
+                </div>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body" id="PaddingBodyAccor">
+                  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="border-bottom:1px solid #E0E0E0;margin-top:10px;">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><span [innerHTML]="'figma-detail-file-ico' | svgIcons:''" class="figma-detail-file-ico"
+                        style="color: #4A79E4;"></span>Details</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false"><span [innerHTML]="'figma-attachment-file-ico' | svgIcons:''" class="figma-attachment-file-ico"
+                        ></span>Attachment</button>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                      <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item" id="BoxSha" style="border:none;">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne" style="border:none;">
+                            <button class="accordion-button" id="customeBG" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">General Information</button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body" id="PaddingBodyAccor">
+                              <div class="DetailsContent">
+                                <li>Created By: <span style="font-weight: 500;">Admin</span></li>
+                                <li>Product Interest: <span style="font-weight: 500;">SAP Service Support</span></li>
+                                <li>Remarks:<span style="font-weight: 500;"></span></li>
+                               </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item" id="BoxSha" style="border:none;">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                            <button class="accordion-button collapsed" id="customeBG" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                              <div>
+                                Address
+                                <li class="AddressLI">E-138, Sec-63, Noida, Gautam Budha Nagar</li>
+                              </div>
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                            <div class="accordion-body" id="PaddingBodyAccor">
+                             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, adipisci?</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                   
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                      <div class="AttachmentFileDiv">
+                        <div>
+                        <h5>Attach File</h5>
+                        <p>Click on attach file button on the right corner to upload your files</p>
+                        <h5>June 8 2023</h5>
+                      </div>
+                      <div>
+                        <label class="FileCustomeBtn" for="upload-photo">+ Attach File</label>
+                        <input type="file" name="photo" id="upload-photo" />
+                      </div>
+                      </div>
+                      <div style="  border-radius: 6px;
+                      padding: 16px;
+                      border: 1px solid #E0E0E0;">
+                      <div class="UplodedFileShow">
+                        <li style="color:#4A79E4;"><span [innerHTML]="'figma-typefile-o-ico' | svgIcons:''" class="figma-typefile-o-ico"
+                          ></span>Opportunities.png</li>
+                          <li>By Wasi Azam</li>
+                          <li>June 8 2023 at 10 AM</li>
+                          <li><i class="fa-solid fa-ellipsis"></i></li>
+                      </div>
+                      <div class="UplodedFileShow">
+                        <li style="color:#4A79E4;"><span [innerHTML]="'figma-typefile-o-ico' | svgIcons:''" class="figma-typefile-o-ico"
+                          ></span>Opportunities.png</li>
+                          <li>By Wasi Azam</li>
+                          <li>June 8 2023 at 10 AM</li>
+                          <li><i class="fa-solid fa-ellipsis"></i></li>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="MainBTNAccrdion">
+              <div class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+
+        <!-- Start Lead Status Accordion  -->
+        <div class="accordion accordion-flush mt-4" id="Lead__StatusAccordion">
+            <div class="accordion-item" style="border-radius: 12px;">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#Lead__Status" aria-expanded="false" aria-controls="flush-collapseOne" style="font-size: 15px; font-weight:600; border-radius: 12px;">Lead Status <a href="#!" style="text-decoration: none; margin-left: 20px;">+ Add Stages</a></button>
+                <div class="Add__Stage_Content">
+                    <li><span [innerHTML]="'figma-done-icons' | svgIcons:''" class="figma-done-icons"></span>&nbsp;Unqualified</li>
+                    <li>New</li>
+                    <li>Working</li>
+                    <li>Nurturing</li>
+                    <li>Converted</li>
+                </div>
+                <div class="MarkStatusBtn">
+                    <div><li>Remark: Hot</li></div>
+                    <div><button>Mark Status as Complete</button></div>
+                </div>
+              </h2>
+              <div id="Lead__Status" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <hr style="height:0.5px; margin: 0;">
+                <div class="Activities_Table_here">
+                   <p>Activities</p>
+                   <div class="AllLIHERE">
+                    <li><span [innerHTML]="'figma-notewhite-icon' | svgIcons:''" class="figma-notewhite-icon" style="background-color:#4A79E4 ;"></span><a href="#!">Note</a></li>
+                    <li><span [innerHTML]="'figma-phonewhite-icon' | svgIcons:''" class="figma-phonewhite-icon" style="background-color: #219653;"></span><a href="#!">Call Log</a></li>
+                    <li><span [innerHTML]="'figma-envelopewhite-icon' | svgIcons:''" class="figma-envelopewhite-icon" style="background-color:#EB5757 ;"></span><a href="#!">Mail Log</a></li>
+                    <li><span [innerHTML]="'figma-notewhite-icon' | svgIcons:''" class="figma-notewhite-icon" style="background-color:#FF7F37 ;"></span><a href="#!">Event</a></li>
+                    <li><span [innerHTML]="'figma-cartwhite-icon' | svgIcons:''" class="figma-cartwhite-icon" style="background-color: #BEC100;"></span><a href="#!">Task</a></li>
+                </div>
+                </div>
+                <div class="NoteHereDown">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              <div class="maintitle">
+                                <div>
+                                <li><span [innerHTML]="'figma-notewhite-icon' | svgIcons:''" class="figma-notewhite-icon" style="background-color:#F2C94C; text-align: center;
+                                    background-color: #F2C94C;width: 25px !important; height: 25px !important;border-radius: 25px;display: inline-block;line-height: 2;"></span> &nbsp;Note by Nishita Arora</li>
+                                 </div>
+                                <div class="onehere">
+                                    <span>June 8 2023 at 10 AM</span>
+                                    <span><i class="fa-solid fa-ellipsis"></i></span>
+                                </div>
+                              </div>
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <div class="maintitle">
+                                    <div>
+                                    <li><span [innerHTML]="'figma-notewhite-icon' | svgIcons:''" class="figma-notewhite-icon" style="background-color:#F2C94C; text-align: center;
+                                        background-color: #F2C94C;width: 25px !important; height: 25px !important;border-radius: 25px;display: inline-block;line-height: 2;"></span>&nbsp;Note by Nishita Arora</li>
+                                     </div>
+                                    <div class="onehere">
+                                        <span>June 8 2023 at 10 AM</span>
+                                        <span><i class="fa-solid fa-ellipsis"></i></span>
+                                    </div>
+                                  </div>
+                                 
+                            </button>
+                          </h2>
+                          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions.
+                            </div>
+                          </div>
+                        </div>
+                       
+                      </div>
+                  </div>
+              </div>
+             
+            </div>
+          </div>
+          <!-- End Here Accordion Tabs -->
+
+    </div>
+    <div class="GridCaleSystem" style="background-color: #fff;">
+    <div class="RecentActivitiesPanalHere">
+        <div class="TitleandcloseIcon">
+        <div><h3>Recent Activities</h3></div>
+        <div><span [innerHTML]="'figma-close-btn-ico' | svgIcons:''" class="figma-close-btn-ico"></span></div>
+    </div>
+    </div>
+    <div class="FilterAndSerachBtn">
+        <div class="TwoIconHere">
+            <li><span [innerHTML]="'figma-search-icon' | svgIcons:''" class="figma-search-icon"></span></li>
+            <li><span [innerHTML]="'figma-filter-ico' | svgIcons:''" class="figma-filter-ico"></span></li>
+        </div>
+    </div>
+    <div class="Lead_Activities__Panel">
+        <li class="pb-3">June 8 2023</li>
+        <div class="NoteBy">
+            <div style="display: flex;">
+            <li class="Icon"><span [innerHTML]="'figma-notepad-icon' | svgIcons:''" class="figma-notepad-icon"></span></li>
+            <li style="font-weight: 500;">Note by Yogita Mer
+            <p style="font-weight: 300;">I have changed the order address </p>
+            </li>
+        </div>
+        <div><li>10 AM</li></div>
+        </div>
+        <div class="NoteBy">
+            <div style="display: flex;">
+            <li class="Icon"><span [innerHTML]="'figma-tasks-icons' | svgIcons:''" class="figma-tasks-icons"></span></li>
+            <li style="font-weight: 500;">Task by Yogita Mer
+            <p style="font-weight: 300;">Follow up with karan</p>
+            </li>
+        </div>
+        <div><li>10 AM</li></div>
+        </div>
+        <div class="NoteBy">
+            <div style="display: flex;">
+            <li class="Icon"><span [innerHTML]="'figma-attachment-icons' | svgIcons:''" class="figma-attachment-icons"></span></li>
+            <li style="font-weight: 500;">Attachment added by Yogita Mer
+            <p style="font-weight: 300;">I have changed the order address </p>
+            </li>
+        </div>
+        <div><li>10 AM</li></div>
+        </div>
+        <div class="NoteBy">
+            <div style="display: flex;">
+            <li class="Icon"><span [innerHTML]="'figma-notepad-icon' | svgIcons:''" class="figma-notepad-icon"></span></li>
+            <li style="font-weight: 500;">Call log
+            <p style="font-weight: 300;">Follow up with karan</p>
+            </li>
+        </div>
+        <div><li>10 AM</li></div>
+        </div>
+    </div>
+    <div class="Lead_Activities__Panel">
+        <li class="pb-3">June 8 2023</li>
+        <div class="NoteBy">
+            <div style="display: flex;">
+            <li class="Icon"><span [innerHTML]="'figma-notepad-icon' | svgIcons:''" class="figma-notepad-icon"></span></li>
+            <li style="font-weight: 500;">Note by Yogita Mer
+            <p style="font-weight: 300;">I have changed the order address </p>
+            </li>
+        </div>
+        <div><li>10 AM</li></div>
+        </div>
+        <div class="NoteBy">
+            <div style="display: flex;">
+            <li class="Icon"><span [innerHTML]="'figma-notepad-icon' | svgIcons:''" class="figma-notepad-icon"></span></li>
+            <li style="font-weight: 500;">Task by Yogita Mer
+            <p style="font-weight: 300;">Follow up with karan</p>
+            </li>
+        </div>
+        <div><li>10 AM</li></div>
+        </div>
+    </div>
+    </div>
+        </div><!-- End home-content -->
+          
+</section>

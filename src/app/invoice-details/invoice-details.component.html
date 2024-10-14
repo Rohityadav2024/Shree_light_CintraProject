@@ -1,0 +1,243 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="figma-detial-home-sec-spliter">
+      <div class="figma-left-main-container" *ngFor="let item of invoices">
+        <div class="figma-detail-header">
+          <div class="figma-left-part">
+            <i class="fa-regular fa-arrow-left cursor-pointer" (click)="backClicked()"></i>
+            <div class="figma-heading-ref-wrap">
+              <span class="figma-main-head">{{Headingss[0].leftheading}}</span>
+              <i class="fa-solid fa-chevron-right"></i>
+              <span class="figma-lead-ref-name">{{Headingss[0].heading116}}</span>
+            </div>
+          </div>
+          <div class="figma-right-part" *ngIf="item.CancelStatus == 'csNo'">
+            <!-- <button class="figma-outline-btn" routerLink="/invoice/add-invoice/{{item.id}}" *ngIf="item.DocumentStatus != 'bost_Close'"> Edit Invoice</button> -->
+            <button class="figma-prim-btn" (click)="GoToPdf(item.id)" style="cursor: pointer;">PDF</button>
+          </div>
+        </div>
+
+        <div class="figma-detail-main-info">
+          <div class="figma-detail-info-split-two">
+            <div class="figma-detail-info-header">
+              <div class="cardnameicon" style="text-transform: uppercase;">{{item.CardName[0]}}</div>
+              <div class="figma-info-contain">
+                <div class="figma-info-name--address">
+                  <div class="figma-info-name">{{item.CardName}}</div>
+                  <!-- <div class="figma-info-address">Quotation Name</div> -->
+                </div>
+                <span class="figma-info-role2" *ngFor="let sperson of item.ContactPersonCodeDetails">{{Headingss[0].heading6}} : {{sperson.FirstName || 'NA'}}</span>
+                <div class="figma-info-num-email" *ngFor="let item2 of customers">
+
+                  <span class="figma-info-email">
+                    <i class="fa-solid fa-envelope"></i>
+                    {{item2.EmailAddress}}
+                  </span>
+                  <span class="figma-info-num">
+                    <i class="fa-solid fa-phone"></i>
+                    {{item2.Phone1}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="figma-detail-properties">
+            <div class="figma-detail-proper" *ngFor="let sperson of item.SalesPersonCodeDetails"><span>{{Headingss[0].heading7}}: </span>{{sperson.SalesEmployeeName || 'NA'}}</div>
+             <div class="figma-detail-proper"><span>{{Headingss[0].heading8}}: </span>{{item.TaxDate | customDate}}</div>
+            <div class="figma-detail-proper"><span>{{Headingss[0].heading9}}: </span>{{item.DocDueDate | customDate}}</div>
+            <div class="figma-detail-proper"><span>{{Headingss[0].heading10}}: </span>{{item.DocDate | customDate}}</div>
+            <!-- <div class="figma-detail-proper"><span>PO Date: </span>{{item.PODate | customDate}}</div>
+            <div class="figma-detail-proper"><span>PO No: </span>{{item.PONumber}}</div> -->
+            <!--<div class="figma-detail-proper">Frequency: <span>{{getFreqnacyt(item.Frequency)}}</span></div>
+            <div class="figma-detail-proper">Assign To: <span>{{item.AssignByDetails[0].SalesEmployeeName || 'NA'}}</span></div> -->
+          </div>
+          <div class="figma-detial-description" *ngIf="isModulefieldview(8, 'Comments')">
+            <span class="figma-detial-head"> {{Headingss[0].heading35}} </span>
+            <div class="figma-detial-text"> {{item.Comments || 'NA'}} </div>
+          </div>
+          <div class="figma-detial-addres-container">
+            <span class="figma-detial-head"> {{Headingss[0].heading19}} Details </span>
+            <div class="figma-detial-addres-wrapper">
+              <div class="figma-detial-addres-content">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading20}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.BillToBuilding}}</span>
+              </div>
+              <div class="figma-detial-addres-content">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading21}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.BillToZipCode}}</span>
+              </div>
+              <div class="figma-detial-addres-content">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading22}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.U_BCOUNTRY}}</span>
+              </div>
+              <div class="figma-detial-addres-content">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading23}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.U_BSTATE}}</span>
+              </div>
+              <div class="figma-detial-addres-content">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading36}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.BillToCity || 'NA'}}</span>
+              </div>
+              <div class="figma-detial-addres-content" *ngIf="isModulefieldview(8, 'U_SHPTYPB')">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading25}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.U_SHPTYPB || 'NA'}}</span>
+              </div>
+              <div class="figma-detial-addres-content">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading199}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.BillToStreet}}</span>
+              </div>
+            </div>
+            <span class="figma-detial-head"> {{Headingss[0].heading27}} Details </span>
+            <div class="figma-detial-addres-wrapper">
+              <div class="figma-detial-addres-content">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading28}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.ShipToBuilding}}</span>
+              </div>
+              <div class="figma-detial-addres-content">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading29}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.ShipToZipCode}}</span>
+              </div>
+              <div class="figma-detial-addres-content">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading30}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.U_SCOUNTRY}}</span>
+              </div>
+              <div class="figma-detial-addres-content">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading31}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.U_SSTATE}}</span>
+              </div>
+              <div class="figma-detial-addres-content">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading36}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.ShipToCity || 'NA'}}</span>
+              </div>
+              <div class="figma-detial-addres-content" *ngIf="isModulefieldview(8, 'U_SHPTYPS')">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading33}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.U_SHPTYPS || 'NA'}}</span>
+              </div>
+              <div class="figma-detial-addres-content">
+                <span class="figma-detial-addres-head">{{Headingss[0].heading34}}</span>
+                <span class="figma-detial-addres-val">{{item.AddressExtension.ShipToStreet}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="figma-ul-types-container">
+            <ul class="figma-ul-types">
+              <li [class.active]="commonObj.detailTab == 'Items'" (click)="commonObj.detailTab = 'Items'"><span [innerHTML]="'figma-product-bag-ico' | svgIcons:''"></span>Item</li>
+              <!-- <li [class.active]="commonObj.detailTab == 'attachment'" (click)="commonObj.detailTab = 'attachment'"><span [innerHTML]="'figma-attachment-file-ico' | svgIcons:''"></span>Attachment</li> -->
+            </ul>
+          </div>
+
+          <ng-container *ngIf="commonObj.detailTab == 'Items'">
+            <div class="figma-collapse-product-info">
+              <div class="figma-collapse-product-header">
+                <div class="figma-collapse-product-left-content">
+                  <span class="figma-product-head-data-count">Item ({{Items.length}})</span>
+                </div>
+                <div class="figma-collapse-product-right-content">
+                  <!-- <button class="figma-outline-btn">Add Item</button> -->
+                  <i class="fa-solid fa-chevron-up figma-collapse-arrow-chev-font-awe-icon" (click)="collapse.toggle()"
+                  [attr.aria-expanded]="!isCollapsed2"></i>
+                </div>
+              </div>
+              <div class="figma-product-table-container" style="padding: 0;" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
+                <table class="new-tabl">
+                  <thead  class="MainUserList" style="top:0px !important">
+                    <tr>
+                    <th>Item Code</th>
+                    <th>Name</th>
+                    <th>Unit Price</th>
+                    <th>GST %</th>
+                    <th *ngIf="isModulefieldview(8, 'DiscountPercent')">Discount %</th>
+                    <th>Open Qty</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    </tr>
+                  </thead>
+                      <tr *ngFor="let item3 of Items">
+                      <td>{{item3.ItemCode}}</td>
+                      <td>{{item3.ItemDescription}} </td>
+                      <td>{{item3.UnitPrice}}</td>
+                      <td>{{item3.TaxRate}}</td>
+                      <td *ngIf="isModulefieldview(8, 'DiscountPercent')">{{item3.DiscountPercent}}</td>
+                      <td>{{item3.OpenQuantity}}</td>
+                      <td>{{item3.Quantity}}</td>
+                      <td *ngIf="item.CancelStatus == 'csNo'">{{item3.LineStatus == 'bost_Close'?'Close':'Open'}}</td>
+                      <td *ngIf="item.CancelStatus != 'csNo'">Cancel</td>
+
+                      <!-- <td [innerHTML]="'table-v-dots' | svgIcons:'figma-template-central'" class="table-v-dots"></td> -->
+                      </tr>
+                      <tr>
+                        <td colspan="8" style="border-top: 1px solid #e0e0e0;
+                        padding: 0px !important;">
+                          <div class="figma-product-account-detail-container">
+                            <div class="figma-product-account-details">
+                              <p  class="figma-product-account-detail-label">Total Before Discount</p>
+                              <p class="figma-product-account-detail-total-val">{{total_after | priceFormat}} /-</p>
+                              <ng-container *ngIf="isModulefieldview(8, 'DiscountPercent')">
+                              <p  class="figma-product-account-detail-label">Discount</p>
+                              <p class="figma-product-account-detail-total-val">{{item.DiscountPercent}}%</p>
+                            </ng-container>
+                              <p  class="figma-product-account-detail-label">Total After Discount</p>
+                              <p class="figma-product-account-detail-total-val">{{total_after_tax | priceFormat}} /-</p>
+                              <p  class="figma-product-account-detail-label">Tax (GST)</p>
+                              <p class="figma-product-account-detail-total-val">{{tax_Value | priceFormat}} /-</p>
+                              <ng-container *ngIf="isModulefieldview(8, 'FreightCharge')">
+                              <p  class="figma-product-account-detail-label">Freight Charge</p>
+                              <p class="figma-product-account-detail-total-val">{{item.FreightCharge || 0 | priceFormat}} /-</p>
+                            </ng-container>
+                              <p  class="figma-product-account-detail-label">Grand Total</p>
+                              <p class="figma-product-account-detail-total-val">{{total_Amount | priceFormat}} /-</p>
+                              <!-- <span class="figma-product-account-detail-label">Total Amount:</span>
+                              <span class="figma-product-account-detail-total-val"> {{total_Amount | priceFormat}}</span> -->
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                </table>
+
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="commonObj.detailTab == 'attachment'">
+            <div class="figma-attachment-container">
+              <div class="figma-attachment-add-wrapper">
+                <div class="figma-attachment-add-content">
+                  <div class="figma-attachment-title">Attach File</div>
+                  <div class="figma-attachment-txt">Click on attach file button on the right corner to upload your files</div>
+                </div>
+                <!-- <div class="fileupload-container" appDnd (fileDropped)="oneditFileDropped($event)">
+                  <input type="file" class="fileuploadref" #fileDropRef1 id="fileDropRef1" multiple
+                    (change)="fileeditBrowseHandler($event)" />
+
+                  <label class="fw-600">+ Attach Files </label>
+                </div> -->
+              </div>
+              <div class="figma-attachment-list-container">
+                <div class="figma-attachment-list-card-content-wrapper">
+                  <div class="figma-attachment-list-card">
+                    <div class="figma-attachment-list" *ngFor="let file of orderAttachment; let i = index">
+                      <a href="{{ this.baseUrl2 }}{{ file.File }}" target="_blank">
+                        <span [innerHTML]="'figma-file-img-frame' | svgIcons:''"></span>
+                        </a>
+                      <div class="figma-attachment-list-file-name">{{
+                        file.File.substr(file.File.lastIndexOf("/") + 1)
+                        }}</div>
+                      <div class="figma-attachment-list-file-by">By Yogita Mer</div>
+                      <div class="figma-attachment-list-file-date">June 8 2023 at 10 AM</div>
+                      <span [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="deletefileapi(file.id, i)"></span>
+                    </div>
+                    <div style="text-align: center;font-size: 20px;color: #4A79E4;">No Data Found</div>
+                    <!-- <div *ngIf="orderAttachment.length == 0" style="text-align: center;font-size: 20px;color: #4A79E4;">No Data Found</div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,351 @@
+<div class="call-modal-width" [ngClass]="{'selectedButton': true, 'minimize-phone': !selectedButton}" *ngIf="show2" style="width: 350px;background: #fff;">
+
+
+  <div class="border border-1 callrounded-top position-relative">
+    <div class="d-flex justify-content-between callbg p-2 callrounded-top">
+      <span>Phone</span>
+      <span class="cursor">
+
+          <span class="me-2" (click)="enableDisableRule()">
+            <!-- <i class="fa {{selectedButton ? 'fa-window-minimize' : 'fa-window-maximize'}}" aria-hidden="true"></i> -->
+            <span [innerHTML]="'minimize' | svgIcons:''"></span>
+            <!-- {{selectedButton ? 'Enabled' : 'Disabled'}} -->
+          </span>
+
+        <span (click)="hideModal()" [innerHTML]="'cancel' | svgIcons:''"></span>
+      </span>
+    </div>
+
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" [destroyOnHide]="false" class="nav-tabs contact-tab">
+      <li [ngbNavItem]="1" [destroyOnHide]="true">
+
+        <a ngbNavLink>Keypad</a>
+        <ng-template ngbNavContent>
+          <!-- call list section start -->
+          <div class="keypad-section">
+            <form class="figma-login-form-container" #f="ngForm" name="theForm">
+            <div class="px-3 py-2">
+              <div class="d-flex border border-1 rounded">
+                <input class="form-control form-control-sm border-0" appOskInput type="text" [(ngModel)]="Call.destination_number" name="destination_number" #destination_number="ngModel" />
+                <!-- <button class="btn border-start border-top-0 border-end-0 border-bottom-0 py-1"
+                  (click)="toggle()"><i class="fa fa-user-circle-o" style="color:#F2994A ;"
+                    aria-hidden="true"></i></button> -->
+                    <button class="btn border-start border-top-0 border-end-0 border-bottom-0 py-1"
+                    ><i class="fa fa-user-circle-o" style="color:#F2994A ;"
+                      aria-hidden="true"></i></button>
+              </div>
+            </div>
+            <div>
+              <div class="keypadcall position-absolute w-100 " style="background-color:#fff; height:208px;"
+                *ngIf="show">
+                <div class="px-3 py-2">
+                  <span class="fw-600">Contacts</span>
+                  <ul class="list-group contact-height-scroll1" id="style-1">
+                    <li
+                      class="list-group-item p-0 border-0 d-flex my-2 justify-content-between align-items-center">
+                      <span class="d-flex">
+                        <span class="call-list-name d-flex justify-content-center align-items-center me-2">
+                          W
+                        </span>
+                        <span>
+                          <span class="fw-600">Will Smith</span>
+                          <p class="mb-0">+91 9078675645</p>
+                        </span>
+                      </span>
+                      <span class="callicon d-flex justify-content-center align-items-center me-2"
+                        >
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                      </span>
+                    </li>
+
+                    <li
+                      class="list-group-item p-0 border-0 d-flex my-2 justify-content-between align-items-center">
+                      <span class="d-flex">
+                        <span class="call-list-name d-flex justify-content-center align-items-center me-2">
+                          W
+                        </span>
+                        <span>
+                          <span class="fw-600">Will Smith</span>
+                          <p class="mb-0">+91 9078675645</p>
+                        </span>
+                      </span>
+                      <span class="callicon d-flex justify-content-center align-items-center me-2"
+
+                      >
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                      </span>
+                    </li>
+
+                    <li
+                      class="list-group-item p-0 border-0 d-flex my-2 justify-content-between align-items-center">
+                      <span class="d-flex">
+                        <span class="call-list-name d-flex justify-content-center align-items-center me-2">
+                          W
+                        </span>
+                        <span>
+                          <span class="fw-600">Will Smith</span>
+                          <p class="mb-0">+91 9078675645</p>
+                        </span>
+                      </span>
+                      <span class="callicon d-flex justify-content-center align-items-center me-2"
+                       >
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                      </span>
+                    </li>
+
+                    <li
+                      class="list-group-item p-0 border-0 d-flex my-2 justify-content-between align-items-center">
+                      <span class="d-flex">
+                        <span class="call-list-name d-flex justify-content-center align-items-center me-2">
+                          W
+                        </span>
+                        <span>
+                          <span class="fw-600">Will Smith</span>
+                          <p class="mb-0">+91 9078675645</p>
+                        </span>
+                      </span>
+                      <span class="callicon d-flex justify-content-center align-items-center me-2"
+                       >
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                      </span>
+                    </li>
+
+                    <li
+                      class="list-group-item p-0 border-0 d-flex my-2 justify-content-between align-items-center">
+                      <span class="d-flex">
+                        <span class="call-list-name d-flex justify-content-center align-items-center me-2">
+                          W
+                        </span>
+                        <span>
+                          <span class="fw-600">Will Smith</span>
+                          <p class="mb-0">+91 9078675645</p>
+                        </span>
+                      </span>
+                      <span class="callicon d-flex justify-content-center align-items-center me-2"
+                        >
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                      </span>
+                    </li>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <app-keyboard></app-keyboard>
+
+            <div>
+              <div class="d-flex px-3 py-2">
+                <button (click)="caller()" class="btn-sm border border-1 callbg w-100">Call</button>
+              </div>
+            </div>
+          </form>
+          </div>
+
+          <!-- call list section close -->
+
+          <!-- Call notes Section start-->
+
+          <div class="keypad-notes" style="display:none;">
+
+
+            <div>
+              <div class="keypadcall  w-100 " style="background-color:#fff; border-bottom: 1px solid #ced4da;">
+                <div class="px-3 py-0">
+                  <span class="fw-600">Contacts</span>
+                  <ul class="list-group ">
+                    <li
+                      class="list-group-item p-0 border-0 d-flex my-2 justify-content-between align-items-center">
+                      <span class="d-flex">
+                        <span class="call-list-name d-flex justify-content-center align-items-center me-2">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                        <span (click)="keypadopen()">
+                          <p class="fw-600 mb-0">Calling..</p>
+                          <p class="mb-0" style="font-size:9px;">Web Techno Limited &nbsp; <span [innerHTML]="'list-dot' | svgIcons:''" >
+                               &nbsp;
+                              </span>01:20:00</p>
+                        </span>
+                      </span>
+                      <span class="callicon d-flex justify-content-center align-items-center">
+                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                      </span>
+
+                    </li>
+                  </ul>
+
+
+
+
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="px-3 py-2">
+                <button class="btn-sm border border-1 callbg w-100">
+
+                  <svg width="16" height="21" viewBox="0 0 16 21" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M7.51667 16.4C7.11122 16.4 6.71487 16.5202 6.37775 16.7455C6.04063 16.9707 5.77787 17.2909 5.62271 17.6655C5.46755 18.0401 5.42696 18.4523 5.50606 18.8499C5.58516 19.2476 5.7804 19.6129 6.0671 19.8996C6.3538 20.1863 6.71907 20.3815 7.11673 20.4606C7.51439 20.5397 7.92658 20.4991 8.30117 20.344C8.67576 20.1888 8.99592 19.926 9.22118 19.5889C9.44644 19.2518 9.56667 18.8554 9.56667 18.45C9.56667 17.9063 9.35069 17.3849 8.96624 17.0004C8.58179 16.616 8.06036 16.4 7.51667 16.4ZM7.51667 10.9333C7.11122 10.9333 6.71487 11.0536 6.37775 11.2788C6.04063 11.5041 5.77787 11.8242 5.62271 12.1988C5.46755 12.5734 5.42696 12.9856 5.50606 13.3833C5.58516 13.7809 5.7804 14.1462 6.0671 14.4329C6.3538 14.7196 6.71907 14.9148 7.11673 14.9939C7.51439 15.073 7.92658 15.0324 8.30117 14.8773C8.67576 14.7221 8.99592 14.4594 9.22118 14.1223C9.44644 13.7851 9.56667 13.3888 9.56667 12.9833C9.56667 12.4396 9.35069 11.9182 8.96624 11.5338C8.58179 11.1493 8.06036 10.9333 7.51667 10.9333ZM7.51667 5.46667C7.11122 5.46667 6.71487 5.5869 6.37775 5.81215C6.04063 6.03741 5.77787 6.35758 5.62271 6.73216C5.46755 7.10675 5.42696 7.51894 5.50606 7.9166C5.58516 8.31426 5.7804 8.67954 6.0671 8.96624C6.3538 9.25293 6.71907 9.44818 7.11673 9.52728C7.51439 9.60638 7.92658 9.56578 8.30117 9.41062C8.67576 9.25546 8.99592 8.99271 9.22118 8.65559C9.44644 8.31846 9.56667 7.92212 9.56667 7.51667C9.56667 6.97297 9.35069 6.45155 8.96624 6.0671C8.58179 5.68265 8.06036 5.46667 7.51667 5.46667ZM7.51667 0C7.11122 0 6.71487 0.12023 6.37775 0.345487C6.04063 0.570744 5.77787 0.89091 5.62271 1.2655C5.46755 1.64009 5.42696 2.05227 5.50606 2.44993C5.58516 2.8476 5.7804 3.21287 6.0671 3.49957C6.3538 3.78627 6.71907 3.98151 7.11673 4.06061C7.51439 4.13971 7.92658 4.09911 8.30117 3.94395C8.67576 3.78879 8.99592 3.52604 9.22118 3.18892C9.44644 2.8518 9.56667 2.45545 9.56667 2.05C9.56667 1.50631 9.35069 0.984881 8.96624 0.600431C8.58179 0.215981 8.06036 0 7.51667 0ZM12.9833 10.9333C12.5779 10.9333 12.1815 11.0536 11.8444 11.2788C11.5073 11.5041 11.2445 11.8242 11.0894 12.1988C10.9342 12.5734 10.8936 12.9856 10.9727 13.3833C11.0518 13.7809 11.2471 14.1462 11.5338 14.4329C11.8205 14.7196 12.1857 14.9148 12.5834 14.9939C12.9811 15.073 13.3932 15.0324 13.7678 14.8773C14.1424 14.7221 14.4626 14.4594 14.6878 14.1223C14.9131 13.7851 15.0333 13.3888 15.0333 12.9833C15.0333 12.4396 14.8174 11.9182 14.4329 11.5338C14.0485 11.1493 13.527 10.9333 12.9833 10.9333ZM12.9833 5.46667C12.5779 5.46667 12.1815 5.5869 11.8444 5.81215C11.5073 6.03741 11.2445 6.35758 11.0894 6.73216C10.9342 7.10675 10.8936 7.51894 10.9727 7.9166C11.0518 8.31426 11.2471 8.67954 11.5338 8.96624C11.8205 9.25293 12.1857 9.44818 12.5834 9.52728C12.9811 9.60638 13.3932 9.56578 13.7678 9.41062C14.1424 9.25546 14.4626 8.99271 14.6878 8.65559C14.9131 8.31846 15.0333 7.92212 15.0333 7.51667C15.0333 6.97297 14.8174 6.45155 14.4329 6.0671C14.0485 5.68265 13.527 5.46667 12.9833 5.46667ZM12.9833 0C12.5779 0 12.1815 0.12023 11.8444 0.345487C11.5073 0.570744 11.2445 0.89091 11.0894 1.2655C10.9342 1.64009 10.8936 2.05227 10.9727 2.44993C11.0518 2.8476 11.2471 3.21287 11.5338 3.49957C11.8205 3.78627 12.1857 3.98151 12.5834 4.06061C12.9811 4.13971 13.3932 4.09911 13.7678 3.94395C14.1424 3.78879 14.4626 3.52604 14.6878 3.18892C14.9131 2.8518 15.0333 2.45545 15.0333 2.05C15.0333 1.50631 14.8174 0.984881 14.4329 0.600431C14.0485 0.215981 13.527 0 12.9833 0ZM2.05 10.9333C1.64455 10.9333 1.2482 11.0536 0.911082 11.2788C0.573961 11.5041 0.311208 11.8242 0.156048 12.1988C0.000888236 12.5734 -0.0397086 12.9856 0.0393911 13.3833C0.118491 13.7809 0.313734 14.1462 0.600432 14.4329C0.88713 14.7196 1.2524 14.9148 1.65007 14.9939C2.04773 15.073 2.45991 15.0324 2.8345 14.8773C3.20909 14.7221 3.52926 14.4594 3.75451 14.1223C3.97977 13.7851 4.1 13.3888 4.1 12.9833C4.1 12.4396 3.88402 11.9182 3.49957 11.5338C3.11512 11.1493 2.59369 10.9333 2.05 10.9333ZM2.05 5.46667C1.64455 5.46667 1.2482 5.5869 0.911082 5.81215C0.573961 6.03741 0.311208 6.35758 0.156048 6.73216C0.000888236 7.10675 -0.0397086 7.51894 0.0393911 7.9166C0.118491 8.31426 0.313734 8.67954 0.600432 8.96624C0.88713 9.25293 1.2524 9.44818 1.65007 9.52728C2.04773 9.60638 2.45991 9.56578 2.8345 9.41062C3.20909 9.25546 3.52926 8.99271 3.75451 8.65559C3.97977 8.31846 4.1 7.92212 4.1 7.51667C4.1 6.97297 3.88402 6.45155 3.49957 6.0671C3.11512 5.68265 2.59369 5.46667 2.05 5.46667ZM2.05 0C1.64455 0 1.2482 0.12023 0.911082 0.345487C0.573961 0.570744 0.311208 0.89091 0.156048 1.2655C0.000888236 1.64009 -0.0397086 2.05227 0.0393911 2.44993C0.118491 2.8476 0.313734 3.21287 0.600432 3.49957C0.88713 3.78627 1.2524 3.98151 1.65007 4.06061C2.04773 4.13971 2.45991 4.09911 2.8345 3.94395C3.20909 3.78879 3.52926 3.52604 3.75451 3.18892C3.97977 2.8518 4.1 2.45545 4.1 2.05C4.1 1.50631 3.88402 0.984881 3.49957 0.600431C3.11512 0.215981 2.59369 0 2.05 0Z"
+                      fill="white" />
+                  </svg>
+
+                </button>
+
+                <span class="d-flex justify-content-between my-2"><span class="fw-600" style="font-size: 14px;">Notes</span> <span
+                    class="check-icon-size"><i class="fa fa-check" aria-hidden="true"></i></span></span>
+                <textarea class="form-control" style="font-size:10px;" rows="4" cols="5"
+                  placeholder="Add note..."></textarea>
+                <button class="btn endcall-btn btn-sm d-block ms-auto mt-3">End Call</button>
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Call notes section stop-->
+
+
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink>Call History</a>
+        <ng-template ngbNavContent>
+          <ul class="list-group px-3 call-history-height"  id="style-1">
+
+
+            <li class="list-group-item p-0 border-0 d-flex my-2 justify-content-between align-items-center"  *ngFor="let item of record">
+              <span class="d-flex">
+                <span class="call-list-name d-flex justify-content-center align-items-center me-2">
+                  {{'N'}}
+                </span>
+                <span>
+                  <p class="fw-600 mb-0">{{PersonName}}</p>
+                  <p class="mb-0 color-red" style="font-size:9px;">
+
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M7.49848 0C7.43291 -0.000799179 7.36789 0.0121331 7.30761 0.0379667C7.24733 0.0638003 7.19313 0.101963 7.14848 0.15L0.998482 6.29V1.5C0.998482 1.36739 0.945804 1.24021 0.852036 1.14645C0.758267 1.05268 0.63109 1 0.498482 1C0.365873 1 0.238696 1.05268 0.144928 1.14645C0.0511599 1.24021 -0.00151825 1.36739 -0.00151825 1.5V8L6.49848 8C6.63109 8 6.75827 7.94732 6.85204 7.85355C6.9458 7.75979 6.99848 7.63261 6.99848 7.5C6.99848 7.36739 6.9458 7.24021 6.85204 7.14645C6.75827 7.05268 6.63109 7 6.49848 7H1.70848L7.84848 0.85C7.89631 0.80511 7.93443 0.750893 7.96049 0.690695C7.98656 0.630497 8 0.565597 8 0.5C8 0.434403 7.98656 0.369503 7.96049 0.309305C7.93443 0.249107 7.89631 0.19489 7.84848 0.15C7.80384 0.101963 7.74963 0.0638003 7.68935 0.0379667C7.62908 0.0121331 7.56406 -0.000799179 7.49848 0Z"
+                      fill="#7C7C7C" />
+                  </svg> &nbsp;
+                    {{item.client_number}} &nbsp; <span>
+                      <svg width="6" height="6" viewBox="0 0 6 6" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="3" cy="3" r="3" fill="#C92400" />
+                      </svg> &nbsp;
+                     {{secondsToDhms(item.call_duration)}} </span>
+                  </p>
+                </span>
+              </span>
+              <!-- <span class="callicon d-flex justify-content-center align-items-center">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+              </span> -->
+              <i class="fa-solid fa-play-circle borderone" style="color: #4a79e4;cursor: pointer;" title="Start Time" (click)="StartTime(item)"></i>
+
+            </li>
+<!--
+            <li class="list-group-item p-0 border-0 d-flex my-2 justify-content-between align-items-center">
+              <span class="d-flex">
+                <span class="call-list-name d-flex justify-content-center align-items-center me-2">
+                  W
+                </span>
+                <span>
+                  <p class="fw-600 mb-0">Will Smith</p>
+                  <p class="mb-0" style="font-size:9px;">
+
+
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0.501518 8C0.567094 8.0008 0.632112 7.98787 0.69239 7.96203C0.752669 7.9362 0.806873 7.89804 0.851519 7.85L7.00152 1.71V6.5C7.00152 6.63261 7.0542 6.75979 7.14796 6.85355C7.24173 6.94732 7.36891 7 7.50152 7C7.63413 7 7.7613 6.94732 7.85507 6.85355C7.94884 6.75979 8.00152 6.63261 8.00152 6.5V0H1.50152C1.36891 0 1.24173 0.0526785 1.14796 0.146447C1.0542 0.240215 1.00152 0.367392 1.00152 0.5C1.00152 0.632608 1.0542 0.759786 1.14796 0.853554C1.24173 0.947322 1.36891 1 1.50152 1H6.29152L0.151518 7.15C0.103687 7.19489 0.0655652 7.24911 0.039505 7.30931C0.0134448 7.3695 0 7.4344 0 7.5C0 7.5656 0.0134448 7.6305 0.039505 7.69069C0.0655652 7.75089 0.103687 7.80511 0.151518 7.85C0.196164 7.89804 0.250368 7.9362 0.310646 7.96203C0.370924 7.98787 0.435942 8.0008 0.501518 8Z"
+                        fill="#7C7C7C" />
+                    </svg>
+                    &nbsp;
+
+                    +91 9078567898 &nbsp; <span>
+                      <svg width="6" height="6" viewBox="0 0 6 6" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="3" cy="3" r="3" fill="#7C7C7C" />
+                      </svg> &nbsp;
+                      01:20:00</span>
+                  </p>
+                </span>
+              </span>
+              <span class="callicon d-flex justify-content-center align-items-center">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+              </span>
+
+            </li> -->
+
+
+
+          </ul>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="3" style="display: none;">
+        <a ngbNavLink>Notes</a>
+        <ng-template ngbNavContent>
+          <span class="px-3 d-block w-100" style="background:#E7E6E6; color:#000">3 Items</span>
+          <ul class="list-group contact-height-scroll " id="style-1">
+            <li class="list-group-item">
+              <span class="d-block listgraycolor fs-10" >4/28/2022, 11:28 PM by Charlie</span>
+              <span class="d-block fs-10">Discussed about the the new opportunity</span>
+              <a class="d-block fs-10 text-decoration-none">Web Techno Limited <span>
+
+                <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="2" cy="2" r="2" fill="#7C7C7C"/>
+                  </svg>
+                   &nbsp; Rohn William
+                                        </span></a>
+            </li>
+            <li class="list-group-item">
+              <span class="d-block listgraycolor fs-10" >4/28/2022, 11:28 PM by Charlie</span>
+              <span class="d-block fs-10">Discussed about the the new opportunity</span>
+              <a class="d-block fs-10 text-decoration-none">Web Techno Limited <span>
+
+<svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="2" cy="2" r="2" fill="#7C7C7C"/>
+</svg>
+&nbsp; Rohn William
+              </span></a>
+            </li>
+
+            <li class="list-group-item">
+              <span class="d-block listgraycolor fs-10" >4/28/2022, 11:28 PM by Charlie</span>
+              <span class="d-block fs-10">Discussed about the the new opportunity</span>
+              <a class="d-block fs-10 text-decoration-none">Web Techno Limited <span>
+
+<svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="2" cy="2" r="2" fill="#7C7C7C"/>
+</svg>
+&nbsp; Rohn William
+              </span></a>
+            </li>
+
+
+          </ul>
+        </ng-template>
+      </li>
+    </ul>
+
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+
+
+
+
+
+
+
+  </div>
+
+  <!-- <button class="btn btn-primary" (click)="hideModal()">Hide Modal</button> -->
+</div>
+
+<!-- <div>
+  <a class="btn text-decoration-none text-dark fw-bold py-3 d-block ps-2 text-start">
+    <span (click)="visible()"><i
+      class="fa fa-phone" aria-hidden="true"></i> Phone</span></a>
+</div> -->

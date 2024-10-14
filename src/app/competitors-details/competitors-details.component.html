@@ -1,0 +1,194 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="figma-detial-home-sec-spliter">
+      <div class="figma-left-main-container" *ngFor="let item of quotations">
+        <div class="figma-detail-header">
+          <div class="figma-left-part">
+            <i class="fa-regular fa-arrow-left cursor-pointer" (click)="backClicked()"></i>
+            <div class="figma-heading-ref-wrap">
+              <span class="figma-main-head">Competitors</span>
+              <i class="fa-solid fa-chevron-right"></i>
+              <span class="figma-lead-ref-name">Details</span>
+            </div>
+          </div>
+          <!-- <div class="figma-right-part" *ngIf="item.CancelStatus == 'csNo' && item.is_draft == 0">
+            <button class="figma-prim-btn" (click)="createOrder(item.id)" *ngIf="item.DocumentStatus == 'bost_Open' && isModuleViewadd(6)" style="cursor: pointer;">{{Headingss[0].heading101}} {{Headingss[0].heading13}}</button>
+             <button class="figma-prim-btn" (click)="GoToPdf(item.id)" style="cursor: pointer;">{{Headingss[0].heading15}}</button>
+          </div> -->
+        </div>
+
+        <div class="figma-detail-main-info">
+          <div class="figma-detail-info-split-two">
+            <div class="figma-detail-info-header">
+              <div class="cardnameicon" style="text-transform: uppercase;">{{item.CompetitorName[0] || 'N'}}</div>
+              <div class="figma-info-contain">
+                <div class="figma-info-name--address">
+                  <div class="figma-info-name">{{item.CompetitorName || 'NA'}} </div>
+                  <!-- <div class="figma-info-address">Quotation Name</div> -->
+                </div>
+                <span class="figma-info-role2" >{{'EmailID'}} : {{item.EmailID}}</span>
+
+              </div>
+            </div>
+            <div class="figma-info-spi-buttn">
+
+            </div>
+          </div>
+          <div class="figma-detail-properties">
+            <!-- <div class="figma-detail-proper" *ngFor="let sperson of item.SalesPersonCodeDetails"><span>{{Headingss[0].heading6}} : </span>{{sperson.SalesEmployeeName || 'NA'}}</div> -->
+             <div class="figma-detail-proper"><span>{{'Contact No'}} : </span>{{item.ContactNo}}</div>
+            <div class="figma-detail-proper"><span>{{'Brand'}} : </span>{{item.Brand}}</div>
+            <div class="figma-detail-proper"><span>{{'Firm Name'}} : </span>{{item.FirmName}}</div>
+
+          </div>
+
+          <div class="figma-ul-types-container">
+            <ul class="figma-ul-types">
+              <li [class.active]="commonObj.detailTab == 'detail'" (click)="commonObj.detailTab = 'detail'"><span [innerHTML]="'figma-detail-file-ico' | svgIcons:''"></span>{{Headingss[0].heading107}}</li>
+              <li [class.active]="commonObj.detailTab == 'Items'" (click)="commonObj.detailTab = 'Items'"><span [innerHTML]="'figma-product-bag-ico' | svgIcons:''"></span>{{'Engineering'}}</li>
+              <!-- <li [class.active]="commonObj.detailTab == 'attachment'" (click)="commonObj.detailTab = 'attachment'"><span [innerHTML]="'figma-attachment-file-ico' | svgIcons:''"></span>{{Headingss[0].heading108}}</li> -->
+              </ul>
+          </div>
+
+          <ng-container *ngIf="commonObj.detailTab == 'detail'">
+            <div class="figma-collapse-common-info">
+              <div class="figma-collapse-head-tab">
+                <p class="figma-collapse-head-name" style="border-bottom: 2px solid #4a79e4;">{{Headingss[0].SubHeading}}</p>
+                <i class="fa-solid fa-chevron-up figma-collapse-arrow-chev-font-awe-icon" (click)="collapse4.toggle()"
+                  [attr.aria-expanded]="!isCollapsed4" [ngClass]="{'fa-chevron-up': isCollapsed4, 'fa-chevron-down': !isCollapsed4}"></i>
+              </div>
+              <div class="figma-collapse-common-info-detail">
+                <div class="figma-collapse-common-info-detail-wrapper-new" #collapse4="ngbCollapse" [(ngbCollapse)]="isCollapsed4">
+
+                    <div class="customer-details-grid" style="margin-top:0px;">
+
+                    <div>
+                      <p class="grey1"> {{'GST No'}}</p>
+                    </div>
+                    <div>
+                      <p class="dtl">{{item.GSTNo || 'NA'}}</p>
+                    </div>
+
+
+                    <div>
+                      <p class="grey1"> {{'Product'}}</p>
+                    </div>
+                    <div>
+                      <p class="dtl">{{item.Product || 'NA'}}</p>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </ng-container>
+
+
+
+
+          <ng-container *ngIf="commonObj.detailTab == 'Items'">
+            <div class="figma-collapse-product-info">
+              <div class="figma-collapse-product-header">
+                <div class="figma-collapse-product-left-content">
+                  <span class="figma-product-head-data-count">Engineers ({{Engineerscount}})</span>
+                </div>
+                <div class="figma-collapse-product-right-content">
+                  <button class="figma-outline-btn" (click)="open(mymodal,false,'')">Add Engineer</button>
+                </div>
+              </div>
+              <div class="figma-product-table-container" style="padding: 0;" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
+                <table class="new-tabl">
+                  <thead  class="MainUserList" style="top:0px !important">
+                    <tr>
+                      <th>{{'Name'}}</th>
+                      <th>{{'Email ID'}}</th>
+                      <th>{{'Mobile No'}}</th>
+                      <th>{{'Create Date'}}</th>
+                      <th class="text-center">{{'Action'}}</th>
+                    </tr>
+                  </thead>
+                      <tr *ngFor="let item3 of Engineers">
+                      <td>{{item3.Name}}</td>
+                      <td>{{item3.EmailID}} </td>
+                      <td>{{item3.MobileNo}}</td>
+                      <td>{{item3.CreateDate | customDate}}</td>
+                      <td class="text-center" style="cursor: pointer;"><i class="fa fa-pencil" (click)="open(mymodal,true,item3)"></i></td>
+                     </tr>
+
+                     <tr *ngIf="Engineerscount == 0">
+                      <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 1% !important;">No Data Found</td>
+                    </tr>
+                </table>
+
+              </div>
+            </div>
+          </ng-container>
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">{{isEdit ? 'Update' : 'Create'}} Engineer </h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')" style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <form #f="ngForm" name="theForm" (submit)="addIndustry(f)">
+    <div class="modal-body">
+      <div class="row">
+
+
+        <div class="col-md-12">
+          <label>Name </label>
+          <input type="text" class="input-fld required-fld" name="Name" [(ngModel)]="Engineeraddedit.Name" #Name="ngModel" placeholder="Name" required>
+          <span class="help-block danger" *ngIf="Name.errors?.required && Name.touched">
+            The Name is required
+          </span>
+          <br>
+        </div>
+
+
+        <div class="col-md-12">
+          <label>Email ID </label>
+          <input type="email" class="input-fld required-fld" name="EmailID" [(ngModel)]="Engineeraddedit.EmailID" #EmailID="ngModel" placeholder="Email ID" required>
+          <span class="help-block danger" *ngIf="EmailID.errors?.required && EmailID.touched">
+            The Email ID is required
+          </span>
+          <br>
+        </div>
+
+
+        <div class="col-md-12">
+          <label>Mobile No </label>
+          <input type="text" class="input-fld required-fld" name="MobileNo" [(ngModel)]="Engineeraddedit.MobileNo" #MobileNo="ngModel" placeholder="Mobile No" required>
+          <span class="help-block danger" *ngIf="MobileNo.errors?.required && MobileNo.touched">
+            The Mobile No is required
+          </span>
+          <br>
+        </div>
+
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+        <!-- <div class="col-md-6"></div> -->
+        <div class="col-md-12 text-center mt-2" *ngIf="!isLoading">
+          <button class="add-invent1">Save</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</ng-template>
+<div class="alert alert-primary success-box alert-dismissible fade show" role="alert">
+  Engineer {{isEdit ? 'Update' : 'Create'}} Successfully !
+</div>

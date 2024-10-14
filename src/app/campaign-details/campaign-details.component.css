@@ -1,0 +1,21 @@
+p{
+  margin-bottom: 0;
+}
+p.grey1{
+  margin-bottom: 1rem;
+}
+
+.custom-search-container .custom-search-wrapper .custom-common-search-container .custom-search-ico-input-container{
+  width: 266px;
+  border: 1px solid #e0e8f6;
+  height: 36px;
+}
+
+.custom-search-container .custom-search-wrapper .custom-common-search-container .custom-search-ico-input-container .new-search-btn{
+  height: 36px;
+  margin-top: -1px;
+}
+
+.custom-com-temp-btn{
+  height: 36px;
+}

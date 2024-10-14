@@ -1,0 +1,104 @@
+<!-- <app-left-menu></app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="TopbarAllComponentDivs">
+      <div class="Innerpagename">
+        <span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="backClicked()" style="cursor: pointer;"></span><h2>inventory Item <span style="font-size: 19px; display: inline-block; transform: translate(-1px, 2px);">></span> <span>Details</span></h2>
+    </div>
+    <div class="SideBTnAllstyle"></div>
+    </div>
+    <div class="sales-boxes" *ngFor="let item of items;">
+      <div class="recent-sales box">
+        <!-- <div class="recent-sales-follow-up" style="color:#4a79e4;">
+          <strong class="recent-heading"><i class="fa-solid fa-arrow-left-long cursor-pointer" (click)="backClicked()"></i> Item Description</strong>
+        </div> -->
+
+        <div class="title" >
+          <h5 class="company-name">
+            Item Description</h5>
+
+              <!-- <button class="btn btn-sm edit-dls add-invent1" routerLink="/edit-order/{{idd}}">Edit</button> -->
+
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="customer-area">
+              <div class="col-sm-4 customer-img">
+                <img class="name-sec" style="text-transform: uppercase;" src="../../assets/img/iner-box1.png">
+              </div>
+              <div class="col-sm-7 customer-text">
+                <b>{{item.ItemName}}</b>
+                <p>{{item.ItemCode}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="clearfix"></div>
+          <div class="row">
+            <div class="col-md-3">
+              <p class="grey1">Item Name</p>
+            </div>
+            <div class="col-md-3">
+              <p>{{item.ItemName}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <p class="grey1">Item Code</p>
+            </div>
+            <div class="col-md-3">
+              <p>{{item.ItemCode}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <p class="grey1">Packing </p>
+            </div>
+            <div class="col-md-3">
+              <p>{{item.Packing}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <p class="grey1">Unit Price</p>
+            </div>
+            <div class="col-md-3">
+              <p>{{item.UnitPrice}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3">
+              <p class="grey1">Stock Quantity</p>
+            </div>
+            <div class="col-md-3">
+              <p>{{item.Inventory}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3">
+              <p class="grey1">Description Information</p>
+            </div>
+            <div class="col-md-4">
+              <p>{{item.Description}}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="loadercss" style="text-align: center;" *ngIf="isdataLoading">
+      <img src="../../assets/img/loder.gif">
+    </div>
+
+  </div>
+
+
+
+</section>

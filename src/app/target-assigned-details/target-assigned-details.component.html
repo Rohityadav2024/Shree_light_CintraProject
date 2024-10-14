@@ -1,0 +1,283 @@
+
+<!-- <app-left-menu></app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="TopbarAllComponentDivs">
+    <div class="Innerpagename">
+      <span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="backClicked()" style="cursor:pointer;"></span><h2>{{Headingss[0].leftheading}}  <span style="font-size: 19px; display: inline-block; transform: translate(-1px, 2px);">></span> <span>{{Headingss[0].heading116}}</span></h2>
+  </div>
+  <div class="SideBTnAllstyle"></div>
+  </div>
+  <div class="home-content">
+
+      <div class="row">
+          <div class="col-lg-12">
+
+
+    <div class="sales-boxes" >
+      <div class="recent-sales box">
+        <div class="em-search-wrapper">
+          <div class="em-search-heading" style="color: #000;font-weight: 400;"> <span [innerHTML]="'figma-target-dot-icon' | svgIcons:''"></span> <span *ngFor="let item of TargeYear"> {{Headingss[0].leftheading}} for <span style="text-transform: capitalize;">{{item.Department}}</span></span>
+          </div>
+        </div>
+        <section>
+          <div class="figma-detail-properties newcssadd" *ngFor="let item of TargeYear">
+             <div class="figma-detail-proper"> <span [innerHTML]="'figma-date-ico' | svgIcons:'':{w:15,h:15}" style="margin-right: 6px;position: relative;top: -3px;"></span>  <span>{{Headingss[0].Extra1}}:</span> {{item.StartYear}} - {{item.EndYear}}</div>
+             <div class="figma-detail-proper"><span [innerHTML]="'figma-target-dot-icon' | svgIcons:'':{w:15,h:15}" style="margin-right: 6px;position: relative;top: -3px;"></span>  <span>{{Headingss[0].SubHeading}}:</span> {{item.YearTarget | priceFormat}}</div>
+             <div class="figma-detail-proper"><span [innerHTML]="'figma-rupee-note-icon' | svgIcons:'':{w:21,h:22}" style="margin-right: 6px;position: relative;top: -1px;"></span>  <span>{{Headingss[0].Extra2}}:</span> {{commonObj.leftAmount | priceFormat}}</div>
+          </div>
+
+
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne" *ngFor="let item of TargeYear">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="text-transform: capitalize;">
+                  {{item.Department}}
+                </button>
+              </h2>
+              <div *ngFor="let item of targetGet" id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body" *ngIf="targetGes == true">
+                  <form #f="ngForm" name="theForm" (submit)="addConsumables(f)">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="d-flex align-items-center my-1"><b>Quarter&nbsp;1:</b> <input type="number" autocomplete="off" class="input-fld required-fld" name="q1" placeholder="0" [class.red-line-border]="addTarQ1.invalid && (addTarQ1.touched ||commonObj.isValid)" [(ngModel)]="addTar.q1" style=" margin-left: 8px;" required #addTarQ1="ngModel" (input)="leftAmounntCalc('qt1',$event)" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        <div class="row">
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">April :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[0].amount" [class.red-line-border]="addTarApr.invalid && (addTarApr.touched ||commonObj.isValid)" placeholder="0" [(ngModel)]="addTar.monthly[0].amount"  required #addTarApr="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">May :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[1].amount" [class.red-line-border]="addTarMay.invalid && (addTarMay.touched ||commonObj.isValid)" placeholder="0" [(ngModel)]="addTar.monthly[1].amount"  required #addTarMay="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2">
+                            <p class="grey1 d-flex align-items-center">June :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[2].amount" [class.red-line-border]="addTarJun.invalid && (addTarJun.touched ||commonObj.isValid)" placeholder="0" [(ngModel)]="addTar.monthly[2].amount"  required #addTarJun="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="d-flex align-items-center my-1"><b>Quarter&nbsp;2:</b> <input type="number" autocomplete="off" class="input-fld required-fld" name="q2" placeholder="0" [class.red-line-border]="addTarQ2.invalid && (addTarQ2.touched ||commonObj.isValid)" [(ngModel)]="addTar.q2" style=" margin-left: 5px;" required #addTarQ2="ngModel" (input)="leftAmounntCalc('qt2',$event)" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        <div class="row">
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">July :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[3].amount" placeholder="0" [class.red-line-border]="addTarJul.invalid && (addTarJul.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[3].amount"  required #addTarJul="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Aug :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[4].amount" placeholder="0" [class.red-line-border]="addTarAug.invalid && (addTarAug.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[4].amount"  required #addTarAug="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Sep :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[5].amount" placeholder="0" [class.red-line-border]="addTarSep.invalid && (addTarSep.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[5].amount"  required #addTarSep="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="d-flex align-items-center my-1"><b>Quarter&nbsp;3:</b> <input type="number" autocomplete="off" class="input-fld required-fld" value="" name="q3" placeholder="0" [class.red-line-border]="addTarQ3.invalid && (addTarQ3.touched ||commonObj.isValid)" [(ngModel)]="addTar.q3" style=" margin-left: 5px;" required #addTarQ3="ngModel" (input)="leftAmounntCalc('qt3',$event)" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        <div class="row">
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Oct :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[6].amount" placeholder="0" [class.red-line-border]="addTarOct.invalid && (addTarOct.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[6].amount"  required #addTarOct="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Nov :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[7].amount" placeholder="0" [class.red-line-border]="addTarNov.invalid && (addTarNov.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[7].amount"  required #addTarNov="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Dec :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[8].amount" placeholder="0" [class.red-line-border]="addTarDec.invalid && (addTarDec.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[8].amount"  required #addTarDec="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="d-flex align-items-center my-1"><b>Quarter&nbsp;4:</b> <input type="number" autocomplete="off" class="input-fld required-fld" name="q4" placeholder="0" [class.red-line-border]="addTarQ4.invalid && (addTarQ4.touched ||commonObj.isValid)" [(ngModel)]="addTar.q4" style="margin-left: 5px;" required #addTarQ4="ngModel" (input)="leftAmounntCalc('qt4',$event)" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        <div class="row">
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Jan :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[9].amount" placeholder="0" [class.red-line-border]="addTarJan.invalid && (addTarJan.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[9].amount"  required #addTarJan="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Feb :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[10].amount" placeholder="0" [class.red-line-border]="addTarFeb.invalid && (addTarFeb.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[10].amount"  required #addTarFeb="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">March :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[11].amount" placeholder="0" [class.red-line-border]="addTarMarch.invalid && (addTarMarch.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[11].amount"  required #addTarMarch="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        </div>
+                      </div>
+                      <!-- <div class="col-md-10"></div> -->
+                      <div class="col-md-12  d-flex justify-content-end">
+                        <button class="add-invent1" *ngIf="commonObj.leftAmount != 0">Save</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body" *ngIf="targetGes == false">
+                  <form #f="ngForm" name="theForm" (submit)="addConsumables(f)">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="d-flex align-items-center my-1"><b>Quarter&nbsp;1:</b> <input type="number" autocomplete="off" class="input-fld required-fld" name="q1" placeholder="0" [class.red-line-border]="addTarQ1.invalid && (addTarQ1.touched ||commonObj.isValid)" [(ngModel)]="addTar.q1" style="margin-left: 8px;" required #addTarQ1="ngModel" (input)="leftAmounntCalc('qt1',$event)" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        <div class="row">
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">April :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[0].amount" [class.red-line-border]="addTarApr.invalid && (addTarApr.touched ||commonObj.isValid)" placeholder="0" [(ngModel)]="addTar.monthly[0].amount"  required #addTarApr="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">May :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[1].amount" [class.red-line-border]="addTarMay.invalid && (addTarMay.touched ||commonObj.isValid)" placeholder="0" [(ngModel)]="addTar.monthly[1].amount"  required #addTarMay="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">June :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[2].amount" [class.red-line-border]="addTarJun.invalid && (addTarJun.touched ||commonObj.isValid)" placeholder="0" [(ngModel)]="addTar.monthly[2].amount"  required #addTarJun="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="d-flex align-items-center my-1"><b>Quarter&nbsp;2:</b> <input type="number" autocomplete="off" class="input-fld required-fld" name="q2" placeholder="0" [class.red-line-border]="addTarQ2.invalid && (addTarQ2.touched ||commonObj.isValid)" [(ngModel)]="addTar.q2" style="margin-left: 8px;" required #addTarQ2="ngModel" (input)="leftAmounntCalc('qt2',$event)" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        <div class="row">
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">July :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[3].amount" placeholder="0" [class.red-line-border]="addTarJul.invalid && (addTarJul.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[3].amount"  required #addTarJul="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Aug :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[4].amount" placeholder="0" [class.red-line-border]="addTarAug.invalid && (addTarAug.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[4].amount"  required #addTarAug="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Sep :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[5].amount" placeholder="0" [class.red-line-border]="addTarSep.invalid && (addTarSep.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[5].amount"  required #addTarSep="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="d-flex align-items-center my-1"><b>Quarter&nbsp;3:</b> <input type="number" class="input-fld required-fld" value="" name="q3" placeholder="0" [class.red-line-border]="addTarQ3.invalid && (addTarQ3.touched ||commonObj.isValid)" [(ngModel)]="addTar.q3" style="margin-left: 5px;" required #addTarQ3="ngModel" (input)="leftAmounntCalc('qt3',$event)" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        <div class="row">
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Oct :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[6].amount" placeholder="0" [class.red-line-border]="addTarOct.invalid && (addTarOct.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[6].amount"  required #addTarOct="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Nov :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[7].amount" placeholder="0" [class.red-line-border]="addTarNov.invalid && (addTarNov.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[7].amount"  required #addTarNov="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Dec :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[8].amount" placeholder="0" [class.red-line-border]="addTarDec.invalid && (addTarDec.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[8].amount"  required #addTarDec="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="d-flex align-items-center my-1"><b>Quarter&nbsp;4:</b> <input type="number" autocomplete="off" class="input-fld required-fld" name="q4" placeholder="0" [class.red-line-border]="addTarQ4.invalid && (addTarQ4.touched ||commonObj.isValid)" [(ngModel)]="addTar.q4" style="margin-left: 8px;" required #addTarQ4="ngModel" (input)="leftAmounntCalc('qt4',$event)" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        <div class="row">
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1 d-flex align-items-center">Jan :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[9].amount" placeholder="0" [class.red-line-border]="addTarJan.invalid && (addTarJan.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[9].amount"  required #addTarJan="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1  d-flex align-items-center">Feb :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[10].amount" placeholder="0" [class.red-line-border]="addTarFeb.invalid && (addTarFeb.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[10].amount"  required #addTarFeb="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+
+                          <div class="col-sm-2 my-1">
+                            <p class="grey1  d-flex align-items-center">March :</p>
+                          </div>
+                          <div class="col-sm-10 ps-1 pe-0 my-1"><input type="number" class="input-fld required-fld" name="monthly[11].amount" placeholder="0" [class.red-line-border]="addTarMarch.invalid && (addTarMarch.touched ||commonObj.isValid)" [(ngModel)]="addTar.monthly[11].amount"  required #addTarMarch="ngModel" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+                        </div>
+                      </div>
+                      <!-- <div class="col-md-10"></div> -->
+                      <div class="col-md-12 d-flex justify-content-end">
+                        <button class="add-invent1">Save</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Team List
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <form #f="ngForm" name="theForm" (submit)="addTeam(f)">
+                  <div class="target-ass" id="TeamDone">
+                    <ng-container *ngFor="let item of bridges; let i = index">
+                      <div>
+                        <p class="grey1" style="height:25px !important;"><a style="text-decoration: none;"> {{i+1}}) {{item.userName}} ({{item.role_name}}) </a></p>
+                      </div>
+                      <div class="mb-2">
+                        <input type="text" class="input-fld" id="YearTarget{{item.id}}" name="YearTarget{{item.id}}" value="0" >
+                      </div>
+
+                    </ng-container>
+                    <div class="col-md-10"></div>
+                    <div class="col-md-12 text-right" *ngIf="!noteamfound" style="float:none;">
+                      <button class="add-invent1">Submit</button>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-10" *ngIf="noteamfound" style="margin-top: -10px;">No Team Found</div>
+
+                  <div class="target-ass" *ngIf="!TeamDone" style="display: grid;grid-template-columns: 300px 300px;">
+                    <ng-container *ngFor="let item of TargeEmployeGets; let i = index">
+                      <div>
+                        <p class="grey1" style="height:25px !important;"><a (click)="SendEmp(item.id, item.SalesPersonCode)" style="text-decoration: none;"> {{i+1}}) {{item.SalesPersonCode.userName}} ({{item.SalesPersonCode.role.Name}}) </a></p>
+                      </div>
+                      <div class="mb-2">
+                        <input type="text" class="input-fld" id="YearTarget{{item.id}}" name="YearTarget{{item.id}}" value="{{item.YearTarget}}" readonly >
+                      </div>
+
+                    </ng-container>
+
+                    <!-- <div class="col-md-10"></div>
+                           <div class="col-md-2">
+                               <button class="btn btn-primary btn-rounded">Submit</button>
+                           </div> -->
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+<br>
+  </div>
+
+
+
+</div>
+  </div>
+
+
+
+
+
+</section>

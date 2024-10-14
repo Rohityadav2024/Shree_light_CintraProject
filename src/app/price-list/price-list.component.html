@@ -1,0 +1,244 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+      <p class="custom-search-head-name">Price List</p>
+      <div class="custom-search-wrapper">
+        <div ngbDropdown class="custom-common-search-container">
+          <div class="custom-search-ico-input-container">
+            <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+            <input type="text" name="" id="" placeholder="Search" [(ngModel)]="searchValue" (keyup.enter)="RowPerPage()">
+            <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+              *ngIf="searchValue != ''"></span>
+            <button type="button" class="new-search-btn" (click)="RowPerPage()"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+          <button type="button" class="custom-com-temp-btn" (click)="open(mymodal,false,'')"><span
+              class="custom-sp-plus-ft-sz">+</span> Add</button>
+
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales UserManagement">
+        <div class="sales-details">
+          <div class="custom-outter-body-lead-list-c9">
+            <div class="custom-table-select-icons">
+              <!-- <span *ngIf="commonObj.tbCheckM_1 && commonObj.tbCheckM_2"
+                [innerHTML]="'figma-pencil-write' | svgIcons:'figma-template-central'" (click)="openEdit(contentEdit, count,false)"></span>
+              <span *ngIf="commonObj.tbCheckM_1" [innerHTML]="'figma-delete' | svgIcons:'figma-template-central'"
+                (click)="multipleDelete1()"></span>
+              <i *ngIf="commonObj.tbCheckM_2" class="fa-solid fa-eye figma-template-central" (click)="openEdit(contentEdit, count,true)"></i> -->
+              <!-- <i class="fa-solid fa-gear" style="color:#909092;" data-bs-toggle="modal" data-bs-target="#EditModalNew"></i> -->
+              <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span>
+            </div>
+          </div>
+        </div>
+          <table class="new-tabl">
+            <!-- <ng-container *ngIf="!isLoading2"> -->
+            <thead class="MainUserList">
+            <tr>
+              <th class="CheckBoxWidthFix"><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+              <th (click)="togglesortType('id')">ID <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('id')">Price List Title <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('ItemGroup')"> Item Group <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+
+
+              <th (click)="togglesortType('Item')">Item <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('Brand')">Brand <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('MRP')">MRP<span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('Minimum Discount')">Minimum Discount <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <!-- <th (click)="togglesortType('IndustryCode')">Industry Code <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th> -->
+              <th (click)="togglesortType('MaximumDiscount')">Maximum Discount <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('Maximum Quantity')">Maximum Quantity <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('Minimum Quantity')">Minimum Quantity<span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('Remarks')">Remarks <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th class="text-center">Action</th>
+            </tr>
+            </thead>
+
+              <tr class="hover" *ngFor="let item of industry; let i = index ">
+                <td><input type="checkbox" id="checkbox{{item.id}}" value="{{item.id}}" class="checkbox"
+                    (click)="checkboxclick(item.id)"></td>
+                <td>{{item.id}}</td>
+                <td>{{item.PriceListTitle}}</td>
+                <td>{{item.ItemGroup.CategoryName || 'NA'}}</td>
+                <td>{{item.Item.ItemName|| 'NA'}}</td>
+                <td>{{item.Brand || 'NA'}}</td>
+                <td>{{item.MRP || 'NA'}}</td>
+                <td>{{item.MinimumDiscount|| 'NA'}}</td>
+                <td>{{item.MaximumDiscount|| 'NA'}}</td>
+                <td>{{item.MaximumQuantity || 'NA'}}</td>
+                <td>{{item.MinimumQuantity || 'NA'}}</td>
+                <!-- <td>{{item.IndustryCode || 'NA'}}</td> -->
+
+
+
+
+
+                <td>{{item.Remarks || 'NA'}}</td>
+                <td class="text-center"><i class="fa fa-pencil" (click)="open(mymodal,true,item)"></i></td>
+              </tr>
+              <tr *ngIf="totalCount == 0">
+                <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No Data Found</td>
+              </tr>
+            <!-- </ng-container> -->
+
+          </table>
+
+          <div class="LoderGifHere" *ngIf="isLoading2">
+            <img src="../../assets/img/loder.gif">
+          </div>
+        </div>
+
+    </div>
+
+  <div class="figma-pagination-controls">
+    <div class="figma-pagination-rows-total">
+      <div class="figma-rows-per-page">
+        <div class="figma-rows-per-page-label">Row per page</div>
+        <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+          [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+        <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+      </div>
+      <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+        (pageChange)="pageChanged($event)" [(page)]="pagination.PageNo" [maxSize]="5" [rotate]="true"
+        [boundaryLinks]="false" class="figma-pagination">
+        <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+        <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+      </ngb-pagination>
+    </div>
+  </div>
+  </div>
+</section>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">{{isEdit ? 'Update' : 'Create'}} Price List</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')" style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <form #f="ngForm" name="theForm" (submit)="addIndustry(f)">
+    <div class="modal-body">
+      <div class="row">
+
+        <div class="col-md-12">
+          <label>Price List Title</label>
+          <input type="text" class="input-fld required-fld" name="PriceListTitle" [(ngModel)]="indus.PriceListTitle" #PriceListTitle="ngModel" placeholder="PriceListTitle" required>
+          <span class="help-block danger" *ngIf="PriceListTitle.errors?.required && PriceListTitle.touched">
+            The Price List Title Group is required
+          </span>
+          <br>
+        </div>
+
+        <div class="col-md-12">
+          <label>Item Group</label>
+          <select class="input-fld required-fld" name="ItemGroup" [(ngModel)]="indus.ItemGroup" (change)="SelectITemGroup($event)"
+                  #ItemGroup="ngModel" required>
+                  <option value="">Select Item Group</option>
+            <option *ngFor="let item of categorys" [value]="item.id">
+              {{ item.CategoryName }}
+            </option>
+          </select>
+          <span class="help-block danger" *ngIf="ItemGroup.errors?.required && ItemGroup.touched">
+            The Item Group is required
+          </span>
+          <br>
+        </div>
+
+
+        <div class="col-md-12">
+            <!-- drop down-->
+          <label>Item</label>
+          <select class="input-fld required-fld" name="Item" [(ngModel)]="indus.Item"
+          #Item="ngModel" required>
+          <option value="">Select Item</option>
+    <option *ngFor="let item of items" [value]="item.id">
+      {{ item.ItemName }}
+    </option>
+  </select>
+  <span class="help-block danger" *ngIf="Item.errors?.required && Item.touched">
+    The Item is required
+  </span>
+          <br>
+        </div>
+
+        <div class="col-md-12">
+          <label>Brand</label>
+          <input type="text" class="input-fld required-fld" name="Brand" [(ngModel)]="indus.Brand" #Brand="ngModel" placeholder="Brand" required>
+          <span class="help-block danger" *ngIf="Brand.errors?.required && Brand.touched">
+            The Brand is required
+
+          </span>
+          <br>
+        </div>
+
+        <div class="col-md-12">
+          <label>MRP</label>
+          <input type="text" class="input-fld required-fld" name="MRP" [(ngModel)]="indus.MRP" #MRP="ngModel" placeholder="MRP" required>
+          <span class="help-block danger" *ngIf="MRP.errors?.required && MRP.touched">
+            The MRP is required
+          </span>
+          <br>
+        </div>
+
+
+        <div class="col-md-12">
+          <label>Minimum Discount</label>
+          <input type="text" class="input-fld required-fld" name="MinimumDiscount" [(ngModel)]="indus.MinimumDiscount" #MinimumDiscount="ngModel" placeholder="MinimumDiscount" required>
+          <span class="help-block danger" *ngIf="MinimumDiscount.errors?.required && MinimumDiscount.touched">
+            The Minimum Discount is required
+          </span>
+          <br>
+        </div>
+
+        <div class="col-md-12">
+          <label>Maximum Discount</label>
+          <input type="text" class="input-fld required-fld" name="MaximumDiscount" [(ngModel)]="indus.MaximumDiscount" #MaximumDiscount="ngModel" placeholder="MaximumDiscount" required>
+          <span class="help-block danger" *ngIf="MaximumDiscount.errors?.required && MaximumDiscount.touched">
+            The Maximum Discount is required
+          </span>
+          <br>
+        </div>
+
+
+        <div class="col-md-12">
+          <label>Minimum Quantity</label>
+          <input type="text" class="input-fld required-fld" name="MinimumQuantity" [(ngModel)]="indus.MinimumQuantity" #MinimumQuantity="ngModel" placeholder="MinimumQuantity" required>
+          <span class="help-block danger" *ngIf="MinimumQuantity.errors?.required && MinimumQuantity.touched">
+            The Minimum Quantity is required
+          </span>
+          <br>
+        </div>
+
+
+        <div class="col-md-12">
+          <label>Maximum Quantity</label>
+          <input type="text" class="input-fld required-fld" name="MaximumQuantity" [(ngModel)]="indus.MaximumQuantity" #MaximumQuantity="ngModel" placeholder="MaximumQuantity" required>
+          <span class="help-block danger" *ngIf="MaximumQuantity.errors?.required && MaximumQuantity.touched">
+            The Maximum Quantity is required
+          </span>
+          <br>
+        </div>
+
+        <div class="col-md-12">
+          <label>Remarks </label>
+          <input type="text" class="input-fld" name="Remarks" [(ngModel)]="indus.Remarks" #Remarks="ngModel" placeholder="Remarks">
+
+        </div>
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+        <!-- <div class="col-md-6"></div> -->
+        <div class="col-md-12 text-center mt-2" *ngIf="!isLoading">
+          <button class="add-invent1">Save</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</ng-template>
+<div class="alert alert-primary success-box alert-dismissible fade show" role="alert">
+  Project Type {{isEdit ? 'Update' : 'Create'}} Successfully !
+</div>
+

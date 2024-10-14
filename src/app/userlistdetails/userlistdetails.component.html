@@ -1,0 +1,125 @@
+<app-user-list style="display: none;" #UserListComponent (dataEvent)="receiveData($event)"></app-user-list>
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="figma-detial-home-sec-spliter">
+      <div class="figma-left-main-container"  *ngFor="let item of Bridge2">
+        <div class="figma-detail-header">
+          <div class="figma-left-part">
+            <i class="fa-regular fa-arrow-left cursor-pointer" (click)="backClicked()"></i>
+            <div class="figma-heading-ref-wrap">
+              <span class="figma-main-head">{{Headingss[0].leftheading}} </span>
+              <i class="fa-solid fa-chevron-right"></i>
+              <span class="figma-lead-ref-name">{{Headingss[0].heading116}}</span>
+            </div>
+          </div>
+          <div class="figma-right-part">
+            <!-- <button class="figma-outline-btn">Remind</button> -->
+            <!-- <button class="figma-prim-btn" style="cursor: pointer;"(click)="CreateLeadstoBp(item.id)" *ngIf="item.status==='Qualified'">Create Customer</button> -->
+          </div>
+        </div>
+
+        <div class="figma-detail-main-info">
+          <div class="figma-detail-info-split-two">
+            <div class="figma-detail-info-header">
+              <div class="cardnameicon" style="text-transform: capitalize;">{{item.firstName[0]}}</div>
+              <div class="figma-info-contain">
+                <div class="figma-info-name--address">
+                  <div class="figma-info-name" style="text-transform: capitalize;">{{item.firstName}} {{item.lastName}}</div>
+                </div>
+                <!-- <span class="figma-info-role2">Contact Number : {{ item.contactPerson || "NA" }}</span> -->
+                <div class="figma-info-num-email">
+
+                  <span class="figma-info-num">
+                    <i class="fa-solid fa-phone"></i>
+                    {{item.Mobile}}
+                  </span>
+                  <span class="figma-info-email">
+                    <i class="fa-solid fa-envelope"></i>
+                    {{item.Email}}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="figma-info-spi-buttn">
+              <div class="figma-info-button">
+                <span class="figma-status">{{Headingss[0].heading11}}:  <span *ngIf="item.Active=='tYES'">Active</span>
+                  <span *ngIf="item.Active =='tNO'">In Active</span></span>
+                  <span  (click)="getId(item.id)" *ngIf="item.RoleDetails.Name.toLowerCase() != 'admin'"  class="figma-outline-btn" [innerHTML]="'figma-edit-ico' | svgIcons:''" style="cursor:pointer"></span>
+                <!-- <span class="figma-outline-btn" (click)="getId(item.id)" [innerHTML]="'figma-hr-trip-dots' | svgIcons:''"></span> -->
+              </div>
+              <div class="figma-dates-info">
+                <span>{{Headingss[0].heading100}}: <span class="small-box">{{item.timestamp || 'NA'}}</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="figma-detail-properties">
+            <!-- <div class="figma-detail-proper">Customer: <span>{{item.CardName}}</span></div> -->
+             <div class="figma-detail-proper"><span>{{Headingss[0].heading4}}:</span> {{item.RoleDetails.Name}}</div>
+            <div class="figma-detail-proper"><span>{{Headingss[0].heading8}}: </span>{{item.ReportingDetails.firstName || 'NA'}} {{item.ReportingDetails.lastName}}</div>
+            <div class="figma-detail-proper"><span>{{Headingss[0].heading9}}: </span>{{item.position || 'NA'}}</div>
+            <!--<div class="figma-detail-proper">Frequency: <span>{{getFreqnacyt(item.Frequency)}}</span></div>
+            <div class="figma-detail-proper">Assign To: <span>{{item.AssignByDetails[0].SalesEmployeeName || 'NA'}}</span></div> -->
+          </div>
+          <div class="figma-ul-types-container">
+            <ul class="figma-ul-types">
+              <!-- <li [class.active]="commonObj.detailTab == 'Items'" (click)="commonObj.detailTab = 'Items'"><span [innerHTML]="'figma-product-bag-ico' | svgIcons:''"></span>Item</li> -->
+              <li [class.active]="commonObj.detailTab == 'detail'" (click)="commonObj.detailTab = 'detail'"><span [innerHTML]="'figma-detail-file-ico' | svgIcons:''"></span>{{Headingss[0].heading107}}</li>
+              <!-- <li [class.active]="commonObj.detailTab == 'attachment'" (click)="commonObj.detailTab = 'attachment'"><span [innerHTML]="'figma-attachment-file-ico' | svgIcons:''"></span>Attachment</li> -->
+            </ul>
+          </div>
+
+
+          <ng-container *ngIf="commonObj.detailTab == 'detail'">
+            <div class="figma-collapse-common-info">
+              <div class="figma-collapse-head-tab">
+                <p class="figma-collapse-head-name" style="border-bottom: 2px solid #4a79e4;">Personal Information</p>
+                <i class="fa-solid fa-chevron-up figma-collapse-arrow-chev-font-awe-icon" (click)="collapse4.toggle()"
+                  [attr.aria-expanded]="!isCollapsed4" [ngClass]="{'fa-chevron-up': isCollapsed4, 'fa-chevron-down': !isCollapsed4}"></i>
+              </div>
+              <div class="figma-collapse-common-info-detail">
+                <div class="figma-collapse-common-info-detail-wrapper-new" #collapse4="ngbCollapse" [(ngbCollapse)]="isCollapsed4">
+
+                  <div class="lead-details-grid">
+                    <div>
+                      <p class="grey1">{{Headingss[0].heading1}}</p>
+                    </div>
+                    <div>
+                      <p class="dtl">{{item.firstName || 'NA'}}</p>
+                    </div>
+                    <div>
+                      <p class="grey1">{{Headingss[0].heading2}}</p>
+                    </div>
+                    <div>
+                      <p class="dtl">{{item.lastName || 'NA'}}</p>
+                    </div>
+
+                    <div>
+                      <p class="grey1">{{Headingss[0].heading5}}</p>
+                    </div>
+                    <div>
+                      <p class="dtl"><span  *ngFor="let its of item.ZoneDetails">{{its.Name}} </span></p>
+                    </div>
+                    <div>
+                      <p class="grey1">{{Headingss[0].heading3}}</p>
+                    </div>
+                    <div>
+                      <p class="dtl">{{item.EmployeeID || 'NA'}}</p>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+          </ng-container>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,257 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="location-tracing">
+    <div class="left-tracing" *ngFor="let userdetails of Bridge2">
+      <div class="active-detail">
+        <button *ngIf="userdetails.Active=='tYES'">active</button>
+        <button *ngIf="userdetails.Active=='tNO'">Inactive</button>
+      </div>
+      <div class="tracing-emp-img-detail">
+        <!-- <img src="../../assets/img/location-tracing-img-1.png" alt=""> -->
+        <span class="userName-container text-uppercase d-flex justify-content-center align-items-center rounded-circle  ">{{userdetails.userName | slice:0:1}}</span>
+        <div class="tracing-detail">
+          <span class="tracing-name">{{userdetails.userName || 'NA'}}</span>
+          <span class="tracing-type">{{userdetails.position || 'NA'}}</span>
+        </div>
+      </div>
+      <div class="tracing-num-detail">
+        <em class="fa-solid fa-phone"></em>
+        <span>{{userdetails.Mobile || 'NA'}}</span>
+        <em class="fa-regular fa-envelope"></em>
+        <span>{{userdetails.Email || 'NA'}}</span>
+        <em class="fa-solid fa-location-dot"></em>
+        <span>Noida-62, Uttar pradesh-110091</span>
+      </div>
+
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <div class="show-more-details accordion-header" id="flush-headingOne">
+            <a class="collapsed text-decoration-none w-100 text-dark fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              Show more Details
+              <span class="dropdownaero float-end" [innerHTML]="'dropdownaero' | svgIcons:''"></span>
+            </a>
+
+          </div>
+
+          <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body employeeAccordian">
+              <div class="tracing-show-detail">
+                <span class="tracing-det-name">Employee ID:</span>
+                <span>{{userdetails.id || 'NA'}}</span>
+                <span class="tracing-det-name">Employee Status:</span>
+                <span ><span *ngIf="userdetails.Active=='tYES'">Active</span><span *ngIf="userdetails.Active=='tNO'">InActive</span></span>
+                <span class="tracing-det-name">Employee Type:</span>
+                <span>Full time</span>
+                <span class="tracing-det-name">Date of Joining:</span>
+                <span>XX-XX-XXXX</span>
+                <span class="tracing-det-name">Designation:</span>
+                <span>{{userdetails.position == ''? 'NA' : userdetails.position}}</span>
+                <span class="tracing-det-name">Reporting To</span>
+                <span>{{userdetails.reportingTo || 'NA'}}</span>
+              </div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+    </div>
+    <div class="right-tracing">
+      <div class="single-location-track-bg">
+        <div class="grid-container">
+          <div class="grid-item">
+            <p><i class="fa-solid fa-arrow-left" (click)="backClicked()"></i> Location Tracking</p>
+          </div>
+          <div class="grid-item" *ngIf="this.TypesManage == 'Start' && empidd == UserId">
+            <span class="dot"></span>
+          </div>
+          <div class="grid-item">
+            <button class="btn btn-sm add-invent1" *ngIf="empidd == UserId" style="float: right;"  (click)="open1(mymodal1)"> {{TypesManageReverse}} Location</button>
+            <!-- (click)="shareLocation()" -->
+          </div>
+
+          </div>
+
+
+
+        <!-- <a (click)="shareLocation()" class="shareLocationbtn">Share Location</a> -->
+
+      <div class="input-calendar">
+        <!-- <div class="input-search-wrapper">
+          <span class="search-icon" [innerHTML]="'search-icon' | svgIcons:''"></span>
+          <input type="text" placeholder="Search" (input)="searchfilter($event)">
+        </div> -->
+        <!-- <div class="input-calendar-double">
+          <span class="calendar-icon" [innerHTML]="'calendar-icon' | svgIcons:''"></span>
+          <input type="date"  [(ngModel)]="searchValue">
+        </div> -->
+        <button class="btn-skyblue openbtn" (click)="openNav()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
+        </button>
+        <button class="btn-skyblue" (click)="goDataPage()"><i class="fa fa-map-marker" aria-hidden="true"></i> Map
+        </button>
+      </div>
+
+
+      <div id="mySidepanel" class="sidepanel">
+        <div class="row">
+          <div class="col-12 mb-3 d-flex justify-content-between px-3 border-bottom py-2" >
+            <strong class="location-filter-h">Location  Filters</strong>
+            <a class="closebtn" (click)="closeNav()">&times;</a>
+          </div>
+         </div>
+        <form name="form" class="filterForm-container" (ngSubmit)="apply()" #f="ngForm" novalidate>
+          <div class="row">
+
+
+            <div class="col-4 my-2">
+              <label>Start Date</label>
+            </div>
+            <div class="col-8 my-2">
+              <input type="date" class="f-size form-control w-100" name="from"  [(ngModel)]="fromdatefilter"
+                placeholder="Start Date">
+
+            </div>
+            <div class="col-4 my-2">
+              <label>From Date</label>
+            </div>
+            <div class="col-8 my-2">
+              <input type="date" class="f-size form-control w-100" name="CreateDate"  [(ngModel)]="todatefilter"
+                placeholder="Start Date">
+
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-6 text-center my-3">
+                <a class="me-3" style="background: transparent;border: 1px solid #4a79e4;padding: 6px 20px;color: #4a79e4;border-radius: 6px;font-size: 13px;"
+                  (click)=resetfilter()>Reset</a>
+              </div>
+              <div class="col-6 my-3">
+                <button
+                  style=" border: 1px solid #4a79e4; padding: 6px 20px; background: #4a79e4; color: #fff;border-radius: 6px; font-size: 13px;"
+                  >Apply</button>
+              </div>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+
+      <table class="new-tabl">
+          <tr class="locationTracking">
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <!-- <th scope="col">Latitude</th> -->
+            <!-- <th scope="col">Longitude</th> -->
+            <th scope="col" style="min-width: 200px;max-width: 250px;">Address</th>
+            <th scope="col" style="max-width: 300px;">Remarks</th>
+            <th scope="col">Status</th>
+            <th scope="col">Location</th>
+          </tr>
+          <tr *ngFor="let table of locationTrack | trackingLocation:searchValue | paginate: { itemsPerPage: 10, currentPage: p };" class="hover">
+
+                  <td>{{table.UpdateDate}}</td>
+                  <td>{{table.UpdateTime}} </td>
+                  <!-- <td>{{table.Lat}} </td> -->
+                  <!-- <td>{{table.Long}}</td> -->
+                  <td>{{table.Address}}</td>
+                  <td>{{table.remark == ''? 'NA' : table.remark}}</td>
+                  <!-- <td class="p-3" (click)="menuStatus = !menuStatus">{{table.TotalHours}} -->
+                    <td><div [ngClass]="table.type == 'Stop' ? 'red' : 'yellow' ">{{table.type == 'Stop'? 'check-out':'check-in'}}</div></td>
+                <td class="text-center" (click)="open(mymodal,table)"><i class="fa fa-map-marker fa-map-marker1"aria-hidden="true"></i></td>
+
+              </tr>
+
+
+          <tr id="noDataFound">
+            <td colspan="8" style="text-align: center;font-size: 20px;color: #4A79E4;">No Data Found
+            </td>
+          </tr>
+
+      </table>
+      <div id="DataFound" class="pagination-controls">
+        <div class="pagination-details">Showing {{startind}} to {{endind}} of {{locationTrack.length}} entries</div>
+        <pagination-controls (pageChange)="pageChanged($event)" class="pgn-cntr"></pagination-controls>
+        <div class="pagelimit">
+          <label for="" class="pagelimitmargin">Rows Per Page</label>
+          <select (change)="clearFilter($event)">
+            <option value="{{page.value}}" *ngFor="let page of paginationOption">{{page.name}}</option>
+            <!-- <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="1000">All</option> -->
+          </select>
+        </div>
+      </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</section>
+
+<ng-template #mymodal let-modal>
+  <agm-map
+  [latitude]="lat1"
+  [longitude]="lng1"
+  [zoom]="zoom"
+  [disableDefaultUI]="false">
+
+  <agm-marker
+      *ngFor="let m of markers; let i = index"
+      (markerClick)="clickedMarker(m.label, i)"
+      [latitude]="m.lat1"
+      [longitude]="m.lng1"
+      [label]="m.label"
+      [markerDraggable]="m.draggable">
+
+    <agm-info-window>
+      <strong>{{m.Address}}</strong>
+    </agm-info-window>
+
+  </agm-marker>
+
+</agm-map>
+</ng-template>
+
+
+
+
+<ng-template #mymodal1 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Enter Remarks</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')" style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <form #f="ngForm" name="theForm" (submit)="addLocationRemark(f)">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-12">
+          <label>Remark<span class="text-da   nger font-weight-bold">*</span></label>
+          <textarea name="" id="" cols="30" rows="0" class="input-fld" name="Remarks" [(ngModel)]="Remarks" placeholder="Enter Remarks"></textarea>
+          <!-- <input type="text" class="input-fld" name="Remarks" [(ngModel)]="Remarks" placeholder="Enter Remarks"> -->
+
+        </div>
+        <div class="col-md-12 text-center mt-2">
+          <button class="add-invent1">Save</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<div class="alert alert-primary success-box alert-dismissible fade show" role="alert">
+  Share Location Successfully !
+</div>

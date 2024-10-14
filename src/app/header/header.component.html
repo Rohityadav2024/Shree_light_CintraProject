@@ -1,0 +1,103 @@
+<header class="figma-header">
+  <!-- (click)="burgerToggle()" -->
+  <div class="figma-menu-bar" [innerHTML]="'figma-menu-bars-ico' | svgIcons:''" (click)="burgerToggle(leftNavbar)" title="Hide/unhide Side bar"></div>
+  <div class=" figma-user-info">
+    <ng-container>
+      <!-- <ng-container *ngIf="isButn"> -->
+    <!-- <span [innerHTML]="'figma-hr-trip-dots' | svgIcons:''" class="iconbtn" (click)="toogleListfun(true)"></span> -->
+    <!-- <ul class="ulcss" *ngIf="toogleList">
+      <li *ngFor="let itme of appList" (click)="redirect(itme.application_name,itme.isExist)">
+        <i class="fa fa-circle" style="color:#08aa21;" *ngIf="itme.isExist"></i>
+        <i class="fa fa-circle" *ngIf="!itme.isExist"></i>
+      <span *ngIf="itme.isExist" style="color:#08aa21;"> {{itme.application_name}}</span>
+      <span *ngIf="!itme.isExist"> {{itme.application_name}}</span>
+      </li>
+    </ul> -->
+  </ng-container>
+    <span class="figma-user-bell-ico" [innerHTML]="'figma-user-bell-ico' | svgIcons:''"></span>
+    <div class="figma-user-detail" (click)="openNav()" style="cursor: pointer;">
+      <img src="../../assets/img/figma-ellipse-1.png">
+      <div class="figma-user">
+        <div class="figma-user-name" title="{{bridgeService2.UserName}}">{{show10Only(bridgeService2.UserName)}}</div>
+        <div class="figma-user-role">{{bridgeService2.role}}</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<div id="myProfilepanel" class="sidepanel sidepanel2">
+  <div class="row">
+    <div class="col-12">
+
+    </div>
+    <div class="col-lg-12" style="background-color: rgb(196, 216, 255);">
+      <div class="UserProfile">
+        <!-- <a class="closebtn" (click)="closeNav()">&times;</a> -->
+        <div class="Pro-Img">
+        <img src="https://www.translitescaffolding.com/wp-content/uploads/2013/06/user-avatar.png" alt="">
+      </div>
+      <div class="AllContent" *ngFor="let item of Bridge2">
+        <li>{{bridgeService2.UserName}}</li>
+        <li>{{item.Email}}</li>
+        <li>{{item.Mobile}}</li>
+        <li style="color:#4a79e4;text-decoration:underline;cursor: pointer;" (click)="openPass(contentchangepassword, item.user_id)"><i class="fa fa-key"
+          aria-hidden="true"></i> Reset Password</li>
+      </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12">
+      <div class="AllProduct_img">
+       <div class="col-lg-4" *ngFor="let itme of appList" (click)="redirect(itme.id,itme.isExist)" style="cursor: pointer;">
+        <div class="Box-1" [ngClass]="itme.isExist?'active':''">
+          <li class="profile-icon">A</li>
+          <li>{{itme.application_name}}</li>
+        </div>
+       </div>
+      </div>
+    </div>
+   </div>
+</div>
+
+
+<ng-template #contentchangepassword let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Reset Password</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <form #f="ngForm" name="theForm" (submit)="changepass(f)">
+      <!-- <form  #f="ngForm" name="theForm"> -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="d-flex justify-content-between">
+            <label>Automatic Generate</label>
+            <label class="switch"><input type="checkbox" id="checkfld" (click)="gen()"><span
+                class="slider round"></span></label>
+          </div>
+          <div class="password-eye">
+            <input class="input-fld" name="password" id="password" [(ngModel)]="resetPass.password" #password="ngModel"
+              [type]="fieldTextType ? 'text' : 'password'" maxlength="20" placeholder="Re Enter password" required>
+            <i class="fa input-group-addon" [ngClass]="{ 'fa-eye-slash': !fieldTextType,'fa-eye': fieldTextType}"
+              (click)="toggleFieldTextType()"></i>
+          </div>
+          <span class="help-block danger" *ngIf="password.errors?.required && password.touched">The password is
+            required</span>
+        </div>
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading">
+          <button class="add-invent1" [disabled]="f.invalid">Save</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</ng-template>

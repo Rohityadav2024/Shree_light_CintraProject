@@ -1,0 +1,299 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="TopbarAllComponentDivs">
+    <div class="Innerpagename">
+      <span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="backClicked()" style="cursor:pointer;"></span><h2>Order <span style="font-size: 19px; display: inline-block; transform: translate(-1px, 2px);">></span> <span>Details</span></h2>
+  </div>
+  <div class="SideBTnAllstyle"></div>
+  </div>
+  <div class="home-content home-content-divider" style="grid-template-columns: minmax(477px, auto) minmax(80px, auto) !important;" *ngFor="let item of orders">
+    <div class="home-left-container">
+      <div class="sales-boxes h-100">
+        <div class="recent-sales box">
+          <!-- <div class="row">
+              <div class="col-md-1 title">
+                <h6><img src="../../assets/img/back.png" style="width:25px;" (click)="backClicked()"></h6>
+              </div>
+              <div class="col-md-10 title">
+                <h5 style="font-weight: 600; color: #4a79e4; font-size: 18px;margin-left: -15px;
+                                margin-top: -5px"><a class="anch-add-user">{{item.CardName}}</a></h5>
+              </div>
+              <div class="col-md-1 title">
+                <h6><a class="btn btn-sm edit-dls" routerLink="/edit-order/{{idd}}">Edit</a></h6>
+              </div>
+            </div> -->
+          <div class="row">
+            <div class="title">
+              <h5 class="company-name">
+                {{item.CardName}}</h5>
+               <div *ngIf="item.CancelStatus == 'csNo'">
+                <a class="btn btn-sm edit-dls add-invent1 me-4" (click)="GoToPdf(item.id)" target="_blank" style="text-decoration: none;"><i class="fa fa-file"
+                  aria-hidden="true"></i> PDF</a>
+              <button class="btn btn-sm edit-dls add-invent1" routerLink="/order/add-order/{{idd}}" *ngIf="item.DocumentStatus != 'bost_Close'">Edit</button>
+               </div>
+
+            </div>
+          </div>
+          <section class="customer-details-grid">
+            <h6 class="heading-title-underline">Contact Details</h6>
+
+            <p class="grey1">Opportunity</p>
+            <p class="dtl">{{item.U_OPPRNM || 'NA' }}</p>
+            <p class="grey1">Quotation</p>
+            <p class="dtl">{{item.U_QUOTNM || 'NA'}}</p>
+
+            <div>
+              <p class="grey1">Business Partner</p>
+            </div>
+            <div>
+              <p class="dtl">{{item.CardName}}</p>
+            </div>
+            <div>
+              <p class="grey1">Contact Person</p>
+            </div>
+            <div>
+              <span *ngFor="let cperson of item.ContactPersonCodeDetails">
+
+                <p class="dtl">{{cperson.FirstName}}</p>
+              </span>
+              <!-- <p class="dtl">{{item.ContactPersonCode}}</p> -->
+            </div>
+            <div>
+              <p class="grey1">Sales Employee</p>
+            </div>
+            <div>
+              <span *ngFor="let sperson of item.SalesPersonCodeDetails">
+
+                <p class="dtl">{{sperson.SalesEmployeeName}}</p>
+              </span>
+              <!-- <p class="dtl">{{item.SalesPersonCode}}</p> -->
+            </div>
+            <div>
+              <p class="grey1">Posting Date</p>
+            </div>
+            <div>
+              <p class="dtl">{{item.TaxDate | customDate}}</p>
+            </div>
+            <div>
+              <p class="grey1">Valid Date</p>
+            </div>
+            <div>
+              <p class="dtl">{{item.DocDueDate | customDate}}</p>
+            </div>
+            <div>
+              <p class="grey1">Document Date</p>
+            </div>
+            <div>
+              <p class="dtl">{{item.DocDate | customDate}}</p>
+            </div>
+
+
+            <div>
+              <p class="grey1">PO NO. </p>
+            </div>
+            <div>
+              <p class="dtl">{{item.PONumber}}</p>
+            </div>
+
+
+            <div>
+              <p class="grey1">PO Date</p>
+            </div>
+            <div>
+              <p class="dtl">{{item.PODate | customDate}}</p>
+            </div>
+
+            <div>
+              <p class="grey1">Description</p>
+            </div>
+            <div>
+              <p class="dtl">{{item.Comments || 'NA'}}</p>
+            </div>
+
+            <h6 class="heading-title-underline">Billing Address</h6>
+            <p class="grey1">Billing Name</p>
+            <p class="dtl">{{item.AddressExtension.BillToBuilding}}</p>
+            <p class="grey1">Zip Code</p>
+            <p class="dtl">{{item.AddressExtension.BillToZipCode}}</p>
+            <p class="grey1">Country</p>
+            <p class="dtl">{{item.AddressExtension.U_BCOUNTRY}}</p>
+            <p class="grey1">State</p>
+            <p class="dtl">{{item.AddressExtension.U_BSTATE}}</p>
+
+            <p class="grey1">City</p>
+            <p class="dtl">{{item.AddressExtension.BillToCity || 'NA'}}</p>
+
+            <p class="grey1">Shipping Type</p>
+            <p class="dtl">{{item.AddressExtension.U_SHPTYPB}}</p>
+            <p class="grey1">Billing Address</p>
+            <p class="dtl">{{item.AddressExtension.BillToStreet}}</p>
+            <h6 class="heading-title-underline">Shipping Address</h6>
+            <p class="grey1">Shipping Name</p>
+            <p class="dtl">{{item.AddressExtension.ShipToBuilding}}</p>
+            <p class="grey1">Zip Code</p>
+            <p class="dtl">{{item.AddressExtension.ShipToZipCode}}</p>
+            <p class="grey1">Country</p>
+            <p class="dtl">{{item.AddressExtension.U_SCOUNTRY}}</p>
+            <p class="grey1">State</p>
+            <p class="dtl">{{item.AddressExtension.U_SSTATE}}</p>
+
+            <p class="grey1">City</p>
+            <p class="dtl">{{item.AddressExtension.ShipToCity || 'NA' }}</p>
+
+            <p class="grey1">Shipping Type</p>
+            <p class="dtl">{{item.AddressExtension.U_SHPTYPS}}</p>
+            <p class="grey1">Shipping Address</p>
+            <p class="dtl">{{item.AddressExtension.ShipToStreet}}</p>
+
+          </section>
+        </div>
+
+      </div>
+    </div>
+    <div class="home-right-container">
+      <div class="sales-boxes">
+        <div class="recent-sales box">
+          <div class="total-amount-grid">
+            <h6 class="heading-title-underline">Total Amount</h6>
+            <p class="grey1">Total Before Discount</p>
+            <p class="dtl">{{total_after | priceFormat}} /-</p>
+            <p class="grey1">Discount</p>
+            <p class="dtl">{{item.DiscountPercent}}%</p>
+            <p class="grey1">Total After Discount</p>
+            <p class="dtl">{{total_after_tax | priceFormat}} /-</p>
+            <p class="grey1">Tax (GST)</p>
+            <p class="dtl">{{tax_Value | priceFormat}} /-</p>
+            <p class="grey1">Freight Charge</p>
+            <p class="dtl">{{item.FreightCharge || 0 | priceFormat}} /-</p>
+            <p class="grey1">Grand Total</p>
+            <p class="dtl">{{total_Amount | priceFormat}} /-</p>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- End Here Two Quotations and Order -->
+      <div class="sales-boxes" style="border-top:1.4px solid lightblue; border-radius: 10px;">
+        <div class="recent-sales box" style="max-height: 400px; overflow: scroll; ">
+          <div class="col-md-12">
+            <h6 class="heading-title-underline">Selected Items</h6>
+          </div>
+          <div *ngFor="let light of item.DocumentLines" style="margin-bottom: 10px;margin-top: 30px;">
+            <a>
+              <div class="{{light.LineStatus == 'bost_Close'?'customer-area Close':'customer-area Open'}}">
+                <div class="col-sm-2 customer-img">
+                  <img class="name-sec" src="../../assets/img/iner-box1.png">
+                </div>
+                <div class="col-sm-9 customer-text">
+                  <span style="font-weight:600; font-size:12px; overflow-wrap: break-word; word-wrap: break-word;">{{light.ItemDescription}}</span><br>
+                  <span style="font-weight:600; font-size:12px; overflow-wrap: break-word; word-wrap: break-word; width:300px">{{light.ItemCode}}</span><br>
+                  <div style="display: flex; justify-content: space-between;">
+                  <span style="font-size:12px; overflow-wrap: break-word; word-wrap: break-word;">Unit Price : {{light.UnitPrice | priceFormat}}</span>
+                  <span style="font-size:12px; overflow-wrap: break-word; word-wrap: break-word;">Quantity : {{light.Quantity}}</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-size:12px; overflow-wrap: break-word; word-wrap: break-word;" *ngIf="item.CancelStatus == 'csNo'">Status : <span class="{{light.LineStatus == 'bost_Close'?'Close':'Open'}}">{{light.LineStatus == 'bost_Close'?'Close':'Open'}}</span></span>
+                  <span style="font-size:12px; overflow-wrap: break-word; word-wrap: break-word;" *ngIf="item.CancelStatus != 'csNo'">Status : <span class="Close">Cancel</span></span>
+                 <span style="font-size:12px; overflow-wrap: break-word; word-wrap: break-word;">Open Qty : {{light.OpenQuantity}}</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-size:12px; overflow-wrap: break-word; word-wrap: break-word;">Tax(GST) : {{ light.TaxRate || 0 }}%</span>
+                  <span style="font-size:12px; overflow-wrap: break-word; word-wrap: break-word;">Discount : {{light.DiscountPercent}}%</span>
+                </div>
+
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="sales-boxes sales-details-cateIms">
+        <div class="sales-details-cateIms-card recent-sales">
+          <div class="row">
+            <div class="col-md-12 my-2"  *ngFor="let light of item.DocumentLines">
+              <div class="customer-area" style="padding: 8px 5px;">
+                <div class="row w-100">
+                  <div class="col-sm-3" style="text-align: -webkit-center;">
+                    <div class="customer-img">
+                      <img class="name-sec" src="../../assets/img/iner-box1.png" style="height: 43px;">
+                    </div>
+                  </div>
+          <div class="col-md-8 customer-text">
+          <div class="customer-text">
+          <span>{{light.ItemDescription}}</span><br>
+          <span>{{light.ItemCode}}</span>
+          <div style="display: flex; justify-content: space-between;">
+          <span style="font-size: 12px; font-weight: 400; overflow-wrap: break-word; word-wrap: break-word;">UnitPrice : {{light.UnitPrice}}</span>
+          <span style="font-size: 12px; font-weight: 400; overflow-wrap: break-word; word-wrap: break-word;">Quantity : {{light.Quantity}}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="font-size: 12px; font-weight: 400; overflow-wrap: break-word; word-wrap: break-word;">Tax : {{ light.Tax || 0 }}%</span>
+          <span style="font-size: 12px; font-weight: 400; overflow-wrap: break-word; word-wrap: break-word;">Discount : {{light.DiscountPercent}}%</span>
+        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div> -->
+
+      <div class="sales-boxes">
+        <div class="recent-sales box" style="margin-left: 0;padding: 20px;">
+          <div class="col-md-12 mb-3">
+            <h6 class="heading-title-underline">Attachments</h6>
+          </div>
+
+          <!-- <p class="heading-title-underline">Attachments</p> -->
+
+          <div class="files-list">
+            <div class="single-file" *ngFor="let file of orderAttachment; let i = index">
+
+              <div class="d-flex justify-content-between w-100 mb-3">
+                <div class="file-icon" >
+                  <a href="{{this.baseUrl2}}{{file.File}}" target="_blank"><img
+                      src="{{this.baseUrl2}}{{file.File}}" style="width: 30px" />
+                    </a>
+                    <span class="ms-3" style="font-size:11px;">{{file.File.substr(file.File.lastIndexOf("/")+1)}}</span>
+                </div>
+
+
+
+                <div class="delete" (click)="deletefileapi(file.id, i)">
+                  <span [innerHTML]="'delete' | svgIcons:''"></span>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+          <div class="fileupload-container" appDnd (fileDropped)="oneditFileDropped($event)">
+            <input type="file" class="fileuploadref" #fileDropRef1 id="fileDropRef1" multiple
+              (change)="fileeditBrowseHandler($event)" />
+
+
+            <label class="fw-600"> Choose a file </label>
+            <label for="fileDropRef"> or drag it here</label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="loadercss" style="text-align: center;" *ngIf="isLoading">
+    <img src="../../assets/img/loder.gif" >
+  </div>
+</section>
+
+<div class="alert alert-primary edit-success-box-attch alert-dismissible fade show" role="alert">
+  Added Attachment Successfully !
+</div>

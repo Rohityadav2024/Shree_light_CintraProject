@@ -1,0 +1,44 @@
+.checkbox{
+  width: 30px;
+  height: 15px;
+  position: relative;
+  top: 2px;
+  cursor: pointer;
+}
+
+.data-inc-dec {
+  display: flex;
+  background: #37BDFF;
+  justify-content: space-between;
+  width: 100px;
+  margin-top: 5px;
+  flex-wrap: nowrap;
+  padding: 2px !important;
+  border-radius: 4px;
+  column-gap: 3px;
+
+  .minus,
+  .plus {
+    padding: 0px 4px;
+    width: 25px;
+    height: 25px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+
+    &:hover {
+      color: #000;
+      background: #fff;
+      border-radius: 50%;
+    }
+  }
+
+  .cut-qny {
+    min-width: 30px;
+    background: #fff;
+    color: #000;
+    text-align: center;
+  }
+}

@@ -1,0 +1,57 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <!-- <i class="fa-regular fa-arrow-left cursor-pointer" (click)="backClicked()"></i> -->
+
+  <div class="home-content">
+    <div class="custom-search-container">
+      <div class="figma-detail-header">
+        <div class="figma-left-part">
+          <i class="fa-regular fa-arrow-left cursor-pointer" (click)="backClicked()"></i>
+          <p class="custom-search-head-name">{{this.isEdit?'Edit':'Add'}} Workflow</p>
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales box">
+    <div class="user-role-mange-container">
+      <span class="user-role-mange-title"></span>
+      <div class="lead-update-container" style="grid-template-columns: 600px;">
+        <div class="lead-update-wrapper">
+          <label>Title <span class="figma-req-star"
+            [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+          <div>
+            <input type="text" class="input-fld required-fld" [(ngModel)]="Payload.workflow_title" name="workflow_title" placeholder="Enter Title">
+          </div>
+        </div>
+
+        <ng-container *ngFor="let address of addresses; let i = index;">
+
+        <div class="lead-update-wrapper" style="grid-template-columns: 200px 300px 200px 200px 40px 40px;">
+          <label>Level {{i+1}}</label>
+          <div>
+            <ng-select name="DesignationId" [(ngModel)]="address.role_type" name="role_type_{{i}}" [multiple]="true" (change)="changevalue()" class="input-fld" placeholder="Select Role">
+              <ng-option *ngFor="let item of filteredArray" [value]="item.Name">{{item.Name}}</ng-option>
+             </ng-select>
+          </div>
+          <div style="padding: 10px;">
+            <input type="number" name="discounts" [(ngModel)]="address.discounts" class="input-fld" placeholder="Enter Discount">
+          </div>
+
+          <div>
+            <input type="number" name="doctotal" [(ngModel)]="address.doctotal" class="input-fld" placeholder="Enter Total Cost">
+          </div>
+
+          <span style="min-width: 40px;padding: 8px;"><i class="fa fa-plus" style="cursor: pointer;color: green;" (click)="addAddress(i)"></i></span>
+          <span style="min-width: 40px;padding: 8px;"><i class="fa fa-times" style="cursor: pointer;color: red;" (click)="removeAddress(i)"></i></span>
+        </div>
+      </ng-container>
+
+      <div style="margin-top: 20px;">
+      <button class="custom-com-temp-btn" (click)="Save()">Save</button>
+      </div>
+      </div>
+</div>
+    </div>
+    </div>
+  </div>
+</section>

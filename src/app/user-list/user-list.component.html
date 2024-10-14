@@ -1,0 +1,637 @@
+<section class="home-section" appLeftMenuNavbar>
+
+  <!-- <div class="row">
+    <div class="col-md-12 text-right">
+      <div class="page-search">
+        <app-belluser></app-belluser>
+      </div>
+    </div>
+  </div> -->
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+      <p class="custom-search-head-name"> {{Headingss[0].leftheading}}</p>
+      <div class="custom-search-wrapper">
+        <div ngbDropdown class="custom-common-search-container">
+          <button *ngIf="exportStatus" type="button" class="custom-action-btn openbtn" (click)="Exportexcel()" ><i >Export &nbsp;</i>
+            <i title="Download Excel" class="fa-solid fa-file-export download-icon cursor-pointer exportfileicon"></i>
+          </button>
+          <button type="button" class="custom-action-btn openbtn" (click)="openNav()"><i class="fa fa-filter openbtn"></i> {{Headingss[0].heading109}}</button>
+          <ng-template #filter> {{Headingss[0].heading109}}</ng-template>
+          <div class="custom-search-ico-input-container">
+            <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+            <input type="text" name="" id="" placeholder=" {{Headingss[0].heading110}}" [(ngModel)]="searchValue" (keyup.enter)="RowPerPage()">
+            <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+              *ngIf="searchValue != ''"></span>
+            <button type="button" class="new-search-btn" (click)="RowPerPage()"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+          <button type="button" class="custom-com-temp-btn" (click)="open(mymodal)"><span
+              class="custom-sp-plus-ft-sz">+</span> {{Headingss[0].heading101}}</button>
+
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales UserManagement">
+        <div class="sales-details">
+          <div class="custom-outter-body-lead-list-c9">
+            <div class="custom-table-select-icons">
+              <span *ngIf="commonObj.tbCheckM_1 && commonObj.tbCheckM_2"
+                [innerHTML]="'figma-pencil-write' | svgIcons:'figma-template-central'" (click)="openEdit(contentEdit, count,false)"></span>
+              <!-- <span *ngIf="commonObj.tbCheckM_1" [innerHTML]="'figma-delete' | svgIcons:'figma-template-central'"
+                (click)="multipleDelete1()"></span> -->
+              <i *ngIf="commonObj.tbCheckM_2" class="fa-solid fa-eye figma-template-central" (click)="openEdit(contentEdit, count,true)"></i>
+              <!-- <i class="fa-solid fa-gear" style="color:#909092;" data-bs-toggle="modal" data-bs-target="#EditModalNew"></i> -->
+              <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span>
+            </div>
+          </div>
+        </div>
+        <table class="new-tabl" id="table-data">
+          <!-- <ng-container *ngIf="!isLoading2"> -->
+          <thead class="MainUserList">
+          <tr>
+            <th><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+            <th (click)="togglesortType('id')">{{Headingss[0].heading0}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+            <!-- <th (click)="togglesortType('userName')">Username <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span>
+            </th> -->
+            <th (click)="togglesortType('firstName')"> {{Headingss[0].heading12}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span>
+            </th>
+            <th (click)="togglesortType('Email')">{{Headingss[0].heading6}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span>
+            </th>
+            <th>{{Headingss[0].heading5}}</th>
+            <th (click)="togglesortType('Mobile')">{{Headingss[0].heading7}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span>
+            </th>
+            <th (click)="togglesortType('role')">{{Headingss[0].heading4}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+            <th>{{Headingss[0].heading8}}</th>
+            <th (click)="togglesortType('Active')"> {{Headingss[0].heading11}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span>
+            </th>
+            <!-- <th>Status</th> -->
+            <th>{{Headingss[0].heading111}}</th>
+          </tr>
+        </thead>
+
+            <ng-container *ngFor="let item of bridges; let i = index">
+              <!-- <ng-container *ngFor="let item of bridges | searchfilter:searchValue | sortEmployee : sortedColumn; let i = index"> -->
+              <tr class="hover">
+                <td>
+                  <input type="checkbox" id="checkbox{{item.id}}" value="{{item.id}}" class="checkbox"
+                    (click)="checkboxclick(item.id)">
+                </td>
+                <td class="text-nowrap">{{item.id}}</td>
+                <!-- <td (click)="suplier(item.id)">{{item.userName}}</td> -->
+                <td (click)="suplier(item.id)">{{item.firstName}} {{item.lastName}}</td>
+                <td (click)="suplier(item.id)">{{item.Email}}</td>
+                <td (click)="suplier(item.id)"><span *ngFor="let item2 of item.ZoneDetails">{{item2.Name}} </span></td>
+                <td (click)="suplier(item.id)">{{item.Mobile}}</td>
+                <td>{{item.RoleDetails.Name}}</td>
+                <td (click)="suplier(item.id)">{{item.ReportingDetails.firstName || 'NA'}} {{item.ReportingDetails.lastName}}</td>
+                <ng-container [ngSwitch]="true">
+                  <td *ngSwitchCase="item.Active == 'tYES'" class="ActiveBTN rounded-pill badge-success">Active</td>
+                  <td *ngSwitchDefault class="ActiveBTN rounded-pill badge-warning">Inactive</td>
+                </ng-container>
+                <td class="EditBoxForm" style="padding: 0 15px;" (click)="editdeletepop(item)" *ngIf="item.RoleDetails.Name.toLowerCase() != 'admin'">
+                  <span class="edit-delete edit-delete{{item.id}}" [innerHTML]="'table-v-dots' | svgIcons:''"
+                    class="table-v-dots"></span>
+                  <div class="hover-show hover-show{{item.id}} hover-show-inactive">
+                    <span (click)="openEdit(contentEdit, [item.id],false)"><i class="fa fa-pencil" aria-hidden="true"></i> {{Headingss[0].heading102}}
+                      {{Headingss[0].leftheading}}</span><br>
+                    <!-- <span (click)="openPass(contentchangepassword, item.id)"><i class="fa fa-key"
+                        aria-hidden="true"></i> Reset Password</span> -->
+                    <span *ngIf="item.Active == 'tYES'" (click)="suspendUser(confirmModal,item,'tNO')"> <i class="fa fa-trash"
+                        aria-hidden="true"></i> Suspend  {{Headingss[0].leftheading}}</span>
+                    <span *ngIf="item.Active == 'tNO'" (click)="suspendUser(confirmModal,item,'tYES')"> <i class="fa fa-user-plus"
+                        aria-hidden="true"></i> Active  {{Headingss[0].leftheading}}</span>
+
+
+                    <!-- <span *ngIf="item.Active == 'tNO'" (click)="deleteUser(confirmModal2,item.id? item.id:0)"><i class="fa fa-trash"
+                        aria-hidden="true"></i> Delete
+                        {{Headingss[0].leftheading}}</span> -->
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="totalCount == 0">
+              <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No Data Found</td>
+            </tr>
+          <!-- </ng-container> -->
+        </table>
+        <div class="LoderGifHere" *ngIf="isLoading2">
+          <img src="../../assets/img/loder.gif">
+        </div>
+      </div>
+    </div>
+    <div class="figma-pagination-controls">
+      <div class="figma-pagination-rows-total">
+        <div class="figma-rows-per-page">
+          <div class="figma-rows-per-page-label">Row per page</div>
+          <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+            [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+          <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+        </div>
+        <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+          (pageChange)="pageChanged($event)" [(page)]="CurrentPage"  [maxSize]="5" [rotate]="true"
+          [boundaryLinks]="false" class="figma-pagination">
+          <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+          <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">{{Headingss[0].heading101}} {{Headingss[0].leftheading}}</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm" (submit)="addUser(f)">
+      <div class="row">
+        <!-- <div class="col-md-6">
+          <label>Username </label>
+          <input type="text" class="input-fld required-fld" name="userName" [(ngModel)]="bridge.userName"
+            #userName="ngModel" placeholder="Enter user name" required>
+          <span class="help-block danger"
+            *ngIf="(userName.errors?.required && f.submitted)||(userName.errors?.required && userName.touched)">
+            The User Name is required
+          </span>
+        </div> -->
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading1}} </label>
+          <input type="text" class="input-fld required-fld" name="firstName" [(ngModel)]="bridge.firstName"
+            #firstName="ngModel" placeholder="Enter {{Headingss[0].heading1}}" required>
+          <span class="help-block danger"
+            *ngIf="(firstName.errors?.required && f.submitted)||(firstName.errors?.required && firstName.touched)">
+            The {{Headingss[0].heading1}} is required
+          </span>
+        </div>
+
+        <!-- <div class="col-md-6">
+          <label>Middle Name</label>
+          <input type="text" class="input-fld" name="middleName" [(ngModel)]="bridge.middleName" #middleName="ngModel"
+            placeholder="Enter Middle name">
+        </div> -->
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading2}} </label>
+          <input type="text" class="input-fld required-fld" name="lastName" [(ngModel)]="bridge.lastName"
+            #lastName="ngModel" placeholder="Enter {{Headingss[0].heading2}}" required>
+          <span class="help-block danger"
+            *ngIf="(lastName.errors?.required && f.submitted)||(lastName.errors?.required && lastName.touched)">
+            The {{Headingss[0].heading2}} is required
+          </span>
+        </div>
+
+
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading3}}</label>
+          <input type="text" class="input-fld" name="EmployeeID" [(ngModel)]="bridge.EmployeeID" #EmployeeID="ngModel"
+            placeholder="Enter {{Headingss[0].heading3}}">
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading4}} </label>
+          <select #role="ngModel" required class="ngsearch-dropdown input-fld required-fld" [(ngModel)]="bridge.role"
+            placeholder="Select Role" name="role" (change)="changeRole($event)">
+            <option value="" disable selected>Select {{Headingss[0].heading4}}</option>
+            <option value="{{role.id}}" *ngFor="let role of UserRole">{{role.Name}}</option>
+          </select>
+
+          <span class="help-block danger"
+            *ngIf="(role.errors?.required && f.submitted)||(role.errors?.required && role.touched)">
+            The Select {{Headingss[0].heading4}} is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading5}} </label>
+          <ng-select required class="input-fld required-fld" [(ngModel)]="bridge.zone" [multiple]=true #zone="ngModel"
+            placeholder="Select zone" name="zone">
+            <ng-option value="" disable selected>Select {{Headingss[0].heading5}}</ng-option>
+            <ng-option [value]="role.id" *ngFor="let role of UserZone">{{role.Name}}</ng-option>
+          </ng-select>
+          <span class="help-block danger"
+          *ngIf="(zone.errors?.required && f.submitted)||(zone.errors?.required && zone.touched)">
+          The {{Headingss[0].heading5}} is required
+        </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading6}} </label>
+          <input type="text" class="input-fld required-fld" name="Email" [(ngModel)]="bridge.Email"
+            #Email="ngModel" placeholder="Enter {{Headingss[0].heading6}}"
+            required>
+          <span class="help-block danger"
+            *ngIf="(Email.errors?.required && f.submitted)||(Email.errors?.required && Email.touched)">
+            The {{Headingss[0].heading6}} is required
+          </span>
+          <!-- <span class="help-block danger" *ngIf="Email.errors?.email && Email.touched">
+            Invalid {{Headingss[0].heading6}}
+          </span> -->
+        </div>
+
+
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading7}} </label>
+          <input type="text" class="input-fld required-fld" maxlength="15" name="Mobile" [(ngModel)]="bridge.Mobile"
+            #Mobile="ngModel" placeholder="Enter {{Headingss[0].heading7}}" pattern="^((\\+91-?)|0)?[0-9]{7,15}$" required>
+          <span class="help-block danger"
+            *ngIf="(Mobile.errors?.required && f.submitted)||(Mobile.errors?.required && Mobile.touched)">
+            The {{Headingss[0].heading7}} is required
+          </span>
+          <span class="help-block danger" *ngIf="Mobile.errors?.pattern && Mobile.touched">
+            Invalid {{Headingss[0].heading7}}
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading8}} </label>
+
+          <ng-select #selectReporting [clearOnBackspace]="false" [searchable]="false" name="reportingTo" required
+            #reportingTo="ngModel" [(ngModel)]="bridge.reportingTo" required
+            class="ngsearch-dropdown input-fld required-fld" placeholder="Select {{Headingss[0].heading8}} ">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectReporting.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>{{Headingss[0].heading8}} </ng-option>
+            <ng-option *ngFor="let item of rolefilter" value="{{item.SalesEmployeeCode}}">{{item.firstName}} {{item.lastName}}</ng-option>
+          </ng-select>
+
+          <span class="help-block danger"
+            *ngIf="(reportingTo.errors?.required && f.submitted)||(reportingTo.errors?.required && reportingTo.touched)">
+            {{Headingss[0].heading8}}  is Required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading9}}  </label>
+          <input type="text" class="input-fld required-fld" name="position" [(ngModel)]="bridge.position"
+            #position="ngModel" placeholder="Enter {{Headingss[0].heading9}}" required>
+          <span class="help-block danger"
+            *ngIf="(position.errors?.required && f.submitted)||(position.errors?.required && position.touched)">
+            The {{Headingss[0].heading9}} is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading10}} </label>
+          <div class="password-eye">
+            <input class="input-fld required-fld" name="password" id="password" [(ngModel)]="bridge.password"
+              #password="ngModel" [type]="fieldTextType ? 'text' : 'password'" placeholder="Enter {{Headingss[0].heading10}}" required>
+            <i class="input-group-addon fa" [ngClass]="{ 'fa-eye-slash': !fieldTextType, 'fa-eye': fieldTextType }"
+              (click)="toggleFieldTextType()"></i>
+          </div>
+          <span class="help-block danger"
+            *ngIf="(password.errors?.required && f.submitted)||(password.errors?.required && password.touched)">
+            The {{Headingss[0].heading10}} is required
+          </span>
+        </div>
+
+
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading">
+          <!-- <button class="add-invent1" [disabled]="f.invalid">Save</button> -->
+          <button class="add-invent1">{{Headingss[0].heading105}}</button>
+        </div>
+        <!-- <div *ngIf="isLoading"><img src="../../assets/img/loder.gif"></div> -->
+
+
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+<div class="alert alert-primary edit-success-box1 alert-dismissible fade show" role="alert">
+  Reset {{Headingss[0].heading10}} Succesfully !
+</div>
+
+<ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title"> {{isView?Headingss[0].heading115:Headingss[0].heading102}}  {{Headingss[0].leftheading}} </h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm" (submit)="editUser(f)">
+      <div class="row">
+        <!-- <div class="col-md-6">
+          <label>Username</label>
+          <input type="text" class="input-fld required-fld" name="userName" [(ngModel)]="bridge2.userName"
+            #userName="ngModel" placeholder="Enter user name" [readonly]="isView" required>
+          <span class="help-block danger"
+            *ngIf="(userName.errors?.required && f.submitted)||(userName.errors?.required && userName.touched)">
+            The User Name is required
+          </span>
+        </div> -->
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading1}}</label>
+          <input type="text" class="input-fld required-fld" name="firstName" [(ngModel)]="bridge2.firstName"
+            #firstName="ngModel" placeholder="Enter {{Headingss[0].heading1}}" [readonly]="isView" required>
+          <span class="help-block danger"
+            *ngIf="(firstName.errors?.required && f.submitted)||(firstName.errors?.required && firstName.touched)">
+            The {{Headingss[0].heading1}} is required
+          </span>
+        </div>
+
+        <!-- <div class="col-md-6">
+          <label>Middle Name</label>
+          <input type="text" class="input-fld" name="middleName" [(ngModel)]="bridge2.middleName" [readonly]="isView" #middleName="ngModel"
+            placeholder="Enter Middle name">
+        </div> -->
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading2}}</label>
+          <input type="text" class="input-fld required-fld" name="lastName" [readonly]="isView" [(ngModel)]="bridge2.lastName"
+            #lastName="ngModel" placeholder="Enter {{Headingss[0].heading2}}" required>
+          <span class="help-block danger"
+            *ngIf="(lastName.errors?.required && f.submitted)||(lastName.errors?.required && lastName.touched)">
+            The {{Headingss[0].heading2}} is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading3}}</label>
+          <input type="text" class="input-fld" name="EmployeeID" [readonly]="isView" [(ngModel)]="bridge2.EmployeeID" #EmployeeID="ngModel"
+            placeholder="Enter {{Headingss[0].heading3}}">
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading4}} </label>
+          <select #role="ngModel" required class="ngsearch-dropdown input-fld required-fld" [(ngModel)]="bridge2.role"
+            placeholder="Select Role" name="role" (change)="changeRole($event)">
+            <option value="" disable selected>Select {{Headingss[0].heading4}}</option>
+            <option value="{{role.id}}" *ngFor="let role of UserRole">{{role.Name}}</option>
+          </select>
+
+          <span class="help-block danger"
+            *ngIf="(role.errors?.required && f.submitted)||(role.errors?.required && role.touched)">
+            The Select {{Headingss[0].heading4}} is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading5}} </label>
+          <ng-select required class="input-fld required-fld" [(ngModel)]="bridge2.zone" [multiple]=true #zone="ngModel"
+            placeholder="Select zone" name="zone">
+            <ng-option value="" disable selected>Select {{Headingss[0].heading5}}</ng-option>
+            <ng-option [value]="role.id" *ngFor="let role of UserZone">{{role.Name}}</ng-option>
+          </ng-select>
+          <span class="help-block danger"
+          *ngIf="(zone.errors?.required && f.submitted)||(zone.errors?.required && zone.touched)">
+          The {{Headingss[0].heading5}} is required
+        </span>
+        </div>
+
+        <!-- <div class="col-md-6">
+          <label>Email</label>
+          <input type="email" email="true" class="input-fld required-fld" [readonly]="isView" name="Email" [(ngModel)]="bridge2.Email"
+            #Email="ngModel" placeholder="Enter Email" required>
+          <span class="help-block danger"
+            *ngIf="(Email.errors?.required && f.submitted)||(Email.errors?.required && Email.touched)">
+            The Email is required
+          </span>
+          <span class="help-block danger" *ngIf="Email.errors?.email">
+            Invalid Email Id
+          </span>
+        </div> -->
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading11}}</label>
+          <ng-select #editselectStatus [clearOnBackspace]="false" [readonly]="isView" [searchable]="false" name="Active" #Active="ngModel"
+            required [(ngModel)]="bridge2.Active" class="ngsearch-dropdown input-fld required-fld"
+            placeholder="Select Status">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="editselectStatus.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading11}}</ng-option>
+            <ng-option value="{{status.value}}" *ngFor="let status of UserStatus">{{status.name}}</ng-option>
+          </ng-select>
+          <span class="help-block danger"
+            *ngIf="(Active.errors?.required && f.submitted)||(Active.errors?.required && Active.touched)">
+            {{Headingss[0].heading11}} is required
+          </span>
+          <!-- <select class="input-fld required-fld" name="Active" required [(ngModel)]="bridge2.Active">
+            <option value="">Select Value</option>
+            <option value="{{status.value}}" *ngFor="let status of UserStatus">{{status.name}}</option>
+          </select> -->
+        </div>
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading7}}</label>
+          <input type="text" class="input-fld required-fld" [readonly]="isView" name="Mobile" [(ngModel)]="bridge2.Mobile" #Mobile="ngModel"
+            placeholder="Enter {{Headingss[0].heading7}}" maxlength="15" pattern="^((\\+91-?)|0)?[0-9]{7,15}$" required>
+          <span class="help-block danger"
+            *ngIf="(Mobile.errors?.required && f.submitted)||(Mobile.errors?.required && Mobile.touched)">
+            The {{Headingss[0].heading7}} is required
+          </span>
+          <span class="help-block danger" *ngIf="Mobile.errors?.pattern">
+            Invalid {{Headingss[0].heading7}}
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading8}} </label>
+          <ng-select #selecteditReportingTo [clearOnBackspace]="false" [readonly]="isView" [searchable]="false" name="reportingTo"
+            #reportingTo="ngModel" required [(ngModel)]="bridge2.reportingTo"
+            class="ngsearch-dropdown input-fld required-fld" placeholder="Select {{Headingss[0].heading8}} ">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selecteditReportingTo.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading8}} </ng-option>
+            <ng-option *ngFor="let item of rolefilter" value="{{item.SalesEmployeeCode}}">{{item.firstName}} {{item.lastName}}</ng-option>
+          </ng-select>
+          <span class="help-block danger"
+            *ngIf="(reportingTo.errors?.required && f.submitted)||(reportingTo.errors?.required && reportingTo.touched)">
+            {{Headingss[0].heading8}}  is required
+          </span>
+          <!-- <select class="input-fld required-fld" name="reportingTo" required [(ngModel)]="bridge2.reportingTo">
+            <option *ngFor="let item of rolefilter" value="{{item.SalesEmployeeCode}}">{{item.firstName}}</option>
+          </select> -->
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading9}}</label>
+          <input type="text" class="input-fld required-fld" [readonly]="isView" name="position" [(ngModel)]="bridge2.position"
+            #position="ngModel" placeholder="Enter {{Headingss[0].heading9}}" required>
+          <span class="help-block danger"
+            *ngIf="(position.errors?.required && f.submitted)||(position.errors?.required && position.touched)">
+            The {{Headingss[0].heading9}} is required
+          </span>
+        </div>
+
+
+        <!-- <input type="hidden"
+        class="input-fld"
+        name="id"
+        [(ngModel)]="bridge2.id"
+          #id="ngModel"
+        placeholder="Enter password"
+        required
+        > -->
+
+        <div style="text-align: center;" *ngIf="isLoading3">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+
+
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading3 && !isView">
+          <button class="add-invent1" [disabled]="f.invalid">{{Headingss[0].heading105}}</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+
+
+<ng-template #contentchangepassword let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Reset {{Headingss[0].heading10}}</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <form #f="ngForm" name="theForm" (submit)="changepass(f)">
+      <!-- <form  #f="ngForm" name="theForm"> -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="d-flex justify-content-between">
+            <label>Automatic Generate</label>
+            <label class="switch"><input type="checkbox" id="checkfld" (click)="gen()"><span
+                class="slider round"></span></label>
+          </div>
+          <div class="password-eye">
+            <input class="input-fld" name="password" id="password" [(ngModel)]="resetPass.password" #password="ngModel"
+              [type]="fieldTextType ? 'text' : 'password'" placeholder="Re Enter {{Headingss[0].heading10}}" required>
+            <i class="fa input-group-addon" [ngClass]="{ 'fa-eye-slash': !fieldTextType,'fa-eye': fieldTextType}"
+              (click)="toggleFieldTextType()"></i>
+          </div>
+          <span class="help-block danger" *ngIf="password.errors?.required && password.touched">The {{Headingss[0].heading10}} is
+            required</span>
+        </div>
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading">
+          <button class="add-invent1" [disabled]="f.invalid">Save</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</ng-template>
+<div id="mySidepanel" class="sidepanel sidepanel2">
+  <div class="row">
+    <div class="col-12 mb-1 px-3 border-bottom" id="FilterTopSide">
+      <strong style="color: #4a79e4 !important;">{{Headingss[0].heading117}}</strong>
+      <a class="closebtn" (click)="closeNav()">&times;</a>
+    </div>
+  </div>
+  <form name="filterform" class="PaddingNoneID">
+    <div class="row">
+      <div class="FiltertwoInputs">
+        <label class="st">{{Headingss[0].heading4}}</label>
+      <div class="col-12">
+        <select class="input-fld text-capitalize" id="CustomDesignInput" name="filterusersrole" [(ngModel)]="filterusersrole"
+          required>
+          <option value="">Select {{Headingss[0].heading4}}</option>
+          <option value="{{role.id}}" *ngFor="let role of UserRole">{{role.Name}}</option>
+        </select>
+      </div>
+      <label class="st">{{Headingss[0].heading11}}</label>
+      <div class="col-12">
+        <select class="input-fld text-capitalize" id="CustomDesignInput" name="filteruserposition" [(ngModel)]="filteruserposition">
+          <option value="" selected>Select {{Headingss[0].heading11}} </option>
+          <option value="{{status.value}}" *ngFor="let status of UserStatus">{{status.name}}</option>
+        </select>
+      </div>
+      <label class="st">{{Headingss[0].heading8}}</label>
+      <div class="col-12">
+        <select class="input-fld text-capitalize" id="CustomDesignInput" name="filteruserposition" [(ngModel)]="filteruserreporting">
+          <option value="" selected>Select {{Headingss[0].heading8}} </option>
+          <option *ngFor="let item of rolefilter" value="{{item.SalesEmployeeCode}}">{{item.firstName}} {{item.lastName}}</option>
+        </select>
+      </div>
+    </div>
+
+      <div class="FilterBtnHere">
+      <div class="ResetBTN">
+        <a (click)="resetfilter()">{{Headingss[0].heading114}}</a>
+      </div>
+      <div class="ApplyBTN">
+        <button (click)="RowPerPage()">{{Headingss[0].heading113}}</button>
+      </div>
+    </div>
+    </div>
+  </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="EditModalNew" tabindex="-1" aria-labelledby="EditModalNewLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="EditModalNewLabel">Listing Field</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <select class="form-select">
+          <option value="1">Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="ClickBtnHere btn-primary">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #confirmModal let-modal>
+  <div class="modal-body">
+    <p> Are You Sure Do You Want To {{bridge2.Active !='tYES'?'Suspend':'Active'}} this {{Headingss[0].leftheading}} ?</p>
+    <div class="confirm-btn">
+      <button class="btn custom-btn-blue" (click)="yessuspendedUser()">OK</button>
+      <button class="btn custom-btn-outline-blue" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #confirmModal2 let-modal>
+  <div class="modal-body">
+    <p> Are You Sure Do You Want To Delete ?</p>
+    <div class="confirm-btn">
+      <button class="btn custom-btn-blue" (click)="yesdeleteUser(1)">OK</button>
+      <button class="btn custom-btn-outline-blue" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>

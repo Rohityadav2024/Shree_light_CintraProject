@@ -1,0 +1,165 @@
+<!-- <app-left-menu></app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+
+
+    <div class="sales-boxes">
+      <div class="recent-sales box">
+        <div class="row">
+          <div class="col-md-5 title">
+            <a class="btn btn-sm btn-primary" routerLink="/lead/Create"><span>+</span> New</a>
+          </div>
+          <div class="col-md-2" style="text-align: center;"><select class="btn btn-sm "
+              style="margin-left: 53px;font-weight: bold;">
+              <option>Hot</option>
+              <option>Cold</option>
+              <option>Warm</option>
+              <option>Junk</option>
+            </select></div>
+          <div class="col-md-1"><select class="btn btn-sm btn-primary">
+              <option>Filter</option>
+            </select></div>
+          <div class="col-md-2" style="text-align: end;"><input type="file" multiple="false"
+              class="custom-file-input" /></div>
+          <div class="col-md-2"><i class="fa fa-search quick-search"></i><input class="sear-are"
+              [(ngModel)]="searchValue" placeholder="Search"></div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-8">
+            <button class="rahul-kirti-btn">Facebook</button>&nbsp;&nbsp;
+            <button class="rahul-btn">Google</button>&nbsp;&nbsp;
+            <button class="rahul-kirti-btn">Instagram</button>&nbsp;&nbsp;
+          </div>
+
+          <div class="col-md-4">
+            <div class="extra-area" style="float: right;margin-right: 30px;">
+              <a class="btn btn-sm btn-primary" (click)="reload()"><i class="fa fa-refresh" aria-hidden="true"
+                  title="Refresh"></i></a>&nbsp;&nbsp;
+              <a class="btn btn-sm btn-primary"><i class="fa fa-user-plus" aria-hidden="true" style="cursor: pointer;"
+                  title="Assign"></i></a>&nbsp;&nbsp;
+              <a class="btn btn-sm btn-primary"><i class="fa fa-trash" aria-hidden="true" title="Delete"></i></a>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="text-align: center;" *ngIf="isLoading2">
+          <img src="../../assets/img/loder.gif" style="width: 10%;margin: 10%;">
+        </div>
+        <div class="sales-details" *ngIf="!isLoading2">
+
+
+          <table class="new-tabl">
+            <tr>
+              <th><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+              <th>Lead name</th>
+              <th>Source</th>
+              <th>Create date</th>
+              <th>Company</th>
+              <th>Location</th>
+              <th>Assign To</th>
+              <th>Status</th>
+              <th>Comments</th>
+              <th>Action</th>
+            </tr>
+
+            <tr class="hover">
+              <td><input type="checkbox" id="checkbox" class="checkbox1"></td>
+              <td (click)="suplier(1)">Rahul</td>
+              <td (click)="suplier(1)">Facebook</td>
+              <td (click)="suplier(1)">24-Feb-2022</td>
+              <td (click)="suplier(1)">Cinntra.com</td>
+              <td (click)="suplier(1)">Shalv</td>
+              <td (click)="suplier(1)">Nodia Sec 62</td>
+              <td (click)="suplier(1)">New Lead</td>
+              <td (click)="suplier(1)">Big Comapny</td>
+              <td style="padding: 0 15px;text-align: center;">
+                <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                <span class="edit-delete edit-delete1" (click)="editdeletepop(1)"> <i class="fa fa-ellipsis-v"
+                    aria-hidden="true" style="width: 50px;"></i></span>
+                <div class="hover-show hover-show1 hover-show-inactive">
+                  <span (click)="CallTriger(1)"><i class="fa fa-phone" aria-hidden="true"></i> Call
+                    <ul>
+                      <li (click)="open(mymodal)"><i class="fa fa-phone" aria-hidden="true"></i> Log a Call</li>
+                      <li><i class="fa fa-phone" aria-hidden="true"></i> Triger Call</li>
+                    </ul>
+                  </span><br>
+                  <span style="color: #47c758;"><i class="fa fa-whatsapp" aria-hidden="true"></i> Whatsapp</span><br>
+                  <span style="color: #d93025;"><i class="fa fa-envelope-o" aria-hidden="true"></i> Mail</span><br>
+                  <span style="color: #7c7c7c;"><i class="fa fa-commenting-o" aria-hidden="true"></i> Message</span><br>
+                </div>
+              </td>
+            </tr>
+
+            <tr class="hover">
+              <td><input type="checkbox" id="checkbox" class="checkbox1"></td>
+              <td (click)="suplier(1)">Pankaj</td>
+              <td (click)="suplier(1)">Google</td>
+              <td (click)="suplier(1)">23-Feb-2022</td>
+              <td (click)="suplier(1)">Cinntra.com</td>
+              <td (click)="suplier(1)">UnAssigned</td>
+              <td (click)="suplier(1)">Nodia Sec 62</td>
+              <td (click)="suplier(1)">New Lead</td>
+              <td (click)="suplier(1)">Big Comapny</td>
+              <td style="padding: 0 15px;text-align: center;">
+                <span><i class="fa fa-pencil" aria-hidden="true"></i></span>&nbsp;&nbsp;
+                <span class="edit-delete edit-delete1"> <i class="fa fa-ellipsis-v" aria-hidden="true"
+                    style="width: 50px;"></i></span>
+
+              </td>
+            </tr>
+
+
+
+
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="width: 100%;text-align: center;color: #4A79E4;">Log a Call
+    </h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm">
+      <div class="row">
+        <div class="col-md-6">
+          <label>Date</label>
+          <input type="date" class="input-fld required-fld" name="date" required>
+        </div>
+
+        <div class="col-md-6">
+          <label>Time</label>
+          <input type="time" class="input-fld required-fld" name="date" required>
+        </div>
+
+        <div class="col-md-12">
+          <label>Message</label>
+          <textarea class="input-fld required-fld" placeholder="Message"></textarea>
+        </div>
+
+        <div class="col-md-12" style="width: 98%;">
+          <button class="add-invent" [disabled]="f.invalid">Submit</button>
+        </div>
+        <!-- <div *ngIf="isLoading"><img src="../../assets/img/loder.gif"></div> -->
+
+
+      </div>
+    </form>
+  </div>
+
+</ng-template>

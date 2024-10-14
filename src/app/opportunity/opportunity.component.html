@@ -1,0 +1,241 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+      <p class="custom-search-head-name">{{Headingss[0].leftheading}}</p>
+      <div class="custom-search-wrapper">
+        <div ngbDropdown class="custom-common-search-container">
+          <button *ngIf="exportStatus" type="button" class="custom-action-btn openbtn" (click)="Exportexcel()" ><i >Export &nbsp;</i>
+            <i title="Download Excel" class="fa-solid fa-file-export download-icon cursor-pointer exportfileicon"></i>
+          </button>
+          <button type="button" class="custom-action-btn openbtn" (click)="openNav()"><i
+              class="fa fa-filter openbtn"></i> {{Headingss[0].heading109}}</button>
+          <ng-template #filter>{{Headingss[0].heading109}}</ng-template>
+          <div class="custom-search-ico-input-container">
+            <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+            <input type="text" name="" id="" placeholder=" {{Headingss[0].heading110}}" [(ngModel)]="searchValue"
+              (keyup.enter)="RowPerPage()">
+            <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+              *ngIf="searchValue != ''"></span>
+            <button type="button" class="new-search-btn" (click)="RowPerPage()"><i
+                class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+          <button type="button" class="custom-com-temp-btn" routerLink="/opportunity/add-opportunity" *ngIf="isModuleViewadd(4)"><span
+              class="custom-sp-plus-ft-sz">+</span> {{Headingss[0].heading101}}</button>
+
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales UserManagement">
+        <div class="sales-details">
+          <div class="custom-outter-body-lead-list-c9">
+            <div class="custom-table-select-icons">
+              <span *ngIf="commonObj.tbCheckM_1 && commonObj.tbCheckM_2"
+                [innerHTML]="'figma-pencil-write' | svgIcons:'figma-template-central'"
+                routerLink="/opportunity/edit-opportunity/{{count[0]}}"></span>
+              <!-- <span *ngIf="commonObj.tbCheckM_1" [innerHTML]="'figma-delete' | svgIcons:'figma-template-central'"
+                (click)="multipleDelete1()"></span> -->
+              <i *ngIf="commonObj.tbCheckM_2" class="fa-solid fa-eye figma-template-central"
+                (click)="suplier(count[0])"></i>
+              <!-- <i class="fa-solid fa-gear" style="color:#909092;" data-bs-toggle="modal" data-bs-target="#EditModalNew"></i> -->
+              <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span>
+            </div>
+          </div>
+        </div>
+        <table class="new-tabl" id="table-data">
+          <!-- <ng-container *ngIf="!isLoading2"> -->
+          <thead class="MainUserList">
+            <tr>
+              <!-- <th>Chk</th> -->
+              <th><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+              <th (click)="togglesortType('id')">{{Headingss[0].heading0}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('StartDate')">{{Headingss[0].heading01}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('OpportunityName')">{{Headingss[0].heading2}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span>
+              </th>
+              <!-- <th (click)="togglesortType('CustomerName')">Customer Name <span
+                [innerHTML]="'up-down-arrow' | svgIcons:''"></span>
+            </th> -->
+              <th (click)="togglesortType('CustomerName')">{{Headingss[0].heading3}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span>
+              </th>
+              <th (click)="togglesortType('U_TYPE')">{{Headingss[0].heading7}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('U_LSOURCE')">{{Headingss[0].heading9}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span></th>
+              <th (click)="togglesortType('ClosingDate')">{{Headingss[0].heading5}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span></th>
+              <th (click)="togglesortType('DocTotal')">Total Amount <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+
+              <th>{{Headingss[0].heading111}}</th>
+
+            </tr>
+          </thead>
+          <tr class="hover" *ngFor="let item of opportunitys; let i = index">
+            <td> <input type="checkbox" id="checkbox{{item.id}}" value="{{item.id}}" class="checkbox"
+                (click)="checkboxclick(item.id)"> </td>
+            <td>{{item.id}}</td>
+            <td (click)="suplier(item.id)">
+              {{item.StartDate | customDate }}
+
+            </td>
+            <td (click)="suplier(item.id)">{{item.OpportunityName}}</td>
+            <!-- <td (click)="suplier(item.id)">{{item.CustomerName || 'NA'}}</td> -->
+            <td (click)="suplier(item.id)">{{item.CardName || 'NA'}}</td>
+            <td (click)="suplier(item.id)">
+              {{item.U_TYPE[0].Type}}
+            </td>
+
+            <td (click)="suplier(item.id)">{{item.U_LSOURCE}}</td>
+            <td (click)="suplier(item.id)">
+              {{item.ClosingDate | customDate}}
+            </td>
+            <td (click)="suplier(item.id)">{{item.DocTotal || 0 | priceFormat}}</td>
+            <td class="EditBoxForm" style="padding: 0 15px;">
+              <span class="edit-delete edit-delete{{item.id}}" (click)="editdeletepop(item)"
+                [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+              <div class="hover-show hover-show{{item.id}} hover-show-inactive" style="display:none;">
+                <a routerLink="/opportunity/edit-opportunity/{{item.id}}"
+                  style="text-decoration: none; color:#4E4E56;" *ngIf="isModuleViewedit(4)"><span><i class="fa fa-pencil" aria-hidden="true"></i>
+                    {{Headingss[0].heading102}} {{Headingss[0].leftheading}}</span></a><br *ngIf="isModuleViewedit(4)">
+                <a (click)="createQuptation(item.id,'Quotation')" style="text-decoration: none;" *ngIf="isModuleViewadd(5)"><span>
+                    <i class="fa fa-plus" aria-hidden="true"></i> {{Headingss[0].heading101}}
+                    {{Headingss[0].heading12}}</span></a><br *ngIf="isModuleViewadd(5)">
+                <a (click)="createQuptation(item.id,'Order')" style="text-decoration: none;" *ngIf="isModuleViewadd(6)"><span>
+                    <i class="fa fa-plus" aria-hidden="true"></i> {{Headingss[0].heading101}}
+                    {{Headingss[3].quicklink4}}</span></a><br *ngIf="isModuleViewadd(6)">
+                <!-- <span ><i class="fa fa-trash" aria-hidden="true"></i> Delete Opportunity</span><br> -->
+              </div>
+            </td>
+          </tr>
+          <!-- </ng-container> -->
+          <tr *ngIf="totalCount == 0">
+            <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No
+              Data Found</td>
+          </tr>
+        </table>
+
+        <div class="LoderGifHere" *ngIf="isLoading2">
+          <img src="../../assets/img/loder.gif">
+        </div>
+      </div>
+    </div>
+    <div class="figma-pagination-controls">
+      <div class="figma-pagination-rows-total">
+        <div class="figma-rows-per-page">
+          <div class="figma-rows-per-page-label">Row per page</div>
+          <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+            [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+          <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+        </div>
+        <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+          (pageChange)="pageChanged($event)" [(page)]="CurrentPage" [maxSize]="5" [rotate]="true"
+          [boundaryLinks]="false" class="figma-pagination">
+          <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+          <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="mySidepanel" class="sidepanel">
+  <div class="row">
+    <div class="col-12 mb-1 px-3 border-bottom" id="FilterTopSide">
+      <strong style="color: #4a79e4 !important;">{{Headingss[0].heading117}}</strong>
+      <a class="closebtn" (click)="closeNav()">&times;</a>
+    </div>
+  </div>
+  <form name="form">
+    <div class="row">
+      <div class="filterForm-container">
+        <div class="col-md-6">
+          <label class="MainFilterLabel filtersize">{{'From Date'}}</label>
+          <input class="input-fld" type="date" name="CreateDate__gte" [(ngModel)]="filter_customer.CreateDate__gte" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="col-md-6">
+          <label class="MainFilterLabel filtersize">{{'To Date'}}</label>
+          <input class="input-fld" type="date" name="CreateDate__lte" [(ngModel)]="filter_customer.CreateDate__lte" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="col-12 mb-1">
+          <label class="MainLabelNames">Sales Person</label>
+          <ng-select id="CustomDesignInput" [items]="bridgess" [multiple]="true"
+          bindValue="id"
+          bindLabel="firstName"
+          placeholder="Select Sales Person"
+          class="ngsearch-dropdown input-fld"
+          [(ngModel)]="filter_customer.assignedTo" [ngModelOptions]="{standalone: true}">
+          </ng-select>
+        </div>
+        <!-- <div class="col-12 mb-1">
+          <label class="MainLabelNames">{{Headingss[0].heading01}}</label>
+          <input type="date" required class="DateInputs form-control w-100" name="StartDate"
+            [max]="this.HeadingServices.getDate()" [(ngModel)]="filter_customer.StartDate" placeholder="Created Date">
+
+        </div> -->
+        <!-- <div class="col-4 mb-3">
+      </div> -->
+        <div class="col-12 mb-1">
+          <label class="MainLabelNames">{{Headingss[0].heading3}}</label>
+          <ng-select #selectcustomer [clearOnBackspace]="false" [searchable]="false"
+            placeholder="Select {{Headingss[0].heading3}}" name="CardCode" [(ngModel)]="filter_customer.CardCode"
+            class="ngsearch-dropdown input-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectcustomer.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading3}}</ng-option>
+            <ng-option *ngFor="let item of businesspartners" value="{{item.CardCode}}">{{item.CardName}}</ng-option>
+          </ng-select>
+        </div>
+        <!-- <div class="col-4 mb-3">
+      </div> -->
+        <div class="col-12 mb-1">
+          <label class="MainLabelNames">{{Headingss[0].heading9}}</label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false"
+            placeholder="Select {{Headingss[0].heading9}}" name="U_LSOURCE" [(ngModel)]="filter_customer.U_LSOURCE"
+            class="ngsearch-dropdown input-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading9}}</ng-option>
+            <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option>
+          </ng-select>
+        </div>
+        <div class="col-12 mb-3">
+          <label class="MainLabelNames">{{Headingss[0].heading7}}</label>
+          <ng-select #selectopportunitytype [clearOnBackspace]="false" [searchable]="false"
+            placeholder="Select {{Headingss[0].heading7}}" name="oppotype" [(ngModel)]="filter_customer.oppotype"
+            class="ngsearch-dropdown input-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectopportunitytype.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading7}}</ng-option>
+            <ng-option *ngFor="let item of optyp" value="{{item.id}}">{{item.Type}}</ng-option>
+          </ng-select>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="FilterBtnHere">
+          <div class="ResetBTN">
+            <a (click)="resetfilter()">{{Headingss[0].heading114}}</a>
+          </div>
+          <div class="ApplyBTN">
+            <button (click)="RowPerPage()">{{Headingss[0].heading113}}</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

@@ -1,0 +1,98 @@
+.locationTracking td,th{width:25%;}
+.checkAlllocation{display: none;}
+.alltracking-details-container{
+  background: #e6e6e6;
+}
+.alltracking-details-container td{
+  vertical-align: top;
+  width:25%;
+}
+.alltracking-details-p{display: flex;}
+.alltracking-details-p span{margin-right:10px;}
+.employeeAccordian{padding: 1rem 0px !important;}
+.employeeAccordian span{font-size: 10px;}
+.userName-container{width: 50px; height: 50px; color: #4A79E4; border: 3px solid #4A79E4;
+  font-size: 35px; }
+  .single-location-track-bg{width: 100%; height: auto; background-color: #fff; border-radius: 7px; padding:15px;}
+
+
+.input-calendar .input-calendar-double{
+  width: 150px;
+}
+.f-size{font-size: 12px;}
+.location-filter-h{color: #4a79e4 !important; font-size: 17px;}
+
+.btn-skyblue {
+  color: #4a79e4 !important;
+  background: #F4F7FE !important;
+  background: #4a79e4;
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+  border-radius: 6px;
+  min-width: 78px;
+  border: none;
+  height: 30px;
+}
+
+.red{
+  background:#be0000;
+  color: #fff;
+  width: 70px;
+  padding: 2px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.yellow{
+  background:#cbcb00;
+  color: #fff;
+  width: 70px;
+  padding: 2px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns:  78% auto auto;
+
+
+}
+.grid-item{
+  display: grid;
+  align-items: center;
+
+}
+.dot {
+  height: 13px;
+  width: 13px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+
+  animation: blinker 1.5s linear infinite;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+
+
+
+
+}
+
+
+.fa-map-marker1{
+  font-size: 30px;color: #118811;
+}
+
+.fa-map-marker1:hover{
+  font-size: 35px;
+}
+
+agm-map {
+  height: 500px;
+}
+

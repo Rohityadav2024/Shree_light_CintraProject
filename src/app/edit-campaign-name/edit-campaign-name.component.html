@@ -1,0 +1,344 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+
+    <div class="TopbarAllComponentDivs">
+      <div class="Innerpagename">
+        <span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="backClicked()" style="cursor: pointer;"></span><h2>Update Campaign</h2>
+    </div>
+    <div class="SideBTnAllstyle"></div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales box">
+        <div class="row">
+          <div class="col-md-7 title">
+          
+          </div>
+        </div>
+        <br>
+
+        <div class="row">
+          <div class="col-lg-11">
+            <form #f="ngForm" name="theForm" (submit)="addCampaignName(f)">
+              <div class="lead-update-container">
+                <div class="lead-update-wrapper">
+                  <label>Campaign Name </label>
+                  <div>
+                    <input type="text" class="input-fld required-fld" name="CampaignName"
+                      [(ngModel)]=CampaignNameCreate1.CampaignName #CampaignName="ngModel" placeholder="Campaign Name"
+                      required><br>
+                    <span class="help-block danger" *ngIf="CampaignName.errors?.required && CampaignName.touched">
+                      Campaign Name is required
+                    </span>
+                  </div>
+                </div>
+
+                <!-- <div class="col-md-6" style="padding-left:0px">
+                                    <div class="col-sm-4">
+                                        <label>Campaign Owner<span
+                                                class="text-danger font-weight-bold">*</span></label>
+                                    </div>
+                                    <div class="col-sm-7">
+
+                                            <select class="input-fld required-fld" name="CampaignOwner" [(ngModel)]=CampaignNameCreate1.CampaignOwner required>
+                                                <option value="{{item.SalesEmployeeCode}}" *ngFor="let item of empall">
+                                                    {{item.SalesEmployeeName}}</option>
+
+
+                                            </select><br>
+
+
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div> -->
+
+                <div class="lead-update-wrapper">
+                  <label>Status  </label>
+
+                  <div>
+                    <ng-select #selectstatus [clearOnBackspace]="false" [searchable]="false" name="Status" #Status="ngModel" [items]="UserStatus" bindLabel="name"
+                    bindValue="num" [(ngModel)]=CampaignNameCreate1.Status
+                    required class="ngsearch-dropdown input-fld required-fld">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectstatus.filter($event.target.value)" />
+                      </ng-template>
+                      <!-- <ng-option value="" disable selected>Select Status</ng-option>
+                      <ng-option value="{{status.num}}" *ngFor="let status of UserStatus">{{status.name}}</ng-option> -->
+                    </ng-select>
+                    <span class="help-block danger" *ngIf="(Status.errors?.required && f.submitted)||(Status.errors?.required && Status.touched)">
+                      Status is required
+                    </span>
+                    <!-- <select class="input-fld required-fld" name="Status" [(ngModel)]=CampaignNameCreate1.Status
+                      required>
+                      <option value="" selected disabled>Choose Select</option>
+                      <option value="{{status.num}}" *ngFor="let status of UserStatus">{{status.name}}</option>
+
+
+                    </select><br> -->
+
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>From Date  </label>
+
+                  <div>
+                    <input type="date" required class="input-fld required-fld" [(ngModel)]=CampaignNameCreate1.StartDate
+                      name="StartDate" #StartDate="ngModel" placeholder="End Date" required><br>
+                    <span class="help-block danger" *ngIf="StartDate.errors?.required && StartDate.touched">
+                      From Date is required
+                    </span>
+
+                  </div>
+                </div>
+                <div class="lead-update-wrapper">
+                  <label>To Date  </label>
+                  <div>
+                    <input type="date" required class="input-fld required-fld" [(ngModel)]=CampaignNameCreate1.EndDate
+                      name="EndDate" #EndDate="ngModel" placeholder="End Date" required><br>
+                    <span class="help-block danger" *ngIf="EndDate.errors?.required && EndDate.touched">
+                      From Date is required
+                    </span>
+                  </div>
+                </div>
+
+
+                <div class="lead-update-wrapper">
+                  <label>Frequency  </label>
+
+                  <div>
+                    <ng-select #selectfrequency [clearOnBackspace]="false" [searchable]="false" name="Frequency" #Frequency="ngModel"
+                    [(ngModel)]="CampaignNameCreate1.Frequency" (change)="showDay($event)" required class="ngsearch-dropdown input-fld required-fld">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectfrequency.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select Frequency</ng-option>
+                      <ng-option value="{{frequency}}" *ngFor="let frequency of CampaignFrequency">{{frequency}}</ng-option>
+                    </ng-select>
+                    <span class="help-block danger" *ngIf="(Frequency.errors?.required && f.submitted)||(Frequency.errors?.required && Frequency.touched)">
+                      Frequency is required
+                    </span>
+
+                    <!-- <select class="input-fld required-fld" name="Frequency" #Frequency="ngModel"
+                      [(ngModel)]="CampaignNameCreate1.Frequency" (change)="showDay($event)" required>
+                      <option value="" selected disabled>Choose Select</option>
+                      <option value="{{frequency}}" *ngFor="let frequency of CampaignFrequency">{{frequency}}</option>
+
+
+                    </select> -->
+
+                  </div>
+                </div>
+
+
+
+                <div class="lead-update-wrapper" id="selectDay">
+                  <label>Day  </label>
+                  <div>
+                    <ng-multiselect-dropdown style="font-size:12px !important" [placeholder]="'Select Days'"
+                      [settings]="dropdownSettings4" [data]="dropdownList2" name="WeekDay" [(ngModel)]="selectedItems"
+                      [class]="input_fld" (onSelect)="onItemSelect($event)" (onDeSelect)="onDeSelect($event)"
+                      (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+                    </ng-multiselect-dropdown>
+                    <!-- <select class="input-fld required-fld dy" name="WeekDay" #WeekDay="ngModel" [(ngModel)]=CampaignNameCreate1.WeekDay  >
+                                            <option value="" selected disabled>Choose Select</option>
+                                            <option value="Sunday">Sunday</option>
+                                            <option value="Monday">Monday</option>
+                                            <option value="Tuesday">Tuesday</option>
+                                            <option value="Wednesday">Wednesday</option>
+                                            <option value="Thursday">Thursday</option>
+                                            <option value="Friday">Friday</option>
+                                            <option value="Satturday">Satturday</option>
+
+                                        </select><br> -->
+                    <!-- <span class="help-block danger"
+                                        *ngIf="WeekDay.errors?.required && WeekDay.touched">
+                                        Day is required
+                                    </span> -->
+
+
+                  </div>
+                </div>
+                <div class="lead-update-wrapper" id="selectMonth">
+                  <label>Monthly Date  </label>
+
+                  <div>
+                    <!-- <select class="input-fld required-fld" name="MonthlyDate" #MonthlyDate="ngModel" [(ngModel)]=CampaignNameCreate1.MonthlyDate  >
+                                            <option value="" selected disabled>Choose Select</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                            <option value="31">31</option>
+
+                                        </select><br> -->
+                    <ng-multiselect-dropdown style="font-size:12px !important" [placeholder]="'Select Month'"
+                      [settings]="dropdownSettings4" [data]="dropdownList3" name="MonthlyDate"
+                      [(ngModel)]="selectedItems1" [class]="input_fld" (onSelect)="onItemSelect1($event)"
+                      (onDeSelect)="onDeSelect1($event)" (onSelectAll)="onSelectAll1($event)"
+                      (onDeSelectAll)="onDeSelectAll1($event)">
+                    </ng-multiselect-dropdown>
+                    <!-- <span class="help-block danger"
+                                        *ngIf="MonthlyDate.errors?.required && MonthlyDate.touched">
+                                        Day is required
+                                    </span> -->
+
+
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>Type  </label>
+                  <div>
+                    <ng-select #selectType [clearOnBackspace]="false" [searchable]="false" name="Type" (change)="selectType($event)" #Type="ngModel"
+                    [(ngModel)]="CampaignNameCreate1.Type" required class="ngsearch-dropdown input-fld required-fld">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectType.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select Type</ng-option>
+                      <ng-option value="{{mode}}" *ngFor="let mode of ModeOfCommunication">{{mode}}</ng-option>
+                    </ng-select>
+
+                    <!-- <select class="input-fld required-fld" name="Type" (change)="selectType($event)" #Type="ngModel"
+                      [(ngModel)]=CampaignNameCreate1.Type required>
+                      <option value="" selected disabled>Choose Select</option>
+                      <option value="{{mode}}" *ngFor="let mode of ModeOfCommunication">{{mode}}</option>
+
+
+                    </select><br> -->
+
+                    <span class="help-block danger" *ngIf="(Type.errors?.required && f.submitted)||(Type.errors?.required && Type.touched)">
+                      Type is required
+                    </span>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>Run Time  </label>
+                  <div>
+                    <input type="time" name="RunTime" [(ngModel)]=CampaignNameCreate1.RunTime
+                      class="input-fld required-fld" placeholder="Run Time" required>
+                  </div>
+                </div>
+
+
+                <div class="lead-update-wrapper label-mark-subject showsubject" id="showsubject">
+                  <label>Subject<span class="text-danger">*</span></label>
+
+                  <div>
+                    <input type="text" id="reqsubject" class="input-fld" name="Subject"
+                      [(ngModel)]=CampaignNameCreate1.Subject #Subject="ngModel" placeholder="Subject"><br>
+                    <!-- <span class="help-block danger"
+                                        *ngIf="Subject.errors?.required && Subject.touched">
+                                        Subject is required
+                                    </span> -->
+
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>Attachment  </label>
+                  <div
+                    *ngIf="extensionresult=='jpg' || extensionresult=='png'|| extensionresult=='gif'||extensionresult=='jpeg'; else elseBlock">
+                    <!-- <input type="file" id="avatar" name="avatar" class="w-100" accept="image/png, image/jpeg"
+                      (change)="onFileChanged($event)" name="Attachments" [(ngModel)]=CampaignNameCreate1.Attachments> -->
+                      <input type="file" id="avatar" name="avatar" class="w-100" accept="image/png, image/jpeg"
+                      (change)="onFileChanged($event)" name="Attachments" >
+                    <img src="{{baseUrl2}}{{dummyAttachments}}" style="height: 41px;">
+
+                  </div>
+                  <ng-template #elseBlock>
+                    <div>
+                      <input type="file" id="avatar" name="avatar" style="width: 80%;" accept="image/png, image/jpeg"
+                        (change)="onFileChanged($event)" name="Attachments" [(ngModel)]=CampaignNameCreate1.Attachments>
+
+                      <a class="pathv" href="{{baseUrl2}}{{CampaignNameCreate1.Attachments}}" style="display: contents;"
+                        target="_blank">{{CampaignNameCreate1.Attachments.substr(CampaignNameCreate1.Attachments.lastIndexOf("/")+1)}}</a>
+                    </div>
+                    <!-- <div class="col-sm-2 mt-3 mx-3 d-flex">
+                                            </div> -->
+                  </ng-template>
+                </div>
+                <div
+                  [ngClass]="CampaignNameCreate1.Type != 'Email' ? 'label-mark-subject lead-update-wrapper' : 'label-mark-item' ">
+
+                  <label>Message  </label>
+
+                  <!-- </div> -->
+
+                  <div>
+                    <textarea class="input-fld required-fld" *ngIf="CampaignNameCreate1.Type != 'Email'" name="Message"
+                      [(ngModel)]="CampaignNameCreate1.Message" required placeholder="Message" rows="3"
+                      cols="50"></textarea>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+              <!-- <ckeditor  *ngIf="CampaignNameCreate1.Type != 'Email'" [editor]="Editor"
+                                    [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic' ,'link', 'bulletedList', 'numberedList', 'blockQuote'  ] }"
+                                    data="" [(ngModel)]=CampaignNameCreate1.Message name="Message" required>
+                                </ckeditor> -->
+              <div>
+
+                <ckeditor [editor]="Editor" *ngIf="CampaignNameCreate1.Type == 'Email'" data=""
+                  [(ngModel)]=CampaignNameCreate1.Message name="Message" required></ckeditor>
+              </div>
+              <div class="col-md-12 text-center" style="text-align: center;" *ngIf="isLoading">
+                <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+              </div>
+              <div class="col-md-12 text-center" *ngIf="!isLoading">
+                <button class="add-invent">Update</button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="loadercss" style="text-align: center;" *ngIf="isdataLoading">
+      <img src="../../assets/img/loder.gif">
+    </div>
+
+  </div>
+</section>
+
+<div class="alert alert-primary success-box alert-dismissible fade show" role="alert">
+  Campaign Updated Successfully !
+</div>

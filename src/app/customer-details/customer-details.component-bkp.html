@@ -1,0 +1,955 @@
+<!-- <app-left-menu></app-left-menu> -->
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="TopbarAllComponentDivs">
+    <div class="Innerpagename">
+      <span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="backClicked()" style="cursor:pointer;"></span><h2>Business Partner <span style="font-size: 19px; display: inline-block; transform: translate(-1px, 2px);">></span> <span>Details</span></h2>
+  </div>
+  <div class="SideBTnAllstyle"></div>
+  </div>
+  <div class="home-content">
+    <div class="customer-container-spliter" style="grid-template-columns: 65.7% auto;">
+      <div >
+        <div class="sales-boxes" *ngFor="let item of customers">
+          <div class="recent-sales box" style="min-height: 589px !important;">
+            <div class="row">
+              <div class="col-10 mt-1">
+                <h5 class="cursor-pointer fs-15" style="font-weight:600; ">{{item.CardName | titlecase}} </h5>
+              </div>
+              <div class="col-md-2 justify-content-end title">
+                <h6><a class="btn btn-sm add-invent1" routerLink="/customer/edit-customer/{{item.CardCode}}">Edit</a></h6>
+              </div>
+            </div>
+            <section>
+              <h6 class="heading-title-underline1"><span class="heading-underline">General Details</span></h6>
+              <div class="customer-details-grid">
+                <div>
+                  <p class="grey1">Lead</p>
+                </div>
+                <div>
+                  <p class="cstmr-size">{{item.U_LEADNM || 'NA'}}</p>
+                </div>
+                <div>
+                  <p class="grey1">Contact Owner</p>
+                </div>
+                <div>
+                  <p class="cstmr-size">{{item.U_CONTOWNR || 'NA'}}</p>
+                </div>
+                <div>
+                  <p class="grey1">Website</p>
+                </div>
+                <div>
+                  <p class="cstmr-size">{{item.Website || 'NA'}}</p>
+                </div>
+                <div>
+                  <p class="grey1">Mobile no.</p>
+                </div>
+                <div>
+                  <p class="cstmr-size">{{item.Phone1 || 'NA'}}</p>
+                </div>
+                <div>
+                  <p class="grey1">Turnover </p>
+                </div>
+                <div>
+                  <p class="cstmr-size">{{item.U_ANLRVN || 0 | priceFormat}}</p>
+                </div>
+                <div>
+                  <p class="grey1">Email</p>
+                </div>
+                <div>
+                  <p class="cstmr-size">{{item.EmailAddress || 'NA'}}</p>
+                </div>
+                <div>
+                  <p class="grey1">Contact Person</p>
+                </div>
+                <div>
+                  <p class="cstmr-size">{{item.ContactPerson || 'NA'}}</p>
+                </div>
+                <div>
+                  <p class="grey1">Business Type</p>
+                </div>
+                <div>
+                  <ng-container *ngIf="!!item.U_TYPE.length else typeU_type">
+                    <span *ngFor="let type of item.U_TYPE">
+                      <p class="cstmr-size">{{type.Type}}</p>
+                    </span>
+                  </ng-container>
+                  <ng-template #typeU_type>
+                    <p class="cstmr-size">NA</p>
+                  </ng-template>
+
+                </div>
+                <div>
+                  <p class="grey1">Remarks</p>
+                </div>
+                <div>
+                  <p class="cstmr-size">{{item.Notes || 'NA'}}</p>
+                </div>
+              </div>
+              <!-- <div class="col-md-12 show-details" (click)="show_details()"> Show Details <i
+                  class="fa fa-caret-down"></i> </div> -->
+            </section>
+            <section class="mt-3">
+              <h6 class="heading-title-underline1"><span class="heading-underline">Contact Details</span></h6>
+              <div class="customer-details-grid">
+                <div>
+                  <p class="grey1">Sales Employee</p>
+                </div>
+                <div>
+                  <span *ngFor="let semp of item.SalesPersonCode">
+                    <p class="cstmr-size">{{semp.SalesEmployeeName}}</p>
+                  </span>
+                </div>
+                <div>
+                  <p class="grey1">Zone</p>
+                </div>
+                <div>
+                  <p class="cstmr-size">{{item.ZoneDeatils.Name || 'NA'}}</p>
+                </div>
+                <div>
+                  <p class="grey1">Parent Account</p>
+                </div>
+                <div>
+                  <p class="cstmr-size">{{item.U_PARENTACC || 'NA'}}</p>
+                </div>
+                <div>
+                  <p class="grey1">Payment Term</p>
+                </div>
+                <div>
+                  <span *ngFor="let paytermsgroupcode of item.PayTermsGrpCode">
+                    <p class="cstmr-size">{{paytermsgroupcode.PaymentTermsGroupName || 'NA'}}</p>
+                  </span>
+                </div>
+
+                <div>
+                  <p class="grey1">Industry</p>
+                </div>
+                <div>
+                  <span *ngFor="let paytermsgroupcode of item.IndustriesDetails">
+                    <p class="cstmr-size">{{paytermsgroupcode.IndustryName || 'NA'}}</p>
+                  </span>
+                </div>
+
+                <div>
+                  <p class="grey1">GST</p>
+                </div>
+                <div>
+                  <p class="cstmr-size">{{item.U_INVNO || 'NA'}}</p>
+                </div>
+                <h6 class="heading-title-underline1 mt-1"><span class="heading-underline">Address Details</span></h6>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="grey1">Billing Name</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[0].AddressName}}</p>
+                </div>
+
+                <div class="grey1">Billing Address</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[0].Street}}</p>
+                </div>
+
+                <div class="grey1">City</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[0].City}}</p>
+                </div>
+                <div class="grey1">State</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[0].U_STATE}}</p>
+                </div>
+                <div class="grey1">Country</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[0].U_COUNTRY}}</p>
+                </div>
+                <div class="grey1">Zip code</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[0].ZipCode}}</p>
+                </div>
+                <div class="grey1">Shipping Type</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[0].U_SHPTYP || 'NA'}}</p>
+                </div>
+                <br/>
+                <br/>
+                <div></div>
+                <div class="grey1">Shipping Name</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[1].AddressName}}</p>
+                </div>
+                <div class="grey1">Shipping Address</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[1].Street}}</p>
+                </div>
+                <div class="grey1">City</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[1].City}}</p>
+                </div>
+                <div class="grey1">State</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[1].U_STATE}}</p>
+                </div>
+                <div class="grey1">Country</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[1].U_COUNTRY}}</p>
+                </div>
+                <div class="grey1">Zip code</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[1].ZipCode}}</p>
+                </div>
+                <div class="grey1">Shipping Type</div>
+                <div>
+                  <p class="cstmr-size">{{item.BPAddresses[1].U_SHPTYP || 'NA'}}</p>
+                </div>
+              </div>
+              <div class="col-md-12 hide-details" (click)="hide_details()">
+                Hide Details
+                <i class="fa fa-caret-down"></i>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- <div class="customer-anylitics">
+          <div class="spliter-heading">Customer Analytics</div>
+          <div class="customer-bar-container position-relative">
+            <div class="spliter-heading">Total Sales</div>
+            <canvas id="anyliticsChart"></canvas>
+            <div *ngIf="nodatafound"
+              style="text-align: center; margin:0 auto; position: absolute; left:50%; top:50%; transform: translate(-50%,-50%); font-size: 20px;color: #4A79E4;">
+              No Data Found</div>
+          </div>
+          <div class="payment-performance">
+            <div class="payment-cart-area position-relative h-100">
+              <div class="spliter-heading">Payment Collection by this customer</div>
+              <canvas id="paymentChart"></canvas>
+              <div *ngIf="nopaymentdata"
+                style="text-align: center;  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);  margin:0 auto; font-size: 20px;color: #4A79E4;">
+                No Data Found</div>
+              <div class="payment-performance-bottom-labels">
+                <span class="pp-l-orange">Complete Payment</span>
+                <span class="pp-l-purple">Pending Amount</span>
+              </div>
+            </div>
+            <div class="payment-cart-area">
+              <div class="spliter-heading">Performance</div>
+              <canvas id="performanceChart"></canvas>
+              <div class="payment-performance-bottom-labels">
+                <span class="pp-l-orange">Aging</span>
+                <span class="pp-l-blue">Iteration</span>
+                <span class="pp-l-pink">Onetime Collection</span>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div style="display: block;">
+        <div class="customer-profile-details" >
+          <div *ngFor="let item of customers">
+            <div class="row justify-content-center">
+              <span class="profile-tagname  color-blue">{{item.U_CONTOWNR| slice:0:1}}</span>
+              <p class="customer-profile-name"> {{item.U_CONTOWNR}}</p>
+              <span class="customer-profile-location"><i class="fa-solid fa-location-dot"></i>
+                {{item.BPAddresses[0].U_STATE}},{{item.BPAddresses[0].U_COUNTRY}}</span>
+            </div>
+            <div class="profile-icons">
+              <a href="tel:+{{item.Phone1}}" ngbTooltip="{{item.Phone1}}" [innerHTML]="'call-icon' | svgIcons:''"
+                class="svg-icon-green"></a>
+              <a href="mailto:{{item.EmailAddress}}" ngbTooltip="{{item.EmailAddress}}" target="_blank"
+                [innerHTML]="'message-icon' | svgIcons:''" class="svg-icon-green"></a>
+              <a href="https://www.google.com/maps" target="_blank"><i class="fa-solid fa-location-dot"></i></a>
+            </div>
+          </div>
+        </div>
+<!-- Wasi -->
+        <div class="row mt-2" id="ManDIvItem" style="background-color: #fff;">
+          <div class="col-lg-6">
+            <div class="recent-sales box">
+              <div class="mb-2" (click)="openLinkHitter('opportunity')" style="cursor: pointer">
+                <!-- <a routerLink="/quotation"> -->
+                <div class="col-md-2">
+                  <img src="../../assets/img/opportunity.png" style="width: 25px" />
+                </div>
+                <div class="col-md-8"><b>Opportunities</b></div>
+                <div class="col-md-2">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="recent-sales box">
+              <div class="mt-2" (click)="openLinkHitter('quotation')" style="cursor:pointer;">
+                <!-- <a routerLink="/quotation"> -->
+                <div class="col-md-2" style="cursor: pointer">
+                  <img src="../../assets/img/quotation.png" style="width: 25px" />
+                </div>
+                <div class="col-md-8"><b>Quotations</b></div>
+                <div class="col-md-2">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2" id="ManDIvItem" style="background-color: #fff;">
+          <div class="col-lg-6">
+            <div class="recent-sales box">
+              <div class="mb-2" (click)="openLinkHitter('order')" style="cursor: pointer">
+                <!-- <a routerLink="/quotation"> -->
+                <div class="col-md-2">
+                  <img src="../../assets/img/orders.png" style="width: 25px" />
+                </div>
+                <div class="col-md-8"><b>Orders</b></div>
+                <div class="col-md-2">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="recent-sales box">
+              <div class="mt-2" (click)="openLinkHitter('invoice')" style="cursor:pointer;">
+                <!-- <a routerLink="/quotation"> -->
+                <div class="col-md-2" style="cursor: pointer">
+                  <img src="../../assets/img/invoices.png" style="width: 25px" />
+                </div>
+                <div class="col-md-8"><b>Invoices</b></div>
+                <div class="col-md-2">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- edns -->
+
+        <!-- <div class="quick-links">
+          <p class="spliter-heading">Related Quick Links</p>
+          <div class="quick-links-container" style="display: block;">
+            <div class="row">
+              <div class="col-md-6 my-3">
+                <span (click)="openLinkHitter('opportunity')"><img
+                    src="../../assets/img/opportunity.png">Opportunities</span>
+              </div>
+              <div class="col-md-6 my-3">
+                <span (click)="openLinkHitter('quotation')"><img src="../../assets/img/quotation.png">Quotations</span>
+              </div>
+              <div class="col-md-6 my-3">
+                <span (click)="openLinkHitter('order')"><img src="../../assets/img/orders.png">Orders</span>
+              </div>
+              <div class="col-md-6 my-3">
+                <span (click)="openLinkHitter('invoice')"><img src="../../assets/img/invoices.png">Invoices</span>
+              </div>
+            </div>
+          </div>
+        </div>
+ -->
+
+
+
+        <div class="position-relative mt-2">
+          <a class="addcontact" (click)="open2(mymodal2)"><i class="fa fa-plus" aria-hidden="true"></i></a>
+        </div>
+        <ngb-accordion class="contact-tab" [closeOthers]="true" #a="ngbAccordion" activeIds="custom-panel-1">
+          <ngb-panel>
+            <ng-template ngbPanelHeader>
+              <button ngbPanelToggle class="accordion-button">Contact(<span
+                  *ngIf="customers[0]!=null">{{customers[0].ContactEmployees.length}}</span>)</button>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <div class="row">
+                <div class="col-md-6 my-2" *ngFor="let item of customers[0].ContactEmployees; let first = first;"
+                  [ngClass]="{ firstcustomer: first}">
+                  <div
+                    class="border-1 w-100 h-100 position-relative border p-3 d-inline-block contact-border-radius text-center">
+                    <span class="customer-contactCRUD">
+                      <span (click)="openEditcontact(editbmodal, item)" class="customer-contactEdit"><i
+                          class="fa fa-pencil" aria-hidden="true"></i></span>
+                      <span class="customer-contactEdit deletecustomer"
+                        (click)="deleteContactPerson(item.id? item.id:0)"><i class="fa fa-trash"
+                          aria-hidden="true"></i></span>
+                    </span>
+                    <span class="fs-12" ngbTooltip="{{item.FirstName}}">{{item.FirstName}} </span>
+                    <p class="my-2" ngbTooltip="{{item.Position}}">{{item.Position}}</p>
+                    <div class="profile-icons1">
+                      <span><a href="tel:+{{item.MobilePhone}}" ngbTooltip="{{item.MobilePhone}}"
+                          [innerHTML]="'call-icon' | svgIcons:''" class="svg-icon-green"></a></span>
+                      <span><a href="mailto:{{item.E_Mail}}" ngbTooltip="{{item.E_Mail}}" target="_blank"
+                          [innerHTML]="'message-icon' | svgIcons:''" class="svg-icon-green"></a></span>
+                      <span><a href="https://www.google.com/maps" target="_blank"><i
+                            class="fa-solid fa-location-dot"></i></a></span>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="customers[0].ContactEmployees===0">
+                  <div class="col-md-12 text-center">
+                    <span class="colorblue">No data Found</span>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel>
+            <ng-template ngbPanelHeader>
+              <a class="addcontact addbranch" (click)="open(mymodal)"><i class="fa fa-plus" aria-hidden="true"></i></a>
+              <button ngbPanelToggle class="accordion-button">Address (<span
+                  *ngIf="branchs!=null">{{branchs.length}}</span>)</button>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <div class="row">
+                <div class="col-md-6 my-2" *ngFor="let branch of branchs let first=first"
+                  [ngClass]="{firstcustomer:first}">
+                  <div class="border-1 w-100 h-100 border position-relative p-3 d-inline-block contact-border-radius text-center">
+                    <span class="customer-contactCRUD">
+                      <span class="customer-contactEdit" (click)="openEdit(contentEdit, branch)"><i class="fa fa-pencil"
+                          aria-hidden="true"></i></span>
+                      <span class="customer-contactEdit deletecustomer"
+                        (click)="deleteBranch(branch.id? branch.id:0)"><i class="fa fa-trash"
+                          aria-hidden="true"></i></span>
+                    </span>
+                    <span class="text-center d-block mb-2 fs-12" style="
+                    font-weight: 800;
+                " ngbTooltip="{{branch.AddressName}}">{{branch.AddressName
+                      | slice:0:10}}{{branch.AddressName.length>10?'...':''}}</span>
+                    <div class="d-flex">
+                      <span [innerHTML]="'map' | svgIcons:''" class="svg-icon-green"></span>
+                      <p class="ms-1">{{branch.AddressName}} {{branch.AddressName2}} {{branch.AddressName3}}
+                        {{branch.BuildingFloorRoom}} {{branch.City}} {{branch.U_STATE}} {{branch.U_COUNTRY}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="branchs.length===0">
+                  <div class="col-md-12 text-center">
+                    <span class="colorblue">No data Found</span>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+        <div class="notes-attachment">
+          <ul class="notes-attch-list">
+            <li class="heading-title-underline" [class.active]="!commonObj.isNotes" (click)="commonObj.isNotes = false">
+              Attachments</li>
+          </ul>
+          <ng-template #attachment>
+          </ng-template>
+          <br>
+          <div class="d-flex justify-content-between mx-4 mt-3" *ngFor="let item of getcutomerAttach1 let i = index">
+            <span class="d-flex">
+              <span *ngIf="i%2==0">
+
+                <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M18.1708 9.16035V20.9363C18.1708 21.626 17.8995 22.2874 17.4164 22.7751C16.9334 23.2627 16.2783 23.5367 15.5952 23.5367H3.57562C2.89253 23.5367 2.23741 23.2627 1.75438 22.7751C1.27136 22.2874 1 21.626 1 20.9363V3.60039C1 2.91072 1.27136 2.2493 1.75438 1.76164C2.23741 1.27397 2.89253 1 3.57562 1H9.85371C10.3089 1.00007 9.76625 1.18266 10.0882 1.50762L17.668 9.16035C17.9899 9.48538 18.1708 8.70073 18.1708 9.16035Z"
+                    fill="#F9A2A2" stroke="#F9A2A2" stroke-width="2" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span *ngIf="i%2!=0">
+                <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M18.1708 9.16035V20.9363C18.1708 21.626 17.8995 22.2874 17.4164 22.7751C16.9334 23.2627 16.2783 23.5367 15.5952 23.5367H3.57562C2.89253 23.5367 2.23741 23.2627 1.75438 22.7751C1.27136 22.2874 1 21.626 1 20.9363V3.60039C1 2.91072 1.27136 2.2493 1.75438 1.76164C2.23741 1.27397 2.89253 1 3.57562 1H9.85371C10.3089 1.00007 9.76625 1.18266 10.0882 1.50762L17.668 9.16035C17.9899 9.48538 18.1708 8.70073 18.1708 9.16035Z"
+                    fill="#219653" stroke="#219653" stroke-width="2" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="item1 text-sm-start customer-details-attachment ms-3">
+
+                <a href="{{baseUrl2}}{{item.File}}" class="text-dark" title="{{item.File}}" style="display: contents;"
+                  target="_blank">{{item.File.substr(item.File.lastIndexOf("/")+1)}}</a>
+              </span>
+            </span>
+            <span class="attach-span" (click)="deleteAttachment(item.id? item.id:0)">
+              <i class="fa fa-trash cursor-pointer"></i>
+            </span>
+          </div>
+          <div class="fileupload-container" appDnd (fileDropped)="onFileDropped($event)">
+            <input type="file" class="fileuploadref" #fileDropRef id="fileDropRef" multiple
+              (change)="fileBrowseHandler($event)" />
+
+
+            <label class="bold"> <b>Choose a file </b></label>&nbsp;
+            <label for="fileDropRef"> or drag it here</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="bussiness-partner">
+
+        </div>
+      </div>
+    </div>
+    <div class="loadercss" style="text-align: center;" *ngIf="isdataLoading">
+      <img src="../../assets/img/loder.gif">
+    </div>
+  </div>
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title modal-heading" id="modal-basic-title">Add Address
+      </h4>
+      <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" style="border: none;">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" name="theForm" (submit)="addBranch(f)">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Address Name</label>
+            <input type="text" placeholder="Address Name" class="input-fld required-fld" name="AddressName"
+              [(ngModel)]="branch.AddressName" #AddressName="ngModel" required>
+            <span class="help-block danger" *ngIf="AddressName.errors?.required && AddressName.touched">
+              The Address Name is required
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label>Zip Code</label>
+            <input type="text" placeholder="Zip Code" class="input-fld required-fld" name="ZipCode"
+              [(ngModel)]="branch.ZipCode" #ZipCode="ngModel" required>
+            <span class="help-block danger" *ngIf="ZipCode.errors?.required && ZipCode.touched">
+              The ZipCode is required
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label>Country</label>
+            <ng-select #selectcountry [clearOnBackspace]="false" [searchable]="false" name="Country" placeholder="Select Country" [items]="countrys" bindLabel="Name"
+            bindValue="Code" (change)="selectChangeHandler($event)" name="Country" #Country="ngModel" required
+              [(ngModel)]="branch.Country" class="ngsearch-dropdown input-fld required-fld">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                  (input)="selectcountry.filter($event.target.value)" />
+              </ng-template>
+            </ng-select>
+            <span class="help-block danger" *ngIf="(Country.errors?.required && f.submitted)||(Country.errors?.required && Country.touched)">
+              Country is required
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label> State</label>
+            <ng-select #selectstate [clearOnBackspace]="false" [searchable]="false" [items]="statess" placeholder="Select State" bindLabel="Name"
+            bindValue="Code" name="State" #State="ngModel" (change)="selectChangeHandlerState($event)" name="State"
+              [(ngModel)]="branch.State" class="ngsearch-dropdown input-fld required-fld" required>
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                  (input)="selectstate.filter($event.target.value)" />
+              </ng-template>
+            </ng-select>
+            <span class="help-block danger" *ngIf="(State.errors?.required && f.submitted)||(State.errors?.required && State.touched)">
+              State is required
+            </span>
+          </div>
+
+          <div class="col-md-6">
+            <label>City</label>
+            <input type="text" placeholder="City" class="input-fld required-fld" name="City"
+              [(ngModel)]="branch.City" #City="ngModel" required>
+            <span class="help-block danger" *ngIf="City.errors?.required && City.touched">
+              The City is required
+            </span>
+          </div>
+
+          <div class="col-md-6">
+            <label>Shipping Type</label>
+            <div>
+              <ng-select #selectshiptype [clearOnBackspace]="false" [searchable]="false"
+                [(ngModel)]="branch.U_SHPTYP" name="U_SHPTYP" #U_SHPTYP=ngModel
+                class="ngsearch-dropdown input-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selectshiptype.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" disable selected>Select Shipping Type</ng-option>
+                <ng-option value="{{type}}" *ngFor="let type of ShippingType">{{type}}</ng-option>
+              </ng-select>
+              <span class="help-block danger" *ngIf="(U_SHPTYP.errors?.required && f.submitted)||(U_SHPTYP.errors?.required && U_SHPTYP.touched)">
+                Select Shipping Type is required
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <label>Address</label>
+            <textarea type="text" placeholder="Address" class="input-fld required-fld" name="Street"
+              [(ngModel)]="branch.Street" #Street="ngModel" maxlength="1000" required></textarea>
+            <span class="help-block danger" *ngIf="(Street.errors?.required && f.submitted)||(Street.errors?.required && Street.touched)">
+              The Address is required
+            </span>
+          </div>
+
+
+
+          <div style="text-align: center;" *ngIf="isLoading">
+            <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+          </div>
+
+          <div class="col-md-12 text-center" *ngIf="!isLoading">
+            <button class="add-invent1" >Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </ng-template>
+
+  <ng-template #editbmodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title modal-heading" id="modal-basic-title">Edit Contact Person
+      </h4>
+      <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" style="border: none;">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" name="theForm" (submit)="updateContactPersone(f)">
+        <div class="row">
+          <div class="col-md-6">
+            <label style="font-size: 12px;">First Name</label>
+            <input type="text" placeholder="First Name" class="input-fld required-fld" name="FirstName"
+              [(ngModel)]="contactPersoneUpdate.FirstName" #FirstName="ngModel" required>
+            <span class="help-block danger" *ngIf="FirstName.errors?.required && FirstName.touched">
+              The First Name is required
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label style="font-size: 12px;">Last Name</label>
+            <input type="text" placeholder="Last Name" class="input-fld" name="LastName"
+              [(ngModel)]="contactPersoneUpdate.LastName" #LastName="ngModel">
+            <span class="help-block danger" *ngIf="LastName.errors?.required && LastName.touched">
+              The Last Name is required
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label style="font-size: 12px;">Mobile Number</label>
+            <input type="text" placeholder="Mobile Number" class="input-fld required-fld" name="MobilePhone"
+              [(ngModel)]="contactPersoneUpdate.MobilePhone" #MobilePhone="ngModel" required>
+            <span class="help-block danger" *ngIf="MobilePhone.errors?.required && MobilePhone.touched">
+              The Mobile Number is required
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label style="font-size: 12px;">Email</label>
+            <input type="text" placeholder="Email" class="input-fld required-fld" name="E_Mail"
+              [(ngModel)]="contactPersoneUpdate.E_Mail" #E_Mail="ngModel" required>
+            <span class="help-block danger" *ngIf="E_Mail.errors?.required && E_Mail.touched">
+              The Email is required
+            </span>
+          </div>
+          <div class="col-md-12">
+            <label style="font-size: 12px;">Position</label>
+            <input type="text" placeholder="Position" class="input-fld" name="Position"
+              [(ngModel)]="contactPersoneUpdate.Position" #Position="ngModel">
+              <span class="help-block danger" *ngIf="Position.errors?.required && Position.touched">
+                Position is required
+              </span>
+          </div>
+
+          <div class="col-md-12">
+            <label style="font-size: 12px;">Address</label>
+            <textarea type="text" placeholder="Address" class="input-fld" name="Address"
+              [(ngModel)]="contactPersoneUpdate.Address" #Address="ngModel"></textarea>
+            <span class="help-block danger" *ngIf="(Address.errors?.required && f.submitted)||(Address.errors?.required && Address.touched)">
+              The Address is required
+            </span>
+          </div>
+
+
+
+          <div style="text-align: center;" *ngIf="isLoading2">
+            <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+          </div>
+
+          <div class="col-md-12"  style="text-align: center;" *ngIf="!isLoading2">
+            <!-- <button class="add-invent1" [disabled]="f.invalid">Save</button> -->
+            <button class="add-invent1">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- <div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+</div> -->
+  </ng-template>
+
+  <ng-template #mymodal2 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title modal-heading" id="modal-basic-title">Add Contact Person</h4>
+      <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" style="border: none;">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" name="theForm" (submit)="addContactPersone(f)">
+        <div class="row">
+          <div class="col-md-6">
+            <label>First Name</label>
+            <input type="text" placeholder="First Name" class="input-fld required-fld" name="FirstName"
+              [(ngModel)]="contactPersoneAdd.FirstName" #FirstName="ngModel" required>
+            <span class="help-block danger" *ngIf="FirstName.errors?.required && FirstName.touched">
+              The First Name is required
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label>Last Name</label>
+            <input type="text" placeholder="Last Name" class="input-fld" name="LastName"
+              [(ngModel)]="contactPersoneAdd.LastName" #LastName="ngModel">
+            <span class="help-block danger" *ngIf="LastName.errors?.required && LastName.touched">
+              The Last Name is required
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label>Mobile Number</label>
+            <input type="text" placeholder="Mobile Number" class="input-fld required-fld" name="MobilePhone"
+              [(ngModel)]="contactPersoneAdd.MobilePhone" #MobilePhone="ngModel" required>
+            <span class="help-block danger" *ngIf="MobilePhone.errors?.required && MobilePhone.touched">
+              The Mobile Number is required
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label>Email</label>
+            <input type="text" placeholder="Email" class="input-fld required-fld" name="E_Mail"
+              [(ngModel)]="contactPersoneAdd.E_Mail" #E_Mail="ngModel" required>
+            <span class="help-block danger" *ngIf="E_Mail.errors?.required && E_Mail.touched">
+              The Email is required
+            </span>
+          </div>
+          <div class="col-md-12">
+            <label>Position</label>
+            <input type="text" placeholder="Position" class="input-fld" name="Position"
+              [(ngModel)]="contactPersoneAdd.Position" #Position="ngModel">
+            <span class="help-block danger" *ngIf="Position.errors?.required && Position.touched">
+              Position is required
+            </span>
+          </div>
+
+          <div class="col-md-12">
+            <label>Address</label>
+            <textarea type="text" placeholder="Address" class="input-fld" name="CustomerAddress"
+              [(ngModel)]="contactPersoneAdd.Address" #CustomerAddress="ngModel"></textarea>
+            <span class="help-block danger" *ngIf="(CustomerAddress.errors?.required && f.submitted)||(CustomerAddress.errors?.required && CustomerAddress.touched)">
+              The Address is required
+            </span>
+          </div>
+
+
+
+          <div style="text-align: center;" *ngIf="isLoading">
+            <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+          </div>
+
+          <div class="col-md-12 text-center" *ngIf="!isLoading">
+            <!-- <button class="add-invent1" [disabled]="f.invalid">Save</button> -->
+            <button class="add-invent1">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div> -->
+  </ng-template>
+
+  <ng-template #contentEdit let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title modal-heading" id="modal-basic-title">Edit Address
+      </h4>
+      <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" style="border: none;">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" name="theForm" (submit)="EditBranch(f)">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Address Name</label>
+            <input type="text" placeholder="Address Name" class="input-fld required-fld" name="AddressName"
+              [(ngModel)]="editbranch.AddressName" #AddressName="ngModel" required>
+            <span class="help-block danger" *ngIf="AddressName.errors?.required && AddressName.touched">
+              The Address Name is required
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label>Zip Code</label>
+            <input type="text" placeholder="Zip Code" class="input-fld required-fld" name="ZipCode" [(ngModel)]="editbranch.ZipCode"
+              #ZipCode="ngModel" required>
+            <span class="help-block danger" *ngIf="ZipCode.errors?.required && ZipCode.touched">
+              The ZipCode is required
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label>Country</label>
+            <ng-select #selecteditcountry [clearOnBackspace]="false" [searchable]="false" [items]="countrys" bindLabel="Name" placeholder="Select Country"
+            bindValue="Code" name="Country" (change)="editselectChangeHandler($event)" name="Country"
+            [(ngModel)]="editbranch.Country" class="ngsearch-dropdown input-fld required-fld">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                  (input)="selecteditcountry.filter($event.target.value)" />
+              </ng-template>
+              <!-- <ng-option value="{{editbranch.Country}}" selected>{{editbranch.U_COUNTRY}}</ng-option>
+              <ng-option *ngFor="let item of countrys" value="{{item.Code}}, {{item.Name}}">{{item.Name}}</ng-option> -->
+            </ng-select>
+
+            <!-- <select class="input-fld" name="Country" (change)="editselectChangeHandler($event)" name="Country"
+              [(ngModel)]="editbranch.Country">
+              <option value="{{editbranch.Country}}" selected>{{editbranch.U_COUNTRY}}</option>
+              <option *ngFor="let item of countrys" value="{{item.Code}}, {{item.Name}}">{{item.Name}}</option>
+            </select> -->
+          </div>
+          <div class="col-md-6">
+            <label>State</label>
+            <ng-select #selecteditstate [clearOnBackspace]="false" [searchable]="false" name="State" placeholder="Select State" [items]="statess1" bindLabel="Name"
+            bindValue="Code" (change)="editselectChangeHandlerState($event)" name="State"
+            [(ngModel)]="editbranch.State" class="ngsearch-dropdown input-fld required-fld">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                  (input)="selecteditstate.filter($event.target.value)" />
+              </ng-template>
+
+            </ng-select>
+
+          </div>
+
+          <div class="col-md-6">
+            <label>City</label>
+            <input type="text" placeholder="City" class="input-fld required-fld" name="City"
+              [(ngModel)]="editbranch.City" #City="ngModel" required>
+            <span class="help-block danger" *ngIf="City.errors?.required && City.touched">
+              The City is required
+            </span>
+          </div>
+
+          <div class="col-md-6">
+            <label>Shipping Type</label>
+            <div>
+              <ng-select #selectshiptype [clearOnBackspace]="false" [searchable]="false"
+                [(ngModel)]="editbranch.U_SHPTYP" name="U_SHPTYP" #U_SHPTYP=ngModel
+                class="ngsearch-dropdown input-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selectshiptype.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" disable selected>Select Shipping Type</ng-option>
+                <ng-option value="{{type}}" *ngFor="let type of ShippingType">{{type}}</ng-option>
+              </ng-select>
+              <span class="help-block danger" *ngIf="(U_SHPTYP.errors?.required && f.submitted)||(U_SHPTYP.errors?.required && U_SHPTYP.touched)">
+                Select Shipping Type is required
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <label>Address</label>
+            <textarea type="text" placeholder="Address" class="input-fld required-fld" name="Street" [(ngModel)]="editbranch.Street"
+              #Street="ngModel" maxlength="1000" required></textarea>
+            <span class="help-block danger" *ngIf="(Street.errors?.required && f.submitted) ||(Street.errors?.required && Street.touched)">
+              The Address is required
+            </span>
+          </div>
+
+
+
+          <div style="text-align: center;" *ngIf="isLoading2">
+            <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+          </div>
+
+          <div class="col-md-12 text-center" *ngIf="!isLoading2">
+            <button class="add-invent1" [disabled]="f.invalid">Save</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div> -->
+  </ng-template>
+
+</section>
+<div class="alert alert-primary edit-success-box-attch alert-dismissible fade show" role="alert">
+  Added Attachment Successfully !
+</div>
+<div class="alert alert-primary edit-success-box-attch1 alert-dismissible fade show" role="alert">
+  Update Attachment Successfully !
+</div>
+
+<div class="alert alert-primary success-box alert-dismissible fade show" role="alert">
+  Branch Added Successfully !
+</div>
+
+<div class="alert alert-primary success-box2 alert-dismissible fade show" role="alert">
+  Add Contact Persone successfully
+</div>
+
+<div class="alert alert-primary edit-success-box alert-dismissible fade show" role="alert">
+  Update Branch successfully
+</div>
+
+<div class="alert alert-primary edit-success-box2 alert-dismissible fade show" role="alert">
+  Update Contact Person successfully
+</div>
+
+<div class="alert alert-primary delete-success-box alert-dismissible fade show px-3 py-5" role="alert">
+  Are you want to Delete this Branch ?
+  <!-- <button type="button" class="btn-close" (click)="yesdeleteUser(0)"></button> -->
+  <div class="delet-btn">
+    <button type="button" class="yes-delete" (click)="yesdeleteBranch()">Yes</button>
+    <button type="button" class="no-delete" (click)="nodeleteBranch()">No</button>
+  </div>
+</div>
+<div class="alert alert-primary delete-success-box-attch alert-dismissible fade show px-3 py-5" role="alert">
+  Are you want to Delete this Attachment ?
+  <!-- <button type="button" class="btn-close" (click)="yesdeleteUser(0)"></button> -->
+  <div class="delet-btn">
+    <button type="button" class="yes-delete" (click)="yesdeleteBranch1()">Yes</button>
+    <button type="button" class="no-delete" (click)="nodeleteBranch1()">No</button>
+  </div>
+</div>
+
+<div class="alert alert-primary delete-success-box1 alert-dismissible fade show px-3 py-5" role="alert">
+  Are you want to Delete this Contact Person ?
+  <!-- <button type="button" class="btn-close" (click)="yesdeleteUser(0)"></button> -->
+  <div class="delet-btn">
+    <button type="button" class="yes-delete" (click)="yesdeleteUser(1)">Yes</button>
+    <button type="button" class="no-delete" (click)="yesdeleteUser(0)">No</button>
+  </div>
+</div>
+<ng-template #mymodal11 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Add Attachment</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <form #f="ngForm" name="theForm" (submit)="addCustomerAttachment(f)">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-12">
+          <label>Atachment </label>
+          <input type="file" (change)="onFileChanged($event)" class="input-fld required-fld" name="GroupNumber"
+            [(ngModel)]="cutomerAttach1.Attach" #GroupNumber="ngModel" placeholder="Attachment" required>
+          <!-- <span class="help-block danger" *ngIf="GroupNumber.errors?.required && GroupNumber.touched">
+            The Industry Name is required
+          </span> -->
+          <br>
+        </div>
+
+        <!-- <div class="col-md-12">
+          <label>AttachmentDescription </label>
+          <input type="text" class="input-fld required-fld" name="PaymentTermsGroupName" [(ngModel)]="indus.IndustryDescription" #PaymentTermsGroupName="ngModel" placeholder="AttachmentDescription" required>
+          <span class="help-block danger" *ngIf="PaymentTermsGroupName.errors?.required && PaymentTermsGroupName.touched">
+            The Industry Description is required
+          </span>
+        </div> -->
+
+        <!-- <div class="col-md-6"></div> -->
+        <div class="col-md-12 text-center mt-2">
+          <button class="add-invent1">Save</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</ng-template>

@@ -1,0 +1,192 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+
+<div class="MainWrapperDashboard">
+  <h5 class="dashheadingmain">{{Headingss[0].heading0}}</h5>
+  
+  <div *ngIf="role == 'admin'" class="me-3 headsec">
+    <ng-select #selectRole [clearOnBackspace]="false" [searchable]="false" [ngModel]="selectedDevice" (ngModelChange)="ChartJs($event)" name="sel2" placeholder="Select Employee" class="ngsearch-dropdown filter-select-width">
+      <ng-template ng-header-tmp>
+        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text" (input)="selectRole.filter($event.target.value)" />
+      </ng-template>
+      <!-- <ng-option value="" disable >Select Employee</ng-option> -->
+      <ng-option [value]="emp.SalesEmployeeCode" *ngFor="let emp of bridges">{{emp.firstName}} {{emp.lastName}}</ng-option>
+    </ng-select>
+    <!-- <select class="form-select form-select-sm filter-select-width" [ngModel]="selectedDevice"
+      (ngModelChange)="dashboardemployeecode($event)" name="sel2">
+      <option value="" selected>Select Employee</option>
+      <option [value]="emp.SalesEmployeeCode" *ngFor="let emp of bridges">{{emp.userName}} - {{emp.role}}</option>
+    </select> -->
+  </div>
+  <div class="clearfix"></div>
+  <div class="MainSalesBox">
+        <div class="MainContentBox">
+          <li class="iconBg"><i class="fa-solid fa-indian-rupee-sign"></i></li>
+          <li class="TotalRevenue">{{Headingss[0].heading1}}</li>
+          <div class="TwoliHere">
+            <div>
+            <h2>{{revanue}}</h2>
+          </div>
+          <div class="upDwn">
+            <span>vs Last Year</span>
+            <li><img src="../../assets/img/growth-icon.png" alt="">+32.40%</li>
+          </div>
+          </div>
+        </div>
+
+        <div class="MainContentBox">
+          <li class="iconBg"><i class="fa-regular fa-money-bill"></i></li>
+          <li class="TotalRevenue">{{Headingss[0].heading2}}</li>
+          <div class="TwoliHere">
+            <div>
+            <h2>{{sales}}</h2>
+          </div>
+          <div class="upDwn">
+            <span>vs Last Year</span>
+            <li><img src="../../assets/img/growth-icon.png" alt="">+32.40%</li>
+          </div>
+          </div>
+        </div>
+
+
+        <div class="MainContentBox">
+          <li class="iconBg"><i class="fa-solid fa-user-tie"></i></li>
+          <li class="TotalRevenue">{{Headingss[0].heading3}}</li>
+          <div class="TwoliHere">
+            <div>
+            <h2>{{Customer}}</h2>
+          </div>
+          <div class="upDwn">
+            <span>vs Last Year</span>
+            <li style="color:#BA1A1A;"><img src="../../assets/img/decrease-down-icon.png" alt="">+32.40%</li>
+          </div>
+          </div>
+        </div>
+
+
+        <div class="MainContentBox">
+          <li class="iconBg"><i class="fa-solid fa-users"></i></li>
+          <li class="TotalRevenue">{{Headingss[0].heading4}}</li>
+          <div class="TwoliHere">
+            <div>
+            <h2>{{Leads}}</h2>
+          </div>
+          <div class="upDwn">
+            <span>vs Last Year</span>
+            <li style="color:#BA1A1A;"><img src="../../assets/img/decrease-down-icon.png" alt="">+32.40%</li>
+          </div>
+          </div>
+        </div>
+
+        <div class="MainContentBox">
+          <li class="iconBg"><i class="fa-solid fa-cart-shopping"></i></li>
+          <li class="TotalRevenue">{{Headingss[0].heading5}}</li>
+          <div class="TwoliHere">
+            <div>
+            <h2>{{allOrder}}</h2>
+          </div>
+          <div class="upDwn">
+            <span>vs Last Year</span>
+            <li style="color:#BA1A1A;"><img src="../../assets/img/decrease-down-icon.png" alt="">+32.40%</li>
+          </div>
+          </div>
+        </div>
+  </div>
+  <div class="WarmDealsChart mt-3">
+    <div class="DealChartHere">
+      <div class="Chartone" style="background-color:#fff;">
+        <h3>{{Headingss[0].heading6}}</h3>
+        <!-- <img src="../../assets/img/Staticgraph.png" style="width: 100%;"> -->
+        <canvas id="CollectionGraph" height="150"></canvas>
+      </div>
+      <div class="Chartone" style="background-color:#fff;">
+        <h3>{{Headingss[0].heading60}}</h3>
+        <canvas id="toFiveCustomer" height="170"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="DashboardAllChartHere">
+  <div class="AllGraphChart">
+    <div class="Chartone" style="background-color:#fff;">
+      <h3>{{Headingss[0].heading7}}</h3>
+      <canvas id="barChart3" height="200"></canvas>
+      <ul class="delievery-ul delievery-grid-ul d-flex justify-content-between">
+        <li class="d-inline-block"><span class="size1 light-sky-blue d-inline-block me-2" style="background-color: #65B0F6;"></span>Overdue</li>
+        <li class="d-inline-block"><span class="size1 sky-blue d-inline-block me-2" style="
+        background-color: #4A79E4;"></span>Open</li>
+        <li class="d-inline-block"><span class="size1 yellow d-inline-block me-2" style="
+        background-color: #FFA63D;"></span>Closed</li>
+      </ul>
+    </div>
+<div class="Chartone" style="background-color:#fff;">
+  <h3>{{Headingss[0].heading8}}</h3>
+  <canvas id="BarBestSell" height="200"></canvas>
+</div>
+  <div class="Chartone" style="background-color:#fff;">
+    <div class="row">
+      <div class="col-lg-8">
+    <h3>{{Headingss[0].heading9}}</h3>
+    <canvas class="Chartone WidthDown" id="doughnut" height="100"></canvas>
+  </div>
+  <div class="col-lg-4">
+    <div class="ChartoneLiHere">
+      <ul>
+        <li class="d-inline-block"><span class="size1 yellow d-inline-block me-2" style="
+          background-color: #4A79E4;"></span>Non Moving</li>
+          <li class="d-inline-block"><span class="size1 yellow d-inline-block me-2" style="
+            background-color: #1EF2FF;"></span>Slow Moving</li>
+            <li class="d-inline-block"><span class="size1 yellow d-inline-block me-2" style="
+              background-color: #FFA63D;"></span>Fast Moving</li>
+      </ul>
+    </div>
+  </div>
+  </div>
+  </div>
+</div>
+</div>
+<div class="WarmDealsChart">
+  <div class="DealChartHere">
+    <div class="Chartone" style="background-color:#fff;">
+      <h3>{{Headingss[0].heading10}}</h3>
+      <canvas id="DealsChart" height="130"></canvas>
+    </div>
+    <div class="Chartone" style="background-color:#fff;">
+      <h3>Lead Source</h3>
+      <div class="LeadSourseSocialIcon">
+        <div class="d-flex"><a style="padding: 6px 0px;">Name</a></div>
+        <div><span>Leads</span></div>
+      </div>
+      <div class="LeadSourseSocialIcon">
+        <div class="d-flex"><li><img src="../../assets/img/cinntraLogo.png" alt=""></li><a>Website</a></div>
+        <div><span>38</span></div>
+      </div>
+      <div class="LeadSourseSocialIcon">
+        <div class="d-flex"><li><img src="../../assets/img/facebookIcon.png" alt=""></li><a>Facebook</a></div>
+        <div><span>133</span></div>
+      </div>
+      <div class="LeadSourseSocialIcon">
+        <div class="d-flex"><li><img src="../../assets/img/instagram-icon.png" alt=""></li><a>Instagram</a></div>
+        <div><span>156</span></div>
+      </div>
+      <div class="LeadSourseSocialIcon">
+        <div class="d-flex"><li><img src="../../assets/img/linkedinIcon.png" alt=""></li><a>Linkedin</a></div>
+        <div><span>200</span></div>
+      </div>
+      <div class="LeadSourseSocialIcon">
+        <div class="d-flex"><li><img src="../../assets/img/IndiaMart.png" alt=""></li><a>India Mart</a></div>
+        <div><span>433</span></div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+</section>
+
+<section class="home-section dashloader" *ngIf="isLoad">
+<div class="text-center">
+  <img src="../../assets/img/vido.gif">
+</div>
+
+</section>

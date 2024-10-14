@@ -1,0 +1,21 @@
+td.ActiveBTN{
+  width: 70px !important;
+}
+
+.modal-body .dropdown-item{
+  background-color: #4a79e4 !important;
+  margin-top: 20px !important;
+  color: #fff !important;
+  width: 150px !important;
+  border-radius: 4px !important;
+}
+
+.colorbluw{
+  color: #4a79e4 !important;
+}
+app-phone {
+  position: fixed;
+  bottom: -10%;
+  right: 30%;
+  z-index: 99;
+}

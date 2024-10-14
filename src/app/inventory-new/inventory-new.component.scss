@@ -1,0 +1,41 @@
+.figma-inventory-product-img{
+  width: 30px;
+}
+
+
+nav {
+  background-color: #fff;
+  color: black;
+  padding: 15px;
+  width: 300px;
+  height: auto;
+  top: 100px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  cursor: pointer;
+  display: block;
+  line-height: 30px;
+}
+
+nav ul li:hover {
+  color: #4a79e4;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.figma-inventory-product-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}

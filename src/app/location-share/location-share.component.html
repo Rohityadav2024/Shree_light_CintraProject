@@ -1,0 +1,59 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+
+
+    <div class="sales-boxes">
+      <div class="recent-sales box">
+        <div class="em-search-wrapper">
+          <div class="em-search-heading"><i class="fa-solid fa-arrow-left-long cursor-pointer" (click)="backClicked()"></i>Map View</div>
+          <div class="em-search-container">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 my-3 ">
+            <!-- <a (click)="shareLocation()" class="shareLocationbtn">Share Location</a> -->
+            <!-- <span class="d-block"><b>lng</b> &nbsp; {{shapes[0].shape.position.lng}}</span>
+            <span><b>lat</b> &nbsp; {{shapes[0].shape.position.lat}}</span> -->
+          </div>
+          <div class="col-md-12">
+
+            <agm-map
+            [latitude]="lat1"
+            [longitude]="lng1"
+            [zoom]="zoom"
+            [disableDefaultUI]="false">
+
+            <agm-marker
+                *ngFor="let m of markers; let i = index"
+                (markerClick)="clickedMarker(m.label, i)"
+                [latitude]="m.lat1"
+                [longitude]="m.lng1"
+                [label]="m.label"
+                [markerDraggable]="m.draggable">
+
+              <agm-info-window>
+                <strong><b>{{m.Emp_Name}}</b></strong><br>
+                <strong>{{m.Address}}</strong>
+              </agm-info-window>
+
+            </agm-marker>
+
+          </agm-map>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="alert alert-primary success-box alert-dismissible fade show" role="alert">
+  Share Your Location Successfully !
+</div>

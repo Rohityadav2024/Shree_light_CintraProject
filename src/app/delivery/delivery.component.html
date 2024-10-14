@@ -1,0 +1,511 @@
+<!-- <app-left-menu></app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+      <p class="custom-search-head-name">{{Headingss[0].leftheading}}</p>
+      <div class="custom-search-wrapper">
+        <div ngbDropdown class="custom-common-search-container">
+          <button *ngIf="exportStatus" type="button" class="custom-action-btn openbtn" (click)="Exportexcel()" ><i >Export &nbsp;</i>
+            <i title="Download Excel" class="fa-solid fa-file-export download-icon cursor-pointer exportfileicon"></i>
+          </button>
+          <!-- <button type="button" class="custom-action-btn openbtn" (click)="openNav()"><i class="fa fa-filter openbtn"></i> Filter</button>
+          <ng-template #filter>Filter</ng-template> -->
+          <div class="custom-search-ico-input-container">
+            <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+            <input type="text" name="" id="" placeholder=" {{Headingss[0].heading110}}" [(ngModel)]="searchValue"
+              (keyup.enter)="RowPerPage()">
+            <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+              *ngIf="searchValue != ''"></span>
+            <button type="button" class="new-search-btn" (click)="RowPerPage()"><i
+                class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+          <button type="button" class="custom-com-temp-btn" (click)="openmaximize(mymodal)" *ngIf="isModuleViewadd(7)"><span
+            class="custom-sp-plus-ft-sz">+</span>  {{Headingss[0].heading101}}</button>
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales UserManagement">
+        <div class="sales-details">
+          <div class="custom-outter-body-lead-list-c9">
+            <div class="custom-table-select-icons">
+              <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span>
+            </div>
+          </div>
+        </div>
+        <table class="new-tabl" id="table-data">
+          <!-- <ng-container *ngIf="!isLoading2"> -->
+          <thead class="MainUserList">
+            <tr>
+              <th><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+              <!-- <th (click)="togglesortType('id')">ID <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th> -->
+
+              <th>{{Headingss[1].heading13}}  {{Headingss[1].heading0}}  </th>
+              <th>{{Headingss[1].heading3}}  </th>
+              <th>{{Headingss[0].Extra3}} </th>
+              <th>{{Headingss[0].Extra9}} </th>
+              <!-- <th style="width: 300px;">{{Headingss[2].heading1}} </th> -->
+              <th>{{Headingss[1].heading11}} </th>
+              <th>{{Headingss[1].heading14}} </th>
+              <th>{{Headingss[0].heading111}}</th>
+
+            </tr>
+          </thead>
+
+          <tr class="hover" *ngFor="let item of orders; let i = index">
+            <td>
+              <input type="checkbox" id="checkbox{{item.id}}" value="{{item.id}}" class="checkbox"
+                (click)="checkboxclick(item.id)">
+            </td>
+            <td>{{item.OrderID}}</td>
+            <td (click)="suplier(item.id)">{{item.CardName}}</td>
+            <td (click)="suplier(item.id)">{{item.DocDate || 'NA'}}</td>
+            <td (click)="suplier(item.id)">{{item.DocDueDate || 'NA'}}</td>
+            <!-- <td (click)="suplier(item.id)">{{item.AddressExtension.ShipToBuilding +" "+ item.AddressExtension.ShipToStreet +" "+ item.AddressExtension.ShipToCity +" "+ item.AddressExtension.U_SSTATE +" "+ item.AddressExtension.U_SCOUNTRY +" "+ item.AddressExtension.ShipToZipCode}}</td> -->
+
+            <td (click)="suplier(item.id)">{{item.DocTotal || 0 | priceFormat}}</td>
+            <ng-container *ngIf="item.CancelStatus == 'csNo'">
+              <div class="table-status-warning" *ngIf="item.DocumentStatus == 'bost_Open'">{{'Open'}}</div>
+              <div class="table-status-success" *ngIf="item.DocumentStatus == 'bost_Close'">{{'Close'}}</div>
+              </ng-container>
+              <ng-container *ngIf="item.CancelStatus != 'csNo'">
+                <div class="table-status-danger">{{'Cancel'}}</div>
+                </ng-container>
+            <td class="EditBoxForm" style="padding: 0 0px; width: 50px;">
+              <span class="edit-delete edit-delete{{item.id}}" (click)="editdeletepop(item)"
+                [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+              <div class="hover-show hover-show{{item.id}} hover-show-inactive"  *ngIf="item.CancelStatus == 'csNo' && item.DocumentStatus == 'bost_Open'">
+                <span (click)="gererateinvoice(item.id)" *ngIf="item.DocumentStatus == 'bost_Open'"><i class="fa fa-plus" aria-hidden="true"></i> {{Headingss[0].heading101}}
+                  {{Headingss[0].Extra4}}</span><br *ngIf="item.DocumentStatus == 'bost_Open'">
+                  <span (click)="CanelOrderPopup(confirmModal,item.id)" *ngIf="item.DocumentStatus == 'bost_Open'"><i class="fa fa-times-circle" aria-hidden="true"></i>  {{Headingss[0].heading112}}
+                    {{Headingss[0].leftheading}}</span><br *ngIf="item.DocumentStatus == 'bost_Open'">
+              </div>
+            </td>
+          </tr>
+          <!-- </ng-container> -->
+          <tr *ngIf="totalCount == 0">
+            <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No
+              Data Found</td>
+          </tr>
+        </table>
+        <div class="LoderGifHere" *ngIf="isLoading2">
+          <img src="../../assets/img/loder.gif">
+        </div>
+      </div>
+    </div>
+    <div class="figma-pagination-controls">
+      <div class="figma-pagination-rows-total">
+        <div class="figma-rows-per-page">
+          <div class="figma-rows-per-page-label">Row per page</div>
+          <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+            [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+          <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+        </div>
+        <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+          (pageChange)="pageChanged($event)" [(page)]="CurrentPage" [maxSize]="5" [rotate]="true"
+          [boundaryLinks]="false" class="figma-pagination">
+          <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+          <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div id="mySidepanel" class="sidepanel">
+  <div class="row">
+    <div class="col-12 mb-1 px-3 border-bottom" id="FilterTopSide">
+      <strong style="color: #4a79e4 !important;">{{Headingss[0].heading117}}</strong>
+      <a class="closebtn" (click)="closeNav()">&times;</a>
+    </div>
+  </div>
+  <form name="form">
+    <div class="filterForm-container">
+    <div class="row">
+      <label class="MainLabelNames">{{Headingss[1].heading01}}</label>
+      <div class="col-12 mb-1">
+        <input type="date" class="f-size form-control w-100" name="CreateDate"
+          [(ngModel)]="filter_customer.CreateDate" placeholder="{{Headingss[1].heading01}}">
+      </div>
+      <div class="col-12 mb-1">
+        <label class="MainLabelNames">{{Headingss[1].heading3}}</label>
+        <ng-select #selectcustomername [clearOnBackspace]="false" [searchable]="false"  [virtualScroll]="true" name="CardCode" placeholder="Select {{Headingss[1].heading3}}" [(ngModel)]="filter_customer.CardCode" class="ngsearch-dropdown input-fld">
+          <ng-template ng-header-tmp>
+            <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+              type="text" (input)="selectcustomername.filter($event.target.value)" />
+          </ng-template>
+          <ng-option value="" disable selected>All {{Headingss[1].heading3}}</ng-option>
+          <ng-option *ngFor="let item of businesspartners" value="{{item.CardCode}}">{{item.CardName}}</ng-option>
+        </ng-select>
+      </div>
+    </div>
+  </div>
+      <div class="row">
+        <div class="FilterBtnHere">
+          <div class="ResetBTN">
+            <a (click)="resetfilter()">{{Headingss[0].heading114}}</a>
+          </div>
+          <div class="ApplyBTN">
+            <button (click)="RowPerPage()">{{Headingss[0].heading113}}</button>
+          </div>
+        </div>
+      </div>
+
+  </form>
+
+</div>
+
+
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">{{Headingss[0].heading101}} {{Headingss[0].leftheading}}</h4>
+    <span class="figma-screen-ico" [innerHTML]="(commonObj.bigScreenMode ? 'figma-modal-big-screen-ico' : 'figma-modal-mid-screen-ico') | svgIcons:''" (click)="bigScreenOrMid()"></span>
+    <span class="figma-screen-close" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="modal.dismiss('Cross click')"></span>
+  </div>
+  <ng-container >
+    <form #f="ngForm" name="theForm" class="figma-modal-form" id="ProjectManagmentPopupHere">
+      <ng-container [ngSwitch]="commonObj.previousItem">
+        <ng-container *ngSwitchCase="'form'">
+
+    <p class="figma-modal-inner-heading">{{Headingss[0].SubHeading}}</p>
+      <div class="figma-modal-body">
+
+        <div class="figma-form-wrapper">
+          <label>{{Headingss[1].heading13}}</label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" [(ngModel)]="AddDelivery.OrderID" name="OrderID" class="input-fld required-fld" (change)="selectQuotationChangeHandlerItem($event)" placeholder="Order" required>
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="Search" type="text" (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Choose {{Headingss[1].heading13}}</ng-option>
+            <ng-option value="{{item1.id}}" *ngFor="let item1 of quotationsList">{{item1.CardName}}</ng-option>
+          </ng-select>
+        </div>
+        <div class="figma-form-wrapper">
+          <label>{{Headingss[1].heading3}} </label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" [(ngModel)]="AddDelivery.CardCode" name="CardCode" [disabled]="true" placeholder="Select Customer" class="input-fld" >
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text" (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Choose {{Headingss[1].heading3}} </ng-option>
+            <ng-option value="{{item1.CardCode}}" *ngFor="let item1 of businesspartners">{{item1.CardName}}</ng-option>
+          </ng-select>
+        </div>
+        <div class="figma-form-wrapper">
+          <label>{{Headingss[0].Extra3}}</label>
+          <input type="date" class="input-fld required-fld" autocomplete="off" [(ngModel)]="AddDelivery.DocDate" name="DocDate" required>
+        </div>
+        <div class="figma-form-wrapper">
+          <label>{{Headingss[0].Extra1}}  </label>
+          <div>
+            <input type="text" [min]="newdate" class="input-fld required-fld" name="PONumber"
+              [(ngModel)]="AddDelivery.PONumber" required placeholder="Enter {{Headingss[0].Extra1}}" #PONumber="ngModel">
+            <span class="help-block danger" *ngIf="PONumber.errors?.required && PONumber.touched">
+              The {{Headingss[0].Extra1}} is required
+            </span>
+          </div>
+        </div>
+        <div class="figma-form-wrapper">
+          <label>{{Headingss[0].Extra2}}  </label>
+          <div>
+            <input type="date" [min]="newdate" class="input-fld required-fld" name="PODate"
+              [(ngModel)]="AddDelivery.PODate" required placeholder="{{Headingss[0].Extra2}}" #PODate="ngModel">
+            <span class="help-block danger" *ngIf="PODate.errors?.required && PODate.touched">
+              The {{Headingss[0].Extra2}} is required
+            </span>
+          </div>
+        </div>
+        <!-- <div class="figma-form-wrapper">
+          <label>Ship To Address </label>
+          <input type="text" class="input-fld required-fld" placeholder="Ship To Address" [(ngModel)]="AddDelivery.AddressExtension.ShipToStreet" name="ShipToStreet" autocomplete="off" required>
+        </div> -->
+
+        <ng-container>
+          <div class="figma-form-wrapper">
+            <label> {{Headingss[2].heading7}}</label>
+            <div>
+              <input type="text" #ShipToBuilding="ngModel" class="input-fld required-fld" name="ShipToBuilding"
+                required [(ngModel)]="AddDelivery.AddressExtension.ShipToBuilding" placeholder="Enter  {{Headingss[2].heading7}}">
+              <span class="help-block danger" *ngIf="ShipToBuilding.errors?.required && ShipToBuilding.touched">
+                 {{Headingss[2].heading7}} is required
+              </span>
+            </div>
+          </div>
+
+
+          <div class="figma-form-wrapper">
+            <label>{{Headingss[2].SubHeading2}}</label>
+            <div>
+              <textarea class="input-fld required-fld" placeholder="Enter  {{Headingss[2].SubHeading2}}" name="ShipToStreet" style="height:40px"
+                #ShipToStreet=ngModel [(ngModel)]="AddDelivery.AddressExtension.ShipToStreet" maxlength="1000" required></textarea>
+              <span class="help-block danger" *ngIf="ShipToStreet.errors?.required && ShipToStreet.touched">
+                 {{Headingss[2].SubHeading2}} is required
+              </span>
+            </div>
+          </div>
+
+
+          <div class="figma-form-wrapper">
+            <label>{{Headingss[2].heading2}}</label>
+            <div>
+              <input type="text" #ShipToCity="ngModel" class="input-fld required-fld" name="ShipToCity" required
+                [(ngModel)]="AddDelivery.AddressExtension.ShipToCity" placeholder="Enter {{Headingss[2].heading2}}" maxlength="1000">
+              <span class="help-block danger" *ngIf="ShipToCity.errors?.required && ShipToCity.touched">
+                {{Headingss[2].heading2}} is required
+              </span>
+            </div>
+          </div>
+
+          <div class="figma-form-wrapper">
+            <label>{{Headingss[2].heading3}}</label>
+            <div>
+              <ng-select #selectshipstate [clearOnBackspace]="false" [searchable]="false" name="ShipToState" #ShipToState="ngModel"
+                [(ngModel)]="AddDelivery.AddressExtension.ShipToState" required
+                (change)="selectChangeHandlerState2($event)" class="ngsearch-dropdown input-fld required-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selectshipstate.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" disable selected>Select {{Headingss[2].heading3}}</ng-option>
+                <ng-option *ngFor="let item of statess" value="{{item.Code}}">{{item.Name}}</ng-option>
+              </ng-select>
+
+              <span class="help-block danger" *ngIf="(ShipToState.errors?.required && f.submitted)||(ShipToState.errors?.required && ShipToState.touched)">
+                {{Headingss[2].heading3}} required
+              </span>
+            </div>
+          </div>
+
+
+          <div class="figma-form-wrapper">
+            <label>{{Headingss[2].heading4}}</label>
+            <div>
+              <ng-select #selectshipcountry [clearOnBackspace]="false" [searchable]="false" name="ShipToCountry" #ShipToCountry="ngModel"
+                [(ngModel)]="AddDelivery.AddressExtension.ShipToCountry" (change)="selectChangeHandler2($event)"
+                required class="ngsearch-dropdown input-fld required-fld">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selectshipcountry.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" disable selected>Select {{Headingss[2].heading4}}</ng-option>
+                <ng-option *ngFor="let item of countrys" value="{{item.Code}}">{{item.Name}}</ng-option>
+              </ng-select>
+
+              <span class="help-block danger" *ngIf="(ShipToCountry.errors?.required && f.submitted)||(ShipToCountry.errors?.required && ShipToCountry.touched)">
+                {{Headingss[2].heading4}} required
+              </span>
+            </div>
+          </div>
+          <div class="figma-form-wrapper">
+            <label>{{Headingss[2].heading5}}</label>
+            <div>
+              <input type="text" class="input-fld required-fld" name="ShipToZipCode"
+                [(ngModel)]="AddDelivery.AddressExtension.ShipToZipCode" placeholder="Enter {{Headingss[2].heading5}}" #ShipToZipCode=ngModel
+                pattern="^[0-9]*$" required>
+              <span class="help-block danger" *ngIf="ShipToZipCode.errors?.required && ShipToZipCode.touched">
+                {{Headingss[2].heading5}} is required
+              </span>
+              <span class="help-block danger" *ngIf="ShipToZipCode.errors?.pattern">
+                Take Numeric Value Only
+              </span>
+            </div>
+          </div>
+          <div class="figma-form-wrapper" *ngIf="isModulefieldview(7, 'U_SHPTYPS')">
+            <label>{{Headingss[2].heading6}}</label>
+            <div>
+              <ng-select #selectshipshippingtype [clearOnBackspace]="false" [searchable]="false" name="U_SHPTYPS" #U_SHPTYPS="ngModel"
+              [(ngModel)]="AddDelivery.AddressExtension.U_SHPTYPS" class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(7, 'U_SHPTYPS')"
+              [class.disable-fld]="!isModulefieldedit(7, 'U_SHPTYPS')" [disabled]="!isModulefieldedit(7, 'U_SHPTYPS')" [required]="HeadingServices.isModulefieldMendetory(7, 'U_SHPTYPS')">
+                <ng-template ng-header-tmp>
+                  <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                    type="text" (input)="selectshipshippingtype.filter($event.target.value)" />
+                </ng-template>
+                <ng-option value="" disable selected>Select {{Headingss[2].heading6}}</ng-option>
+                <ng-option value="{{type}}" *ngFor="let type of ShippingType">{{type}}</ng-option>
+              </ng-select>
+
+              <span class="help-block danger" *ngIf="(U_SHPTYPS.errors?.required && f.submitted)||(U_SHPTYPS.errors?.required && U_SHPTYPS.touched)">
+                {{Headingss[2].heading6}} is required
+              </span>
+              <ng-container *ngIf="HeadingServices.isModulefieldMendetory(7, 'U_SHPTYPS')">
+                <span class="help-block danger"
+                  *ngIf="(U_SHPTYPS.errors?.required && f.submitted)||(U_SHPTYPS.errors?.required && U_SHPTYPS.touched)">
+                  The {{Headingss[2].heading6}} is required
+                </span>
+              </ng-container>
+            </div>
+          </div>
+
+        </ng-container>
+        <div class="figma-form-central-main-head-name">{{Headingss[4].heading}}</div>
+        <div class="figma-form-central-select-item-card"  (click)="SelectItemArry()" >
+          <div class="figma-form-select-items-count">Item ({{QuatItems.length}})</div>
+          <div class="figma-form-select-items-text">
+            <span class="figma-form-select-items-text-text"> {{Headingss[4].heading0}} </span>
+            <i class="fa fa-angle-right"></i>
+          </div>
+        </div>
+        <div class="figma-form-wrapper" *ngIf="isModulefieldview(7, 'DocTotal')">
+          <label>{{Headingss[1].heading11}}</label>
+          <div class="newrupe">
+            <span style="top:14px;">{{'' | priceFormat:''}}</span>
+            <input type="number" class="input-fld" name="totalAmount" [(ngModel)]="total_Amount"
+              placeholder="{{Headingss[1].heading11}}"
+              [class.disable-fld]="!isModulefieldedit(7, 'DocTotal')" [disabled]="!isModulefieldedit(7, 'DocTotal')">
+
+          </div>
+        </div>
+        <div class="figma-form-wrapper" *ngIf="isModulefieldview(7, 'DiscountPercent')">
+          <label>{{Headingss[1].heading12}}</label>
+          <div>
+            <input type="number" min="0" max="100" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(7, 'DiscountPercent')" name="DiscountPercent"
+            [(ngModel)]="AddDelivery.DiscountPercent" #DiscountPercent="ngModel" placeholder="Enter {{Headingss[1].heading12}}" (change)="calculatitonFuntion(QuatItems,'cal')"
+            [class.disable-fld]="!isModulefieldedit(7, 'DiscountPercent')" [disabled]="!isModulefieldedit(7, 'DiscountPercent')" [required]="HeadingServices.isModulefieldMendetory(7, 'DiscountPercent')">
+            <span class="help-block danger" *ngIf="DiscountPercent.errors?.max || DiscountPercent.errors?.min && DiscountPercent.touched"
+            >
+              Take Numeric Value Only and Value between 1 to 100
+            </span>
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(7, 'DiscountPercent')">
+              <span class="help-block danger"
+                *ngIf="(DiscountPercent.errors?.required && f.submitted)||(DiscountPercent.errors?.required && DiscountPercent.touched)">
+                The {{Headingss[1].heading12}} is required
+              </span>
+            </ng-container>
+          </div>
+        </div>
+        <div class="figma-form-wrapper" *ngIf="isModulefieldview(7, 'FreightCharge')">
+          <label>{{Headingss[1].heading9}}</label>
+          <div class="newrupe">
+            <span style="top:14px;">{{'' | priceFormat:''}}</span>
+            <input type="number" min="0" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(7, 'FreightCharge')" name="FreightCharge"
+              [(ngModel)]="AddDelivery.FreightCharge" #FreightCharge="ngModel" placeholder="Enter {{Headingss[1].heading9}}" (change)="calculatitonFuntion(QuatItems,'cal')"
+              [class.disable-fld]="!isModulefieldedit(7, 'FreightCharge')" [disabled]="!isModulefieldedit(7, 'FreightCharge')" [required]="HeadingServices.isModulefieldMendetory(7, 'FreightCharge')">
+              <span class="help-block danger" *ngIf="FreightCharge.errors?.min && FreightCharge.touched"
+              >
+                Take Numeric Value Only
+              </span>
+              <ng-container *ngIf="HeadingServices.isModulefieldMendetory(7, 'FreightCharge')">
+                <span class="help-block danger"
+                  *ngIf="(FreightCharge.errors?.required && f.submitted)||(FreightCharge.errors?.required && FreightCharge.touched)">
+                  The {{Headingss[1].heading9}} is required
+                </span>
+              </ng-container>
+            </div>
+        </div>
+        <div class="figma-form-wrapper figma-form-wrapper-full">
+          <input type="checkbox" class="input-fld checkbox" [(ngModel)]="showHidedata" name="showHidedata" placeholder="Ship To Address" autocomplete="off">
+          <label>Self Delivery?</label>
+        </div>
+      <ng-container *ngIf="showHidedata">
+        <div class="figma-form-central-main-head-name">{{Headingss[0].Extra5}}</div>
+        <div class="figma-form-wrapper" *ngIf="isModulefieldview(7, 'TrackingId')">
+          <label>{{Headingss[0].Extra6}} </label>
+          <input type="text" class="input-fld" [(ngModel)]="AddDelivery.TrackingId" name="TrackingId"  placeholder="Enter {{Headingss[0].Extra6}}" autocomplete="off" [class.disable-fld]="!isModulefieldedit(7, 'TrackingId')" [disabled]="!isModulefieldedit(7, 'TrackingId')">
+        </div>
+        <div class="figma-form-wrapper">
+          <label>{{Headingss[0].Extra7}} </label>
+          <select type="text" class="input-fld required-fld" [(ngModel)]="AddDelivery.ShippedWith" name="ShippedWith" placeholder="{{Headingss[0].Extra6}}" autocomplete="off"  [required]="showHidedata">
+            <option value="">Select {{Headingss[0].Extra7}}</option>
+            <option>DTDC</option>
+                    <option>DHL</option>
+                    <option>Blue dart</option>
+                    <option>Indian Post</option>
+                    <option>Fedex</option>
+                    <option>Ship rocket</option>
+                    <option>Go javas</option>
+            </select>
+        </div>
+        <!-- <div class="figma-form-wrapper">
+          <label>Status </label>
+          <input type="text" class="input-fld required-fld" [(ngModel)]="AddDelivery.TrackingStatus" name="TrackingStatus" placeholder="Status" autocomplete="off"  [required]="showHidedata">
+        </div> -->
+        <div class="figma-form-wrapper">
+          <label>{{Headingss[1].heading11}} </label>
+          <input type="text" class="input-fld required-fld" [(ngModel)]="AddDelivery.DocTotal" name="DocTotal" placeholder="{{Headingss[1].heading11}}" autocomplete="off"  [required]="showHidedata">
+        </div>
+        <div class="figma-form-wrapper">
+          <label>{{Headingss[0].Extra8}}</label>
+          <input type="date" class="input-fld required-fld" [(ngModel)]="AddDelivery.DispatchedDate" name="DispatchedDate" placeholder="{{Headingss[0].Extra8}}" autocomplete="off"  [required]="showHidedata">
+        </div>
+        <div class="figma-form-wrapper">
+          <label>{{Headingss[0].Extra9}} </label>
+          <input type="date" class="input-fld required-fld" [(ngModel)]="AddDelivery.DocDueDate" name="DocDueDate" placeholder="{{Headingss[0].Extra9}}" autocomplete="off"  [required]="showHidedata">
+        </div>
+        </ng-container>
+      </div>
+      <div class="figma-modal-fotter">
+        <button class="figma-outline-btn" (click)="modal.dismiss('Cross click')">{{Headingss[0].heading112}}</button>
+        <!-- <button class="figma-outline-btn">Save and Create Other</button> -->
+        <button class="figma-prim-btn" (click)="SaveOrder(f)">{{Headingss[0].heading105}}</button>
+      </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="'Item'">
+
+          <p class="figma-modal-inner-heading">Selected Items ({{QuatItems.length}})</p>
+          <div class="sales-boxes" style="margin-top: 20px;padding: 0px 10px;">
+            <div class="recent-sales UserManagement">
+
+              <table class="new-tabl">
+                <thead class="MainUserList" style="position: static;">
+                  <tr>
+
+                    <th>{{Headingss[3].heading}}  </th>
+                    <th>{{Headingss[3].heading0}}  </th>
+                    <th>{{Headingss[3].heading2}}  </th>
+                    <th>{{Headingss[3].heading7}} </th>
+                    <th>{{Headingss[3].heading8}} </th>
+                    <th>{{Headingss[3].heading6}} </th>
+                    <!-- <th>Action </th> -->
+
+                  </tr>
+                </thead>
+
+                <tr class="hover" *ngFor="let item of QuatItems; let i = index">
+
+                  <td>{{item.ItemCode}}</td>
+                  <td >{{item.ItemDescription}}</td>
+                  <td >{{item.UnitPrice | priceFormat}}</td>
+                  <td >{{item.TaxRate}}</td>
+                  <td>{{item.DiscountPercent}}</td>
+
+                  <!-- <td>{{item.Quantity}}</td> -->
+                  <td class="data-inc-dec">
+                  <div class="minus" (click)="minus_qty(item.ItemCode)"> - </div>
+                  <span class="cut-qny" style="padding-top: 4px;"> {{item.Quantity}} </span>
+                  <div class="plus" (click)="add_qty(item.ItemCode)"> + </div>
+                  </td>
+                 <!-- <td><span class="figma-screen-close" [innerHTML]="'figma-modal-close' | svgIcons:''"  (click)="remove_array(i)"></span></td> -->
+
+                </tr>
+
+              </table>
+            </div>
+          </div>
+        <div class="figma-modal-fotter">
+          <button class="figma-outline-btn" (click)="cancelSaveChange('Cancel')">{{Headingss[0].heading112}}</button>
+          <!-- <button class="figma-outline-btn">Save and Create Other</button> -->
+          <button class="figma-prim-btn" (click)="cancelSaveChange('Save')">{{Headingss[0].heading105}}</button>
+        </div>
+      </ng-container>
+    </ng-container>
+    </form>
+  </ng-container>
+
+</ng-template>
+
+
+
+
+<ng-template #confirmModal let-modal>
+  <div class="modal-body">
+    <p> Are You Sure Do You Want To Cancel This Delivery</p>
+    <div class="confirm-btn">
+      <button class="btn custom-btn-blue" (click)="cancelOrder(CanelID)">OK</button>
+      <button class="btn custom-btn-outline-blue" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,131 @@
+th.minWidth{
+    min-width: 100px;
+}
+th.MinWidthID{
+    min-width: 67px;
+}
+th.StatusMIn{
+    min-width: 110px;
+}
+
+tr.hover li.OnHold{
+    list-style: none;
+    color: #FFC700;
+    background: #FEFAEC;
+    border-radius: 4px;
+    padding: 5px;
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+tr.hover li.OffTrack{
+    list-style: none;
+    color: #FF791B;
+    background: #FFF4ED;
+    border-radius: 4px;
+    padding: 5px;
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+tr.hover li.InProcess{
+    list-style: none;
+    color: #4766D1;
+    background: #F2F5FF;
+    border-radius: 4px;
+    padding: 5px;
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+tr.hover li.CancelledLI{
+    list-style: none;
+    color: #BA1A1A;
+    background: #F9EAEA;
+    border-radius: 4px;
+    padding: 5px;
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+tr.hover li.CompletedLI{
+    list-style: none;
+    color: #198038;
+    background: #EFFBF3;
+    border-radius: 4px;
+    padding: 5px;
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+tr .PriorityPerent li.PriorityTD{
+    list-style: none;
+    margin-left: 10px;
+}
+tr .PriorityPerent{
+    display: flex;
+}
+tr .PriorityPerent span.High{
+    background: red;
+    width: 9px;
+    height: 9px;
+    margin-top: 4px;
+    border-radius: 10px;
+}
+tr .PriorityPerent span.Low{
+    background: #60F15D;
+    width: 9px;
+    height: 9px;
+    margin-top: 4px;
+    border-radius: 10px;
+}
+tr .PriorityPerent span.Medium{
+    background: #FED500;
+    width: 9px;
+    height: 9px;
+    margin-top: 4px;
+    border-radius: 10px;
+}
+
+  
+#progressTDcontainer{
+    width: 100px;
+    background-color: #EAEAEA;
+    height: 11px;
+    position: relative;
+    border-radius: 19px;
+    .loading_bar {
+        width: 20%;
+        height: 100%;
+        background-color: #04A91E;
+        border-radius: 18px 2px 0px 18px;
+      }
+      #progress_container_text {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 100%;
+      }
+      
+      #progress_container_text_align_center {
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        border-radius: 21px;
+        font-size: 9px;
+      }
+
+} 
+
+// .MainProgressTD{
+//     .progress-bar {
+//         background: #198038 !important;
+//     }
+//     .present{
+//         position: absolute;
+//         top: 30%;
+//         left: 40%;
+//         color: #000;
+//     }
+// }

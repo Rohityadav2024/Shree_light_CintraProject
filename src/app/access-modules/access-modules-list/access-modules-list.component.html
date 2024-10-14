@@ -1,0 +1,147 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+
+      <p class="custom-search-head-name"><span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="backClicked()" style="cursor:pointer;"></span> User Management ({{ role_name }})
+      </p>
+     <div class="custom-search-wrapper">
+       <div ngbDropdown class="custom-common-search-container">
+         <!-- <button type="button" class="custom-com-temp-btn" (click)="SaveChange()">-->
+           <button class="custom-com-temp-btn" (click)="deleteAttach(confirmModal)">
+           <span
+             class="custom-sp-plus-ft-sz"></span> Save</button>
+
+       </div>
+     </div>
+    </div>
+    <!-- <div class="custom-search-container">
+
+    </div> -->
+    <div class="sales-boxes">
+      <div class="recent-sales box" style="padding: 10px;">
+        <form #f="ngForm" name="theForm">
+          <!-- <form #f="ngForm" name="theForm" (submit)="saveSettings(f)"> -->
+          <div class="sales-details">
+            <div class="custom-outter-body-lead-list-c9">
+              <div class="custom-table-select-icons">
+                <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="GetAllModule()"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Parent Table -->
+          <table id="table-data" class="new-tabl">
+            <thead class="MainUserList">
+              <tr>
+                <th>Module</th>
+                <th>Add</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <ng-container *ngFor="let module of Module; let moduleIndex = index">
+              <tr class="hover">
+                <td>{{ module.module_name }}</td>
+                <td>
+                  <input type="checkbox" [name]="'add_status_' + moduleIndex" [(ngModel)]="module.is_add"
+                    [disabled]="!module.is_view"
+                    (change)="moduleUpdator(module, $event.target.checked, 'add')">
+                </td>
+                <td>
+                  <input type="checkbox" [name]="'view_status_' + moduleIndex" [(ngModel)]="module.is_view"
+                    (change)="moduleUpdator(module, $event.target.checked, 'view')">
+                </td>
+                <td>
+                  <input type="checkbox" [name]="'edit_status_' + moduleIndex" [(ngModel)]="module.is_edit"
+                    [disabled]="!module.is_view"
+                    (change)="moduleUpdator(module, $event.target.checked, 'edit')">
+                </td>
+                <td class="text-center" [ngStyle]="{ cursor: module.is_view ? 'pointer' : 'not-allowed' }" (click)="showhid(moduleIndex)">
+                  <i *ngIf="module.is_view"
+                    [ngClass]="{
+                      'fa-caret-down': openId === moduleIndex,
+                      'fa-caret-right': openId !== moduleIndex
+                    }"
+                    class="fa fa-caret-right"
+                    >
+                  </i>
+                </td>
+              </tr>
+
+              <!-- Show sub-modules only if "view" is checked -->
+              <tr *ngIf="isShow && openId === moduleIndex && module.is_view">
+                <td colspan="5">
+                  <table id="table-data" class="new-tabl">
+                    <thead style="border: 1px solid #cdcdcd;">
+                      <tr>
+                        <th>S. No.</th>
+                        <th>Field Name</th>
+                        <th>View</th>
+                        <th>Edit</th>
+                      </tr>
+                    </thead>
+                    <td></td>
+                    <td></td>
+                    <td >
+                      <input type="checkbox" [(ngModel)]="module.selectAllView"
+                        [ngModelOptions]="{standalone: true}"
+                        (change)="toggleAll(module, $event.target.checked, 'view')">
+                      <label class="ml-2"></label>
+                    </td>
+                    <td >
+                      <input type="checkbox" [(ngModel)]="module.selectAllEdit" *ngIf="module.selectAllView == true"
+                        [ngModelOptions]="{standalone: true}"
+                        (change)="toggleAll(module, $event.target.checked, 'edit')">
+                      <label class="ml-2"></label>
+                    </td>
+
+                    <ng-container  *ngFor="let item2 of module.data; let item2Index = index" >
+                    <tr *ngIf="item2.is_mandatory != true">
+                      <td>{{ item2Index + 1 }}</td>
+                      <td>{{ item2.label }}</td>
+                      <td>
+                        <input type="checkbox" [name]="'view' + moduleIndex + item2Index" [(ngModel)]="item2.view"
+                          [ngModelOptions]="{ standalone: true }"
+                          (change)="updateChildItem(module, $event.target.checked, 'view', item2, moduleIndex, item2Index)">
+                      </td>
+                      <td>
+                        <input type="checkbox" [name]="'edit' + moduleIndex + item2Index" [(ngModel)]="item2.edit"
+                          [disabled]="!item2.view"
+                          [ngModelOptions]="{ standalone: true }"
+                          (change)="updateChildItem(module, $event.target.checked, 'edit', item2, moduleIndex, item2Index)">
+                      </td>
+                    </tr>
+                  </ng-container>
+                  </table>
+                </td>
+              </tr>
+            </ng-container>
+          </table>
+
+          <!-- <div class="card-footer text-center">
+            <button class="custom-com-temp-btn" (click)="deleteAttach(confirmModal)">Save</button>
+          </div> -->
+
+          <div class="text-center my-3" *ngIf="isLoading">
+            <img src="../../assets/img/loder.gif" style="height: 100%; width: 10%;">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<ng-template #confirmModal let-modal>
+  <div class="modal-body">
+    <p> Are You Sure To Save If You Are Change in Admin You Need To Relogin ?</p>
+    <div class="confirm-btn">
+      <button class="btn custom-btn-blue" (click)="saveSettings()">OK</button>
+      <button class="btn custom-btn-outline-blue" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,38 @@
+.nav-links {
+
+  .list {
+    margin: 10px;
+    color:#4a79e4;
+
+    a {
+      display: grid;
+      grid-template-columns: 20px auto;
+      align-items: center;
+    }
+  }
+
+}
+
+.te{
+  font-weight:600;
+  margin-left: -7px;
+  color:#4a79e4;
+  font-size: 12px;
+  margin-left: 2px;
+}
+.pr{
+  margin: 14px 0px;
+    font-size: 13px;
+    font-weight: 400;
+}
+.da{
+  margin: 14px 0px;
+  width: 100%;
+  background-color: #f1f1f1;
+  height: 28px;
+  border: none;
+  border-radius: 2px;
+  font-size: 10px;
+  padding: 10px;
+
+}

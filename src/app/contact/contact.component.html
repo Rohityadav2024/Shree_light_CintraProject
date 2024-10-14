@@ -1,0 +1,190 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="sales-boxes">
+      <div class="recent-sales box table-view-container-size" style="background:transparent !important;">
+
+
+        <div class="row">
+          <div class="col-md-3 mt-1 ">
+            <div class="w-100 bg-white py-3 rounded h-100">
+              <h6 class="fw-600 border-bottom px-3 pb-3"> Leads Management </h6>
+              <div class="em-search-wrapper border-bottom px-3 py-3">
+                <p class="fw-600 mb-0">Leads</p>
+                <div class="em-search-container">
+
+
+                  <div ngbDropdown class="d-inline-block">
+                    <button type="button" class="btn btn-outline-primary btn-skyblue" id="dropdownBasic1"
+                      ngbDropdownToggle>Actions</button>
+                    <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <li><a class="cursor" (mouseleave)="mouseLeave()" (mouseenter)="multipledropdownhide()"
+                          ngbDropdownItem>Import</a></li>
+                      <li><a class="cursor" (mouseleave)="mouseLeave()" (mouseenter)="multipledropdownhide()"
+                          ngbDropdownItem>Export</a></li>
+                      <li><a ngbDropdownItem (mouseenter)="mouseEnter()" (mouseleave)="mouseLeaveshort()"
+                          class="multiple-dropdown-tag cursor">Display As <span style="float:right;"><i
+                              class="fa fa-angle-right" aria-hidden="true"></i></span></a>
+                        <ul class="tableview multipledropdown py-2">
+                          <li class="my-2"><a routerLink="/leads/table">
+                            <span [innerHTML]="'table-view' | svgIcons:''"></span>
+                              &nbsp; &nbsp; Table</a></li>
+                          <li class="my-2"><a routerLink="/leads/split">
+                            <span [innerHTML]="'split-view' | svgIcons:''"></span>
+
+                              &nbsp; &nbsp; Split
+                            </a></li>
+                          <li class="my-2"><a routerLink="/leads/karban">
+                            <span [innerHTML]="'karban-view' | svgIcons:''"></span>
+
+
+                              &nbsp; &nbsp; Karban</a></li>
+                        </ul>
+                      </li>
+                      <li (mouseenter)="mouseEntershortby()" (mouseleave)="mouseLeavetable()">
+                        <a class="cursor" ngbDropdownItem>Sort By <span style="float:right;"><i
+                              class="fa fa-angle-right" aria-hidden="true"></i></span></a>
+                        <ul class="shortview multipledropdown py-2">
+                          <li class="my-2"><a routerLink="">All leads</a></li>
+                          <li class="my-2"><a routerLink="">My leads</a></li>
+                          <li class="my-2"><a routerLink="">This week</a></li>
+                          <li class="my-2"><a routerLink="">This month</a></li>
+                          <li class="my-2"><a routerLink="">This year</a></li>
+                        </ul>
+                      </li>
+
+
+
+                    </ul>
+                  </div>
+                  <button class="openbtn btn-skyblue openbtn" (click)="openNav()"><i class="fa fa-filter"
+                      aria-hidden="true"></i> Filters</button>
+                </div>
+              </div>
+
+              <!-- filter section start -->
+
+              <div id="mySidepanel" class="sidepanel sidepanel2">
+                <!-- <a class="closebtn" (click)="closeNav()">&times;</a> -->
+                <div class="d-flex justify-content-between align-items-center">
+                  <div><span style="font-size:12px; font-weight:600;">Filter</span></div>
+                  <div>
+                    <a style="font-size:12px; font-weight:600; text-decoration: none;">Clear all</a>
+                    <a style="font-size:12px; font-weight:600; text-decoration: none;" (click)="closeNav()">&times;</a>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- <div class="col-md-12 text-center" style="margin-bottom: 15px;">
+                    <strong style="color: #4a79e4 !important;">Lead Filters</strong>
+                  </div> -->
+                  <div class="col-md-6" style="margin-bottom: 15px;">
+                    <label><b>Lead Status</b></label>
+                  </div>
+                  <div class="col-md-6" style="margin-bottom: 15px;">
+                    <!-- <select style="border: none;width: 100px;" [(ngModel)]="status2" class="f-size" multiple>
+                      <option value="All" selected>All</option>
+                      <option value="Follow Up">Follow Up</option>
+                      <option value="Demo">Demo</option>
+                      <option value="Hold">Hold</option>
+                      <option value="Meeting">Meeting</option>
+                      <option value="Dead">Dead</option>
+                    </select> -->
+
+                    <ng-multiselect-dropdown style="font-size:12px !important" [(ngModel)]="status2"
+                      [placeholder]="'Select Days'" [settings]="dropdownSettings1" [data]="dropdownList1" name="LeadStatus"
+                      (onSelect)="onItemSelect1($event)" (onDeSelect)="onDeSelect1($event)"
+                      (onSelectAll)="onSelectAll1($event)" (onDeSelectAll)="onDeSelectAll1($event)">
+                    </ng-multiselect-dropdown>
+                  </div>
+                  <div class="col-md-6" style="margin-bottom: 15px;">
+                    <label><b>Lead Prority</b></label>
+                  </div>
+                  <div class="col-md-6" style="margin-bottom: 15px;">
+                    <select style="border: none;width: 100px;" [(ngModel)]="leadtype2" class="f-size">
+                      <option value="All" selected>All</option>
+                      <option value="Hot">Hot</option>
+                      <option value="Warm">Warm</option>
+                      <option value="Cold">Cold</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-6" style="margin-bottom: 15px;">
+                    <label><b>Category</b></label>
+                  </div>
+                  <div class="col-md-6" style="margin-bottom: 15px;">
+                    <select style="border: none;width: 100px;" [(ngModel)]="cate2" class="f-size">
+                      <option value="All" selected>All</option>
+                      <option value="ass">Assigned</option>
+                      <option value="un">UnAssigned</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-6 text-center" style="margin-bottom: 15px;">
+                    <button
+                      style="background: transparent;border: 1px solid #4a79e4;padding: 6px 20px;color: #4a79e4;border-radius: 6px;font-size: 13px;"
+                      (click)=resetfilter()>Reset</button>
+                  </div>
+                  <div class="col-md-6" style="margin-bottom: 15px;">
+                    <button
+                      style=" border: 1px solid #4a79e4; padding: 6px 20px; background: #4a79e4; color: #fff;border-radius: 6px; font-size: 13px;"
+                      (click)="apply()">Apply</button>
+                  </div>
+
+                </div>
+              </div>
+
+              <!---Filter section close-->
+
+
+
+              <div class="em-search-wrapper border-bottom px-3 py-3">
+
+
+
+              </div>
+
+
+
+
+
+
+            </div>
+
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+
+
+        <!-- <div style="text-align: center;">
+          <img src="../../assets/img/loder.gif" style="width: 25%;margin: 10%;">
+        </div> -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="w-100 bg-white">
+              <app-phone></app-phone>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+  <div class="loadercss" style="text-align: center;" *ngIf="isLoading">
+    <img src="../../assets/img/loder.gif">
+  </div>
+</section>
+
+

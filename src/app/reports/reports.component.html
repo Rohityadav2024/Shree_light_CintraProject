@@ -1,0 +1,310 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+      <p class="custom-search-head-name">{{Headingss[0].leftheading}}</p>
+      <div class="custom-search-wrapper">
+        <div ngbDropdown class="custom-common-search-container">
+          <button type="button" class="custom-action-btn openbtn" *ngIf="Table2Show" (click)="open(Greport)"><i>Filter
+              Report &nbsp;</i>
+            <!-- <i title="generate report" class=""></i> -->
+          </button>
+          <button type="button" class="custom-action-btn openbtn" *ngIf="!Table2Show" (click)="openNav()"><i
+              class="fa fa-filter openbtn"></i> Filter</button>
+          <ng-template #filter>{{Headingss[0].heading109}}</ng-template>
+          <div class="custom-search-ico-input-container">
+            <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+
+            <input type="text" name="" id="" placeholder="Search" [(ngModel)]="searchValue"
+              (keyup.enter)="RowPerPage()" *ngIf="!Table2Show">
+            <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+              *ngIf="searchValue != '' && !Table2Show"></span>
+            <button type="button" class="new-search-btn" (click)="RowPerPage()" *ngIf="!Table2Show"><i
+                class="fa-solid fa-magnifying-glass" ></i></button>
+            <input type="text" name="" id="" placeholder="Search" [(ngModel)]="searchValue"
+              (keyup.enter)="RowPerPage2()" *ngIf="Table2Show">
+            <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach2()"
+              *ngIf="searchValue != '' && Table2Show" ></span>
+            <button type="button" class="new-search-btn" (click)="RowPerPage2()" *ngIf="Table2Show"><i
+                class="fa-solid fa-magnifying-glass" ></i></button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales UserManagement">
+        <div class="sales-details">
+          <div class="custom-outter-body-lead-list-c9">
+            <div class="custom-table-select-icons">
+              <!-- <span *ngIf="commonObj.tbCheckM_1 && commonObj.tbCheckM_2"
+                [innerHTML]="'figma-pencil-write' | svgIcons:'figma-template-central'" (click)="openEdit(contentEdit, count,false)"></span>
+              <span *ngIf="commonObj.tbCheckM_1" [innerHTML]="'figma-delete' | svgIcons:'figma-template-central'"
+                (click)="multipleDelete1()"></span>
+              <i *ngIf="commonObj.tbCheckM_2" class="fa-solid fa-eye figma-template-central" (click)="openEdit(contentEdit, count,true)"></i> -->
+              <!-- <i class="fa-solid fa-gear" style="color:#909092;" data-bs-toggle="modal" data-bs-target="#EditModalNew"></i> -->
+              <!-- <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span> -->
+              <div class="reportsall" [ngClass]="{'active':AllReport && ReportHistoryActive == false }" (click)="allReport()">All
+                {{Headingss[0].leftheading}}</div>
+              <div class="reportsall" [ngClass]="{'active':!AllReport && ReportHistoryActive == false}" data-bs-toggle="modal"
+                data-bs-target="#EditModalNew" (click)="toggleNav($event)">{{Headingss[0].Extra3}}
+                <i class="fa fa-angle-down" style="font-size: 15px;padding-left: 10px;"></i>
+              </div>
+              <div class="reportsall" [ngClass]="{'active':  ReportHistoryActive == true }" (click)="showReportHistory()">
+                Report History
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="MultiSelectSec" *ngIf="bridgeService2.FilterTabs.length != 0 && ReportHistoryActive == false" >
+          <span class="tabs" [ngClass]="{'active':item.title == ModuleItemSub}"
+            *ngFor="let item of bridgeService2.FilterTabs; let i = index;" (click)="goDetail(item)">{{item.title}}
+            <i class="fa fa-times-circle" (click)="remove_array(i)"></i>
+          </span>
+        </div>
+        <ng-container *ngIf="ReportHistoryActive == false">
+        <div *ngIf="ModuleItem != ''" class="ModuleItem">{{ModuleItem}}</div>
+        <div *ngIf="ModuleItemSub != ''" class="ModuleItem">{{ModuleItemSub}}
+          <span class="reportdwd" (click)="ExportIt()"><i class="fa fa-download" aria-hidden="true"></i>
+            Download</span>
+        </div>
+      </ng-container>
+        <table class="new-tabl" *ngIf="!Table2Show && ReportHistoryActive == false">
+          <!-- <ng-container *ngIf="!isLoading2"> -->
+          <thead class="MainUserList">
+            <tr>
+              <th (click)="togglesortType('title')">{{Headingss[0].SubHeading}} Name <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('description')">{{Headingss[0].Extra1}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('last_access')">{{Headingss[0].Extra2}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('title')">{{Headingss[0].Extra4}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th class="text-center">{{Headingss[0].heading111}}</th>
+            </tr>
+          </thead>
+
+          <tr class="hover" *ngFor="let item of industry; let i = index ">
+            <td (click)="goDetail(item)">{{item.title}}</td>
+            <td (click)="goDetail(item)" style="width:600px">{{item.description}}</td>
+            <td (click)="goDetail(item)">{{item.last_access || 'NA' | customDate}}</td>
+            <td>
+              <select class="input-fld">
+                <option>Role</option>
+              </select>
+            </td>
+            <td class="text-center" style="padding: 0 15px;">
+              <span class="edit-delete edit-delete{{item.id}}" (click)="editdeletepop(item)"
+                [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+              <div class="hover-show hover-show{{item.id}} hover-show-inactive" style="display:none;">
+                <span><i class="fa fa-download" aria-hidden="true"></i> Download</span><br>
+                <span><i class="fa fa-trash" aria-hidden="true"></i> Delete</span><br>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="totalCount == 0">
+            <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No
+              Data Found</td>
+          </tr>
+          <!-- </ng-container> -->
+
+        </table>
+        <table class="new-tabl" id="table-data" *ngIf="ReportHistoryActive == true">
+          <thead class="MainUserList">
+            <tr>
+              <th>User Id</th>
+              <th>Report Title</th>
+              <!-- <th>User Email</th> -->
+              <th>Report Name</th>
+              <th>Added On</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <ng-container *ngFor="let report of reportsData">
+            <tr class="hover">
+              <td>{{ report.user_id }}</td>
+              <td>{{ report.report_title }}</td>
+              <!-- <td>{{ report.user_email }}</td> -->
+              <td>{{ report.module_name }}</td>
+              <td>{{ report.added_on }}</td>
+              <td>
+                <a [href]="report.file_url" download>
+                  <i title="Download Excel" class="fa-solid fa-file-export download-icon cursor-pointer exportfileicon"></i>
+                </a>
+                <i class="fa fa-close" style="font-size:16px;color:red;margin-left: 10px;" (click)="CanelOrderPopup(confirmModal,report.id)"></i>
+              </td>
+            </tr>
+          </ng-container>
+
+        </table>
+        <div *ngIf="Table2Show && ReportHistoryActive == false">
+          <table class="new-tabl" id="LeadsTable">
+            <thead class="MainUserList">
+              <tr>
+                <th *ngFor="let head of DataHeading" style="text-transform: capitalize;">{{head}}</th>
+
+              </tr>
+            </thead>
+            <ng-container *ngFor="let item of Datas; let i = index">
+              <tr class="hover">
+
+                <td *ngFor="let headkey of DataHeadingkey">{{item[headkey] || 'NA'}}</td>
+
+              </tr>
+            </ng-container>
+          </table>
+        </div>
+        <div class="LoderGifHere" *ngIf="isloadging">
+          <img src="../../assets/img/loder.gif">
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="figma-pagination-controls" *ngIf="!Table2Show  && ReportHistoryActive == false">
+      <div class="figma-pagination-rows-total">
+        <div class="figma-rows-per-page">
+          <div class="figma-rows-per-page-label">Row per page</div>
+          <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+            [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+          <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+        </div>
+        <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+          (pageChange)="pageChanged($event)" [(page)]="pagination.PageNo" [maxSize]="5" [rotate]="true"
+          [boundaryLinks]="false" class="figma-pagination">
+          <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+          <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+        </ngb-pagination>
+      </div>
+    </div>
+    <div class="figma-pagination-controls" *ngIf="Table2Show && ReportHistoryActive == false">
+      <div class="figma-pagination-rows-total">
+        <div class="figma-rows-per-page">
+          <div class="figma-rows-per-page-label">Row per page</div>
+          <ng-select class="figma-row-per-page-ng-select"
+            [(ngModel)]="pagination2.maxItem" (change)="RowPerPage2()">
+          <ng-option *ngFor="let lo of ['10','20','50','100',totalCount]; let last = last" value="{{lo}}"> {{ last ? 'All' : lo }}</ng-option>
+          </ng-select>
+          <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+        </div>
+        <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination2.PageShow"
+          (pageChange)="pageChanged2($event)" [(page)]="pagination2.PageNo" [maxSize]="5" [rotate]="true"
+          [boundaryLinks]="false" class="figma-pagination">
+          <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+          <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="EditModalNew" tabindex="-1" aria-labelledby="EditModalNewLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content22" *ngIf="isNavVisible">
+      <div class="modal-body">
+        <ul>
+          <li *ngFor="let item of ReportModule" [ngClass]="{'active':item.title==ModuleItem }"
+            (click)="setModule(item)">{{item.title}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="mySidepanel" class="sidepanel">
+  <div class="row ">
+    <div class="row">
+      <div class="col-12 mb-1 px-3 border-bottom" id="FilterTopSide">
+        <strong style="color: #4a79e4 !important;">Filter</strong>
+        <a class="closebtn" (click)="closeNav()">&times;</a>
+      </div>
+    </div>
+    <form name="form">
+      <div class="filterForm-container">
+        <!-- <div class="row">
+      <div class="col-md-6">
+        <label class="MainFilterLabel filtersize">{{'From Date'}}</label>
+        <input class="input-fld" type="date" name="CreateDate__gte" [(ngModel)]="filter_customer.CreateDate__gte" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="col-md-6">
+        <label class="MainFilterLabel filtersize">{{'To Date'}}</label>
+        <input class="input-fld" type="date" name="CreateDate__lte" [(ngModel)]="filter_customer.CreateDate__lte" [ngModelOptions]="{standalone: true}">
+      </div>
+    </div> -->
+      </div>
+      <!-- <hr class="TophrLIne"> -->
+      <div class="row">
+        <div class="FilterBtnHere">
+          <div class="ResetBTN">
+            <a (click)="resetfilter()">{{Headingss[0].heading114}}</a>
+          </div>
+          <div class="ApplyBTN">
+            <button (click)="RowPerPage()">{{Headingss[0].heading113}}</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #Greport let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Filter Report</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <!-- <div *ngIf="error">{{error}}</div> -->
+  <!-- <div *ngIf="success">{{success}}</div> -->
+  <form #f="ngForm" name="theForm" (submit)="genaratereport(f)">
+    <div class="modal-body">
+      <div class="row">
+        <div class="row">
+          <div class="col-md-6 pe-3" id="MainPlaceholderFilter">
+            <label class="MainFilterLabel filtersize">From Date</label>
+            <input class="input-fld" type="date" name="CreateDate__gte"
+              [(ngModel)]="commonPayload.CreateDate__gte" [ngModelOptions]="{standalone: true}"
+              #CreateDate__gte="ngModel">
+
+          </div>
+          <div class="col-md-6 pe-3" id="MainPlaceholderFilter">
+            <label class="MainFilterLabel filtersize">To Date</label>
+            <input class="input-fld" type="date" name="CreateDate__lte"
+              [(ngModel)]="commonPayload.CreateDate__lte" [ngModelOptions]="{standalone: true}"
+              #CreateDate__lte="ngModel">
+          </div>
+        </div>
+      </div>
+
+      <!-- <div style="text-align: center;" *ngIf="isloadging">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div> -->
+      <div class="col-md-12 text-center mt-3" style="padding: 1%;">
+        <button class="add-invent1">Save</button>
+      </div>
+
+
+    </div>
+
+  </form>
+
+</ng-template>
+
+<ng-template #confirmModal let-modal>
+  <div class="modal-body">
+    <p> Are You Sure Do You Want To Cancel This Report History</p>
+    <div class="confirm-btn">
+      <button class="btn custom-btn-blue" (click)="cancelOrder(CanelID)">OK</button>
+      <button class="btn custom-btn-outline-blue" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>

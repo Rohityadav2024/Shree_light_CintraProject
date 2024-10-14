@@ -1,0 +1,1076 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+      <p class="custom-search-head-name">{{Headingss[0].leftheading}}</p>
+      <div class="custom-search-wrapper">
+
+
+        <div ngbDropdown class="custom-common-search-container">
+          <!-- <button type="button" class="custom-action-btn openbtn" (click)="open(Greport)"><i>Generate &nbsp;</i>
+          </button> -->
+          <button *ngIf="bridgeService2.isValidExportStatus()" type="button" class="custom-action-btn openbtn"
+            (click)="Exportexcel()"><i>Export &nbsp;</i>
+            <i title="Download Excel" class="fa-solid fa-file-export download-icon cursor-pointer exportfileicon"></i>
+          </button>
+          <div class="row">
+            <div class="col">
+              <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-primary custom-action-btn" id="dropdownBasic1"
+                  ngbDropdownToggle>{{Headingss[0].heading111}}</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button ngbDropdownItem>
+                    <input type="file" ngbDropdownItem (change)="onFileChange($event)" multiple="false"
+                      class="custom-file-input1" style="float: left;" />
+                    <i title="Download Excel" class="fa-solid fa-download download-icon cursor-pointer importfileicon"
+                      onclick="window.location.href = '../../assets/lead_import.xlsx'"></i>
+                  </button>
+                  <button ngbDropdownItem routerLink="/leads/split">
+                    <span>
+                      <span [innerHTML]="'split-view' | svgIcons:''"></span>
+                      &nbsp; &nbsp; {{Headingss[0].SubHeading3}}</span>
+                  </button>
+                  <button ngbDropdownItem routerLink="/leads/karban">
+                    <span>
+                      <span [innerHTML]="'karban-view' | svgIcons:''"></span>
+                      &nbsp; &nbsp; {{Headingss[0].SubHeading4}}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="custom-action-btn openbtn" (click)="openNav()"><i
+              class="fa fa-filter openbtn"></i> {{Headingss[0].heading109}}</button>
+          <ng-template #filter>{{Headingss[0].heading109}}</ng-template>
+          <div class="custom-search-ico-input-container">
+            <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+            <input type="text" name="" id="" placeholder="{{Headingss[0].heading110}}" [(ngModel)]="searchValue"
+              (keyup.enter)="RowPerPage()">
+            <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+              *ngIf="searchValue != ''"></span>
+            <button type="button" class="new-search-btn" (click)="RowPerPage()"><i
+                class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+          <button type="button" class="custom-com-temp-btn" (click)="open(mymodal)" *ngIf="isModuleViewadd(1)"><span
+              class="custom-sp-plus-ft-sz">+</span> {{Headingss[0].heading101}}</button>
+
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales UserManagement">
+
+        <div class="sales-details">
+          <div class="custom-outter-body-lead-list-c9">
+            <div class="custom-table-select-icons">
+              <span *ngIf="commonObj.tbCheckM_1 && commonObj.tbCheckM_2"
+                [innerHTML]="'figma-pencil-write' | svgIcons:'figma-template-central'"
+                (click)="openEdit(contentEdit, count,false)"></span>
+              <span *ngIf="commonObj.tbCheckM_1" [innerHTML]="'figma-delete' | svgIcons:'figma-template-central'"
+                (click)="confirmModal(confirmModal2,count)"></span>
+              <i *ngIf="commonObj.tbCheckM_2" class="fa-solid fa-eye figma-template-central"
+                (click)="openEdit(contentEdit, count,true)"></i>
+              <i *ngIf="commonObj.tbCheckM_1" class="fa-solid fa-user" style="color:#909092;" data-bs-toggle="modal"
+                data-bs-target="#EditModalNew" (click)="assingEdit(contentAssignEdit, '',true,count)"></i>
+              <!-- <i class="fa-solid fa-gear" style="color:#909092;" data-bs-toggle="modal" data-bs-target="#EditModalNew"></i> -->
+              <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span>
+            </div>
+          </div>
+        </div>
+
+        <table class="new-tabl" id="table-data">
+          <!-- <ng-container *ngIf="!isLoading"> -->
+          <thead class="MainUserList">
+            <tr>
+              <th><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+              <th (click)="togglesortType('id')"> {{Headingss[0].heading0}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('companyName')" style="width: 150px;">{{Headingss[0].heading1}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span></th>
+              <th (click)="togglesortType('contactPerson')">{{Headingss[0].heading2}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span></th>
+              <th (click)="togglesortType('phoneNumber')">{{Headingss[0].heading3}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span></th>
+              <th (click)="togglesortType('status')">{{Headingss[0].heading11}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span>
+              </th>
+              <th (click)="togglesortType('leadType')">{{Headingss[0].heading12}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span></th>
+              <th (click)="togglesortType('employeeId')">{{Headingss[0].heading15}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span></th>
+              <th (click)="togglesortType('assignedTo')">{{Headingss[0].heading13}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th>{{Headingss[0].heading111}}</th>
+            </tr>
+          </thead>
+          <ng-container *ngFor="let item of bridges2; let i = index">
+
+            <!-- <ng-container *ngFor="let item of bridges | searchfilter:searchValue | sortEmployee : sortedColumn; let i = index"> -->
+            <tr class="hover">
+              <td><input type="checkbox" id="checkbox{{item.id}}" value="{{item.id}}" class="checkbox"
+                  (click)="checkboxclick(item.id)">
+                <!-- <i *ngIf="item.status ==='Qualified'" class="fa fa-check right-check" aria-hidden="true"></i> -->
+              </td>
+              <td (click)="suplier(item.id)">{{item.id}}</td>
+              <td (click)="suplier(item.id)">{{item.companyName}}</td>
+              <td (click)="suplier(item.id)">{{item.contactPerson}}</td>
+              <td class="blue-color"><span style="color:#4A79E4;text-decoration: underline;"
+                  (click)="CallFiled(item)">{{item.phoneNumber}}</span></td>
+              <ng-container [ngSwitch]="true">
+                <td *ngSwitchCase="item.status == ''" (click)="suplier(item.id)">...</td>
+                <td *ngSwitchDefault (click)="suplier(item.id)">{{item.status}}</td>
+              </ng-container>
+              <ng-container [ngSwitch]="true">
+                <td *ngSwitchCase="item.leadType.trim() == ''" class="ActiveBTN rounded-pill badge-danger"
+                  style="background: #fff;border: 1px solid #5b5b5b;" (click)="suplier(item.id)">NA</td>
+                <td *ngSwitchCase="item.leadType.trim() == 'Hot'" class="ActiveBTN rounded-pill badge-danger"
+                  (click)="suplier(item.id)">{{item.leadType}}</td>
+                <td *ngSwitchCase="item.leadType.trim() == 'Cold'" class="ActiveBTN rounded-pill badge-success"
+                  (click)="suplier(item.id)">{{item.leadType}}</td>
+                <td *ngSwitchCase="item.leadType.trim() == 'Warm'" class="ActiveBTN rounded-pill badge-warning"
+                  (click)="suplier(item.id)">{{item.leadType}}</td>
+                <!-- <td
+                        [ngClass]="{'ActiveBTN rounded-pill badge-warning': item.leadType.trim() === 'Hot',
+                         'ActiveBTN rounded-pill badge-success' : item.leadType.trim() === 'Cold',
+                         'ActiveBTN rounded-pill badge-success' : item.leadType.trim() === 'Warm'}"
+                        *ngSwitchDefault (click)="suplier(item.id)">{{item.leadType}}</td> -->
+              </ng-container>
+              <td (click)="suplier(item.id)">{{getValues(item.employeeId)[3]}}</td>
+              <td (click)="suplier(item.id)">{{getValues(item.assignedTo)[3]}}</td>
+              <td class="EditBoxForm" style="padding: 0 15px;">
+                <span class="edit-delete edit-delete{{item.id}}" (click)="editdeletepop(item)"
+                  [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                <div class="hover-show hover-show{{item.id}} hover-show-inactive">
+                  <span (click)="openEdit(contentEdit, [item.id],false)" *ngIf="isModuleViewedit(1)"><i
+                      class="fa fa-pencil" aria-hidden="true"></i> {{Headingss[0].heading102}}
+                    {{Headingss[0].leftheading}}</span><br *ngIf="isModuleViewedit(1)">
+                  <span *ngIf="item.status==='Qualified' && isModuleViewadd(3)"
+                    (click)="CreateLeadstoBp(item.id? item.id:0)"><i class="fa fa-plus" aria-hidden="true"></i>
+                    {{Headingss[0].heading101}} {{Headingss[0].heading17}} <br></span>
+                  <span (click)="openfollowup(followup, item.id)"><i class="fa fa-hand-o-up" aria-hidden="true"></i>
+                    {{Headingss[1].heading}}</span><br>
+                  <span (click)="assingEdit(contentAssignEdit, item,false,'')"><i class="fa fa-user"
+                      aria-hidden="true"></i>
+                    Assign {{Headingss[0].leftheading}}</span><br>
+                  <span (click)="openEdit(contentPriorityEdit, [item.id])"><i class="fa fa-pencil"
+                      aria-hidden="true"></i>
+                    {{Headingss[0].heading102}} {{Headingss[0].heading12}}</span><br>
+                  <span *ngIf="item.status !='Qualified'" (click)="confirmModal(confirmModal2,[item.id])"><i
+                      class="fa fa-trash" aria-hidden="true"></i>
+                    Suspend {{Headingss[0].leftheading}}<br></span>
+
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+          <tr *ngIf="totalCount == 0">
+            <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No
+              Data Found</td>
+          </tr>
+          <!-- </ng-container> -->
+        </table>
+        <div class="LoderGifHere" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif">
+        </div>
+
+
+        <!-- <app-phone></app-phone> -->
+
+      </div>
+
+    </div>
+    <div class="figma-pagination-controls">
+      <div class="figma-pagination-rows-total">
+        <div class="figma-rows-per-page">
+          <div class="figma-rows-per-page-label">Row per page</div>
+          <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+            [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+          <div class="figma-rows-per-page-total">Total {{startind}} - {{endind}} of {{totalCount}}</div>
+        </div>
+        <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+          (pageChange)="pageChanged($event)" [(page)]="CurrentPage" [maxSize]="5" [rotate]="true"
+          [boundaryLinks]="false" class="figma-pagination">
+          <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+          <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+        </ngb-pagination>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">{{Headingss[0].heading101}}
+      {{Headingss[0].leftheading}}</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <!-- <div *ngIf="error">{{error}}</div> -->
+  <!-- <div *ngIf="success">{{success}}</div> -->
+  <form #f="ngForm" name="theForm" (submit)="addLeads(f)">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading1}} </label>
+          <input type="text" class="input-fld"
+            [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'companyName')" name="companyName"
+            [(ngModel)]="bridges.companyName" #companyName="ngModel" placeholder="Enter {{Headingss[0].heading1}}"
+            [required]="HeadingServices.isModulefieldMendetory(1, 'companyName')">
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'companyName')">
+            <span class="help-block danger"
+              *ngIf="(companyName.errors?.required && f.submitted)||(companyName.errors?.required && companyName.touched)">
+              The {{Headingss[0].heading1}} is required
+            </span>
+          </ng-container>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading2}} </label>
+          <input type="text" class="input-fld"
+            [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'contactPerson')" name="contactPerson"
+            [(ngModel)]="bridges.contactPerson" #contactPerson="ngModel" placeholder="Enter {{Headingss[0].heading2}}"
+            [required]="HeadingServices.isModulefieldMendetory(1, 'contactPerson')">
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'contactPerson')">
+            <span class="help-block danger"
+              *ngIf="(contactPerson.errors?.required && f.submitted)||(contactPerson.errors?.required && contactPerson.touched)">
+              The {{Headingss[0].heading2}} is required
+            </span>
+          </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'designation')">
+          <label>{{Headingss[0].heading4}}</label>
+          <input type="text" class="input-fld"
+            [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'designation')" name="designation"
+            [(ngModel)]="bridges.designation" #designation="ngModel" placeholder="Enter {{Headingss[0].heading4}}"
+            [class.disable-fld]="!isModulefieldedit(1, 'designation')" [disabled]="!isModulefieldedit(1, 'designation')"
+            [required]="HeadingServices.isModulefieldMendetory(1, 'designation')">
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'designation')">
+            <span class="help-block danger"
+              *ngIf="(designation.errors?.required && f.submitted)||(designation.errors?.required && designation.touched)">
+              The {{Headingss[0].heading4}} is required
+            </span>
+          </ng-container>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading3}} </label>
+          <input type="number" class="input-fld"
+            [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'phoneNumber')" name="phoneNumber"
+            [(ngModel)]="bridges.phoneNumber" ngModel #phoneNumber="ngModel"
+            placeholder="Enter {{Headingss[0].heading3}}" maxlength="15" pattern="^((\\+91-?)|0)?[0-9]{7,15}$"
+            [required]="HeadingServices.isModulefieldMendetory(1, 'phoneNumber')">
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'phoneNumber')">
+            <span class="help-block danger"
+              *ngIf="(phoneNumber.errors?.required && f.submitted)||(phoneNumber.errors?.required && phoneNumber.touched)">
+              The {{Headingss[0].heading3}} is required
+            </span>
+          </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'email')">
+          <label>{{Headingss[0].heading5}}</label>
+          <input type="email" email="true" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'email')" name="email" [(ngModel)]="bridges.email" #email="ngModel"
+            placeholder="Enter {{Headingss[0].heading5}}" [class.disable-fld]="!isModulefieldedit(1, 'email')"
+            [disabled]="!isModulefieldedit(1, 'email')" [required]="HeadingServices.isModulefieldMendetory(1, 'email')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'email')">
+              <span class="help-block danger"
+                *ngIf="(email.errors?.required && f.submitted)||(email.errors?.required && email.touched)">
+                The {{Headingss[0].heading5}} is required
+              </span>
+            </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'location')">
+          <label>{{Headingss[0].heading6}}</label>
+          <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'location')" name="location" [(ngModel)]="bridges.location" #location="ngModel"
+            placeholder="Enter {{Headingss[0].heading6}}" [class.disable-fld]="!isModulefieldedit(1, 'location')"
+            [disabled]="!isModulefieldedit(1, 'location')" [required]="HeadingServices.isModulefieldMendetory(1, 'location')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'location')">
+              <span class="help-block danger"
+                *ngIf="(location.errors?.required && f.submitted)||(location.errors?.required && location.touched)">
+                The {{Headingss[0].heading6}} is required
+              </span>
+            </ng-container>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading7}} </label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" name="source"
+            [(ngModel)]=bridges.source #source="ngModel" [required]="HeadingServices.isModulefieldMendetory(1, 'source')" class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'source')">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading7}} </ng-option>
+            <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option>
+          </ng-select>
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'source')">
+          <span class="help-block danger"
+            *ngIf="(source.errors?.required && f.submitted)||(source.errors?.required && source.touched)">
+            The {{Headingss[0].heading7}} is required
+          </span>
+        </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="bridges.source == 'Campaign'">
+          <label>Campaign Name</label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" name="campaign1"
+            [(ngModel)]="bridges.campaign" #campaign1="ngModel" [required]="HeadingServices.isModulefieldMendetory(1, 'campaign1')" class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'campaign1')">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select Campagn </ng-option>
+            <ng-option value="{{item1.CampaignSetName}}"
+              *ngFor="let item1 of CampaigNameList">{{item1.CampaignSetName}}</ng-option>
+          </ng-select>
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'campaign1')">
+          <span class="help-block danger"
+            *ngIf="(campaign1.errors?.required && f.submitted)||(campaign1.errors?.required && campaign1.touched)">
+            The Campaign is required
+          </span>
+        </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'productInterest')">
+          <label>{{Headingss[0].heading8}} </label>
+          <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'productInterest')" name="productInterest" [(ngModel)]="bridges.productInterest"
+            #productInterest="ngModel" placeholder="Enter {{Headingss[0].heading8}}"
+            [class.disable-fld]="!isModulefieldedit(1, 'productInterest')"
+            [disabled]="!isModulefieldedit(1, 'productInterest')" [required]="HeadingServices.isModulefieldMendetory(1, 'productInterest')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'productInterest')">
+              <span class="help-block danger"
+                *ngIf="(productInterest.errors?.required && f.submitted)||(productInterest.errors?.required && productInterest.touched)">
+                The {{Headingss[0].heading8}} is required
+              </span>
+            </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'numOfEmployee')">
+          <label>{{Headingss[0].heading9}}</label>
+          <input type="number" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'numOfEmployee')" name="numOfEmployee" [(ngModel)]="bridges.numOfEmployee"
+            #numOfEmployee="ngModel" min="0" placeholder="Enter {{Headingss[0].heading9}}" pattern="^[0-9]*$"
+            [class.disable-fld]="!isModulefieldedit(1, 'numOfEmployee')"
+            [disabled]="!isModulefieldedit(1, 'numOfEmployee')" [required]="HeadingServices.isModulefieldMendetory(1, 'numOfEmployee')">
+            <span class="help-block danger" *ngIf="numOfEmployee.errors?.pattern && numOfEmployee.touched">
+              Take Numeric Value only
+            </span>
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'numOfEmployee')">
+              <span class="help-block danger"
+                *ngIf="(numOfEmployee.errors?.required && f.submitted)||(numOfEmployee.errors?.required && numOfEmployee.touched)">
+                The {{Headingss[0].heading9}} is required
+              </span>
+            </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'turnover')">
+          <label>{{Headingss[0].heading10}}</label>
+          <div class="newrupe">
+
+            <span class="span10">{{'' | priceFormat:''}}</span>
+            <input type="number" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'turnover')" name="Turnover" [(ngModel)]="bridges.turnover" #turnover="ngModel"
+              placeholder="Enter {{Headingss[0].heading10}}" min="0" pattern="^[0-9]*$"
+              [class.disable-fld]="!isModulefieldedit(1, 'turnover')" [disabled]="!isModulefieldedit(1, 'turnover')" [required]="HeadingServices.isModulefieldMendetory(1, 'turnover')">
+          </div>
+          <span class="help-block danger" *ngIf="turnover.errors?.pattern && turnover.touched">
+            Take Numeric Value Only
+          </span>
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'turnover')">
+            <span class="help-block danger"
+              *ngIf="(turnover.errors?.required && f.submitted)||(turnover.errors?.required && turnover.touched)">
+              The {{Headingss[0].heading10}} is required
+            </span>
+          </ng-container>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading11}} </label>
+          <ng-select #selectstatus [clearOnBackspace]="false" [searchable]="false" [(ngModel)]="bridges.status"
+            name="status" #status="ngModel" [required]="HeadingServices.isModulefieldMendetory(1, 'status')" class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'status')">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectstatus.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading11}} </ng-option>
+            <ng-option value="{{status}}" *ngFor="let status of leadStatus">{{status}}</ng-option>
+          </ng-select>
+          <!-- <select class="input-fld required-fld" [(ngModel)]="bridges.status" name="status" #status="ngModel" required>
+            <option value="{{status}}" *ngFor="let status of leadStatus">{{status}}</option>
+
+          </select> -->
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'status')">
+          <span class="help-block danger"
+            *ngIf="(status.errors?.required && f.submitted)||(status.errors?.required && status.touched)">
+            The {{Headingss[0].heading11}} is required
+          </span>
+        </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'leadType')">
+          <label>{{Headingss[0].heading12}} </label>
+          <ng-select #selectleadpriority [clearOnBackspace]="false" [searchable]="false" [(ngModel)]="bridges.leadType"
+            name="leadType" #leadType="ngModel" class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'leadType')" [class.disable-fld]="!isModulefieldedit(1, 'leadType')"
+            [disabled]="!isModulefieldedit(1, 'leadType')" [required]="HeadingServices.isModulefieldMendetory(1, 'leadType')">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectleadpriority.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading12}}</ng-option>
+            <ng-option value="{{item1.Name}}" *ngFor="let item1 of lead_Type">{{item1.Name}}</ng-option>
+          </ng-select>
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'leadType')">
+            <span class="help-block danger"
+              *ngIf="(leadType.errors?.required && f.submitted)||(leadType.errors?.required && leadType.touched)">
+              The {{Headingss[0].heading12}} is required
+            </span>
+          </ng-container>
+          <!-- <select class="input-fld" [(ngModel)]="bridges.leadType" name="leadType">
+            <option value="" selected>Select Lead Priority</option>
+            <option value="{{item1.Name}}" *ngFor="let item1 of lead_Type">{{item1.Name}}</option>
+
+          </select> -->
+        </div>
+
+        <div class="col-md-12" *ngIf="isModulefieldview(1, 'assignedTo')">
+          <label>{{Headingss[0].heading13}}</label>
+          <ng-select #selectassignTo [clearOnBackspace]="false" [searchable]="false" [(ngModel)]="bridges.assignedTo"
+            name="assignedTo" #assignedTo="ngModel" class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'assignedTo')"
+            [class.disable-fld]="!isModulefieldedit(1, 'assignedTo')" [disabled]="!isModulefieldedit(1, 'assignedTo')" [required]="HeadingServices.isModulefieldMendetory(1, 'assignedTo')">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectassignTo.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading13}}</ng-option>
+            <ng-option *ngFor="let item of bridgess" value="{{item.id}}">{{item.firstName}}</ng-option>
+          </ng-select>
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'assignedTo')">
+            <span class="help-block danger"
+              *ngIf="(assignedTo.errors?.required && f.submitted)||(assignedTo.errors?.required && assignedTo.touched)">
+              The {{Headingss[0].heading13}} is required
+            </span>
+          </ng-container>
+          <!-- <select class="input-fld" [(ngModel)]="bridges.assignedTo" name="assignedTo">
+            <option value="{{UserId}}" selected>Choose Select</option>
+            <option *ngFor="let item of bridgess" value="{{item.id}}">{{item.firstName}}</option>
+          </select> -->
+        </div>
+
+        <div class="col-md-12" *ngIf="isModulefieldview(1, 'message')">
+          <label>{{Headingss[0].heading14}}</label>
+          <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'message')" name="message" [(ngModel)]="bridges.message" #message="ngModel"
+            placeholder="Enter {{Headingss[0].heading14}}" [class.disable-fld]="!isModulefieldedit(1, 'message')"
+            [disabled]="!isModulefieldedit(1, 'message')" [required]="HeadingServices.isModulefieldMendetory(1, 'message')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'message')">
+              <span class="help-block danger"
+                *ngIf="(message.errors?.required && f.submitted)||(message.errors?.required && message.touched)">
+                The {{Headingss[0].heading14}} is required
+              </span>
+            </ng-container>
+        </div>
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading">
+          <button class="add-invent1">{{Headingss[0].heading101}}</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+</ng-template>
+
+
+
+
+<ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">
+      {{isView?Headingss[0].heading115:Headingss[0].heading102}} {{Headingss[0].leftheading}}</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <form #f="ngForm" name="theForm" (submit)="editLeads(f)">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading1}} {{HeadingServices.isModulefieldMendetory(1, 'companyName')}}</label>
+          <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'companyName')" name="companyName" [readonly]="isView"
+            [(ngModel)]="editbridges.companyName" #companyName="ngModel" placeholder="Enter {{Headingss[0].heading1}} "
+            [required]="HeadingServices.isModulefieldMendetory(1, 'companyName')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'companyName')">
+          <span class="help-block danger"
+            *ngIf="(companyName.errors?.required && f.submitted)||(companyName.errors?.required && companyName.touched)">
+            The {{Headingss[0].heading1}} is required
+          </span>
+        </ng-container>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading2}} </label>
+          <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'contactPerson')" name="contactPerson" [readonly]="isView"
+            [(ngModel)]="editbridges.contactPerson" #contactPerson="ngModel"
+            placeholder="Enter {{Headingss[0].heading2}} " [required]="HeadingServices.isModulefieldMendetory(1, 'contactPerson')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'contactPerson')">
+          <span class="help-block danger"
+            *ngIf="(contactPerson.errors?.required && f.submitted)||(contactPerson.errors?.required && contactPerson.touched)">
+            The {{Headingss[0].heading2}} is required
+          </span>
+        </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'designation')">
+          <label>{{Headingss[0].heading4}} </label>
+          <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'designation')" name="designation" [readonly]="isView"
+            [(ngModel)]="editbridges.designation" #designation="ngModel" placeholder="Enter {{Headingss[0].heading4}}"
+            [class.disable-fld]="!isModulefieldedit(1, 'designation')"
+            [disabled]="!isModulefieldedit(1, 'designation')" [required]="HeadingServices.isModulefieldMendetory(1, 'designation')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'designation')">
+              <span class="help-block danger"
+                *ngIf="(designation.errors?.required && f.submitted)||(designation.errors?.required && designation.touched)">
+                The {{Headingss[0].heading2}} is required
+              </span>
+            </ng-container>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading3}} </label>
+          <input type="number" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'phoneNumber')" name="phoneNumber" [readonly]="isView"
+            [(ngModel)]="editbridges.phoneNumber" #phoneNumber="ngModel" placeholder="Enter {{Headingss[0].heading3}}"
+            maxlength="15" pattern="^((\\+91-?)|0)?[0-9]{7,15}$" [required]="HeadingServices.isModulefieldMendetory(1, 'phoneNumber')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'phoneNumber')">
+          <span class="help-block danger" *ngIf="phoneNumber.errors?.required ">
+            The {{Headingss[0].heading3}} is required
+          </span>
+          <span class="help-block danger" *ngIf="phoneNumber.errors?.pattern && phoneNumber.touched">
+            Invalid {{Headingss[0].heading3}}
+          </span>
+        </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'email')">
+          <label>{{Headingss[0].heading5}}</label>
+          <input type="email" email="true" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'email')" name="email" [readonly]="isView"
+            [(ngModel)]="editbridges.email" #email="ngModel" placeholder="Enter {{Headingss[0].heading5}}"
+            [class.disable-fld]="!isModulefieldedit(1, 'email')" [disabled]="!isModulefieldedit(1, 'email')" [required]="HeadingServices.isModulefieldMendetory(1, 'email')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'email')">
+              <span class="help-block danger"
+                *ngIf="(email.errors?.required && f.submitted)||(email.errors?.required && email.touched)">
+                The {{Headingss[0].heading3}} is required
+              </span>
+            </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'location')">
+          <label>{{Headingss[0].heading6}}</label>
+          <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'location')" name="location" [readonly]="isView" [(ngModel)]="editbridges.location"
+            #location="ngModel" placeholder="Enter {{Headingss[0].heading6}}"
+            [class.disable-fld]="!isModulefieldedit(1, 'location')" [disabled]="!isModulefieldedit(1, 'location')" [required]="HeadingServices.isModulefieldMendetory(1, 'location')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'location')">
+              <span class="help-block danger"
+                *ngIf="(location.errors?.required && f.submitted)||(location.errors?.required && location.touched)">
+                The {{Headingss[0].heading3}} is required
+              </span>
+            </ng-container>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading7}} </label>
+          <ng-select #selectsource [clearOnBackspace]="false" [readonly]="isView" [searchable]="false" name="source"
+            [(ngModel)]="editbridges.source" #source="ngModel" placeholder="Source" [required]="HeadingServices.isModulefieldMendetory(1, 'source')"
+            class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'source')">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading7}}</ng-option>
+            <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option>
+          </ng-select>
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'source')">
+            <span class="help-block danger"
+              *ngIf="(source.errors?.required && f.submitted)||(source.errors?.required && source.touched)">
+              The {{Headingss[0].heading7}} is required
+            </span>
+          </ng-container>
+          <!-- <input type="text" class="input-fld" name="source" [(ngModel)]="editbridges.source" #source="ngModel" placeholder="Source"> -->
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'productInterest')">
+          <label>{{Headingss[0].heading8}}</label>
+          <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'productInterest')" name="productInterest" [readonly]="isView"
+            [(ngModel)]="editbridges.productInterest" #productInterest="ngModel"
+            placeholder="Enter {{Headingss[0].heading8}}" [class.disable-fld]="!isModulefieldedit(1, 'productInterest')"
+            [disabled]="!isModulefieldedit(1, 'productInterest')" [required]="HeadingServices.isModulefieldMendetory(1, 'productInterest')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'productInterest')">
+              <span class="help-block danger"
+                *ngIf="(productInterest.errors?.required && f.submitted)||(productInterest.errors?.required && productInterest.touched)">
+                The {{Headingss[0].heading7}} is required
+              </span>
+            </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'numOfEmployee')">
+          <label>{{Headingss[0].heading9}}</label>
+          <input type="number" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'numOfEmployee')" name="numOfEmployee" [readonly]="isView"
+            [(ngModel)]="editbridges.numOfEmployee" #numOfEmployee="ngModel" min="0"
+            placeholder="Enter {{Headingss[0].heading9}}" pattern="^[0-9]*$"
+            [class.disable-fld]="!isModulefieldedit(1, 'numOfEmployee')"
+            [disabled]="!isModulefieldedit(1, 'numOfEmployee')" [required]="HeadingServices.isModulefieldMendetory(1, 'numOfEmployee')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'numOfEmployee')">
+              <span class="help-block danger"
+                *ngIf="(numOfEmployee.errors?.required && f.submitted)||(numOfEmployee.errors?.required && numOfEmployee.touched)">
+                The {{Headingss[0].heading7}} is required
+              </span>
+            </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'turnover')">
+          <label>{{Headingss[0].heading10}}</label>
+          <div class="newrupe">
+            <span class="span10">{{'' | priceFormat:''}}</span>
+            <input type="number" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'turnover')" name="turnover" [readonly]="isView"
+              [(ngModel)]="editbridges.turnover" #turnover="ngModel" placeholder="Enter {{Headingss[0].heading10}}"
+              min="0" pattern="^[0-9]*$" [class.disable-fld]="!isModulefieldedit(1, 'turnover')"
+              [disabled]="!isModulefieldedit(1, 'turnover')" [required]="HeadingServices.isModulefieldMendetory(1, 'turnover')">
+          </div>
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'turnover')">
+            <span class="help-block danger"
+              *ngIf="(turnover.errors?.required && f.submitted)||(turnover.errors?.required && turnover.touched)">
+              The {{Headingss[0].heading7}} is required
+            </span>
+          </ng-container>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading11}} </label>
+          <ng-select #selectstatus [clearOnBackspace]="false" [searchable]="false" [(ngModel)]="editbridges.status"
+            name="status" #status="ngModel" [required]="HeadingServices.isModulefieldMendetory(1, 'status')" class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'status')">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectstatus.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading11}}</ng-option>
+            <ng-option value="{{status}}" *ngFor="let status of leadStatus">{{status}}</ng-option>
+          </ng-select>
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'status')">
+            <span class="help-block danger"
+              *ngIf="(status.errors?.required && f.submitted)||(status.errors?.required && status.touched)">
+              The {{Headingss[0].heading11}} is required
+            </span>
+          </ng-container>
+        </div>
+
+        <div class="col-md-6" *ngIf="isModulefieldview(1, 'leadType')">
+          <label>{{Headingss[0].heading12}}</label>
+          <ng-select #selectleadtype [clearOnBackspace]="false" [readonly]="isView" [searchable]="false"
+            [(ngModel)]="editbridges.leadType" #leadType="ngModel" name="leadType" class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'leadType')"
+            [class.disable-fld]="!isModulefieldedit(1, 'leadType')" [disabled]="!isModulefieldedit(1, 'leadType')" [required]="HeadingServices.isModulefieldMendetory(1, 'leadType')">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectleadtype.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading12}}</ng-option>
+            <ng-option value="{{item1.Name}}" *ngFor="let item1 of lead_Type">{{item1.Name}}</ng-option>
+          </ng-select>
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'leadType')">
+            <span class="help-block danger"
+              *ngIf="(leadType.errors?.required && f.submitted)||(leadType.errors?.required && leadType.touched)">
+              The {{Headingss[0].heading11}} is required
+            </span>
+          </ng-container>
+        </div>
+
+        <div class="col-md-12" *ngIf="isModulefieldview(1, 'assignedTo')">
+          <label>{{Headingss[0].heading13}}</label>
+          <ng-select #selectleadassignedTo [clearOnBackspace]="false" [readonly]="isView" [searchable]="false"
+            [items]="bridgess" bindLabel="firstName" placeholder="Select {{Headingss[0].heading13}}" bindValue="id"
+            [(ngModel)]="editbridges.assignedTo" name="assignedTo" class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'assignedTo')"
+            [class.disable-fld]="!isModulefieldedit(1, 'assignedTo')" [disabled]="!isModulefieldedit(1, 'assignedTo')" [required]="HeadingServices.isModulefieldMendetory(1, 'assignedTo')">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectleadassignedTo.filter($event.target.value)" />
+            </ng-template>
+            <!-- <ng-option value="" disable selected>Select Assigned To</ng-option>
+            <ng-option *ngFor="let item of bridgess" value="{{item.id}}">{{item.firstName}}</ng-option> -->
+            <!-- <ng-option value="{{UserId}}">UnAssigned</ng-option> -->
+          </ng-select>
+          <!-- <select class="input-fld" [(ngModel)]="editbridges.assignedTo" name="assignedTo">
+            <option *ngFor="let item of bridgess" value="{{item.id}}">{{item.firstName}}</option>
+            <option value="{{UserId}}">UnAssigned</option>
+          </select> -->
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'assignedTo')">
+            <span class="help-block danger"
+              *ngIf="(assignedTo.errors?.required && f.submitted)||(assignedTo.errors?.required && assignedTo.touched)">
+              The {{Headingss[0].heading11}} is required
+            </span>
+          </ng-container>
+        </div>
+
+        <div class="col-md-12" *ngIf="isModulefieldview(1, 'message')">
+          <label>{{Headingss[0].heading14}}</label>
+          <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(1, 'message')" name="message" [readonly]="isView" [(ngModel)]="editbridges.message"
+            #message="ngModel" placeholder="Enter {{Headingss[0].heading14}}"
+            [class.disable-fld]="!isModulefieldedit(1, 'message')" [disabled]="!isModulefieldedit(1, 'message')" [required]="HeadingServices.isModulefieldMendetory(1, 'message')">
+            <ng-container *ngIf="HeadingServices.isModulefieldMendetory(1, 'message')">
+              <span class="help-block danger"
+                *ngIf="(message.errors?.required && f.submitted)||(message.errors?.required && message.touched)">
+                The {{Headingss[0].heading11}} is required
+              </span>
+            </ng-container>
+        </div>
+
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading && !isView">
+          <button class="add-invent1" [disabled]="f.invalid">{{Headingss[0].heading105}}</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+</ng-template>
+
+
+
+
+<ng-template #contentPriorityEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">{{Headingss[0].heading102}} {{Headingss[0].heading12}}
+    </h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <form #f="ngForm" name="theForm" (submit)="editLeads(f)">
+    <div class="modal-body">
+      <div class="row">
+
+
+
+        <div class="col-md-12">
+          <label>{{Headingss[0].heading12}}</label>
+          <ng-select #selecteditleadpriority [clearOnBackspace]="false" [searchable]="false"
+            [(ngModel)]="editbridges.leadType" name="leadType" class="ngsearch-dropdown input-fld ">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selecteditleadpriority.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[0].heading12}}</ng-option>
+            <ng-option value="{{item1.Name}}" *ngFor="let item1 of lead_Type">{{item1.Name}}</ng-option>
+          </ng-select>
+          <!-- <select class="input-fld" [(ngModel)]="editbridges.leadType" name="leadType">
+            <option value="">Select Lead Priority</option>
+            <option value="{{item1.Name}}" *ngFor="let item1 of lead_Type">{{item1.Name}}</option>
+
+          </select> -->
+        </div>
+
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading">
+          <button class="add-invent1" [disabled]="f.invalid">{{Headingss[0].heading105}}</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+</ng-template>
+
+<ng-template #contentAssignEdit let-modal>
+  <div class="modal-header justify-content-center">
+    <h4 class="modal-title modal-heading" id="modal-basic-Assign">Assign</h4>
+  </div>
+  <div class="modal-body">
+
+    <ng-select id="CustomDesignInput" [items]="bridgess" [multiple]="false" bindValue="id" bindLabel="firstName"
+      placeholder="Select Employee" [(ngModel)]="searchAssignValue" [ngModelOptions]="{standalone: true}">
+    </ng-select>
+    <div class="row">
+      <div class="col-6 d-flex justify-content-center p-1 text-center">
+        <button type="button" class="assign-btn" ngbDropdownItem (click)="Assign_()">Assign</button>
+      </div>
+      <div class="col-6 d-flex justify-content-center p-1 text-center">
+        <button type="button" class="cancelbtn" (click)="modal.dismiss('Cross click')" ngbDropdownItem>Cancel</button>
+      </div>
+    </div>
+
+  </div>
+
+
+</ng-template>
+
+<ng-template #followup let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"
+      style="width: 100%;text-align: center;color: #4A79E4; font-size: 1.2rem;">{{Headingss[1].heading}}</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #fb="ngForm" name="theForm" (submit)="addFollowUp(fb)">
+      <div class="row">
+
+        <div class="col-md-1">
+          <input type="radio" id="checkfld" style="height: 27px;cursor: pointer;" name="showremid"
+            [checked]="!showremid" (click)="Changeshowremid(false)">
+        </div>
+        <div class="col-md-3">
+          <label (click)="Changeshowremid(false)" style="cursor: pointer;"
+            [ngClass]="{'colorbluw': !showremid}">{{Headingss[1].heading}}</label>
+        </div>
+        <div class="col-md-1">
+          <input type="radio" id="checkfld" style="height: 27px;cursor: pointer;" name="showremid" [checked]="showremid"
+            (click)="Changeshowremid(true)">
+        </div>
+        <div class="col-md-3">
+          <label (click)="Changeshowremid(true)" style="cursor: pointer;"
+            [ngClass]="{'colorbluw': showremid}">{{Headingss[1].heading4}}</label>
+        </div>
+        <br><br>
+        <div class="col-md-6" *ngIf="showremid">
+          <label>{{Headingss[1].heading0}}</label>
+          <input type="date" class="input-fld required-fld" name="From" [(ngModel)]="AddFollow2.From" #From="ngModel"
+            required>
+          <span class="help-block danger"
+            *ngIf="(From.errors?.required && fb.submitted)||(From.errors?.required && From.touched)">
+            {{Headingss[1].heading0}} is required
+          </span>
+        </div>
+
+        <div class="col-md-6" *ngIf="showremid">
+          <label>{{Headingss[1].heading1}}</label>
+          <input type="time" class="input-fld required-fld" name="Time" [(ngModel)]="AddFollow2.Time" #Time="ngModel"
+            required>
+          <span class="help-block danger"
+            *ngIf="(Time.errors?.required && fb.submitted)||(Time.errors?.required && Time.touched)">
+            {{Headingss[1].heading1}} is required
+          </span>
+
+        </div>
+        <div class="col-md-12">
+          <label>{{Headingss[1].heading2}}</label>
+          <ng-select #selectmodeofcom [clearOnBackspace]="false" [searchable]="false" name="Mode"
+            [(ngModel)]="AddFollow2.Mode" #Mode="ngModel" required class="ngsearch-dropdown input-fld required-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectmodeofcom.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select {{Headingss[1].heading2}}</ng-option>
+            <ng-option value="{{mode}}" *ngFor="let mode of ModeOfCommunication">{{mode}}</ng-option>
+          </ng-select>
+          <span class="help-block danger"
+            *ngIf="(Mode.errors?.required && fb.submitted)||(Mode.errors?.required && Mode.touched)">
+            {{Headingss[1].heading2}} is required
+          </span>
+        </div>
+
+
+
+
+        <div class="col-md-12">
+          <label>{{Headingss[1].heading3}}</label>
+          <textarea class="input-fld required-fld" placeholder="Enter {{Headingss[1].heading3}}" name="Comment"
+            [(ngModel)]="AddFollow2.Comment" #Comment="ngModel" required></textarea>
+          <span class="help-block danger"
+            *ngIf="(Comment.errors?.required && fb.submitted)||(Comment.errors?.required && Comment.touched)">
+            {{Headingss[1].heading3}} is required
+          </span>
+        </div>
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading">
+          <button class="add-invent1">{{Headingss[0].heading105}}</button>
+        </div>
+        <!-- <div *ngIf="isLoading"><img src="../../assets/img/loder.gif"></div> -->
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+<div id="mySidepanel" class="sidepanel sidepanel2 px-0">
+  <div class="row ">
+    <div class="row">
+      <div class="col-12 mb-1 px-3 border-bottom" id="FilterTopSide">
+        <strong style="color: #4a79e4 !important;">{{Headingss[0].heading117}}</strong>
+        <a class="closebtn" (click)="closeNav()">&times;</a>
+      </div>
+    </div>
+    <form name="form" novalidate>
+      <div class="row">
+        <div class="col-md-6 pe-3" id="MainPlaceholderFilter">
+          <label class="MainFilterLabel filtersize">{{'From Date'}}</label>
+          <input class="input-fld" type="date" name="CreateDate__gte" [(ngModel)]="filterLead.CreateDate__gte"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="col-md-6 pe-3" id="MainPlaceholderFilter">
+          <label class="MainFilterLabel filtersize">{{'To Date'}}</label>
+          <input class="input-fld" type="date" name="CreateDate__lte" [(ngModel)]="filterLead.CreateDate__lte"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="col-md-12 pe-3" id="MainPlaceholderFilter">
+          <label class="MainFilterLabel filtersize">{{Headingss[0].heading13}}</label>
+          <ng-select id="CustomDesignInput" [items]="bridgess" [multiple]="true" bindValue="id" bindLabel="firstName"
+            placeholder="Select {{Headingss[0].heading13}}" [(ngModel)]="filterLead.assignedTo"
+            [ngModelOptions]="{standalone: true}">
+          </ng-select>
+        </div>
+
+        <div class="col-md-12 mb-3 pe-3" id="MainPlaceholderFilter">
+          <label class="MainFilterLabel filtersize">{{Headingss[0].heading7}}</label>
+          <ng-select id="CustomDesignInput" [items]="source1" [multiple]="true" bindValue="Name" bindLabel="Name"
+            placeholder="Select {{Headingss[0].heading7}}" [(ngModel)]="filterLead.source"
+            [ngModelOptions]="{standalone: true}">
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="FilterBtnHere">
+        <div class="ResetBTN">
+          <a (click)="resetfilter()">{{Headingss[0].heading114}}</a>
+        </div>
+        <div class="ApplyBTN">
+          <button (click)="RowPerPage()">{{Headingss[0].heading113}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #confirmModal2 let-modal>
+  <div class="modal-body">
+    <p>Are You Sure Do You Want To Move This Data in Junk ?</p>
+    <div class="confirm-btn">
+      <button class="btn custom-btn-blue" (click)="multipleDelete1(JunkId)">OK</button>
+      <button class="btn custom-btn-outline-blue" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #Greport let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Generate Report</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <!-- <div *ngIf="error">{{error}}</div> -->
+  <!-- <div *ngIf="success">{{success}}</div> -->
+  <form #f="ngForm" name="theForm" (submit)="genarateCommonPayload(f)">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-12">
+          <label>Report Name </label>
+          <input type="text" class="input-fld required-fld" name="ReportName" [(ngModel)]="commonPayload.report_title"
+            #ReportName="ngModel" placeholder="Enter Report Name" required>
+          <span class="help-block danger"
+            *ngIf="(ReportName.errors?.required && f.submitted)||(ReportName.errors?.required && ReportName.touched)">
+            The Report Name is required
+          </span>
+        </div>
+
+        <div class="col-md-12">
+          <label>Fields Name</label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" [multiple]="true" name="FieldName"
+            [(ngModel)]="commonPayload.fields" #FieldName="ngModel" required class="input-fld required-fld"
+            [placeholder]="'Select Fields'">
+
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%; line-height: 24px;" placeholder="search" type="text"
+                (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+
+            <ng-option disabled selected>Select Fields</ng-option><ng-option *ngFor="let item of fieldsArray"
+              [value]="item.value">{{item.label}}</ng-option>
+          </ng-select>
+          <span class="help-block danger"
+            *ngIf="(FieldName.errors?.required && f.submitted) || (FieldName.errors?.required && FieldName.touched)">
+            The Fields is required
+          </span>
+        </div>
+        <div class="row">
+          <div class="col-md-6 pe-3" id="MainPlaceholderFilter">
+            <label class="MainFilterLabel filtersize">{{'From Date'}}</label>
+            <input class="input-fld" type="date" name="CreateDate__gte"
+              [(ngModel)]="commonPayload.filter.field.CreateDate__gte" [ngModelOptions]="{standalone: true}"
+              #CreateDate__gte="ngModel">
+          </div>
+          <div class="col-md-6 pe-3" id="MainPlaceholderFilter">
+            <label class="MainFilterLabel filtersize">{{'To Date'}}</label>
+            <input class="input-fld" type="date" name="CreateDate__lte"
+              [(ngModel)]="commonPayload.filter.field.CreateDate__lte" [ngModelOptions]="{standalone: true}"
+              #CreateDate__lte="ngModel" [min]="commonPayload.filter.field.CreateDate__gte">
+            <!-- <span class="help-block danger"
+              *ngIf="(CreateDate__lte.errors?.required && f.submitted) || (CreateDate__lte.errors?.required && CreateDate__lte.touched)">
+              The To Date is required
+            </span> -->
+          </div>
+
+          <div class="col-md-12 pe-3" id="MainPlaceholderFilter">
+            <label class="MainFilterLabel filtersize">{{Headingss[0].heading13}}</label>
+            <ng-select id="CustomDesignInput" [items]="bridgess" [multiple]="true" name="Assigned_to" bindValue="id"
+              bindLabel="firstName" placeholder="Select {{Headingss[0].heading13}}"
+              [(ngModel)]="commonPayload.filter.field.assignedTo_id__in" #Assigned_to="ngModel" class="input-fld">
+            </ng-select>
+            <!-- <span class="help-block danger"
+              *ngIf="(Assigned_to.errors?.required && f.submitted) || (Assigned_to.errors?.required && Assigned_to.touched)">
+              The Field is required
+            </span> -->
+          </div>
+
+
+          <div class="col-md-12 mb-3 pe-3" id="MainPlaceholderFilter">
+            <label class="MainFilterLabel filtersize">{{Headingss[0].heading7}}</label>
+            <ng-select id="CustomDesignInput" [items]="source1" [multiple]="true" name="source" bindValue="Name"
+              bindLabel="Name" placeholder="Select {{Headingss[0].heading7}}"
+              [(ngModel)]="commonPayload.filter.field.source__in" #source="ngModel" class="input-fld">
+            </ng-select>
+            <!-- <span class="help-block danger"
+              *ngIf="(source.errors?.required && f.submitted) || (source.errors?.required && source.touched)">
+              The Field is required
+            </span> -->
+          </div>
+
+        </div>
+
+
+
+
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+        <div class="col-md-12 text-center mt-3" *ngIf="!isLoading">
+          <button class="add-invent1">Save</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+</ng-template>
+
+<app-phone></app-phone>

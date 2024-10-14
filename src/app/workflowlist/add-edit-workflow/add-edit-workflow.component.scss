@@ -1,0 +1,30 @@
+.user-role-mange-container {
+  background-color: var(--bs-white);
+  padding: 12px;
+  padding-bottom: 30px;
+
+  // .user-role-mange-title {}
+
+  .user-management-list-contain {
+    margin-top: 18px;
+
+    .user-management-list-title {
+      font-weight: 600;
+    }
+
+    .user-management-list-iterator {
+      display: grid;
+      grid-template-columns: 150px repeat(3, 150px);
+      gap: 22px;
+
+      span,
+      input {
+        text-align: center;
+      }
+
+      .user-management-list-name {
+        text-align: left;
+      }
+    }
+  }
+}

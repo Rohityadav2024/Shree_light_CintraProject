@@ -1,0 +1,59 @@
+.col-lg-6, .col-md-4,.col-lg-4,.col-lg-8{
+    float: left;
+}
+.myalert-box{
+    top: 60px;
+    position: absolute;
+    right: 0px;
+    z-index: 999;
+    display: none;
+    box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
+    padding: 0;
+    background: #fff;
+    border: 1px solid #eee;
+    color:#000 !important;
+    animation: linear;
+    animation-name: altbox;
+    animation-duration: 5s;
+}
+@keyframes altbox {
+    0% {
+        right: 0;
+      }
+      25% {
+        right: 75px;
+      }
+      50% {
+        right: 75px;
+      }
+      75% {
+        right: 0px;
+      }
+      100% {
+        right: 0px;
+      }
+      
+  }
+.myalert-box strong{
+color:#28c76f !important;
+}
+.alert-dismissible .btn-close{
+    font-size: 10px;
+    outline: none !important;
+    padding: 7px;
+}
+
+.progres {
+    width: 10px;
+    height: 3px;
+    border-radius: 10px;
+    background-color: #28c76f;
+    animation-name: example;
+    animation-timing-function: ease;
+    animation-duration: 5s;
+  }
+  
+  @keyframes example {
+    from {width: 0%;}
+    to {width: 100%;}
+  }

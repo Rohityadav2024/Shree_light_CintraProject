@@ -1,0 +1,11 @@
+@import '/src/assets/scss/mixin';
+// Custom Table Include Start
+@include customTable(lead-list-c9, 60px 60px 200px 122px 160px 122px 130px 122px 94px);
+@include customTable(delivery-list-c8, 180px 160px 140px 150px 150px 130px 122px 104px);
+@include customTable(customer-list-c9, 60px 60px 200px 122px 160px 122px 130px 122px 94px);
+@include customTable(opportunity-list-c9, 40px 70px 120px 150px 160px 122px 200px 122px 94px);
+@include customTable(quotation-list-c9, 40px 80px 200px 150px 160px 133px 150px 112px 74px);
+@include customTable(inventory-list-c8, 60px 180px 100px 120px 160px 122px 130px 94px);
+@include customTable(location-tracking-c6, 70px 140px 130px 230px 140px 90px);
+
+// Custom Table Include End

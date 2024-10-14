@@ -1,0 +1,449 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content position-relative">
+    <div class="TopbarAllComponentDivs">
+      <div class="Innerpagename">
+        <span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="backClicked()" style="cursor: pointer;"></span><h2>{{Headingss[0].heading101}} {{Headingss[0].leftheading}}</h2>
+    </div>
+    <div class="SideBTnAllstyle"></div>
+    </div>
+    <div class="sales-boxes" id="add_quat">
+      <div class="recent-sales box">
+        <div class="row">
+          <div class="col-lg-12">
+            <form #f="ngForm" name="theForm" (submit)="addOpportunity(f)">
+              <div class="lead-update-container">
+
+                <div class="lead-update-wrapper" *ngIf="isModulefieldview(4, 'U_LEADID')">
+                  <label>{{Headingss[0].heading1}}</label>
+                  <div id="selectlead">
+                    <ng-select #selectlead [clearOnBackspace]="false" [searchable]="false" placeholder="Select {{Headingss[0].heading1}}" (change)="SelectLead($event)" name="U_LEADID" #U_LEADID="ngModel"  [(ngModel)]="opportunity.U_LEADID" class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(4, 'U_LEADID')"
+                    [class.disable-fld]="!isModulefieldedit(4, 'U_LEADID')" [disabled]="!isModulefieldedit(4, 'U_LEADID')" [required]="HeadingServices.isModulefieldMendetory(4, 'U_LEADID')">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectlead.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" selected>Select {{Headingss[0].heading1}}</ng-option>
+                      <ng-option *ngFor="let item of bridges2" value="{{item.id}}">{{item.companyName}}</ng-option>
+                    </ng-select>
+                    <ng-container *ngIf="HeadingServices.isModulefieldMendetory(4, 'U_LEADID')">
+                      <span class="help-block danger"
+                        *ngIf="(U_LEADID.errors?.required && f.submitted)||(U_LEADID.errors?.required && U_LEADID.touched)">
+                        The {{Headingss[0].heading1}} is required
+                      </span>
+                    </ng-container>
+                  </div>
+                  <div id="inputlead">
+                    <input class="input-fld required-fld" value="{{this.opportunity.U_LEADNM}}" readonly>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[0].heading2}}</label>
+                  <div>
+                    <input type="text" required class="input-fld required-fld" name="OpportunityName" [(ngModel)]="opportunity.OpportunityName" #OpportunityName="ngModel" placeholder="Enter {{Headingss[0].heading2}}">
+                    <span class="help-block danger" *ngIf="OpportunityName.errors?.required && OpportunityName.touched">
+                      The {{Headingss[0].heading2}} is required
+                    </span>
+                  </div>
+                </div>
+
+
+
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[0].heading3}} </label>
+                  <div>
+                    <ng-select #selectBP [clearOnBackspace]="false" [searchable]="false" name="CardCode"  #CardCode="ngModel" [(ngModel)]="opportunity.CardCode" (change)="selectChangeHandler($event)" required class="ngsearch-dropdown input-fld required-fld">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectBP.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select {{Headingss[0].heading3}}</ng-option>
+                      <ng-option *ngFor="let item of businesspartners" value="{{item.CardCode}}">{{item.CardName}}</ng-option>
+                    </ng-select>
+
+                    <span class="help-block danger" *ngIf="(CardCode.errors?.required && f.submitted)||(CardCode.errors?.required && CardCode.touched)">
+                      Select {{Headingss[0].heading3}} is required
+                    </span>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[0].heading4}} </label>
+                  <div>
+                    <ng-select #selectCP [clearOnBackspace]="false" [searchable]="false" name="contactprson" [(ngModel)]="opportunity.ContactPerson" #contactprson="ngModel" required class="ngsearch-dropdown input-fld required-fld">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectCP.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select {{Headingss[0].heading4}}</ng-option>
+                      <ng-option *ngFor="let item of contactPersoneList" value="{{item.InternalCode}}">{{item.FirstName}}</ng-option>
+                    </ng-select>
+                    <span class="help-block danger" *ngIf="(contactprson.errors?.required && f.submitted)||(contactprson.errors?.required && contactprson.touched)">
+                      Select {{Headingss[0].heading4}} is required
+                    </span>
+                  </div>
+                </div>
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[0].heading5}} </label>
+                  <div>
+
+                    <div class="calendar-input-icon">
+                      <input type="date" [min]="newdate" class="input-fld required-fld" name="ClosingDate" placeholder="dd/mm/yyyy"  [(ngModel)]="opportunity.ClosingDate" #ClosingDate="ngModel" required >
+                    </div>
+                    <span class="help-block danger" *ngIf="ClosingDate.errors?.required && ClosingDate.touched">
+                      The {{Headingss[0].heading5}} is required
+                    </span>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[0].heading6}} </label>
+                  <div>
+                    <ng-select #selectSE [clearOnBackspace]="false" [searchable]="false" (change)="selectChangeHandler3($event)" name="salesEmp" [(ngModel)]="opportunity.SalesPerson" #salesEmp="ngModel" required class="ngsearch-dropdown input-fld required-fld">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectSE.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select {{Headingss[0].heading6}}</ng-option>
+                      <ng-option *ngFor="let item of bridgess" value="{{item.id}}">{{item.firstName}}</ng-option>
+                    </ng-select>
+
+                    <span class="help-block danger" *ngIf="(salesEmp.errors?.required && f.submitted)||(salesEmp.errors?.required && salesEmp.touched)">
+                      The {{Headingss[0].heading6}} is required
+                    </span>
+                  </div>
+                </div>
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[0].heading7}} </label>
+                  <div>
+                    <ng-select #selectSType [clearOnBackspace]="false" [searchable]="false" #U_TYPE="ngModel" [(ngModel)]="opportunity.U_TYPE" name="U_TYPE" required class="ngsearch-dropdown input-fld required-fld">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectSType.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select {{Headingss[0].heading7}}</ng-option>
+                      <ng-option *ngFor="let item of optyp" value="{{item.id}}">{{item.Type}}</ng-option>
+                    </ng-select>
+
+                    <!-- <select class="input-fld required-fld" #U_TYPE="ngModel" [(ngModel)]="opportunity.U_TYPE" name="U_TYPE" required>
+                      <option value="" selected>Choose Select</option>
+                      <option *ngFor="let item of optyp" value="{{item.id}}">{{item.Type}}</option>
+                    </select> -->
+                    <span class="help-block danger" *ngIf="(U_TYPE.errors?.required && f.submitted)||(U_TYPE.errors?.required && U_TYPE.touched)">
+                      Select {{Headingss[0].heading7}} is required
+                    </span>
+
+                  </div>
+                </div>
+                <div class="lead-update-wrapper" *ngIf="isModulefieldview(4, 'U_PROBLTY')">
+                  <label>{{Headingss[0].heading8}}</label>
+                  <div>
+                    <ng-select #selectProbability [clearOnBackspace]="false" [searchable]="false" name="U_PROBLTY" [(ngModel)]="opportunity.U_PROBLTY" #U_PROBLTY="ngModel" class="ngsearch-dropdown input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(4, 'U_PROBLTY')"
+                    [class.disable-fld]="!isModulefieldedit(4, 'U_PROBLTY')" [disabled]="!isModulefieldedit(4, 'U_PROBLTY')" [required]="HeadingServices.isModulefieldMendetory(4, 'U_PROBLTY')">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectProbability.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select {{Headingss[0].heading8}}</ng-option>
+                      <ng-option value="{{probability}}" *ngFor="let probability of OpportunityProbability">{{probability}}%</ng-option>
+                    </ng-select>
+                    <ng-container *ngIf="HeadingServices.isModulefieldMendetory(4, 'U_PROBLTY')">
+                      <span class="help-block danger"
+                        *ngIf="(U_PROBLTY.errors?.required && f.submitted)||(U_PROBLTY.errors?.required && U_PROBLTY.touched)">
+                        The {{Headingss[0].heading8}} is required
+                      </span>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper">
+                  <label>{{Headingss[0].heading9}}</label>
+                  <div>
+                    <ng-select #selectLeadSource [clearOnBackspace]="false" [searchable]="false" #U_LSOURCE="ngModel" [(ngModel)]="opportunity.U_LSOURCE" name="U_LSOURCE" required class="ngsearch-dropdown input-fld required-fld">
+                      <ng-template ng-header-tmp>
+                        <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+                          type="text" (input)="selectLeadSource.filter($event.target.value)" />
+                      </ng-template>
+                      <ng-option value="" disable selected>Select {{Headingss[0].heading9}}</ng-option>
+                      <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option>
+                    </ng-select>
+
+                    <span class="help-block danger" *ngIf="(U_LSOURCE.errors?.required && f.submitted)||(U_LSOURCE.errors?.required && U_LSOURCE.touched)">
+                      Select {{Headingss[0].heading9}} is required
+                    </span>
+                  </div>
+                </div>
+
+
+
+                <div class="lead-update-wrapper"  *ngIf="isModulefieldview(4, 'Remarks')">
+                  <label>{{Headingss[0].heading10}}</label>
+                  <div>
+                    <textarea class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(4, 'Remarks')"  placeholder="Enter {{Headingss[0].heading10}}" [(ngModel)]="opportunity.Remarks" name="Remarks" #Remarks="ngModel"
+                    [class.disable-fld]="!isModulefieldedit(4, 'Remarks')" [disabled]="!isModulefieldedit(4, 'Remarks')" [required]="HeadingServices.isModulefieldMendetory(4, 'Remarks')"></textarea>
+                    <ng-container *ngIf="HeadingServices.isModulefieldMendetory(3, 'Remarks')">
+                      <span class="help-block danger"
+                        *ngIf="(Remarks.errors?.required && f.submitted)||(Remarks.errors?.required && Remarks.touched)">
+                        The {{Headingss[0].heading10}} is required
+                      </span>
+                    </ng-container>
+                  </div>
+                  
+                </div>
+
+                <h6 class="label-mark">{{Headingss[2].heading}}</h6>
+                <div class="col-md-6 item-list-area label-mark-item" (click)="showitem()">
+                  <div class="col-sm-6">Item ({{CountItem}})</div>
+                  <div class="col-sm-6"><a style="text-decoration: none;color: #fff; font-size:12px;">{{Headingss[2].heading1}} &nbsp;&nbsp;
+                      <i class="fa fa-angle-right"></i></a>
+                  </div>
+                </div>
+
+                <div class="lead-update-wrapper" *ngIf="isModulefieldview(4, 'DocTotal')">
+                  <label>{{Headingss[0].heading11}}</label>
+                  <div class="newrupe">
+                    <span>{{'' | priceFormat:''}}</span>
+                    <input type="number" min="0" oninput="this.value = Math.abs(this.value)" class="input-fld" name="totalAmount" [(ngModel)]="total_Amount" readonly
+                      placeholder="{{Headingss[0].heading11}}" [class.disable-fld]="!isModulefieldedit(4, 'DocTotal')" [disabled]="!isModulefieldedit(4, 'DocTotal')">
+                      </div>
+                </div>
+
+
+
+              </div>
+              <div class="col-md-12 text-center" *ngIf="isLoading">
+                <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+              </div>
+              <div class="col-md-12 text-center" *ngIf="!isLoading">
+                <!-- <button class="add-invent" [disabled]="f.invalid">Save</button> -->
+                <button class="add-invent">{{Headingss[0].heading105}}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="loadercss" style="text-align: center;" *ngIf="isdataLoading">
+        <img src="../../assets/img/loder.gif">
+      </div>
+
+    </div>
+
+    <div class="sales-boxes" id="select_item">
+      <div class="recent-sales box">
+        <div class="em-search-wrapper">
+          <div class="em-search-heading">
+            <span (click)="back()" class="toggle-show"><em class="fa-solid fa-arrow-left-long cursor-pointer"></em></span>
+            <span (click)="back2()" class="toggle-show1"><em class="fa-solid fa-arrow-left-long cursor-pointer"></em></span>
+            <h6>{{Headingss[2].heading1}}</h6>
+          </div>
+          <div class="em-search-container">
+            <div class="em-search">
+              <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="quick-search"></span><input class="sear-are" placeholder="Quick Search" [(ngModel)]="searchValue"> -->
+              <div class="toggle-show">
+                <span [innerHTML]="'search-icon' | svgIcons:''" class="quick-search"></span><input class="sear-are"
+                  placeholder="Search" [(ngModel)]="searchValue1">
+              </div>
+              <div class="toggle-show1">
+                <span [innerHTML]="'search-icon' | svgIcons:''" class="quick-search"></span><input class="sear-are"
+                  placeholder="Search" [(ngModel)]="searchValue">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+        [ngClass]="(categorys | inventorysearchfilter: searchValue1)?.length < 4?'sales-details-cateCate sales-details-cateCate-limiting':'sales-details-cateCate'"
+        *ngIf="!isLoading" id="CateCate">
+        <ng-container *ngFor="let item of categorys | inventorysearchfilter: searchValue1">
+          <div (click)="getQuotationItem2(item.id)">
+            <img *ngIf="item.CategoryImageURL == ''" src="../../assets/img/iner-box1.png" alt="" class="figma-inventory-product-img">
+            <img *ngIf="item.CategoryImageURL != ''" src="{{bridgeService2.baseUrl2}}{{item.CategoryImageURL}}" alt="" class="figma-inventory-product-img">
+            <p> {{item.CategoryName}}</p>
+          </div>
+        </ng-container>
+      </div>
+
+        <div class="sales-details-cateIms" id="cateITem">
+
+          <table class="new-tabl">
+            <tr>
+              <th>{{Headingss[1].heading01}} <i class="fa fa-sort"></i> </th>
+              <th>Item Image <i class="fa fa-sort"></i> </th>
+              <th>{{Headingss[1].heading}} <i class="fa fa-sort"></i> </th>
+              <th>{{Headingss[1].heading0}} <i class="fa fa-sort"></i> </th>
+              <th>{{Headingss[1].heading1}} </th>
+              <th>{{Headingss[1].heading2}} <i class="fa fa-sort"></i> </th>
+
+            </tr>
+
+            <ng-container>
+              <tr class="hover" *ngFor="let item of items | invendata:searchValue" (click)="open(mymodal, item)">
+                <td>{{item.id}}</td>
+                <td >
+                  <img *ngIf="item.ItemImageURL == ''" src="../../assets/img/iner-box1.png" alt="" class="img">
+                  <img *ngIf="item.ItemImageURL != ''" src="{{bridgeService2.baseUrl2}}{{item.ItemImageURL}}" alt="" class="img">
+                </td>
+                <td>{{item.ItemCode}}</td>
+                <td>{{item.ItemName}}</td>
+                <td>{{getValues(item.CatID)[1]}}</td>
+                <td> {{item.UnitPrice | priceFormat}}</td>
+
+              </tr>
+
+            </ng-container>
+            <tr>
+            <td colspan="7" id="itemnoDataFound" style="text-align: center;font-size: 20px;color: #4A79E4;">
+              No Data Found
+            </td>
+            </tr>
+          </table>
+          <div class="figma-pagination-controls" *ngIf="!paginDisplay">
+            <div class="figma-pagination-rows-total">
+              <div class="figma-rows-per-page">
+                <div class="figma-rows-per-page-label">Row per page</div>
+                <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+                  [(ngModel)]="pagination2.maxItem" (change)="RowPerPage2()"></ng-select>
+                <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+              </div>
+              <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination2.PageShow"
+                (pageChange)="pageChanged2($event)" [(page)]="pagination2.PageNo" [maxSize]="5" [rotate]="true"
+                [boundaryLinks]="false" class="figma-pagination">
+                <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+                <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+              </ngb-pagination>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+      <div class="figma-pagination-controls" *ngIf="paginDisplay">
+        <div class="figma-pagination-rows-total">
+          <div class="figma-rows-per-page">
+            <div class="figma-rows-per-page-label">Row2 per page</div>
+            <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+              [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+            <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+          </div>
+          <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+            (pageChange)="pageChanged($event)" [(page)]="pagination.PageNo" [maxSize]="5" [rotate]="true"
+            [boundaryLinks]="false" class="figma-pagination">
+            <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+            <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes" id="selected_item">
+      <div class="recent-sales box">
+        <div class="d-flex justify-content-between">
+          <div class="recent-sales-follow-up" style="color: #4a79e4;width: 75%;">
+            <strong class="recent-heading"><i class="fa-solid fa-arrow-left-long cursor-pointer" (click)="back()"></i>
+              {{Headingss[2].heading2}}</strong>
+          </div>
+          <div class="title" (click)="add_items()">
+            <h5 style="cursor: pointer;"><span class="anch-add-user"><span>+</span> {{Headingss[2].heading3}}</span>
+            </h5>
+          </div>
+        </div>
+
+
+        <div class="sales-details">
+          <div class="lead-update-card" *ngFor="let item of QuatItems; let i = index;">
+            <div class="customer-area">
+              <div class="customer-img">
+                <i class="fa fa-times" (click)="remove_array(i)"></i>
+                <img class="name-sec nam-sec2" src="../../assets/img/iner-box1.png">
+              </div>
+              <div class="customer-text">
+                <b>{{item.ItemDescription}}</b>
+                <p class="mb-1">{{Headingss[1].heading2}} {{item.UnitPrice | priceFormat}}</p>
+                <!-- <p class="mb-1">Tax Code {{item.TaxCode}}</p> -->
+                <p class="mb-1">{{Headingss[1].heading7}} {{item.Tax}}</p>
+                <p class="mb-1">{{Headingss[1].heading8}} {{item.DiscountPercent}}</p>
+              </div>
+              <div class="customer-text">
+                <i class="fa fa-pencil-square-o pull-right" (click)="editItemArray(mymodal,item)"></i>
+                <p class="text-center">{{item.ItemCode}}</p>
+                <div class="data-inc-dec">
+                  <div class="minus" (click)="minus_qty(item.ItemCode)" > - </div>
+                  <span class="cut-qny"> {{item.Quantity}} </span>
+                  <div class="plus" (click)="add_qty(item.ItemCode)"> + </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 text-center mt-2">
+            <button class="add-invent1" (click)="sendarray()">{{Headingss[0].heading105}}</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title modal-heading" id="modal-basic-title">{{ItemNAme}}</h4>
+      <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" style="border: none;">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" name="theForm" (submit)="UpdateQuotationItem(f)">
+        <div class="row">
+          <input type="hidden" class="input-fld required-fld" name="id" [(ngModel)]="ItemId">
+
+        <div class="col-md-12">
+          <label>{{Headingss[1].heading2}}</label>
+          <div class="newrupe">
+            <span class="span9">{{'' | priceFormat:''}}</span>
+          <input type="number" placeholder="Enter {{Headingss[1].heading2}}" class="input-fld required-fld" min="0" name="price" readonly [(ngModel)]="ItemPrice" pattern="^[0-9]*$" #price="ngModel" (change)="ITemDataUpdate($event)">
+          </div>
+          <span class="help-block danger" *ngIf="price.errors?.pattern && price.touched">
+            Take Numeric Value Only
+          </span>
+        </div>
+
+        <div class="col-md-12">
+          <label>{{Headingss[1].heading6}}</label>
+          <input type="number" placeholder="Enter {{Headingss[1].heading6}}" class="input-fld required-fld" min="1" max="10000000"  name="quantity" [(ngModel)]="ItemQty" pattern="^[0-9]*$" #quantity="ngModel" (change)="ITemDataUpdate($event)">
+          <span class="help-block danger" *ngIf="quantity.errors?.pattern && quantity.touched">
+            Take Numeric Value Only and {{Headingss[1].heading6}} is 1 to 10000000
+          </span>
+        </div>
+
+
+        <div class="col-md-12">
+          <label>{{Headingss[1].heading8}}</label>
+          <input type="number" placeholder="Enter {{Headingss[1].heading8}}" class="input-fld required-fld" min="0" max="100" [(ngModel)]="ItemDis" name="discount" pattern="^[0-9]*$" #discount="ngModel" (change)="ITemDataUpdate($event)">
+        </div>
+        <span class="help-block danger" *ngIf="discount.errors?.pattern && discount.touched">
+          Take Numeric Value Only
+        </span>
+
+        <div class="col-md-12">
+          <label>{{Headingss[1].heading7}}</label>
+          <input type="number" placeholder="Enter {{Headingss[1].heading7}}" class="input-fld required-fld" min="0" max="100" name="tax" [(ngModel)]="Tax" pattern="^[0-9]*$" #tax="ngModel" (change)="ITemDataUpdate($event)">
+          <span class="help-block danger" *ngIf="tax.errors?.pattern && tax.touched">
+            Take Numeric Value Only
+          </span>
+        </div>
+
+        <div class="col-md-12 text-center my-3">
+          <button class="add-invent1" [disabled]="f.invalid">{{Headingss[0].heading105}}</button>
+        </div>
+
+        </div>
+       </form>
+    </div>
+
+  </ng-template>
+</section>
+

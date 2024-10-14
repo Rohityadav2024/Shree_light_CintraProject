@@ -1,0 +1,59 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+      <p class="custom-search-head-name">Reports</p>
+      <div class="custom-search-wrapper">
+      </div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales UserManagement">
+        
+        <table class="new-tabl" id="table-data">
+            <thead class="MainUserList">
+              <tr>
+                <th>User Id</th>
+                <th>Report Title</th>
+                <!-- <th>User Email</th> -->
+                <th>Report Name</th>
+                <th>Added On</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+       
+            <ng-container *ngFor="let report of reportsData">
+              <tr class="hover">
+                <td>{{ report.user_id }}</td>
+                <td>{{ report.report_title }}</td>
+                <!-- <td>{{ report.user_email }}</td> -->
+                <td>{{ report.module_name }}</td>
+                <td>{{ report.added_on }}</td>
+                <td>
+                  <a [href]="report.file_url" download>
+                    <i title="Download Excel" class="fa-solid fa-file-export download-icon cursor-pointer exportfileicon"></i>
+                  </a>
+                  <i class="fa fa-close" style="font-size:16px;color:red;margin-left: 10px;" (click)="CanelOrderPopup(confirmModal,report.id)"></i>
+                </td>
+              </tr>
+            </ng-container>
+            
+          </table>
+       
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #confirmModal let-modal>
+  <div class="modal-body">
+    <p> Are You Sure Do You Want To Cancel This Report History</p>
+    <div class="confirm-btn">
+      <button class="btn custom-btn-blue" (click)="cancelOrder(CanelID)">OK</button>
+      <button class="btn custom-btn-outline-blue" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>
+

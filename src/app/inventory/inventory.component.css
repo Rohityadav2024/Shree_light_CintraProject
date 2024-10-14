@@ -1,0 +1,37 @@
+.edit-pencil{
+  position: absolute;
+  top: -10%;
+  left: 90%;
+    cursor: pointer;
+    width: 20px;
+  font-size: 12px;
+  color: #f2b036;
+  background: #fff;
+  padding: 5px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.09);
+}
+
+.edit-pencil:hover {
+  background: #4a79e4;
+  color: #fff;
+}
+
+.edit-trash{
+  position: absolute;
+  top: -10%;
+  left: 0%;
+    cursor: pointer;
+    width: 20px;
+  font-size: 12px;
+  color: #f2b036;
+  background: #fff;
+  padding: 5px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.09);
+}
+
+.edit-trash:hover {
+  background: #4a79e4;
+  color: #fff;
+}

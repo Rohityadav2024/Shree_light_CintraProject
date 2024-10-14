@@ -1,0 +1,976 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+  <div class="custom-search-container">
+      <p class="custom-search-head-name"><i class="fa-solid fa-arrow-left-long cursor-pointer" (click)="backClicked()"></i>Project > Wiscon <li style="list-style: none; font-size: 12px;background-color: #F4F3EB;color: #FFC700; padding: 7px 20px; border-radius: 5px;">On Hold</li></p>
+      <div class="custom-search-wrapper">
+        <div ngbDropdown class="custom-common-search-container">
+          <ng-template #filter>Filter</ng-template>
+          <button type="button" class="custom-action-btn"><i class="fa-solid fa-plus"></i> Add Sub Project</button>
+          <button type="button" class="custom-com-temp-btn" routerLink="/customer/add-customer"><span [innerHTML]="'figma-invite-ico' | svgIcons:''" class="figma-invite-ico"></span> Invite</button>
+
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales" style="padding: 10px;">
+  <div class="ProjectDetails">
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item">
+        <div class="MainProjectLine">
+          <div class="ItemText d-flex"><li>W</li><a href="#!"><span>Wiscon-</span> Wiscon Enterprises</a>
+            <div style="position: relative;">
+              <div class="progress" style="border-radius:50px; height: 11px; width: 120px; margin-left:61px; margin-top:10px;">
+              <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+              </div>
+            </div>
+            <div style="position: absolute; top:9px;left: 66%;color:#000; font-size:
+            9px;">5%</div>
+          </div>
+          </div>
+          <div class="ItemText2">
+            <i><span [innerHTML]="'figma-edit-ico' | svgIcons:''" class="figma-edit-ico"></span></i>
+            <i><span [innerHTML]="'figma-three-dots-ico' | svgIcons:''" class="figma-three-dots-ico"></span></i>
+          </div>
+        </div>
+        <div class="accordion-header" id="flush-headingOne">
+          <div class="grid-container">
+            <div class="grid-Priority">Priority: <span class="High"></span> High</div>
+            <div class="grid-item"><li>Start Date:</li><span> 27/07/2023</span></div>
+            <div class="grid-item"><li>End Date:</li> <span>27/07/2023</span></div>
+            <div class="grid-item"><li>Order ID:</li> <span>12345</span></div>
+            <div class="grid-item"><li>Project Owner:</li> <span>Nishita Arora</span></div>
+          </div>
+          </div>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body" id="PaddingBodyAccor">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="border-bottom:1px solid #E0E0E0;margin-top:10px;">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><span [innerHTML]="'figma-detail-file-ico' | svgIcons:''" class="figma-detail-file-ico"
+                  style="color: #4A79E4;"></span>Details</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false"><span [innerHTML]="'figma-sub-project-ico' | svgIcons:''" class="figma-sub-project-ico"
+                  ></span>Sub Project</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false"><span [innerHTML]="'figma-attachment-file-ico' | svgIcons:''" class="figma-attachment-file-ico"
+                  ></span>Attachment</button>
+              </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                  <div class="accordion-item" id="BoxSha" style="border:none;">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne" style="border:none;">
+                      <button class="accordion-button" id="customeBG" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        Contact Peron Details
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                      <div class="accordion-body" id="PaddingBodyAccor">
+                        <div class="DetailsContent">
+                          <li>Contact Person : Shreya Shaw (Sales)</li>
+                          <li><span [innerHTML]="'figma-phone-ico' | svgIcons:''" class="figma-phone-ico"></span>9876757787</li>
+                          <li><span [innerHTML]="'figma-mail-o-ico' | svgIcons:''" class="figma-mail-o-ico"></span> Shreyashaw@gmail.com</li>
+                         </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item" id="BoxSha" style="border:none;">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                      <button class="accordion-button collapsed" id="customeBG" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        <div>
+                          Address
+                          <li class="AddressLI">E-138, Sec-63, Noida, Gautam Budha Nagar</li>
+                        </div>
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                      <div class="accordion-body" id="PaddingBodyAccor">
+                       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, adipisci?</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item" id="BoxSha" style="border:none;">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                      <button class="accordion-button collapsed" id="customeBG" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                        <div>
+                          Description
+                          <li class="AddressLI">Jorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                        </div>
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                      <div class="accordion-body" id="PaddingBodyAccor">
+                       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, adipisci?</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item" id="BoxSha" style="border:none;">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                      <button class="accordion-button collapsed" id="customeBG" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                        <div>Total Working Time</div>
+                        <div class="TotalWorkingTime">
+                          <li class="AddressLI">Jorem ipsum dolor sit amet,</li>
+                          <li class="AddressLI">Jorem ipsum dolor sit amet, </li>
+                          <li class="AddressLI">Jorem ipsum dolor sit amet, </li>
+                        </div>
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour" style="border:none;">
+                      <div class="accordion-body" id="PaddingBodyAccor" style="border:none;">
+                       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, adipisci?</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="sales-details">
+                  <div class="custom-outter-body-lead-list-c9 d-flex">
+                    <div class="custom-table-select-icons">
+                      <span
+                        [innerHTML]="'figma-pencil-write' | svgIcons:'figma-template-central'"></span>
+                      <!-- <span *ngIf="commonObj.tbCheckM_1" [innerHTML]="'figma-delete' | svgIcons:'figma-template-central'"
+                        (click)="multipleDelete1()"></span> -->
+                      <i class="fa-solid fa-eye figma-template-central" ></i>
+                      <!-- <i class="fa-solid fa-gear" style="color:#909092;" data-bs-toggle="modal" data-bs-target="#EditModalNew"></i> -->
+                      <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'"></span>
+                    </div>
+                    <div class="subprojectadd">
+                      <button>+ Add</button>
+                    </div>
+                  </div>
+                </div>
+              <table class="new-tabl">
+                <!-- <ng-container *ngIf="!isLoading2"> -->
+                <thead class="MainUserList">
+                <tr>
+                  <th><input id="selectAll1" type="checkbox"></th>
+                  <th class="MinWidthID">ID <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+                  <th class="minWidth">Project Name<span
+                      [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+                  <th>Customer <span
+                    [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+                  <th class="StatusMIn">Status <span
+                      [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+                  <th>Progress (%) <span
+                      [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+                  <th>Start Date <span
+                      [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+                  <th>End Date <span
+                      [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+                  <th>Priority <span
+                      [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+                </tr>
+              </thead>
+                <ng-container>
+                  <tr class="hover">
+                    <td>
+                      <input type="checkbox" class="checkbox"
+                        >
+                    </td>
+                    <td>12345</td>
+                    <td>Wiscon</td>
+                    <td>Wiscon Enterprises</td>
+                    <td><li class="OnHold">On Hold</li></td>
+                    <td style="position: relative;">
+                      <div class="progress" style="border-radius:50px; height: 11px;">
+                      <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div style="position: absolute; top: 37%;left: 40%;color:#000; font-size:
+                    9px;">5%</div>
+                  </td>
+                    <td>27/07/2023</td>
+                    <td>27/07/2023</td>
+                    <td><div class="PriorityPerent"><span class="High"></span><li class="PriorityTD">High</li></div></td>
+                  </tr>
+                  <tr class="hover">
+                    <td>
+                      <input type="checkbox" class="checkbox"
+                        >
+                    </td>
+                    <td>12345</td>
+                    <td>Wiscon</td>
+                    <td>Wiscon Enterprises</td>
+                    <td><li class="OnHold">On Hold</li></td>
+                    <td style="position: relative;">
+                      <div class="progress" style="border-radius:50px; height: 11px;">
+                      <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div style="position: absolute; top: 37%;left: 40%;color:#000; font-size:
+                    9px;">5%</div>
+                  </td>
+                    <td>27/07/2023</td>
+                    <td>27/07/2023</td>
+                    <td><div class="PriorityPerent"><span class="High"></span><li class="PriorityTD">High</li></div></td>
+                  </tr>
+                  <tr class="hover">
+                    <td>
+                      <input type="checkbox" class="checkbox"
+                        >
+                    </td>
+                    <td>12345</td>
+                    <td>Wiscon</td>
+                    <td>Wiscon Enterprises</td>
+                    <td><li class="OnHold">On Hold</li></td>
+                    <td style="position: relative;">
+                      <div class="progress" style="border-radius:50px; height: 11px;">
+                      <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div style="position: absolute; top: 37%;left: 40%;color:#000; font-size:
+                    9px;">5%</div>
+                  </td>
+                    <td>27/07/2023</td>
+                    <td>27/07/2023</td>
+                    <td><div class="PriorityPerent"><span class="High"></span><li class="PriorityTD">High</li></div></td>
+                  </tr>
+
+
+                </ng-container>
+              <!-- </ng-container> -->
+              </table>
+              </div>
+              <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div class="AttachmentFileDiv">
+                  <div>
+                  <h5>Attach File</h5>
+                  <p>Click on attach file button on the right corner to upload your files</p>
+                  <h5>June 8 2023</h5>
+                </div>
+                <div>
+                  <label class="FileCustomeBtn" for="upload-photo">+ Attach File</label>
+                  <input type="file" name="photo" id="upload-photo" />
+                </div>
+                </div>
+                <div style="  border-radius: 6px;
+                padding: 16px;
+                border: 1px solid #E0E0E0;">
+                <div class="UplodedFileShow">
+                  <li style="color:#4A79E4;"><span [innerHTML]="'figma-typefile-o-ico' | svgIcons:''" class="figma-typefile-o-ico"
+                    ></span>Opportunities.png</li>
+                    <li>By Wasi Azam</li>
+                    <li>June 8 2023 at 10 AM</li>
+                    <li><i class="fa-solid fa-ellipsis"></i></li>
+                </div>
+                <div class="UplodedFileShow">
+                  <li style="color:#4A79E4;"><span [innerHTML]="'figma-typefile-o-ico' | svgIcons:''" class="figma-typefile-o-ico"
+                    ></span>Opportunities.png</li>
+                    <li>By Wasi Azam</li>
+                    <li>June 8 2023 at 10 AM</li>
+                    <li><i class="fa-solid fa-ellipsis"></i></li>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="MainBTNAccrdion">
+        <div class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- Add Project-Details HTML here -->
+  <div class="DivStagesMain">
+    <div class="DivStagestopBar">
+      <h6>Stages</h6>
+      <!-- <button><span [innerHTML]="'figma-tabs-ico' | svgIcons:''" class="figma-tabs-ico" ></span>Tabs<span [innerHTML]="'figma-chevron-ico' | svgIcons:''" class="new-search-cross" ></span></button> -->
+      <div>
+      <span [innerHTML]="'figma-tabs-ico' | svgIcons:''" class="figma-tabs-ico" ></span><select [(ngModel)]="KanbanValue" name="KanbanValue" (change)="kanbanortab()" style="border:none">
+        <option value="tab">Tabs</option>
+        <option value="kanban">Karban</option>
+      </select>
+    </div>
+    </div>
+    <!-- Table Hide css here -->
+    <div class="StageInvioceMainDiv" *ngIf="iskanban == false">
+    <div class="StagesBoxDiv">
+      <div class="AllBoxMainDiv">
+      <div class="AllBox">
+        <div class="BorderLIne"></div>
+        <li><span [innerHTML]="'figma-done-ico' | svgIcons:''" class="figma-done-ico'" ></span></li>
+        <li>Invoice</li>
+        <span>End Date-22/07/2023</span>
+      </div>
+      <div class="AllBox">
+        <div class="BorderLIne"></div>
+        <li><span [innerHTML]="'figma-done-gray-ico' | svgIcons:''" class="figma-done-gray-ico" ></span></li>
+        <li>Invoice</li>
+        <span>End Date-22/07/2023</span>
+      </div>
+      <div class="AllBox">
+        <div class="BorderLIne"></div>
+        <li><span [innerHTML]="'figma-done-gray-ico' | svgIcons:''" class="figma-done-gray-ico" ></span></li>
+        <li>Invoice</li>
+        <span>End Date-22/07/2023</span>
+      </div>
+      <div class="AllBox">
+        <li><span [innerHTML]="'figma-done-gray-ico' | svgIcons:''" class="figma-done-gray-ico" ></span></li>
+        <li>Invoice</li>
+        <span>End Date-22/07/2023</span>
+      </div>
+      <div class="AllBox">
+        <li class="AddStageBTN" (click)="openmaximize(mymodal)" style="cursor: pointer;">+ Add Stage</li>
+      </div>
+    </div>
+    <div class="MarkStageBtnMain">
+        <button class="MarkStageBtn">Mark Stage as Complete</button>
+    </div>
+    </div>
+    <div class="StageTableDataDiv" style="border: 1px solid #4A79E4; border-radius: 10px;">
+      <div class="StageTableDataTitle">
+        <div class="TitleAllbtn">
+          <div class="Title">
+        <h5>Invoice</h5>
+      </div>
+      <div class="AllBtnIcon">
+      <li><span [innerHTML]="'figma-table-filter' | svgIcons:''" class="figma-table-filter" ></span></li>
+      <li><span [innerHTML]="'figma-time-cut-ico' | svgIcons:''" class="new-search-cross" ></span></li>
+      <li><span> <li><i class="fa-solid fa-ellipsis" style="color: #909092;"></i></li></span></li>
+      <li><span [innerHTML]="'figma-close-btn-ico' | svgIcons:''" class="new-search-cross" ></span></li>
+      </div>
+      </div>
+      </div>
+      <div class="sales-details">
+        <div class="custom-outter-body-lead-list-c9" style="display: flex; justify-content: space-between;">
+          <div class="custom-table-select-icons">
+            <span [innerHTML]="'figma-pencil-write' | svgIcons:'figma-template-central'"></span>
+            <span *ngIf="commonObj.tbCheckM_1" [innerHTML]="'figma-delete' | svgIcons:'figma-template-central'" (click)="multipleDelete1()"></span>
+            <i class="fa-solid fa-eye figma-template-central"></i>
+            <i class="fa-solid fa-gear" style="color:#909092;" data-bs-toggle="modal" data-bs-target="#EditModalNew"></i>
+            <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" ></span>
+          </div>
+          <div class="SerchandAddtask d-flex">
+            <form class="example" action="action_page.php">
+              <input type="text" placeholder="Search.." name="search" s>
+              <i class="fa fa-search"></i>
+            </form>
+            <button (click)="openmaximize(mymodal2)">+ Add Task</button>
+          </div>
+        </div>
+      </div>
+
+        <table class="new-tabl">
+          <!-- <ng-container *ngIf="!isLoading2"> -->
+          <thead class="MainUserList">
+          <tr>
+            <th><input id="selectAll1" type="checkbox"></th>
+            <th class="minWidth">Task Name<span
+                [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+            <th>Assigned To <span
+              [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+            <th class="StatusMIn">Status <span
+                [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+            <th >Task Progress<span
+                [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+            <th >Due Date<span
+                [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+            <th >Start Date<span
+                [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+            <th >Priority<span
+                [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+                <th>End Date<span
+                    [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+            <th>Action</th>
+          </tr>
+        </thead>
+          <ng-container>
+            <tr class="hover">
+              <td>
+                <input type="checkbox" class="checkbox"
+                  >
+              </td>
+              <td><span [innerHTML]="'figma-done-ico' | svgIcons:''"></span> Wiscon</td>
+              <td>Wiscon Enterprises</td>
+              <td><li class="OnHold">On Hold</li></td>
+              <td style="position: relative;">
+                <div class="progress" style="border-radius:50px; height: 11px;">
+                <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+              <div style="position: absolute; top: 37%;left: 40%;color:#000; font-size:
+              9px;">5%</div>
+            </td>
+              <td>27/07/2023</td>
+              <td>27/07/2023</td>
+              <td><div class="PriorityPerent"><span class="High"></span><li class="PriorityTD">High</li></div></td>
+              <td>Nishita Arora</td>
+              <td>27/07/2023</td>
+              <td class="EditBoxForm">
+                <span class="edit-delete edit-delete"
+                  [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                <div class="hover-show hover-show hover-show-inactive">
+                  <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                        class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                  <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                    Delete Customer</span><br> -->
+                  <span><i class="fa fa-plus" aria-hidden="true"></i> Create
+                    Opportunity</span><br>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover">
+                <td>
+                  <input type="checkbox" class="checkbox"
+                    >
+                </td>
+                <td ><span [innerHTML]="'figma-done-ico' | svgIcons:''"></span> Wiscon</td>
+                <td>Wiscon Enterprises</td>
+                <td><li class="OffTrack">Off Track</li></td>
+                <td style="position: relative;">
+                    <div class="progress" style="border-radius:50px; height: 11px;">
+                    <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                  <div style="position: absolute; top: 37%;left: 40%;color:#000; font-size:
+                  9px;">5%</div>
+                </td>
+                <td>27/07/2023</td>
+                <td>27/07/2023</td>
+                <td><div class="PriorityPerent"><span class="Low"></span><li class="PriorityTD">Low</li></div></td>
+                <td>Nishita Arora</td>
+                <td>27/07/2023</td>
+                <td class="EditBoxForm">
+                  <span class="edit-delete edit-delete"
+                    [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                  <div class="hover-show hover-show hover-show-inactive">
+                    <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                          class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                    <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                      Delete Customer</span><br> -->
+                    <span><i class="fa fa-plus" aria-hidden="true"></i> Create
+                      Opportunity</span><br>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover">
+                <td>
+                  <input type="checkbox" class="checkbox"
+                    >
+                </td>
+                <td><span [innerHTML]="'figma-done-ico' | svgIcons:''"></span> Wiscon</td>
+                <td>Wiscon Enterprises</td>
+                <td><li class="OnHold">On Hold</li></td>
+                <td style="position: relative;">
+                    <div class="progress" style="border-radius:50px; height: 11px;">
+                    <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                  <div style="position: absolute; top: 37%;left: 40%;color:#000; font-size:
+                  9px;">5%</div>
+                </td>
+                <td>27/07/2023</td>
+                <td>27/07/2023</td>
+                <td><div class="PriorityPerent"><span class="Medium"></span><li class="PriorityTD">Medium</li></div></td>
+                <td>Nishita Arora</td>
+                <td>27/07/2023</td>
+                <td class="EditBoxForm">
+                  <span class="edit-delete edit-delete"
+                    [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                  <div class="hover-show hover-show hover-show-inactive">
+                    <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                          class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                    <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                      Delete Customer</span><br> -->
+                    <span><i class="fa fa-plus" aria-hidden="true"></i> Create
+                      Opportunity</span><br>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover">
+                <td>
+                  <input type="checkbox" class="checkbox"
+                    >
+                </td>
+                <td><span [innerHTML]="'figma-done-ico' | svgIcons:''"></span> Wiscon</td>
+                <td>Wiscon Enterprises</td>
+                <td><li class="InProcess">In Process</li></td>
+                <td style="position: relative;">
+                    <div class="progress" style="border-radius:50px; height: 11px;">
+                    <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                  <div style="position: absolute; top: 37%;left: 40%;color:#000; font-size:
+                  9px;">5%</div>
+                </td>
+                <td>27/07/2023</td>
+                <td>27/07/2023</td>
+                <td><div class="PriorityPerent"><span class="Low"></span><li class="PriorityTD">Low</li></div></td>
+                <td>Nishita Arora</td>
+                <td>27/07/2023</td>
+                <td class="EditBoxForm">
+                  <span class="edit-delete edit-delete"
+                    [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                  <div class="hover-show hover-show hover-show-inactive">
+                    <a routerLink="/customer/edit-customer/" style="text-decoration: none; color:#4E4E56;"><span><i
+                          class="fa fa-pencil" aria-hidden="true"></i> Edit Customer</span></a><br>
+                    <!-- <span (click)="deleteCustomer(item.id? item.id:0)"><i class="fa fa-trash" aria-hidden="true"></i>
+                      Delete Customer</span><br> -->
+                    <span><i class="fa fa-plus" aria-hidden="true"></i> Create
+                      Opportunity</span><br>
+                  </div>
+                </td>
+              </tr>
+          </ng-container>
+        <!-- </ng-container> -->
+        </table>
+    </div>
+    </div>
+    <!-- Hide and Show Div -->
+    <!--  -->
+    <div class="KanbanviewStage" *ngIf="iskanban == true" style="background-color: #DDE1EC;" >
+      <div class="sales-details" >
+        <!--- step start-->
+        <div class="row">
+          <div class="col-lg-9">
+        <div class="KanbanviewStageWidth">
+          <div class="e-sample-resize-container">
+            <ejs-kanban keyField='status' #headerText [dataSource]='selectedData | searchfilterlead:searchValue '
+            [cardSettings]='cardSettings' (dialogOpen)="onOpen($event)" (dragStop)='onKanbanBDragStop($event)'>
+            <span class="d-block cursor" [innerHTML]="'table-h-dots' | svgIcons:'' "class="table-v-dots"></span>
+              <e-columns>
+                <e-column headerText='Invioce' keyField='New'></e-column>
+                <e-column headerText='Final Development' keyField='Follow Up'></e-column>
+                <e-column headerText='Invoice' keyField='Hold'></e-column>
+              </e-columns>
+              <!-- <e-column headerText='Qualified' keyField='Qualified' allowToggle='true'></e-column> -->
+              <div class="KarbanMainBoxDiv">
+                <!-- <h1>new media</h1> -->
+              <div class="e-card-wrapper">
+              <ng-template #cardSettingsTemplate #content let-selectedData>
+                <div class='e-card-content'>
+                  <div class="card-body p-2" style="border: 1px solid #e9e9e9;">
+                    <div class="d-flex justify-content-between">
+                      <div class="custom-action-btn openbtn" (click)="openNav()" style="cursor:pointer; width:100%;">
+                        <div class="CKanbanBoardParthere">
+                        <div>
+                          <p class="fw-600 mb-0"> {{selectedData.companyName}}</p>
+                          <!-- <p class="mb-0"> {{selectedData.contactPerson}}</p> -->
+                          <p class="mb-0" id="CustomerPriority">
+                            <span>Priority:</span>
+                            <span style="width:8px;height: 8px; border-radius: 10px; margin-top:5px; margin-left:5px; background-color: orange;"></span>
+                            <span style="margin-left: 4px;">Medium</span>
+                          </p>
+                        </div>
+                        <div>
+                        <span class="d-block cursor edit-delete{{selectedData.id}}" (click)="editdeletepop(selectedData)"><li style="list-style: none;"><i class="fa-solid fa-ellipsis" style="color: #909092;"></i></li></span>
+                        </div>
+                        </div>
+                        <div class="KanbanProfileImg">
+                          <div>
+                          <img src="../../../assets/img/contact-person-1.png" alt="">
+                          <img src="../../../assets/img/contact-person-1.png" alt="">
+                          <img src="../../../assets/img/contact-person-1.png" alt="">
+                        </div>
+                        <div style="display: flex; gap:8px;">
+                          <span class="date">21/05/2023</span>
+                          <span class="d-block cursor" [innerHTML]="'online-mgs-ico' | svgIcons:''" class="online-mgs-ico">1</span>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="text-center">
+                        <div class="hover-show  text-start hover-show{{selectedData.id}}" style="display:none;">
+                          <span (click)="openEdit(contentEdit, selectedData)"> Edit
+                            Lead</span>
+                          <span (click)="AssignTo(assignTO ,selectedData)"> Assign To</span>
+                          <span (click)="deleteLeads(selectedData.id? selectedData.id:0)">
+                            Suspend Lead</span>
+                        </div>
+                        <p></p>
+                        <span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+            </div>
+            </ejs-kanban>
+          </div>
+          <div id="noDataFound">
+            <span class="d-flex justify-content-center"
+              style="text-align: center;font-size: 20px;color: #4A79E4;">No Data Found</span>
+          </div>
+        </div>
+      </div>
+        <!-- End Width Here -->
+      <div class="col-lg-3">
+        <div class="AddStageBtnHere">
+          <button>+ Add Stage</button>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </section>
+
+  <!-- Modal Here -->
+  <div class="MainProjectPMOSide">
+  <div id="mySidepanel" class="sidepanel sidepanel2">
+    <div class="row">
+      <div class="col-12 mb-1 px-3 border-bottom" id="FilterTopSide" style="background-color: #fff;">
+        <!-- <strong style="color: #4a79e4 !important;">Filters</strong> -->
+        <button class="TopBarBtn"><span class="d-block cursor" [innerHTML]="'figma-done-blue-icon' | svgIcons:''" class="figma-done-blue-icon"></span>Complete</button>
+        <span class="two-icons-top" [innerHTML]="'figma-watch-ico' | svgIcons:''"></span>
+        <span class="two-icons-top" [innerHTML]="'figma-three-dots-ico' | svgIcons:''"></span>
+        <a class="closebtn" (click)="closeNav()">&times;</a>
+      </div>
+    </div>
+    <div class="PaddingNoneID" style="margin-top:10px;">
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="FiltertwoInputs">
+          <div class="mainDatahere">
+            <h3>Send Invoice to all customers</h3>
+            <li>Owner: Chanchal Bhaskar</li>
+          </div>
+          <div class="tableProjectHere">
+            <div class="AllLIHEre">
+            <li>Team Members:</li>
+            <li>Priority:</li>
+            <li>Due Date:</li>
+          </div>
+          <div class="AllLIHEre">
+            <div class="allimages">
+            <li><img src="../../../assets/img/contact-person-1.png" alt=""></li>
+            <li><img src="../../../assets/img/contact-person-1.png" alt=""></li>
+            <li><img src="../../../assets/img/contact-person-1.png" alt=""></li>
+            <li><img src="../../../assets/img/contact-person-1.png" alt=""></li>
+            <li><span class="two-icons-top" [innerHTML]="'figma-imageplus-icon' | svgIcons:''"></span></li>
+          </div>
+            <li>Priority:</li>
+            <li>Due Date:</li>
+          </div>
+          </div>
+        </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="FiltertwoInputs">
+          <div class="mainDatahere d-flex">
+            <h3 class="PaddingH3">Task Manage </h3>
+            <div style="position: relative;">
+              <div class="progress" style="border-radius:50px; height: 11px; width: 120px; margin-left:22px; margin-top:6px;">
+              <div class="progress-bar" style="background-color: orange;" role="progressbar" style="width: 15%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+              </div>
+            </div>
+            <div style="position: absolute; top:5px;left: 56%;color:#000; font-size:
+            9px;">5%</div>
+          </div>
+          </div>
+          <div class="tableProjectHere">
+            <div class="AllLIHEre">
+            <li>Start Date:</li>
+            <li>End Date</li>
+            <li>Status</li>
+          </div>
+          <div class="AllLIHEre">
+            <li>27/7/2023</li>
+            <li>27/7/2023</li>
+            <li>On Hold</li>
+          </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="ProjectfitlerDescription">
+      <div class="mainHere--Div">
+      <h6>Description</h6>
+      <div class="mainInputsclass">
+      <input type="text">
+      <div class="TwoIConinput">
+        <div class="d-flex">
+          <li style="list-style: none;">A</li>
+          <!-- <span class="btn btn-primary btn-file">
+            <input type="file">
+        </span> -->
+        <label class="center-block btn-file" style="margin-left:10px; cursor: pointer;">
+          <span class="two-icons-top" [innerHTML]="'figma-upload-file-icon' | svgIcons:''"></span>
+          <input type="file" style="display: none;">
+        </label>
+        </div>
+        <div>
+          <button>Cancel</button>
+          <button style="background-color: #4A79E4; color:#fff;">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+    <div class="DependencySection">
+      <div class="DependencyBar">
+        <h6>Dependency</h6>
+        <span class="two-icons-top" [innerHTML]="'figma-imageplus-icon' | svgIcons:''"></span>
+      </div>
+    </div>
+    <div class="SlideProjectDetailsTabsHere">
+      <!-- <div class="alltabsbtn"> -->
+      <ul class="nav nav-pills mb-3" id="AllTabsHere" role="tablist">
+        <li>
+          <span class="MainBtnIconSpan" [innerHTML]="'figma-Activity-slide-icon' | svgIcons:''"></span>
+          <button class="nav-link ActivityButton active" id="pills-Activity-tab" data-bs-toggle="pill" data-bs-target="#pills-Activity" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Activity/Comment</button>
+        </li>
+        <li>
+          <span class="MainBtnIconSpan" [innerHTML]="'figma-attachment-1-file-ico' | svgIcons:''"></span>
+          <button class="nav-link AttachmentButton" id="pills-Attachment-tab" data-bs-toggle="pill" data-bs-target="#pills-azam" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Attachment</button>
+        </li>
+        <li>
+          <span class="MainBtnIconSpan" [innerHTML]="'figma-simple-watch-icon' | svgIcons:''"></span>
+          <button class="nav-link hoursButton" id="pills-Loghours-tab" data-bs-toggle="pill" data-bs-target="#pills-saifi" type="button" role="tab" aria-controls="pills-saifi" aria-selected="false">Log hours</button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="pills-tabContentHere">
+        <!-- Activity/Comment -->
+        <div class="tab-pane fade show active" id="pills-Activity" role="tabpanel" aria-labelledby="pills-Activity-tab">
+          <div class="d-flex">
+          <label><li>C</li></label>
+          <input type="text" placeholder="Add a Comment">
+        </div>
+        </div>
+        <!-- End Here Div -->
+        <div class="tab-pane fade" id="pills-azam" role="tabpanel" aria-labelledby="pills-Attachment-tab">
+          <div class="AttachmentFileDiv">
+          <div>
+          <h5>Attach File</h5>
+          <p>Click on attach file button on the right corner to upload your files</p>
+        </div>
+        <div>
+          <label class="FileCustomeBtn" for="upload-photo">+ Attach File</label>
+          <input type="file" name="photo" id="upload-photo" style="display: none;"/>
+        </div>
+        </div>
+        <div class="MainDivBGcolor">
+          <h6>June 8 2023</h6>
+        <div style=" border-radius: 6px; padding: 16px; border: 1px solid #E0E0E0;">
+        <div class="UplodedFileShow">
+          <li style="color:#4A79E4;"><span [innerHTML]="'figma-typefile-o-ico' | svgIcons:''" class="figma-typefile-o-ico"
+            ></span>Opportunities.png</li>
+            <li>By Wasi Azam</li>
+            <li>June 8 2023 at 10 AM</li>
+            <li><i class="fa-solid fa-ellipsis"></i></li>
+        </div>
+        <div class="UplodedFileShow">
+          <li style="color:#4A79E4;"><span [innerHTML]="'figma-typefile-o-ico' | svgIcons:''" class="figma-typefile-o-ico"
+            ></span>Opportunities.png</li>
+            <li>By Wasi Azam</li>
+            <li>June 8 2023 at 10 AM</li>
+            <li><i class="fa-solid fa-ellipsis"></i></li>
+        </div>
+      </div>
+    </div>
+      </div>
+        <div class="tab-pane fade" id="pills-saifi" role="tabpanel" aria-labelledby="pills-Loghours-tab">
+          <div class="LogHoursBtnHere">
+            <div class="BtnandClose">
+              <button>Log Hours</button>
+            </div>
+            <div class="LogHoursForm">
+              <div class="Topbar">
+                <h6>LOG HOURS</h6>
+                <button type="button" class="close clos-pop-btn" aria-label="Close" style="outline: none;">
+                <span aria-hidden="true" style="outline: none;">×</span>
+                </button>
+              </div>
+              <div class="allMaterialForm">
+                <div class="allInputs">
+                  <input type="date" value="2023-08-02" id="UpdateDate" />
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <label for="">Time-From</label>
+                      <input id="appt-time" type="time" name="appt-time" value="13:30" />
+                    </div>
+                    <div class="col-lg-6">
+                      <label for="">To</label>
+                      <input id="appt-time" type="time" name="appt-time" value="13:30" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+    </div>
+
+  </div>
+  </div>
+  <!-- End Main Div Here -->
+  <!-- Button Here -->
+    <!-- <div class="FilterBtnHere">
+        <div class="ResetBTN">
+          <a>Reset</a>
+        </div>
+        <div class="ApplyBTN">
+          <button>Apply</button>
+        </div>
+  </div> -->
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title modal-heading" id="modal-basic-title">ADD {{ProductItem.productComponent ? 'STAGE' : ProductItem.modalSelectName}}</h4>
+      <span class="figma-screen-ico" [innerHTML]="(commonObj.bigScreenMode ? 'figma-modal-big-screen-ico' : 'figma-modal-mid-screen-ico') | svgIcons:''" (click)="bigScreenOrMid()"></span>
+      <span class="figma-screen-close" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="modal.dismiss('Cross click')"></span>
+    </div>
+    <ng-container *ngIf="ProductItem.productComponent else selectProduct" >
+      <p class="figma-modal-inner-heading">Stage Details</p>
+      <form #f="ngForm" name="theForm" class="figma-modal-form" id="ProjectManagmentPopupHere">
+        <div class="figma-modal-body">
+          <div class="figma-form-wrapper">
+            <label>Stage Name<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+            <input type="text" class="input-fld" placeholder="Stage Name" autocomplete="off">
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Owner<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+            <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" class="input-fld" placeholder="Owner">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="Search" type="text" (input)="selectsource.filter($event.target.value)" />
+              </ng-template>
+              <ng-option value="" disable selected>Choose Order</ng-option>
+              <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+            </ng-select>
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Start Date</label>
+            <input type="date" email="true" class="input-fld" placeholder="Select Date">
+          </div>
+          <div class="figma-form-wrapper">
+            <label>End Date</label>
+            <input type="date" email="true" class="input-fld" placeholder="Select Date">
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Status<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+            <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" placeholder="Select Status" class="input-fld">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text" (input)="selectsource.filter($event.target.value)" />
+              </ng-template>
+              <ng-option value="" disable selected>Choose Status</ng-option>
+              <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+            </ng-select>
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Priority<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+            <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" placeholder="Select Priority" class="input-fld">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text" (input)="selectsource.filter($event.target.value)" />
+              </ng-template>
+              <ng-option value="" disable selected>Choose Department</ng-option>
+              <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+            </ng-select>
+          </div>
+        </div>
+        <div class="figma-modal-fotter">
+          <button class="figma-outline-btn">Cancel</button>
+          <button class="figma-outline-btn">Save and Create Other</button>
+          <button class="figma-prim-btn" (click)="addLeads(f)">Save</button>
+        </div>
+      </form>
+    </ng-container>
+    <ng-template #selectProduct>
+      <p class="figma-modal-inner-heading">{{ProductItem.selectItems?ProductItem.modalSelectLabelName : ProductItem.modalSelectedLabelName}}</p>
+      <app-project-product [ProductItem]="ProductItem"></app-project-product>
+    </ng-template>
+  </ng-template>
+
+  <ng-template #mymodal2 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title modal-heading" id="modal-basic-title">ADD {{ProductItem.productComponent ? 'Task' : ProductItem.modalSelectName}}</h4>
+      <span class="figma-screen-ico" [innerHTML]="(commonObj.bigScreenMode ? 'figma-modal-big-screen-ico' : 'figma-modal-mid-screen-ico') | svgIcons:''" (click)="bigScreenOrMid()"></span>
+      <span class="figma-screen-close" [innerHTML]="'figma-modal-close' | svgIcons:''" (click)="modal.dismiss('Cross click')"></span>
+    </div>
+    <ng-container *ngIf="ProductItem.productComponent else selectProduct" >
+      <p class="figma-modal-inner-heading">Task Details</p>
+      <form #f="ngForm" name="theForm" class="figma-modal-form" id="ProjectManagmentPopupHere">
+        <div class="figma-modal-body">
+          <div class="figma-form-wrapper">
+            <label>Task Name<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+            <input type="text" class="input-fld" placeholder="Task Name" autocomplete="off">
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Owner<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+            <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" class="input-fld" placeholder="Owner">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="Search" type="text" (input)="selectsource.filter($event.target.value)" />
+              </ng-template>
+              <ng-option value="" disable selected>Choose Owner</ng-option>
+              <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+            </ng-select>
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Start Date</label>
+            <input type="date" email="true" class="input-fld" placeholder="Select Date">
+          </div>
+          <div class="figma-form-wrapper">
+            <label>End Date</label>
+            <input type="date" email="true" class="input-fld" placeholder="Select Date">
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Due Date</label>
+            <input type="date" email="true" class="input-fld" placeholder="Select Date">
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Priority<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+            <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" placeholder="Select Priority" class="input-fld">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text" (input)="selectsource.filter($event.target.value)" />
+              </ng-template>
+              <ng-option value="" disable selected>Choose Department</ng-option>
+              <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+            </ng-select>
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Status<span class="figma-req-star" [innerHTML]="'figma-modal-form-required-star' | svgIcons:''"></span></label>
+            <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" placeholder="Select Status" class="input-fld">
+              <ng-template ng-header-tmp>
+                <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text" (input)="selectsource.filter($event.target.value)" />
+              </ng-template>
+              <ng-option value="" disable selected>Choose Status</ng-option>
+              <!-- <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option> -->
+            </ng-select>
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Description</label>
+            <textarea class="input-fld" rows="6" placeholder="Description"></textarea>
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Due Date</label>
+            <input type="date" email="true" class="input-fld" placeholder="Select Date">
+          </div>
+          <div class="figma-form-wrapper">
+            <label>Due Date</label>
+            <input type="time" email="true" class="input-fld" placeholder="Select Date">
+          </div>
+          <div class="figma-form-wrapper figma-form-wrapper-full text-center">
+            <label style="border-bottom:2.5px solid #4A79E4;">Attachments</label>
+          </div>
+          <div class="figma-form-wrapper figma-form-wrapper-full pt-2">
+            <label style="background-color: #E9EFFC; border:1px dotted #4A79E4; padding: 12px; border-radius:5px; text-align: center; border: 1px dotted #4A79E4; width:100%; justify-content: center; align-items: center; display:flex;">
+              <input type="file" style="display: none;">
+              <span class="edit-delete edit-delete" [innerHTML]="'figma-attachment-file-ico' | svgIcons:''" class="table-v-dots"></span>
+              <li style="list-style: none;">Choose a File Or Drag Here</li>
+            </label>
+          </div>
+        </div>
+        <div class="figma-modal-fotter">
+          <button class="figma-outline-btn">Cancel</button>
+          <button class="figma-outline-btn">Save and Create Other</button>
+          <button class="figma-prim-btn" (click)="addLeads(f)">Save</button>
+        </div>
+      </form>
+    </ng-container>
+    <ng-template #selectProduct>
+      <p class="figma-modal-inner-heading">{{ProductItem.selectItems?ProductItem.modalSelectLabelName : ProductItem.modalSelectedLabelName}}</p>
+      <app-project-product [ProductItem]="ProductItem"></app-project-product>
+    </ng-template>
+  </ng-template>

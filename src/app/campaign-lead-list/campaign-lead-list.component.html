@@ -1,0 +1,41 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+    <div class="home-content mt-3">
+        <div class="sales-boxes">
+            <div class="recent-sales box">
+
+                <div class="sales-details mt-2">
+                    <table class="new-tabl mt-0" id="assigntable">
+
+                        <tr>
+                            <th style="width: 150px;">Lead ID <i class="fa fa-sort"></i></th>
+                            <th>Company Name <i class="fa fa-sort"></i></th>
+                            <th>Phone <i class="fa fa-sort"></i></th>
+                            <th>Name <i class="fa fa-sort"></i></th>
+                            <th>Email <i class="fa fa-sort"></i></th>
+                            <th>Address <i class="fa fa-sort"></i></th>
+                            <th>Date Time</th>
+                        </tr>
+
+                        <ng-container *ngFor="let item of campaignleadList; ">
+                            <tr class="hover">
+                                <td>{{item.lead_id}}</td>
+                                <td>{{item.company_Name}}</td>
+                                <td>{{item.Phone}}</td>
+                                <td>{{item.Name}}</td>
+                                <td>{{item.Email}}</td>
+                                <td>{{item.Address}}</td>
+                                <td>{{item.dateTime}}</td>
+                            </tr>
+                        </ng-container>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>

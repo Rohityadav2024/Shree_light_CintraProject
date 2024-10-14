@@ -1,0 +1,104 @@
+
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content  dif">
+
+    <div class="home-left-container dif">
+
+
+      <div class="sales-boxes">
+        <div class="recent-sales box">
+          <div class="row">
+
+            <div class="col-md-10" style="margin-bottom:15px;">
+              <h5 class="fs-15" style="font-weight:600; margin-left: -7px; color:#4a79e4; text-align: center;"> Videos Related To Project Learns </h5>
+              <div class="em-search-wrapper" style="justify-content: center">
+                <div class="em-search-container">
+                  <div class="em-search">
+                    <span [innerHTML]="'search-icon' | svgIcons:''" class="quick-search"></span> <input class="sear-are"
+                      placeholder="Search" style="width: 300px;" />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="sales-boxes">
+
+        <div class="col-md-10" >
+        <button type="button" data-toggle="button" class="btn btn-secondary btn-lg bt active" (click)="opentab('all')" style=" border-radius: 12px; margin: 11px 9px 0px 6px" id="defaultOpen" >All</button>
+        <button type="button" data-toggle="button" class="btn btn-secondary btn-lg bt" (click)="opentab('email')" >Email</button>
+        <button type="button"  data-toggle="button"class="btn btn-secondary btn-lg bt" (click)="opentab('Social Media')" >Social Media</button>
+        <button type="button"  data-toggle="button"class="btn btn-secondary btn-lg bt" (click)="opentab('Graphics')" >Graphics</button>
+        <button type="button"  data-toggle="button" class="btn btn-secondary btn-lg bt" (click)="opentab('Reports')" >Reports</button>
+       </div>
+       <div class="col-md-2">
+        <button type="submit" style="border: none; background-color: #f4f7fe; margin: 11px 9px 0px 6px;" (click)="open(mymodal)">
+          <i class=" fa-2x fa-regular  fa-video-plus fa-beat-fade"></i>
+        </button>
+
+       </div>
+
+
+
+      </div>
+      <div class="sales-boxes">
+        <div class="row" >
+        <div class="card vid " *ngFor="let role of video1">
+          <!-- <video  style="border-radius: 13px;" controls> -->
+            <!-- <iframe  src="https://www.youtube.com/embed/9iGoDNlKY-g" frameborder="0"  style="border-radius: 13px;"></iframe> -->
+            <iframe [src]="_BridgeService.saniter(role.link)" frameborder="0"  style="border-radius: 13px;" embedded="true"></iframe>
+            <!-- <source [src]="role.link" type="video/webm"/>
+            <source [src]="role.link" type="video/webm" /> -->
+          <!-- </video> -->
+
+          <div class="card-body">
+            <p class="card-text">{{role.title}}</p>
+          </div>
+        </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+</section>
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="width: 100%;text-align: center;color: #4A79E4; font-size: 20px;">Upload Video</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')" style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm" >
+      <div class="row">
+        <div class="col-md-12">
+          <div _ngcontent-mhx-c185="" appdnd="" class="fileupload-container"><input _ngcontent-mhx-c185="" type="file" id="fileDropRef" multiple="" class="fileuploadref"><label _ngcontent-mhx-c185="" class="fw-600"> Choose a file </label><label _ngcontent-mhx-c185="" for="fileDropRef"> &nbsp; or drag it here</label></div>
+
+        </div>
+
+        <div class="col-md-12 text-center mt-2">
+          <!-- <button class="add-invent1" [disabled]="f.invalid">Save</button> -->
+          <button class="add-invent1">Save</button>
+        </div>
+        <!-- <div *ngIf="isLoading"><img src="../../assets/img/loder.gif"></div> -->
+      </div>
+    </form>
+  </div>
+
+</ng-template>

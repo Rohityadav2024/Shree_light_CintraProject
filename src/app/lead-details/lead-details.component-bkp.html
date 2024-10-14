@@ -1,0 +1,547 @@
+<!-- <app-left-menu></app-left-menu> -->
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="TopbarAllComponentDivs">
+      <div class="Innerpagename">
+        <span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="backClicked()"></span><h2>Leads Management <span style="font-size: 19px; display: inline-block; transform: translate(-1px, 2px);">></span> <span>Details</span></h2>
+    </div>
+    <div class="SideBTnAllstyle"></div>
+    </div>
+    <ng-container *ngFor="let item of Bridge2">
+      <div class="sales-boxes flex-row">
+        <div class="recent-sales p-0">
+          <div class="row">
+          <div class="col-lg-8" style="border-right: 8px solid #F4F7FE;">
+            <div class="title" id="CustomeLeadDetails">
+              <h5> <strong>
+                  {{item.companyName | titlecase}}</strong></h5>
+
+              <h6 (click)="openEdit(contentEdit, item)" *ngIf="item.junk==0"><a class="btn btn-sm">Edit</a>
+              </h6>
+            </div>
+            <div class="lead-details-grid" style="padding: 0 20px;">
+              <div>
+                <p class="grey1">Date</p>
+              </div>
+              <div>
+                <p class="dtl">{{item.date | customDate}}</p>
+              </div>
+              <div>
+                <p class="grey1">Person Name</p>
+              </div>
+              <div>
+                <p dtl>{{item.contactPerson || 'NA'}}</p>
+              </div>
+
+              <div>
+                <p class="grey1">Phone</p>
+              </div>
+              <div>
+                <p class="dtl">{{item.phoneNumber || 'NA'}}</p>
+              </div>
+              <div>
+                <p class="grey1">Email</p>
+              </div>
+              <div>
+                <p class="dtl text-break">{{item.email || 'NA'}}</p>
+              </div>
+
+              <div>
+                <p class="grey1">Location</p>
+              </div>
+              <div>
+                <p class="dtl">{{item.location || 'NA'}}</p>
+              </div>
+              <div>
+                <p class="grey1">Source</p>
+              </div>
+              <div>
+                <p class="dtl">{{item.source || 'NA'}}</p>
+              </div>
+
+              <div>
+                <p class="grey1">Status</p>
+              </div>
+              <div>
+                <p class="dtl">{{item.status || 'NA'}}</p>
+              </div>
+              <div>
+                <p class="grey1">Lead Priority</p>
+              </div>
+              <div>
+                <p class="dtl">{{item.leadType || 'NA'}}</p>
+              </div>
+
+
+              <div>
+                <p class="grey1">Turnover</p>
+              </div>
+              <div>
+                <p class="dtl">{{item.turnover || 0 | priceFormat}}</p>
+              </div>
+
+              <div>
+                <p class="grey1">Created By</p>
+              </div>
+              <div>
+                <p class="dtl">{{item.employeeId.SalesEmployeeName || 'NA'}}</p>
+              </div>
+              <div>
+                <p class="grey1">Assign To</p>
+              </div>
+              <div>
+                <p class="dtl">{{item.assignedTo.SalesEmployeeName || 'NA'}}</p>
+              </div>
+
+              <div>
+                <p class="grey1">Product Interst</p>
+              </div>
+              <div>
+                <p class="dtl">{{item.productInterest || 'NA'}}</p>
+              </div>
+              <div>
+                <p class="grey1">Remarks</p>
+              </div>
+              <div>
+                <p class="dtl">{{item.message || 'NA'}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6"><ul ngbNav #nav="ngbNav" class="nav-tabs notes-container">
+                <li ngbNavItem>
+                  <a ngbNavLink>Attachment</a>
+                  <ng-template ngbNavContent>
+                    <div class="w-100 bg-white py-3 rounded ">
+
+                      <div class="d-flex justify-content-between align-items-center my-2"
+                        *ngFor="let file of fileattachList" style="font-size: 12px;">
+
+                        <span>
+                          <span class="me-2" [innerHTML]="'png' | svgIcons:''"></span>
+                          <a href="{{baseUrl2}}{{file.File}}" title="{{baseUrl2}}{{file.File}}" target="_blank"
+                            class="fileNameellipse text-decoration-none text-dark">{{file.File.substr(file.File.lastIndexOf("/")+1)}}</a>
+                        </span>
+                        <!-- <span >{{((file.Size)/1024)| number: '1.0-0'}}MB</span>
+                        <span>
+                          {{file.CreatedBy[0].firstName}} {{file.CreatedBy[0].lastName}}
+                        </span> -->
+                        <span (click)="deleteattachment(file.id)" *ngIf="item.junk==0"
+                          [innerHTML]="'delete' | svgIcons:''"></span>
+                      </div>
+
+                      <div *ngIf="fileattachList.length==0 && item.junk==1"
+                        style="text-align: center;font-size: 20px;color: #4A79E4;">No Data Found</div>
+
+                      <div class="fileupload-container" *ngIf="item.junk==0" appDnd
+                        (fileDropped)="onFileDropped($event)">
+                        <input type="file" class="fileuploadref" #fileDropRef id="fileDropRef" multiple
+                          (change)="fileBrowseHandler($event)" />
+
+
+                        <label class="fw-600"> Choose a file </label>
+                        <label for="fileDropRef"> &nbsp; or drag it here</label>
+                      </div>
+                    </div>
+                  </ng-template>
+                </li>
+              </ul>
+              <div [ngbNavOutlet]="nav" class="mt-2"></div></div>
+              <div class="col-md-6 my-3 pe-md-0">
+                <div class="w-100 bg-white py-3 rounded " *ngFor="let item of Bridge2">
+                  <div class="d-flex  justify-content-between align-items-center ">
+                    <h6 class="fw-600 mb-0 pb-3"> Contact Address </h6>
+                    <a class="btn  color-skyblue  cursor" style="
+                    margin-right: 20px;
+                " *ngIf="item.junk==0"
+                      (click)="openEdit(contentEditAddress, item)">Edit</a>
+                  </div>
+                  <p>{{item.location || 'No Address Available'}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      <div class="col-lg-4" style="position: relative;">
+        <div class="row">
+          <div class="sales-boxes">
+            <div class="recent-sales box">
+                <div class="col-md-12 title">
+                  <h6 style="text-transform: uppercase;margin-bottom: 0;"> <strong>Follow Up</strong></h6>
+                  <a class="cursor text-decoration-none addfollowup text-center" *ngIf="item.junk==0"
+                    (click)="openfollowup(followup)">+ Add</a>
+                </div>
+                <div class="col-lg-12" id="Test">
+                <div style="text-align:center; z-index: 999; margin-top:10%; font-size:20px;color: #4a79e4; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" *ngIf="nodata"><h5>No Follow Up</h5>
+                </div>
+                <!-- #scrollMe [scrollTop]="scrollMe.scrollHeight" -->
+                <div *ngIf="!nodata" class='education' #scrollMe>
+                  <div class='education__content' *ngFor="let item of Follow">
+                    <h5>{{item.Mode}} - {{item.UpdateDate | customDate}} ({{item.UpdateTime }}) </h5>
+                    <span class='year'
+                      [ngClass]="{'bg-green': item.Mode === 'Whatsapp', 'bg-blue' : item.Mode === 'Call', 'bg-orange' : item.Mode === 'SMS', 'bg-red' : item.Mode === 'E-Mail', 'bg-blue2' : item.Mode === 'Visit' }">
+                      <i class="fa"
+                        [ngClass]="{'fa-whatsapp': item.Mode === 'Whatsapp', 'fa-phone' : item.Mode === 'Call', 'fa-commenting-o' : item.Mode === 'SMS', 'fa-envelope' : item.Mode === 'E-Mail', 'fa-user' : item.Mode === 'Visit' }"
+                        aria-hidden="true"></i></span>
+                    <p>{{item.Message}} </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- Row under Follow Up End -->
+      </div><!-- Col-lg6  Follow Up End -->
+    </div>
+  </div>
+</div>
+<!-- Row End -->
+
+    </ng-container>
+
+
+    <div class="loadercss" style="text-align: center;" *ngIf="isdataLoading">
+      <img src="../../assets/img/loder.gif">
+    </div>
+
+  </div>
+</section>
+
+
+
+<ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Edit Leads</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <!-- <div *ngIf="error">{{error}}</div> -->
+  <!-- <div *ngIf="success">{{success}}</div> -->
+  <form #f="ngForm" name="theForm" (submit)="editLeads(f)">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <label>Company Name  </label>
+          <input type="text" class="input-fld required-fld" name="companyName" [(ngModel)]="editbridges.companyName"
+            #companyName="ngModel" placeholder="Company Name" required>
+          <span class="help-block danger" *ngIf="companyName.errors?.required && companyName.touched">
+            The Company Name is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Person Name  </label>
+          <input type="text" class="input-fld required-fld" name="contactPerson" [(ngModel)]="editbridges.contactPerson"
+            #contactPerson="ngModel" placeholder="Name" required>
+          <span class="help-block danger" *ngIf="contactPerson.errors?.required && contactPerson.touched">
+            The Person Name is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Person Designation</label>
+          <input type="text" class="input-fld" name="designation" [(ngModel)]="editbridges.designation"
+            #designation="ngModel" placeholder="Designation">
+        </div>
+
+        <div class="col-md-6">
+          <label>Phone  </label>
+          <input type="text" class="input-fld required-fld" name="phoneNumber" [(ngModel)]="editbridges.phoneNumber"
+            #phoneNumber="ngModel" placeholder="Phone" maxlength="15" pattern="^((\\+91-?)|0)?[0-9]{7,15}$" required>
+          <span class="help-block danger" *ngIf="phoneNumber.errors?.required ">
+            The Phone Number is required
+          </span>
+          <span class="help-block danger" *ngIf="phoneNumber.errors?.pattern">
+            Invalid Phone Number
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Email</label>
+          <input type="email" email="true" class="input-fld" name="email" [(ngModel)]="editbridges.email"
+            #email="ngModel" placeholder="Email">
+          <span class="help-block danger" *ngIf="email.errors?.email">
+            Invalid Email Id
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Location</label>
+          <input type="text" class="input-fld" name="location" [(ngModel)]="editbridges.location" #location="ngModel"
+            placeholder="Location">
+        </div>
+
+        <div class="col-md-6">
+          <label>Source  </label>
+          <ng-select #selectsource [clearOnBackspace]="false" [searchable]="false" name="source" [(ngModel)]="editbridges.source" #source="ngModel"
+           required class="ngsearch-dropdown input-fld required-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectsource.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select Source</ng-option>
+            <ng-option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</ng-option>
+          </ng-select>
+          <!-- <select class="input-fld " name="source" [(ngModel)]="editbridges.source" #source="ngModel"
+            placeholder="Source">
+            <option value="" selected disabled>Choose Select</option>
+            <option value="{{item1.Name}}" *ngFor="let item1 of source1">{{item1.Name}}</option>
+
+          </select> -->
+
+
+
+
+
+          <!-- <input type="text" class="input-fld" name="source" [(ngModel)]="editbridges.source" #source="ngModel" placeholder="Source"> -->
+        </div>
+
+        <div class="col-md-6">
+          <label>Product Interest</label>
+          <input type="text" class="input-fld" name="productInterest" [(ngModel)]="editbridges.productInterest"
+            #productInterest="ngModel" placeholder="Product Interest">
+        </div>
+
+        <div class="col-md-6">
+          <label>Num Of Employee</label>
+          <input type="text" class="input-fld" name="numOfEmployee" [(ngModel)]="editbridges.numOfEmployee"
+            #numOfEmployee="ngModel" min="0" placeholder="Num of Employee" pattern="^[0-9]*$">
+          <span class="help-block danger" *ngIf="numOfEmployee.errors?.pattern">
+            Take Numeric Value Only
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Turnover</label>
+          <div class="newrupe">
+            <span class="span10">{{'' | priceFormat:''}}</span>
+          <input type="text" class="input-fld" name="turnover" [(ngModel)]="editbridges.turnover" #turnover="ngModel"
+            placeholder="Turnover" min="0" pattern="^[0-9]*$">
+            </div>
+          <span class="help-block danger" *ngIf="turnover.errors?.pattern">
+            Take Numeric Value Only
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Status  </label>
+          <ng-select #selectstatus [clearOnBackspace]="false" [searchable]="false" [(ngModel)]="editbridges.status" #status="ngModel" name="status" required
+            class="ngsearch-dropdown input-fld required-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectstatus.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select Status</ng-option>
+            <ng-option value="{{status}}" *ngFor="let status of leadStatus">{{status}}</ng-option>
+          </ng-select>
+
+          <span class="help-block danger" *ngIf="(status.errors?.required && f.submitted)||(status.errors?.required && status.touched)">
+            The Status is required
+          </span>
+
+        </div>
+
+        <div class="col-md-6">
+          <label>Lead Priority</label>
+          <ng-select #selectpriority [clearOnBackspace]="false" [searchable]="false"
+      [(ngModel)]="editbridges.leadType" name="leadType"
+            class="ngsearch-dropdown input-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectpriority.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select Lead Type</ng-option>
+            <ng-option value="{{item1.Name}}" *ngFor="let item1 of lead_Type">{{item1.Name}}</ng-option>
+          </ng-select>
+
+          <!-- <select class="input-fld" [(ngModel)]="editbridges.leadType" name="leadType">
+            <option value="">Select Lead Type</option>
+            <option value="{{item1.Name}}" *ngFor="let item1 of lead_Type">{{item1.Name}}</option>
+
+          </select> -->
+        </div>
+
+        <div class="col-md-12">
+          <label>Assigned To</label>
+          <ng-select #selectleadassignedTo [clearOnBackspace]="false" [searchable]="false" [items]="bridgess"
+          bindLabel="firstName" placeholder="Select Assigned To"
+          bindValue="id" [(ngModel)]="editbridges.assignedTo" name="assignedTo"
+            class="ngsearch-dropdown input-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectleadassignedTo.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select Assigned To</ng-option>
+            <ng-option *ngFor="let item of bridgess" value="{{item.id}}">{{item.firstName}}</ng-option>
+            <ng-option value="{{UserId}}">UnAssigned</ng-option>
+          </ng-select>
+
+          <!-- <select class="input-fld" [(ngModel)]="editbridges.assignedTo" name="assignedTo">
+            <option *ngFor="let item of bridgess" value="{{item.id}}">{{item.firstName}}</option>
+            <option value="{{UserId}}">UnAssigned</option>
+          </select> -->
+        </div>
+
+        <div class="col-md-12">
+          <label>Remarks</label>
+          <input type="text" class="input-fld" name="message" [(ngModel)]="editbridges.message" #message="ngModel"
+            placeholder="Remarks">
+        </div>
+
+        <div class="col-md-12 text-center mt-3">
+          <button class="add-invent1" [disabled]="f.invalid">Save</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+
+</ng-template>
+
+<ng-template #contentEditAddress let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Edit Contact Address</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <!-- <div *ngIf="error">{{error}}</div> -->
+  <!-- <div *ngIf="success">{{success}}</div> -->
+  <form #f="ngForm" name="theForm" (submit)="editLeads(f)">
+    <div class="modal-body">
+      <div class="row">
+
+        <div class="col-md-12">
+          <label>Contact Address</label>
+          <input type="text" class="input-fld" name="location" [(ngModel)]="editbridges.location" #location="ngModel"
+            placeholder="Address">
+        </div>
+
+        <div class="col-md-12 text-center mt-3">
+          <button class="add-invent1" [disabled]="f.invalid">Save</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+
+</ng-template>
+<div class="alert alert-primary edit-success-box alert-dismissible fade show" role="alert">
+  Lead Updated Successfully !
+</div>
+
+
+<ng-template #followup let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"
+      style="width: 100%;text-align: center;color: #4A79E4; font-size: 1.2rem;">Follow Up</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #fb="ngForm" name="theForm" (submit)="addFollowUp(fb)">
+      <div class="row">
+        <div class="col-md-6">
+          <label>Date</label>
+          <input type="date" class="input-fld required-fld" name="From" [(ngModel)]="AddFollow2.From" #From="ngModel"
+            required>
+          <span class="help-block danger" *ngIf="From.errors?.required && From.touched">
+            From is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Time</label>
+          <input type="time" class="input-fld required-fld" name="Time" [(ngModel)]="AddFollow2.Time" #Time="ngModel"
+            required>
+          <span class="help-block danger" *ngIf="Time.errors?.required && Time.touched">
+            Time is required
+          </span>
+
+        </div>
+
+        <div class="col-md-12">
+          <label>Mode of Communication</label>
+          <ng-select #selectmodeofcom [clearOnBackspace]="false" [searchable]="false" name="Mode"  [(ngModel)]="AddFollow2.Mode" #Mode="ngModel" required class="ngsearch-dropdown input-fld required-fld">
+            <ng-template ng-header-tmp>
+              <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search" type="text"
+                (input)="selectmodeofcom.filter($event.target.value)" />
+            </ng-template>
+            <ng-option value="" disable selected>Select Mode Of Communication</ng-option>
+            <ng-option value="{{mode}}" *ngFor="let mode of ModeOfCommunication">{{mode}}</ng-option>
+          </ng-select>
+          <span class="help-block danger" *ngIf="(Mode.errors?.required && fb.submitted)||(Mode.errors?.required && Mode.touched)">
+            Mode is required
+          </span>
+        </div>
+        <div class="col-md-12">
+          <label>Comment</label>
+          <textarea class="input-fld required-fld" placeholder="Message" name="Comment" [(ngModel)]="AddFollow2.Comment"
+            #Comment="ngModel" required></textarea>
+          <span class="help-block danger" *ngIf="Comment.errors?.required && Comment.touched">
+            Comment is required
+          </span>
+        </div>
+
+        <div class="col-md-12 text-center mt-3">
+          <button class="add-invent1">Save</button>
+        </div>
+        <!-- <div *ngIf="isLoading"><img src="../../assets/img/loder.gif"></div> -->
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+<div class="alert alert-primary success-box2 alert-dismissible fade show" role="alert">
+  Add followup Successfully !
+</div>
+
+
+<!--- Add Notes-->
+
+<ng-template #addNotes let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Add Notes</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <!-- <div *ngIf="error">{{error}}</div> -->
+  <!-- <div *ngIf="success">{{success}}</div> -->
+  <form #f="ngForm" name="theForm" (submit)="addnotes(f)">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-12">
+          <label>Name</label>
+          <input type="text" class="input-fld required-fld" name="companyName" [(ngModel)]="editbridges.companyName"
+            #companyName="ngModel" placeholder="Company Name" required>
+          <span class="help-block danger" *ngIf="companyName.errors?.required && companyName.touched">
+            The Company Name is required
+          </span>
+        </div>
+        <div class="col-md-12">
+          <label>Notes</label>
+          <textarea rows="4" cols="6" class="input-fld" name="message" [(ngModel)]="editbridges.message"
+            #message="ngModel" placeholder="Remarks">
+
+          </textarea>
+
+        </div>
+
+        <div class="col-md-12 text-center mt-3">
+          <button class="add-invent1" [disabled]="f.invalid">Save</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+</ng-template>

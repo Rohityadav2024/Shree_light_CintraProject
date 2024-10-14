@@ -1,0 +1,267 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+      <p class="custom-search-head-name">{{Headingss[0].leftheading}}</p>
+      <div class="custom-search-wrapper">
+        <div ngbDropdown class="custom-common-search-container">
+          <button *ngIf="exportStatus" type="button" class="custom-action-btn openbtn" (click)="Exportexcel()" ><i >Export &nbsp;</i>
+            <i title="Download Excel" class="fa-solid fa-file-export download-icon cursor-pointer exportfileicon"></i>
+          </button>
+          <div class="custom-search-ico-input-container">
+            <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+            <input type="text" name="" id="" placeholder="Search" [(ngModel)]="searchValue" (keyup.enter)="RowPerPage()">
+            <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+              *ngIf="searchValue != ''"></span>
+            <button type="button" class="new-search-btn" (click)="RowPerPage()"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+          <button type="button" class="custom-com-temp-btn" (click)="open(mymodal,false,'')" *ngIf="isModuleViewadd(9)"><span
+              class="custom-sp-plus-ft-sz">+</span> {{Headingss[0].heading101}}</button>
+
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales UserManagement">
+        <div class="sales-details">
+          <div class="custom-outter-body-lead-list-c9">
+            <div class="custom-table-select-icons">
+              <!-- <span *ngIf="commonObj.tbCheckM_1 && commonObj.tbCheckM_2"
+                [innerHTML]="'figma-pencil-write' | svgIcons:'figma-template-central'" (click)="openEdit(contentEdit, count,false)"></span>
+              <span *ngIf="commonObj.tbCheckM_1" [innerHTML]="'figma-delete' | svgIcons:'figma-template-central'"
+                (click)="multipleDelete1()"></span>
+              <i *ngIf="commonObj.tbCheckM_2" class="fa-solid fa-eye figma-template-central" (click)="openEdit(contentEdit, count,true)"></i> -->
+              <!-- <i class="fa-solid fa-gear" style="color:#909092;" data-bs-toggle="modal" data-bs-target="#EditModalNew"></i> -->
+              <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span>
+            </div>
+          </div>
+        </div>
+          <table class="new-tabl" id="table-data">
+            <!-- <ng-container *ngIf="!isLoading2"> -->
+            <thead class="MainUserList">
+            <tr>
+              <th class="CheckBoxWidthFix"><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+              <!-- <th (click)="togglesortType('id')">ID <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th> -->
+              <th (click)="togglesortType('InvoiceNo')">{{Headingss[0].Extra4}}. <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th>{{Headingss[0].heading1}}  </th>
+              <th (click)="togglesortType('TransactId')">{{Headingss[0].Extra5}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('TransactMod')">{{Headingss[0].Extra6}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('ReceivedAmount')">{{Headingss[0].Extra7}}. <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('DueAmount')">{{Headingss[0].Extra8}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('TotalAmt')">{{Headingss[0].Extra9}}. <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('PaymentDate')">{{Headingss[0].Extra10}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th>{{Headingss[0].heading108}} </th>
+              <th class="text-center">{{Headingss[0].heading111}}</th>
+            </tr>
+            </thead>
+
+              <tr class="hover" *ngFor="let item of pyterms; let i = index ">
+                <td><input type="checkbox" id="checkbox{{item.id}}" value="{{item.id}}" class="checkbox"
+                    (click)="checkboxclick(item.id)"></td>
+                <td>{{item.InvoiceNo}}</td>
+                <td>{{item.CardName}}</td>
+                <td>{{item.TransactId || 'NA'}}</td>
+                <td>{{item.TransactMod}}</td>
+                <td>{{item.ReceivedAmount | priceFormat}}</td>
+                <td>{{item.DueAmount | priceFormat}}</td>
+                <td>{{item.TotalAmt | priceFormat}}</td>
+                <td>{{item.PaymentDate | customDate}}</td>
+                <td class="text-center" style="color: #4A79E4;" (click)="open(mymodal,true,item)"> <span [innerHTML]="'figma-attactment' | svgIcons:'':{w:14,h:14}"></span>  ({{item.AttachDetails.length}})</td>
+                <td class="text-center">
+                  <i class="fa fa-pencil" (click)="open(mymodal,true,item)" *ngIf="isModuleViewedit(9)"></i>
+                 </td>
+
+              </tr>
+              <tr *ngIf="totalCount == 0">
+                <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No Data Found</td>
+              </tr>
+            <!-- </ng-container> -->
+
+          </table>
+
+          <div class="LoderGifHere" *ngIf="isLoading2">
+            <img src="../../assets/img/loder.gif">
+          </div>
+        </div>
+
+    </div>
+
+  <div class="figma-pagination-controls">
+    <div class="figma-pagination-rows-total">
+      <div class="figma-rows-per-page">
+        <div class="figma-rows-per-page-label">Row per page</div>
+        <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+          [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+        <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+      </div>
+      <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+        (pageChange)="pageChanged($event)" [(page)]="CurrentPage" [maxSize]="5" [rotate]="true"
+        [boundaryLinks]="false" class="figma-pagination">
+        <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+        <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+      </ngb-pagination>
+    </div>
+  </div>
+  </div>
+</section>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">{{isEdit ? Headingss[0].heading102:Headingss[0].heading101}} {{Headingss[0].leftheading}} </h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')" style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <form #f="ngForm" name="theForm" (submit)="addPaymentTerms(f)">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <label>{{Headingss[0].heading1}}  </label>
+
+          <ng-select #selectbusinesspartner [clearOnBackspace]="false" [searchable]="false" id="BusinessPartner" name="BusinessPartner"
+          [(ngModel)]="pyaddterms.CardCode" #BusinessPartner="ngModel" ngModel required
+          (change)="selectChangeHandlerItem($event)" class="ngsearch-dropdown input-fld required-fld">
+          <ng-template ng-header-tmp>
+            <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+              type="text" (input)="selectbusinesspartner.filter($event.target.value)" />
+          </ng-template>
+          <ng-option value="" disable selected>Select {{Headingss[0].heading1}}</ng-option>
+          <ng-option *ngFor="let item of businesspartners"
+            value="{{item.CardCode}}">{{item.CardName}}</ng-option>
+        </ng-select>
+        </div>
+        <div class="col-md-6">
+          <label>{{Headingss[0].Extra4}} </label>
+          <!-- <input type="text" class="input-fld required-fld" name="InvoiceNo" [(ngModel)]="pyaddterms.InvoiceNo" placeholder="Invoice Number" required> -->
+          <ng-select #selectbusinesspartner2 [clearOnBackspace]="false" [searchable]="false" id="BusinessPartner" name="InvoiceNo"
+          [(ngModel)]="pyaddterms.InvoiceNo" #InvoiceNo="ngModel" ngModel required
+          (change)="selectChangeHandlerItem2($event)" class="ngsearch-dropdown input-fld required-fld">
+          <ng-template ng-header-tmp>
+            <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+              type="text" (input)="selectbusinesspartner2.filter($event.target.value)" />
+          </ng-template>
+          <ng-option value="" disable selected>Select {{Headingss[0].Extra4}}</ng-option>
+          <ng-option *ngFor="let item of invoice"
+            value="{{item.id}}">{{item.CardName}} (#INV{{item.id}})</ng-option>
+        </ng-select>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].Extra6}} </label>
+          <select type="text" class="input-fld required-fld" name="TransactMod" [(ngModel)]="pyaddterms.TransactMod" placeholder="Transaction Mode" required>
+          <option value="" disabled>Select {{Headingss[0].Extra5}}</option>
+          <option value="Online">Online</option>
+          <option value="Bank">Bank</option>
+          <option value="Cheque">Cheque</option>
+          <option value="Other">Other</option>
+          </select>
+          <br>
+        </div>
+
+
+
+        <div class="col-md-6" *ngIf="isModulefieldview(9, 'TransactId')">
+          <label>{{Headingss[0].Extra5}}</label>
+          <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(9, 'TransactId')" name="TransactId" #TransactId="ngModel" [(ngModel)]="pyaddterms.TransactId" placeholder="Transaction ID"
+          [class.disable-fld]="!isModulefieldedit(9, 'TransactId')" [disabled]="!isModulefieldedit(9, 'TransactId')" [required]="HeadingServices.isModulefieldMendetory(9, 'TransactId')">
+          <br>
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(9, 'TransactId')">
+            <span class="help-block danger"
+              *ngIf="(TransactId.errors?.required && f.submitted)||(TransactId.errors?.required && TransactId.touched)">
+              The {{Headingss[0].Extra5}} is required
+            </span>
+          </ng-container>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].Extra7}} </label>
+          <input type="number" class="input-fld required-fld" min="0" max="{{pyaddterms.TotalAmt}}" name="ReceivedAmount" [(ngModel)]="pyaddterms.ReceivedAmount" placeholder="Received Amount" #ReceivedAmount="ngModel"  pattern="^[0-9,.]*$" (input)="calculateDue()" required>
+          <span class="help-block danger" *ngIf="ReceivedAmount.errors?.pattern">
+            Take Numeric Value Only
+          </span>
+          <span class="help-block danger" *ngIf="ReceivedAmount.errors?.min || ReceivedAmount.errors?.max">
+            The Received Amount is 0 to {{pyaddterms.TotalAmt}}
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].Extra9}} </label><!--wrong-->
+          <input type="number" class="input-fld required-fld" name="TotalAmt" [(ngModel)]="pyaddterms.TotalAmt" placeholder="Invoice Amount" #TotalAmt="ngModel" readonly required>
+          <!-- <span class="help-block danger" *ngIf="TotalAmt.errors?.pattern">
+            Take Numeric Value Only
+          </span> -->
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].Extra8}} </label>
+          <input type="number" class="input-fld required-fld" min="0" name="DueAmount" [(ngModel)]="pyaddterms.DueAmount" placeholder="Balance Pending" #DueAmount="ngModel"  pattern="^[0-9,.]*$" required readonly>
+          <span class="help-block danger" *ngIf="DueAmount.errors?.pattern">
+            Take Numeric Value Only
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>{{Headingss[0].Extra10}}</label>
+          <input type="date" class="input-fld required-fld" name="PaymentDate" [max]="newdate" [(ngModel)]="pyaddterms.PaymentDate" placeholder="Transaction Date" required>
+          <br>
+        </div>
+        <div class="col-md-12" *ngIf="this.isEdit == false">
+          <label>Attachment </label>
+          <div class="figma-form-wrapper-file-upload">
+          <input type="file" class="input-fld" name="attach" (change)="onFileChanged($event)" multiple>
+          <p class="figma-form-wrapper-file-upload-text"><span [innerHTML]="'figma-drop-upload-file-ico' | svgIcons:''"></span> {{flAttach == ''? 'Choose a file or drag it here':getspit(flAttach)}} </p>
+          </div>
+          <!-- <br> -->
+        </div>
+        <div class="col-md-12" *ngIf="this.isEdit == true">
+          <label>Attachment </label>
+          <div *ngFor="let light of pyaddterms.AttachDetails" style="margin-bottom: 5px;">
+            <div class="col-md-1">
+                  <a class="name-sec" title="Attachment File" href="{{bridgeService2.baseUrl2}}{{light.File}}" target="_blank" style="border-radius: 0%; font-size: 20px;padding-top: 10px;">
+                    <i class="fa fa-file"></i>
+                  </a>
+                </div>
+                <div class="col-md-6">
+                  <p class="mid-set" title="{{light.File}}">{{light.File.substr(light.File.lastIndexOf("/")+1)}}</p>
+                </div>
+                <div class="col-md-4">
+                  <p class="mid-set" title="{{light.CreateDate || 'NA' | customDate}}">{{light.CreateDate || 'NA' | customDate}}</p>
+                </div>
+                <div class="col-md-1">
+                 <a style="text-decoration: none;"  (click)="deleteAttachment(light.id)"><span><i class="fa fa-trash" aria-hidden="true"></i></span></a><br>
+                </div>
+          <div class="clearfix"></div>
+          </div>
+          <!-- <input type="file" class="input-fld" name="flAttach" [(ngModel)]="flAttach" (change)="onFileChanged2($event)" multiple> -->
+          <div class="figma-form-wrapper-file-upload">
+            <!-- <input type="file" class="input-fld" name="attach" (change)="onFileChanged($event)" multiple> -->
+            <input type="file" class="input-fld" name="attach" (change)="onFileChanged2($event)" multiple>
+          <p class="figma-form-wrapper-file-upload-text"><span [innerHTML]="'figma-drop-upload-file-ico' | svgIcons:''"></span> {{flAttach == ''? 'Choose a file or drag it here':getspit(flAttach)}} </p>
+
+            </div>
+
+        </div>
+        <div class="col-md-12" *ngIf="isModulefieldview(9, 'Remarks')">
+          <label>{{Headingss[0].heading105}} </label>
+          <input type="text" class="input-fld" [class.required-fld]="HeadingServices.isModulefieldMendetory(9, 'Remarks')" name="Remarks" #Remarks="ngModel" [(ngModel)]="pyaddterms.Remarks" placeholder="Remark"
+          [class.disable-fld]="!isModulefieldedit(9, 'Remarks')" [disabled]="!isModulefieldedit(9, 'Remarks')" [required]="HeadingServices.isModulefieldMendetory(9, 'Remarks')">
+          <br>
+          <ng-container *ngIf="HeadingServices.isModulefieldMendetory(9, 'Remarks')">
+            <span class="help-block danger"
+              *ngIf="(Remarks.errors?.required && f.submitted)||(Remarks.errors?.required && Remarks.touched)">
+              The {{Headingss[0].heading105}} is required
+            </span>
+          </ng-container>
+        </div>
+        <!-- <div class="col-md-6"></div> -->
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+        <div class="col-md-12 text-center mt-2" *ngIf="!isLoading">
+          <button class="add-invent1">Save</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+

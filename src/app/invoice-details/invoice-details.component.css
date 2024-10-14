@@ -1,0 +1,31 @@
+
+.fileupload-container{
+  width: 100px;
+  padding: 0.5rem 0.5rem;
+  color: #4a79e4;
+  border: 1px solid #4a79e4;
+  margin-bottom: 1rem;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+  position: relative;
+}
+
+.fileuploadref{
+  opacity: 0;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.figma-product-account-detail-label{
+  font-size: 13px !important;
+  padding-right: 30px;
+}
+.figma-product-account-detail-total-val{
+  font-size: 11px !important;
+  padding-right: 30px;
+}

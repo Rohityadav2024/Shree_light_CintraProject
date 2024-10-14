@@ -1,0 +1,324 @@
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content" *ngFor="let item of orders">
+    <div class="figma-detial-home-sec-spliter">
+      <div class="figma-left-main-container">
+        <div class="figma-detail-header">
+          <div class="figma-left-part">
+            <i class="fa-regular fa-arrow-left cursor-pointer" (click)="backClicked()"></i>
+            <div class="figma-heading-ref-wrap">
+              <span class="figma-main-head">{{Headingss[0].leftheading}}</span>
+              <i class="fa-solid fa-chevron-right"></i>
+              <span class="figma-lead-ref-name">{{Headingss[0].heading116}}</span>
+            </div>
+          </div>
+          <!-- <div class="figma-right-part">
+            <button class="figma-outline-btn">Follow up</button>
+            <button class="figma-prim-btn">Convert</button>
+          </div> -->
+        </div>
+        <div class="figma-both-inner-split-container onlydelivery">
+          <div class="figma-left-inner-split-container">
+            <div class="figma-detail-main-info">
+              <div class="figma-detail-info-split-two">
+                <div class="figma-detail-info-header">
+                  <div class="cardnameicon" style="text-transform: uppercase;">{{item.CardName[0]}}</div>
+                  <div class="figma-info-contain">
+                    <div class="figma-info-name--address">
+                      <div class="figma-info-name">{{item.CardName}}</div>
+                      <!-- <div class="figma-info-address">Order ID:#0R45674</div> -->
+                    </div>
+                    <span class="figma-info-role">{{Headingss[1].heading13}}  {{Headingss[1].heading0}} : <span class="figma-info-link">#{{item.OrderID}}</span></span>
+                    <!-- <div class="figma-info-num-email">
+                    <span class="figma-info-num">
+                      <i class="fa-solid fa-phone"></i>
+                      9876757787
+                    </span>
+                    <span class="figma-info-email">
+                      <i class="fa-solid fa-envelope"></i>
+                      Shreyashaw@gmail.com
+                    </span>
+                  </div> -->
+                  </div>
+                </div>
+                <div class="figma-info-spi-buttn">
+                  <div class="figma-info-button">
+                    <span class="figma-status">{{Headingss[1].heading14}} : {{CurrentStage}}</span>
+                    <!-- <span class="figma-outline-btn" [innerHTML]="'figma-edit-ico' | svgIcons:''"></span>
+                  <span class="figma-outline-btn" [innerHTML]="'figma-hr-trip-dots' | svgIcons:''"></span> -->
+                  </div>
+                  <div class="figma-dates-info">
+                    <span>{{Headingss[0].Extra9}} : {{item.DocDueDate | customDate}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="figma-delivery-order-timline-container">
+                <div class="figma-delivery-order-timline">
+                  <div class="figma-delivery-order-content" *ngFor="let stage of item.StageDetails" [ngClass]="{'active': stage.Status == 2}" (click)="open(mymodal,false,stage)" style="cursor: pointer;">
+                    <span [innerHTML]="'figma-check-right-ico' | svgIcons:'':{w:24,h:24}" class="figma-check-right-ico"></span>
+                    <span class="figma-delivery-order-title">{{stage.StageName}}</span>
+                    <span class="figma-delivery-order-date" *ngIf="stage.Status == 2">{{stage.UpdateDate | customDate}}</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="figma-shipping-details-container">
+              <ng-container *ngIf="showStageDetials">
+
+                <div class="figma-shipping-detail-grid">
+                  <span class="figma-shipping-grid-heading">Stage Details</span>
+                  <div class="figma-shipping-detail-grid-inner-wrap">
+                    <span class="figma-shipping-label">Stage Name</span>
+                    <span class="figma-shipping-value">{{SelectStage.StageName}}</span>
+                  </div>
+                  <div class="figma-shipping-detail-grid-inner-wrap">
+                    <span class="figma-shipping-label">Stage Status</span>
+                    <span class="figma-shipping-value">{{SelectStage.Status == 0 ?'Pending':'Complete'}}</span>
+                  </div>
+                  <div class="figma-shipping-detail-grid-inner-wrap">
+                    <span class="figma-shipping-label">Stage Remark</span>
+                    <span class="figma-shipping-value">{{SelectStage.Remarks || 'NA'}}</span>
+                  </div>
+                  <div class="figma-shipping-detail-grid-inner-wrap">
+                    <span class="figma-shipping-label">File</span>
+                    <span class="figma-shipping-value" *ngIf="SelectStage.File != ''"><a href="{{bridgeService.baseUrl2}}{{SelectStage.File}}" target="_blank"><i class="fa fa-file"></i></a></span>
+                    <span class="figma-shipping-value" *ngIf="SelectStage.File == ''">NA</span>
+                  </div>
+                </div>
+                <div class="figma-shipping-detail-grid-split-line"></div>
+              </ng-container>
+
+              <div class="figma-shipping-detail-grid">
+                <span class="figma-shipping-grid-heading">{{Headingss[2].SubHeading2}} {{Headingss[0].heading116}}</span>
+                <div class="figma-shipping-detail-grid-inner-wrap">
+                  <span class="figma-shipping-label">{{Headingss[2].SubHeading2}} {{Headingss[2].heading0}}</span>
+                  <span class="figma-shipping-value">{{item.AddressExtension.ShipToBuilding}}</span>
+                </div>
+                <div class="figma-shipping-detail-grid-inner-wrap">
+                  <span class="figma-shipping-label">{{Headingss[2].SubHeading2}} {{Headingss[2].heading1}}</span>
+                  <span class="figma-shipping-value">{{item.AddressExtension.ShipToStreet}}</span>
+                </div>
+                <div class="figma-shipping-detail-grid-inner-wrap">
+                  <span class="figma-shipping-label">{{Headingss[2].heading2}}</span>
+                  <span class="figma-shipping-value">{{item.AddressExtension.ShipToCity}}</span>
+                </div>
+                <div class="figma-shipping-detail-grid-inner-wrap">
+                  <span class="figma-shipping-label">{{Headingss[2].heading3}}</span>
+                  <span class="figma-shipping-value">{{item.AddressExtension.U_SSTATE}}</span>
+                </div>
+                <div class="figma-shipping-detail-grid-inner-wrap">
+                  <span class="figma-shipping-label">{{Headingss[2].heading4}}</span>
+                  <span class="figma-shipping-value">{{item.AddressExtension.U_SCOUNTRY}}</span>
+                </div>
+                <div class="figma-shipping-detail-grid-inner-wrap">
+                  <span class="figma-shipping-label">{{Headingss[2].heading5}}</span>
+                  <span class="figma-shipping-value">{{item.AddressExtension.ShipToZipCode}}</span>
+                </div>
+                <div class="figma-shipping-detail-grid-inner-wrap" *ngIf="isModulefieldview(7, 'U_SHPTYPS')">
+                  <span class="figma-shipping-label">{{Headingss[2].heading6}}</span>
+                  <span class="figma-shipping-value">{{item.AddressExtension.U_SHPTYPS || 'NA'}}</span>
+                </div>
+              </div>
+              <div class="figma-shipping-detail-grid-split-line"></div>
+              <div class="figma-shipping-detail-grid">
+                <span class="figma-shipping-grid-heading">{{Headingss[0].Extra5}}</span>
+                <div class="figma-shipping-detail-grid-inner-wrap">
+                  <span class="figma-shipping-label">{{Headingss[0].Extra9}}</span>
+                  <span class="figma-shipping-value">{{item.DocDueDate | customDate}}</span>
+                </div>
+                <div class="figma-shipping-detail-grid-inner-wrap">
+                  <span class="figma-shipping-label">{{Headingss[0].Extra7}}</span>
+                  <span class="figma-shipping-value">{{item.ShippedWith || 'NA'}}</span>
+                </div>
+                <div class="figma-shipping-detail-grid-inner-wrap" *ngIf="isModulefieldview(7, 'TrackingId')">
+                  <span class="figma-shipping-label">{{Headingss[0].Extra6}}</span>
+                  <span class="figma-shipping-value">{{item.TrackingId || 'NA'}}</span>
+                </div>
+                <!-- <div class="figma-shipping-detail-grid-inner-wrap">
+                  <span class="figma-shipping-label">Shipped Type</span>
+                  <span class="figma-shipping-value">{{'NA'}}</span>
+                </div>
+                <div class="figma-shipping-detail-grid-inner-wrap">
+                  <span class="figma-shipping-label">Courier</span>
+                  <span class="figma-shipping-value">{{'NA'}}</span>
+                </div> -->
+              </div>
+              <div class="figma-shipping-detail-grid-split-line"></div>
+
+              <ng-container>
+                <div class="figma-collapse-product-info">
+                  <div class="figma-collapse-product-header">
+                    <div class="figma-collapse-product-left-content">
+                      <span class="figma-product-head-data-count">Item Details ({{Items.length}})</span>
+                    </div>
+                  </div>
+                  <div class="figma-product-table-container" style="padding: 0;">
+                    <table class="new-tabl">
+                      <thead  class="MainUserList" style="top:0px !important">
+                        <tr>
+                          <th>{{Headingss[3].heading}}</th>
+                          <th>{{Headingss[3].heading0}}</th>
+                          <th>{{Headingss[3].heading2}}</th>
+                          <th>{{Headingss[3].heading7}}</th>
+                          <th>{{Headingss[3].heading8}}</th>
+                          <th>{{Headingss[3].heading9}}</th>
+                          <th>{{Headingss[3].heading6}}</th>
+                          <th>{{Headingss[1].heading14}}</th>
+                        </tr>
+                      </thead>
+                          <tr *ngFor="let item3 of Items">
+                          <td>{{item3.ItemCode}}</td>
+                          <td>{{item3.ItemDescription}} </td>
+                          <td>{{item3.UnitPrice}}</td>
+                          <td>{{item3.TaxRate}}</td>
+                          <td>{{item3.DiscountPercent}}</td>
+                          <td>{{item3.OpenQuantity}}</td>
+                          <td>{{item3.Quantity}}</td>
+                          <td *ngIf="item.CancelStatus == 'csNo'">{{item3.LineStatus == 'bost_Close'?'Close':'Open'}}</td>
+                          <td *ngIf="item.CancelStatus != 'csNo'">Cancel</td>
+                          <!-- <td [innerHTML]="'table-v-dots' | svgIcons:'figma-template-central'" class="table-v-dots"></td> -->
+                          </tr>
+                          <tr>
+                            <td colspan="8" style="border-top: 1px solid #e0e0e0;
+                            padding: 0px !important;">
+                              <div class="figma-product-account-detail-container">
+                                <div class="figma-product-account-details">
+                                  <p  class="figma-product-account-detail-label">{{Headingss[5].heading}}</p>
+                                  <p class="figma-product-account-detail-total-val">{{total_after | priceFormat}} /-</p>
+                                  <p  class="figma-product-account-detail-label">{{Headingss[3].heading8}}</p>
+                                  <p class="figma-product-account-detail-total-val">{{item.DiscountPercent}}</p>
+                                  <p  class="figma-product-account-detail-label">{{Headingss[5].heading0}}</p>
+                                  <p class="figma-product-account-detail-total-val">{{total_after_tax | priceFormat}} /-</p>
+                                  <p  class="figma-product-account-detail-label">{{Headingss[3].heading7}}</p>
+                                  <p class="figma-product-account-detail-total-val">{{tax_Value | priceFormat}} /-</p>
+                                  <ng-container *ngIf="isModulefieldview(7, 'FreightCharge')">
+                                  <p  class="figma-product-account-detail-label">{{Headingss[1].heading9}}</p>
+                                  <p class="figma-product-account-detail-total-val">{{item.FreightCharge || 0 | priceFormat}} /-</p>
+                                </ng-container>
+                                  <p  class="figma-product-account-detail-label">{{Headingss[5].heading1}}</p>
+                                  <p class="figma-product-account-detail-total-val">{{total_Amount | priceFormat}} /-</p>
+                                  <!-- <span class="figma-product-account-detail-label">Total Amount:</span>
+                                  <span class="figma-product-account-detail-total-val"> {{total_Amount | priceFormat}}</span> -->
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                    </table>
+
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div class="figma-right-inner-split-container">
+            <div class="figma-delivery-follow-up-orders-lists-container">
+              <div class="figma-delivery-follow-up-orders-head">
+                <span class="figma-delivery-follow-up-head"> {{Headingss[0].leftheading}} By </span>
+                <button type="button" class="figma-outline-btn" (click)="open2(mymodal2)"><span class="custom-sp-plus-ft-sz">+</span> New</button>
+              </div>
+              <div class="figma-delivery-follow-up-orders-track" *ngIf="isModulefieldview(7, 'TrackingId')">
+                {{Headingss[0].Extra6}} :
+                <span class="figma-delivery-follow-up-orders-track-id">#{{item.TrackingId || 'NA'}}</span>
+              </div>
+              <div class="figma-delivery-follow-up-orders-lists">
+                <div class="figma-delivery-follow-up-orders-list-container" style="margin-top: 20px;">
+                  <!-- <div class="figma-delivery-follow-up-orders-list-date">{{mainFollowUp.DeliveryID}}</div> -->
+                  <div class="figma-delivery-follow-up-orders-list-card" *ngFor="let mainFollowUp of logs">
+                    <div class="figma-delivery-follow-up-c-detail" style="width: 250px;">
+                      <span class="figma-delivery-follow-up-c-title">{{mainFollowUp.Title || 'NA'}} ({{mainFollowUp.Datetime | customDate}})</span>
+                      <p class="figma-delivery-follow-up-c-text">{{mainFollowUp.Description || 'NA'}}</p>
+                    </div>
+                    <span class="figma-delivery-follow-up-c-time">{{mainFollowUp.Datetime | date: 'shortTime'}}</span>
+                  </div>
+                </div>
+                <div *ngIf="logs.length == 0" style="    text-align: center;
+                color: #4a79e4;
+                margin-top: 50%;">No Data Found</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="LoderGifHere" *ngIf="isLoading">
+  <img src="../../assets/img/loder.gif">
+</div>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">{{SelectStage.StageName}}</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')" style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <form #f="ngForm" name="theForm" (submit)="addPaymentTerms(f)">
+    <div class="modal-body">
+      <div class="row">
+              <div class="col-md-12">
+          <label>Remarks </label>
+          <input type="text" class="input-fld required-fld" name="Remarks" [(ngModel)]="StageComplete.Remarks" #Remarks="ngModel" placeholder="Remarks" required>
+          <span class="help-block danger" *ngIf="(Remarks.errors?.required && f.submitted)||(Remarks.errors?.required && Remarks.touched)">
+            The Remarks is required
+          </span>
+        </div>
+        <div class="col-md-12">
+          <label>File </label>
+          <input type="file" class="input-fld" name="Remarks"  (change)="onFileChanged($event)" placeholder="Remarks" required>
+
+        </div>
+        <!-- <div class="col-md-6"></div> -->
+        <div style="text-align: center;" *ngIf="isSubmit">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+        <div class="col-md-12 text-center mt-2" *ngIf="!isSubmit">
+          <button class="add-invent1">Complete</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+
+<ng-template #mymodal2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">ADD  LOG</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')" style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+  <form #f="ngForm" name="theForm" (submit)="addLogsFunc(f)">
+    <div class="modal-body">
+      <div class="row">
+          <div class="col-md-12">
+          <label>Title </label>
+          <select type="text" class="input-fld required-fld" name="Title" [(ngModel)]="addLogs.Title" #Title="ngModel" placeholder="Title" required>
+          <option value="">Select Stage</option>
+          <option *ngFor="let item of orders[0].StageDetails" value="{{item.StageName}}">{{item.StageName}}</option>
+          </select>
+          <span class="help-block danger" *ngIf="(Title.errors?.required && f.submitted)||(Title.errors?.required && Title.touched)">
+            The Title is required
+          </span>
+        </div>
+
+        <div class="col-md-12">
+          <label>Description </label>
+          <input type="text" class="input-fld required-fld" name="Description" [(ngModel)]="addLogs.Description" #Description="ngModel" placeholder="Description" required>
+          <span class="help-block danger" *ngIf="(Description.errors?.required && f.submitted)||(Description.errors?.required && Description.touched)">
+            The Description is required
+          </span>
+        </div>
+
+        <!-- <div class="col-md-6"></div> -->
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+        <div class="col-md-12 text-center mt-2" *ngIf="!isLoading">
+          <button class="add-invent1">Save</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>

@@ -1,0 +1,224 @@
+<!-- <app-left-menu>
+</app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+    <div class="home-content">
+      <div class="TopbarAllComponentDivs">
+        <div class="Innerpagename">
+          <span [innerHTML]="'figma-backgarrow-ico' | svgIcons:''" (click)="backClicked()" style="cursor: pointer;"></span><h2>Campaign  <span style="font-size: 19px; display: inline-block; transform: translate(-1px, 2px);">></span> <span>Details</span></h2>
+      </div>
+      <div class="SideBTnAllstyle" *ngFor="let item of compaignname">
+        <h6 class="custom-com-temp-btn" routerLink="/campaign/details/campaign-name/edit-campaign-name/{{item.id}}">
+          Edit </h6>
+      </div>
+      </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sales-boxes">
+                    <div class="recent-sales box" *ngFor="let item of compaignname">
+
+                        <section>
+
+
+
+                            <div class="row mt-3">
+
+                                <div class="col-md-2">
+                                    <p class="grey1">Campaign Owner</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p class="cstmr-size" *ngIf="item.CampaignOwner[0].SalesEmployeeName != ''">
+                                        {{item.CampaignOwner[0].SalesEmployeeName}}</p>
+                                    <p class="cstmr-size" *ngIf="item.CampaignOwner[0].SalesEmployeeName == ''">NA</p>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2">
+                                    <p class="grey1">Created Date</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p class="cstmr-size" *ngIf="item.CreateDate != ''">{{item.CreateDate | customDate}}</p>
+                                    <p class="cstmr-size" *ngIf="item.CreateDate == ''">NA</p>
+                                </div>
+                            </div>
+
+                            <div class="row mt-20">
+                                <div class="col-md-2">
+                                    <p class="grey1">Run Time</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="cstmr-size" *ngIf="item.Type != ''">{{item.RunTime}}</p>
+                                    <p class="cstmr-size" *ngIf="item.Type == ''">NA</p>
+                                </div>
+                                <!-- <div class="col-md-2">
+                                    <p class="grey1">Quality</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="cstmr-size">{{item.QualityResponse}}</p>
+                                </div> -->
+                                <div class="col-md-2">
+
+                                    <p class="grey1">Status</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <ng-container [ngSwitch]="true">
+
+                                        <p class="cstmr-size" *ngSwitchCase="item.Status==1">Active</p>
+                                        <p class="cstmr-size" *ngSwitchDefault>Inactive</p>
+                                    </ng-container>
+                                </div>
+
+                            </div>
+                            <div class="row mt-20">
+                                <div class="col-md-2">
+                                    <p class="grey1">From Date</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p class="cstmr-size" *ngIf="item.StartDate != ''">{{item.StartDate | customDate}}</p>
+                                    <p class="cstmr-size" *ngIf="item.StartDate == ''">NA</p>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2">
+                                    <p class="grey1">To Date</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="cstmr-size" *ngIf="item.EndDate != ''">{{item.EndDate | customDate}}
+                                    </p>
+                                    <p class="cstmr-size" *ngIf="item.EndDate == ''">EndDate</p>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="row mt-20">
+                                <div class="col-md-2">
+                                    <p class="grey1">Frequency</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p class="cstmr-size" *ngIf="item.Frequency != ''">{{item.Frequency}}</p>
+                                    <p class="cstmr-size" *ngIf="item.Frequency == ''">NA</p>
+                                </div>
+                                <div class="col-md-1"></div>
+
+                                <div class="col-md-2" *ngIf="item.Frequency == 'Weekly'">
+                                    <p class="grey1">Day</p>
+                                </div>
+                                <div class="col-md-4" *ngIf="item.Frequency == 'Weekly'">
+                                    <p class="cstmr-size" style="word-break: break-all;" *ngIf="item.WeekDay != ''">
+                                        {{item.WeekDay}}</p>
+                                    <p class="cstmr-size" *ngIf="item.WeekDay == ''">NA</p>
+                                </div>
+
+                                <!-- <div *ngIf="item.Frequency == 'Monthly'"> -->
+
+                                <div class="col-md-2" *ngIf="item.Frequency == 'Monthly'">
+                                    <p class="grey1"> Date Of Month</p>
+                                </div>
+                                <div class="col-md-4" *ngIf="item.Frequency == 'Monthly'">
+                                    <p class="cstmr-size" style="word-break: break-all;" *ngIf="item.MonthlyDate != ''">
+                                        {{item.MonthlyDate}}</p>
+                                    <p class="cstmr-size" *ngIf="item.MonthlyDate == ''">NA</p>
+                                    <!-- <p class="cstmr-size" *ngIf="item.MonthlyDate == []">NA</p>    -->
+                                </div>
+                                <!-- </div> -->
+
+                                <div class="col-md-2">
+                                    <p class="grey1">Type</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="cstmr-size" *ngIf="item.Type != ''">{{item.Type}}</p>
+                                    <p class="cstmr-size" *ngIf="item.Type == ''">NA</p>
+                                </div>
+                                <div class="col-md-2" *ngIf="item.Type == 'Email'">
+                                    <p class="grey1">Subject</p>
+                                </div>
+                                <div class="col-md-4" *ngIf="item.Type == 'Email'">
+                                    <p class="cstmr-size" *ngIf="item.Subject != ''">{{item.Subject}}</p>
+                                    <p class="cstmr-size" *ngIf="item.Subject == ''">NA</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <p class="grey1">Attachment</p>
+                                </div>
+                                <div class="col-md-4"
+                                    *ngIf="extensionresult=='jpg' || extensionresult=='png'|| extensionresult=='gif'||extensionresult=='jpeg'; else elseBlock">
+                                    <img src="{{baseUrl2}}{{item.Attachments}}" style="height: 41px;">
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ng-template #elseBlock>
+                                        <a href="{{baseUrl2}}{{item.Attachments}}" style="display: contents;"
+                                            target="_blank">{{item.Attachments.substr(item.Attachments.lastIndexOf("/")+1)}}</a>
+
+                                    </ng-template>
+                                </div>
+
+
+                            </div>
+                            <!-- <div class="row mt-20">
+                                <div class="col-md-2">
+
+                                    <p class="grey1">Status</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <ng-container [ngSwitch]="true">
+
+                                        <p class="cstmr-size" *ngSwitchCase="item.Status==1">Active</p>
+                                        <p class="cstmr-size" *ngSwitchDefault>Inactive</p>
+                                    </ng-container>
+                                </div>
+                                <div class="col-md-1"></div>
+
+
+                            </div> -->
+                            <!-- <div class="row mt-20" *ngIf="item.Type == 'Email'">
+                                <div class="col-md-2">
+                                    <p class="grey1">Subject</p>
+                                </div>
+                                <div class="col-md-10">
+                                    <p class="cstmr-size" *ngIf="item.Subject != ''">{{item.Subject}}</p>
+                                    <p class="cstmr-size" *ngIf="item.Subject == ''">NA</p>
+                                    </div>
+
+                                <div class="col-md-1"></div>
+
+                            </div> -->
+
+                            <div class="row mt-20">
+                                <div class="col-md-12">
+                                    <p class="grey1">Message</p>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="container">
+                                        <div class="box1 invisible-scrollbar">
+                                            <p class="cstmr-size" [innerHtml]='item.Message'
+                                                *ngIf="item.Message != ''">{{item.Message}}</p>
+                                            <p class="cstmr-size" *ngIf="item.Message == ''">NA</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+
+                            </div>
+
+                        </section>
+
+
+
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="loadercss" style="text-align: center;" *ngIf="isLoading">
+      <img src="../../assets/img/loder.gif">
+    </div>
+</section>

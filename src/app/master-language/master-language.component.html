@@ -1,0 +1,295 @@
+
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content  dif">
+
+    <div class="home-left-container dif">
+
+
+      <div class="sales-boxes">
+        <div class="recent-sales box">
+          <div class="row">
+
+            <div class="col-md-10" style="margin-bottom:15px;">
+              <h5 class="fs-15" style="font-weight:600; margin-left: -7px; color:#4a79e4;"> Master Language </h5>
+              <div class="row">
+              <div class="col-md-3" style=" margin: 11px; font-size: 13px;color: #4A79E4;">Please choose your language
+              </div>
+                <div class="col-md-3">
+                  <select class="input-fld required-fld text-capitalize"
+                      required>
+                    <option value="">Select Language</option>
+                    <option value="" >Hindi</option>
+                    <option value="" >English</option>
+                  </select>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="sales-boxes ">
+        <div class="recent-sales box  px-0 py-3 bg-transparent">
+          <div class="row">
+            <div class="col-md-4 mobile-sm-container pl-0" style="padding: 0px;padding-right: 15px;">
+              <div class="bg-white p-3" style="border-radius: 20px; overflow-y: scroll; height: 420px;">
+                <h6 class="fw-bold">All Module</h6>
+                <div class="em-search-wrapper">
+                  <div class="em-search-container">
+                    <div class="em-search">
+                      <span [innerHTML]="'search-icon' | svgIcons:''" class="quick-search"></span> <input class="sear-are"
+                        placeholder="Search" style="width: 300px;" />
+                    </div>
+                  </div>
+                </div>
+                <ul class="nav-links" style="list-style-type: none; padding-left: 0%;">
+
+                    <li class="list">
+                        <a>
+                            <i class="fa fa-th-large"aria-hidden="true"> </i>
+                            <span class="links_name">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a>
+                            <i class='fa fa-user'>User</i>
+                            <span class="links_name"></span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a >
+                            <i class='fa fa-users'></i>
+                            <span class="links_name" style="width: 100%;">Leads</span>
+
+                        </a>
+                    </li >
+                    <li class="list">
+                        <a >
+                            <i class='fa fa-users'></i>
+                            <span class="links_name">Customer</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a >
+                            <i class='fa fa-envelope'></i>
+                            <span class="links_name">Campaign</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                      <a >
+                          <i class='fa fa-users'></i>
+                          <span class="links_name">Opportunity</span>
+
+                      </a>
+
+                  </li>
+
+                    <li class="list">
+                        <a >
+                            <i class='fa fa-users'></i>
+                            <span class="links_name">Quotation </span>
+
+                        </a>
+
+                    </li>
+                    <li class="list" >
+                      <a >
+                          <i class='fa fa-users'></i>
+                          <span class="links_name" style="width: 100%;">Orders </span>
+
+                      </a>
+
+                  </li>
+                  <li class="list" >
+                    <a >
+                        <i class='fa fa-users'></i>
+                        <span class="links_name" style="width: 100%;">Payment Details </span>
+
+                    </a>
+
+                </li>
+                <li class="list" >
+                  <a >
+                    <i class='fa fa-inr'></i>
+                      <span class="links_name" style="width: 100%;">Expense </span>
+
+                  </a>
+
+              </li>
+              <li class="list" >
+                <a >
+                  <i class='fa fa-file'></i>
+                    <span class="links_name" style="width: 100%;">Invoice</span>
+
+                </a>
+
+            </li>
+            <li class="list" >
+              <a >
+                <i class='fa fa-truck'></i>
+                  <span class="links_name" style="width: 100%;">Delivery </span>
+
+              </a>
+
+          </li>
+                <li class="list" >
+                  <a >
+                    <i class="fa fa-list-alt" ></i>
+                      <span class="links_name" style="width: 100%;">Inventory </span>
+
+                  </a>
+
+               </li>
+               <li class="list" >
+                <a >
+                  <i class='fa fa-truck'></i>
+                    <span class="links_name" style="width: 100%;">Target Assisment </span>
+
+                </a>
+
+             </li>
+             <li class="list" >
+              <a >
+                <i class="fa fa-map-marker"></i>
+                  <span class="links_name" style="width: 100%;">Location Tracking </span>
+
+              </a>
+
+           </li>
+           <li class="list" >
+            <a >
+              <i class="fa fa-map-marker" ></i>
+                <span class="links_name" style="width: 100%;">My Location </span>
+
+            </a>
+
+         </li>
+           <li class="list" >
+            <a >
+              <i class='fa fa-calendar'></i>
+                <span class="links_name" style="width: 100%;">Calender </span>
+
+            </a>
+
+         </li>
+
+
+
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-8 mobile-sm-container pr-0" style="padding: 0px;padding-right: 5px;">
+              <div class="bg-white p-3 position-relative" style="border-radius: 20px; height: 420px;">
+                <!-- <img style="width: 100%;" src="../../assets/img/graph3.JPG"> -->
+                <h6 class="fw-bold">Privilege Management</h6>
+                <div class="em-search-wrapper">
+                  <!-- <div class="col-md-9" style="font-weight:600;  color:#4a79e4;">
+                                <h2 class="page-tite" style="padding-left: 6px;">Customer</h2>
+                            </div> -->
+
+                  <div class="em-search-heading"> </div>
+                  <div class="em-search-container">
+                    <button class="btn-skyblue" >
+                      Clear</button>
+
+                    <button class="btn btn-sm" > Apply </button>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-4 te" >
+                      Source Language
+                    </div>
+                    <div class="col-6 te">
+                    Target Language
+                    </div>
+                  </div>
+                  <div class="row" >
+                    <div class="col-4 pr" >
+                      Privilege Management
+                    </div>
+                    <div class="col-6">
+                      <input class="da" type="text"  name="" value="">
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: -17px;">
+                    <div class="col-4 pr" >
+                      Privilege Group Name
+                    </div>
+                    <div class="col-6">
+                      <input class="da" type="text"  name="" value="">
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: -17px;">
+                    <div class="col-4 pr" >
+                      ACCT
+                    </div>
+                    <div class="col-6">
+                      <input class="da" type="text"  name="" value="">
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: -17px;">
+                    <div class="col-4 pr" >
+                      External User
+                    </div>
+                    <div class="col-6">
+                      <input class="da" type="text"  name="" value="">
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: -17px;">
+                    <div class="col-4 pr" >
+                      Developer
+                    </div>
+                    <div class="col-6">
+                      <input class="da" type="text"  name="" value="">
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: -17px;">
+                    <div class="col-4 pr" >
+                     MGMT
+                    </div>
+                    <div class="col-6">
+                      <input class="da" type="text"  name="" value="">
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: -17px;">
+                    <div class="col-4 pr" >
+                     PM
+                    </div>
+                    <div class="col-6">
+                      <input class="da" type="text"  name="" value="">
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: -17px;">
+                    <div class="col-4 pr" >
+                     Sales
+                    </div>
+                    <div class="col-6">
+                      <input class="da" type="text"  name="" value="">
+                    </div>
+                  </div>
+
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</section>
+

@@ -1,0 +1,271 @@
+<!-- <app-left-menu></app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+
+
+    <div class="sales-boxes">
+      <div class="recent-sales box">
+        <div class="row">
+          <div class="col-md-6 title"><a class="btn btn-sm btn-primary" (click)="open(mymodal)"><span>+</span> New</a></div>
+          <div class="col-md-3"></div>
+          <div class="col-md-3"><i class="fa fa-search quick-search"></i><input class="sear-are" placeholder="Search" [(ngModel)]="searchValue"></div>
+        </div>
+        <div style="text-align: center;" *ngIf="isLoading2">
+          <img src="../../assets/img/loder.gif" style="width: 10%;margin: 10%;">
+        </div>
+        <div class="sales-details" *ngIf="!isLoading2">
+          <!-- <div *ngIf="error">{{error}}</div> -->
+          <!-- <div *ngIf="success">{{success}}</div> -->
+          <table class="new-tabl">
+            <tr>
+              <th>S. No.</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Cinty</th>
+              <th>State</th>
+              <th>Country</th>
+              <th>Status</th>
+              <th>Action</th>
+
+            </tr>
+            <ng-container *ngFor="let item of products; let i = index">
+              <tr class="hover">
+                <td>{{i+1}}</td>
+                <td>{{item.ItemCode}}</td>
+                <td>{{item.ItemName}}</td>
+                <td>{{item.UnitPrice}}</td>
+                <td>{{item.Currency}}</td>
+                <td>{{item.TaxCode}}</td>
+                <ng-container [ngSwitch]="true">
+                  <td *ngSwitchCase="item.Status == '1'"><a class="btn btn-sm btn-success">Active</a></td>
+                  <td *ngSwitchDefault class="pedding"><a class="btn btn-sm btn-warning">Inactive</a></td>
+                </ng-container>
+
+                <td style="padding: 0 15px;text-align: center;">
+                  <span class="edit-delete edit-delete{{item.id}}" (click)="editdeletepop(item)"> <i class="fa fa-ellipsis-v" aria-hidden="true" style="width: 50px;"></i></span>
+                  <div class="hover-show hover-show{{item.id}} hover-show-inactive">
+                    <span><i class="fa fa-pencil" aria-hidden="true"></i> Edit Warehouse</span><br>
+                    <span><i class="fa fa-trash" aria-hidden="true"></i> Delete Warehouse</span><br>
+                  </div>
+                </td>
+              </tr>
+
+            </ng-container>
+
+
+          </table>
+        </div>
+        <div class="button">
+          <!-- <a href="#">See All</a> -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="width: 100%;text-align: center;color: #4A79E4;">Add Product</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')" style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm" (submit)="addUser(f)">
+      <div class="row">
+        <div class="col-md-12">
+          <label>Item Name</label>
+          <input type="text" class="input-fld required-fld" name="ItemName" [(ngModel)]="product.ItemName" #ItemName="ngModel" placeholder="Enter Item Name" required>
+          <span class="help-block danger" *ngIf="ItemName.errors?.required && ItemName.touched">
+            The Item Name is required
+          </span>
+        </div>
+
+
+
+
+
+
+
+        <div style="text-align: center;" *ngIf="isLoading">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+
+        <div class="col-md-12" style="width: 98%;" *ngIf="!isLoading">
+          <button class="add-invent" [disabled]="f.invalid">Submit</button>
+        </div>
+        <!-- <div *ngIf="isLoading"><img src="../../assets/img/loder.gif"></div> -->
+
+
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+
+<div class="alert alert-primary success-box alert-dismissible fade show" role="alert">
+  Warehouse Added Successfully !
+</div>
+
+
+
+<ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="width: 100%;text-align: center;color: #4A79E4;">Edit Employee</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')" style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #f="ngForm" name="theForm" (submit)="editUser(f)">
+      <div class="row">
+
+
+        <div class="col-md-6">
+          <label>Username</label>
+          <input type="text" class="input-fld required-fld" name="userName" [(ngModel)]="bridge2.userName" #userName="ngModel" placeholder="Enter user name" required>
+          <span class="help-block danger" *ngIf="userName.errors?.required">
+            The User Name is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>First Name</label>
+          <input type="text" class="input-fld required-fld" name="firstName" [(ngModel)]="bridge2.firstName" #firstName="ngModel" placeholder="Enter First name" required>
+          <span class="help-block danger" *ngIf="firstName.errors?.required">
+            The First Name is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Middle Name</label>
+          <input type="text" class="input-fld" name="middleName" [(ngModel)]="bridge2.middleName" #middleName="ngModel" placeholder="Enter Middle name">
+        </div>
+
+        <div class="col-md-6">
+          <label>Last Name</label>
+          <input type="text" class="input-fld required-fld" name="lastName" [(ngModel)]="bridge2.lastName" #lastName="ngModel" placeholder="Enter Last name" required>
+          <span class="help-block danger" *ngIf="lastName.errors?.required">
+            The Last Name is required
+          </span>
+        </div>
+
+
+
+        <div class="col-md-6">
+          <label>Employee ID</label>
+          <input type="text" class="input-fld" name="EmployeeID" [(ngModel)]="bridge2.EmployeeID" #EmployeeID="ngModel" placeholder="Enter Employee ID">
+        </div>
+        <div class="col-md-6">
+          <label>Role</label>
+
+
+          <select class="input-fld required-fld" name="role" [(ngModel)]="bridge2.role" required>
+            <option value="">Select Role</option>
+            <option value="manager">Manager</option>
+            <option value="salesman">Salesman</option>
+          </select>
+        </div>
+        <span class="help-block danger" *ngIf="role.errors?.required">
+          The Select Role is required
+        </span>
+        <div class="col-md-12" style="width: 98%;margin-left: 6px;">
+          <label>Email</label>
+          <input type="email" email="true" class="input-fld required-fld" name="Email" [(ngModel)]="bridge2.Email" #Email="ngModel" placeholder="Enter Email" required>
+          <span class="help-block danger" *ngIf="Email.errors?.required">
+            The Email is required
+          </span>
+          <span class="help-block danger" *ngIf="Email.errors?.email">
+            Invalid Email Id
+          </span>
+        </div>
+
+
+
+        <div class="col-md-6">
+          <label>Phone</label>
+          <input type="text" class="input-fld required-fld" name="Mobile" [(ngModel)]="bridge2.Mobile" #Mobile="ngModel" placeholder="Enter phone" maxlength="15" pattern="^((\\+91-?)|0)?[0-9]{7,15}$" required>
+          <span class="help-block danger" *ngIf="Mobile.errors?.required">
+            The Phone is required
+          </span>
+          <span class="help-block danger" *ngIf="Mobile.errors?.pattern">
+            Invalid Phone Number
+          </span>
+        </div>
+
+
+        <div class="col-md-6">
+          <label>Reporting To</label>
+
+          <select class="input-fld required-fld" name="reportingTo" required [(ngModel)]="bridge2.reportingTo">
+            <option *ngFor="let item of bridges" value="{{item.SalesEmployeeCode}}">{{item.firstName}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label>Designation</label>
+          <input type="text" class="input-fld required-fld" name="position" [(ngModel)]="bridge2.position" #position="ngModel" placeholder="Enter Designation" required>
+          <span class="help-block danger" *ngIf="position.errors?.required">
+            The Designation is required
+          </span>
+        </div>
+
+        <div class="col-md-6">
+          <label>Password</label>
+          <input class="input-fld required-fld" name="password" id="password" [(ngModel)]="bridge2.password" #password="ngModel" [type]="fieldTextType ? 'text' : 'password'" placeholder="Enter password" required>
+          <span class="input-group-addon" style="width: 20px;height: 40px;position: relative;top: -35px;left: 190px;border-radius: 0px 5px 5px 0px;">
+            <i class="fa" [ngClass]="{
+              'fa-eye-slash': !fieldTextType,
+              'fa-eye': fieldTextType
+            }" (click)="toggleFieldTextType()"></i></span>
+          <span class="help-block danger" *ngIf="password.errors?.required && password.touched">
+            The password is required
+          </span>
+        </div>
+
+        <!-- <input type="hidden"
+      class="input-fld"
+      name="id"
+      [(ngModel)]="bridge2.id"
+        #id="ngModel"
+      placeholder="Enter password"
+      required
+      > -->
+
+        <div style="text-align: center;" *ngIf="isLoading3">
+          <img src="../../assets/img/loder.gif" style="height: 100%;width: 10%;">
+        </div>
+
+
+
+        <div class="col-md-12" style="width: 98%;" *ngIf="!isLoading3">
+          <button class="add-invent" [disabled]="f.invalid">Submit</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+
+
+<div class="alert alert-primary edit-success-box alert-dismissible fade show" role="alert">
+  Employee Updated Successfully !
+</div>
+
+
+<div class="alert alert-primary delete-success-box alert-dismissible fade show" role="alert">
+  Are You Sure Do You Want To Delete ?
+  <button type="button" class="btn-close" (click)="yesdeleteUser(0)"></button>
+  <div class="delet-btn">
+    <button type="button" class="yes-delete" (click)="yesdeleteUser(1)">Yes</button>
+    <button type="button" class="no-delete" (click)="yesdeleteUser(0)">No</button>
+  </div>
+</div>

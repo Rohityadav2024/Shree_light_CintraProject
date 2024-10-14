@@ -1,0 +1,75 @@
+import { Pipe, PipeTransform } from '@angular/core';
+declare var $: any;
+import { Bridge } from './bridge';
+
+@Pipe({
+  name: 'employeefilter1'
+})
+export class EmployeefilterPipe1 implements PipeTransform {
+
+  data: any;
+
+  // transform(inventory:Bridge[], searchValue5: string): Bridge[] {
+  //   if(!inventory || searchValue5 == 'All' ){
+  //     return inventory;
+  //   }
+  //   else if(searchValue5 == 'ass'){
+  //     this.data =  searchValue5 ? inventory.filter(item => String(Object.values(item.assignedTo)[0]) != String(Object.values(item.employeeId)[0])) : inventory;
+  //   }
+  //   else if(searchValue5 == 'un'){
+  //     this.data =  searchValue5 ? inventory.filter(item => String(Object.values(item.assignedTo)[0]) == String(Object.values(item.employeeId)[0])) : inventory;
+  //      }
+  //      if(this.data.length == 0){
+  //       $('#noDataFound').show();
+  //       $('#DataFound').hide();
+  //     }
+  //     else{
+  //       $('#noDataFound').hide();
+  //       $('#DataFound').show();
+  //     }
+  //   return  this.data;
+  // }
+  transform(inventory:Bridge[], searchValue: any = []): Bridge[] {
+    if(searchValue[0] == ''){
+      searchValue[0] = 'NAN';
+    }
+    if(searchValue[1] == ''){
+      searchValue[1] = 'NAN';
+    }
+
+    if(!inventory || searchValue.length == 0 ){
+      return inventory;
+    }
+
+
+
+    //  this.data = inventory.filter(inventory =>
+
+    //   (inventory.role.toLocaleLowerCase().includes(searchValue[0].toLocaleLowerCase()) ||
+    //   inventory.Active.toLocaleLowerCase().includes(searchValue[1].toLocaleLowerCase()))||
+    //   (inventory.role.toLocaleLowerCase().includes(searchValue[0].toLocaleLowerCase()) &&
+    //    inventory.Active.toLocaleLowerCase().includes(searchValue[1].toLocaleLowerCase()))
+    //   );
+    this.data = inventory.filter(inventory =>
+
+        (inventory.role.toLocaleLowerCase().includes(searchValue[0].toLocaleLowerCase()) ||
+      inventory.Active.toLocaleLowerCase().includes(searchValue[1].toLocaleLowerCase()))
+      ||
+      (inventory.role.toLocaleLowerCase().includes(searchValue[0].toLocaleLowerCase()) &&
+       inventory.Active.toLocaleLowerCase().includes(searchValue[1].toLocaleLowerCase()))
+      );
+
+     // console.log(this.data);
+
+    if(this.data.length == 0){
+      $('#noDataFound').show();
+      $('#DataFound').hide();
+      }
+      else{
+      $('#noDataFound').hide();
+      $('#DataFound').show();
+      }
+      return this.data;
+  }
+
+}
