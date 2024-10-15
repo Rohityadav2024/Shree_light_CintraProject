@@ -3930,5 +3930,65 @@ insertPrice(indusadd: any, isEdit: boolean) {
   );
 }
 
+getBPcatByPagination(pagination: any, searchValue: any, order_by_field: any, order_by_value: any, filteruser: any) {
+  filteruser.CardCode = this.checkKeyEpty(filteruser.CardCode);
+  return this.http.post(`${this.baseUrl2}/master_api/bp_catalogue/all_filter_page`, {
+    "PageNo": pagination.PageNo,
+    "maxItem": pagination.maxItem,
+    "order_by_field": order_by_field,
+    "order_by_value": order_by_value,
+    "SearchText": searchValue,
+    "field": {
+      "CardCode": filteruser.CardCode,
+    }
+  }, { 'headers': this.getHeader() }).pipe(
+    map((res: any) => {
+      return res;
+    })
+  );
+}
+insertBP(indusadd: any, isEdit: boolean) {
+  return this.http.post(`${this.baseUrl2}/master_api/bp_catalogue/${isEdit ? 'update' : 'create'}`, indusadd, { 'headers': this.getHeader() }).pipe(
+    map((res: any) => {
+      return res;
+    })
+  );
+}
+
+getComptitorQuotationByPagination(pagination: any, searchValue: any, filteruser: any, order_by_field: any, order_by_value: any) {
+  filteruser.CreateDate = this.checkKeyEpty(filteruser.CreateDate);
+  filteruser.CardCode = this.checkKeyEpty(filteruser.CardCode);
+  filteruser.OppID = this.checkKeyEpty(filteruser.OppID);
+  filteruser.CancelStatus = this.checkKeyEpty(filteruser.CancelStatus);
+  filteruser.DocumentStatus = this.checkKeyEpty(filteruser.DocumentStatus);
+  filteruser.CreateDate__gte = this.checkKeyEpty(filteruser.CreateDate__gte);
+  filteruser.CreateDate__lte = this.checkKeyEpty(filteruser.CreateDate__lte);
+  filteruser.is_draft = this.checkKeyEpty(filteruser.is_draft);
+  return this.http.post(`${this.baseUrl2}/competitor_quotation/all_filter_page`, {
+    "SalesPersonCode": this.SalesEmployeeCode,
+    "PageNo": pagination.PageNo,
+    "maxItem": pagination.maxItem,
+    "order_by_field": order_by_field,
+    "order_by_value": order_by_value,
+    "SearchText": searchValue,
+    "field": {
+      // "CreateDate": filteruser.CreateDate,
+      // "CardCode": filteruser.CardCode,
+      // "U_OPPID": filteruser.OppID,
+      // "DocumentStatus":filteruser.DocumentStatus,
+      // "CancelStatus":filteruser.CancelStatus,
+      // "departement": '2',
+      // is_draft:filteruser.is_draft,
+      // CreateDate__gte: filteruser.CreateDate__gte,
+      // CreateDate__lte: filteruser.CreateDate__lte
+    }
+  }, { 'headers': this.getHeader() }).pipe(
+    map((res: any) => {
+      // //console.log(res)
+      return res;
+    })
+  );
+
+}
 
 }

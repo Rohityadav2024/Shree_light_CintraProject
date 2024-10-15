@@ -186,6 +186,9 @@ import { DPDetailsComponent } from './dp-details/dp-details.component';
 import { CustomerSegmentComponent } from './customer-segment/customer-segment.component';
 import { ProjectTypeComponent } from './project-type/project-type.component';
 import { PriceListComponent } from './price-list/price-list.component';
+import { BPCatalogComponent } from './bp-catalog/bp-catalog.component';
+import { ComptitorQuotationComponent } from './comptitor-quotation/comptitor-quotation.component';
+import { AddeditcomptitorquotationComponent } from './comptitor-quotation/addeditcomptitorquotation/addeditcomptitorquotation.component';
 
 
 // import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -353,7 +356,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     DPDetailsComponent,
     CustomerSegmentComponent,
     ProjectTypeComponent,
-    PriceListComponent
+    PriceListComponent,
+    BPCatalogComponent,
+    ComptitorQuotationComponent,
+    AddeditcomptitorquotationComponent
   ],
   imports: [
     BrowserModule,

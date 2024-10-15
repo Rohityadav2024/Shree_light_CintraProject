@@ -107,6 +107,9 @@ import { CustomerSegmentComponent } from './customer-segment/customer-segment.co
 import { CustomerSegmentMasterComponent } from './customer-segment-master/customer-segment-master.component';
 import { ProjectTypeComponent } from './project-type/project-type.component';
 import { PriceListComponent } from './price-list/price-list.component';
+import { BPCatalogComponent } from './bp-catalog/bp-catalog.component';
+import { ComptitorQuotationComponent } from './comptitor-quotation/comptitor-quotation.component';
+import { AddeditcomptitorquotationComponent } from './comptitor-quotation/addeditcomptitorquotation/addeditcomptitorquotation.component';
 
 const routes: Routes = [
   // { path: '', component: HomeComponent },
@@ -221,7 +224,14 @@ const routes: Routes = [
   {path:'Directory-Partner',component:DirectoryPartnerComponent},
   {path:'customer-segment',component:CustomerSegmentMasterComponent},
   {path:'project-type',component:ProjectTypeComponent},
-  {path:'price-list',component:PriceListComponent}
+  {path:'price-list',component:PriceListComponent},
+  {path:'bp-catalog',component:BPCatalogComponent},
+  {path:'comptitor-quotation',component:ComptitorQuotationComponent},
+  {path:'comptitor-quotation/addedit-comptitor-quotation', component: AddeditcomptitorquotationComponent },
+  {path:'comptitor-quotation/addedit-comptitor-quotation/:id', component: AddeditcomptitorquotationComponent },
+
+
+
 
 ]
 

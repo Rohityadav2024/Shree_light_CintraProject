@@ -26,7 +26,7 @@ export class HeadingServicesService {
     'Nov',
     'Dec',
   ];
-  
+
   savedModules: any;
   newdate = this.day + '-' + this.month + '-' + this.year;
   newrevdate = this.year + '-' + this.month + '-' + this.day;
@@ -186,7 +186,7 @@ export class HeadingServicesService {
       SubHeading: 'Branch', heading: 'Address Details', SubHeading1: 'Billing', SubHeading2: 'Shipping Address', heading0: 'Billing Name', heading1: 'Billing Address', heading2: 'City',
        heading3: 'State', heading4: 'Country', heading5: 'Zip code', heading6: 'Shipping Type',heading7: 'Shipping Name', heading8: 'Zip code',heading9: 'Country',heading10: 'State',heading11: 'City',
        heading12: 'Shipping Name',heading13: 'Shipping Type', heading111: 'Billing Steet',SubHeading22: 'Shipping Street'
-        
+
     },
     this.Module4[1],
     this.Module4[2],
@@ -326,6 +326,38 @@ export class HeadingServicesService {
     {
       header1: 'Image', header2: 'Name', header3: this.Module4[2].heading,
     },
+  ]
+
+
+
+
+  Module26: any[] = [   // Comptitor Quotation
+    {
+      leftheading: 'Competitor Quotation', SubHeading: 'Details', Extra1: 'PO NO.', Extra2: 'PO Date', Extra3: 'Delivery', Extra4: 'Invoice',
+      heading101: this.MainWord.heading101, heading102: this.MainWord.heading102, heading103: this.MainWord.heading103, heading104: this.MainWord.heading104, heading105: this.MainWord.heading105,
+      heading106: this.MainWord.heading106, heading107: this.MainWord.heading107, heading108: this.MainWord.heading108, heading109: this.MainWord.heading109, heading110: this.MainWord.heading110,
+      heading111: this.MainWord.heading111, heading112: this.MainWord.heading112, heading113: this.MainWord.heading113, heading114: this.MainWord.heading114, heading115: this.MainWord.heading115,
+      heading116: this.MainWord.heading116, heading117: this.MainWord.heading117, heading118: this.MainWord.heading118, heading119: this.MainWord.heading119, heading120: this.MainWord.heading120
+    },
+    // this.Module5[0],
+    {
+      leftheading: 'Quotation', SubHeading: 'Details', heading0: 'ID', heading01: 'Created Date', heading1: this.Module4[0].leftheading, heading2: 'Name', heading3: this.Module3[0].leftheading, heading4: this.Module3[1].SubHeading, heading5: 'Posting Date', heading50: 'Valid Date', heading51: 'Document Date', heading6: this.Module3[0].heading8,
+      heading7: 'Branch', heading8: this.Module3[0].heading10, heading9: 'Freight Charge', heading91: 'Attachments', heading10: this.Module4[0].heading10, heading11: 'Total Amount', heading12: this.Module4[1].heading8, heading13: this.Module4[3].quicklink4, heading14: 'Status', heading15: 'PDF', heading100: this.Module1[0].heading100,
+      heading101: this.MainWord.heading101, heading102: this.MainWord.heading102, heading103: this.MainWord.heading103, heading104: this.MainWord.heading104, heading105: this.MainWord.heading105,
+      heading106: this.MainWord.heading106, heading107: this.MainWord.heading107, heading108: this.MainWord.heading108, heading109: this.MainWord.heading109, heading110: this.MainWord.heading110,
+      heading111: this.MainWord.heading111, heading112: this.MainWord.heading112, heading113: this.MainWord.heading113, heading114: this.MainWord.heading114, heading115: this.MainWord.heading115,
+      heading116: this.MainWord.heading116, heading117: this.MainWord.heading117, heading118: this.MainWord.heading118, heading119: this.MainWord.heading119, heading120: this.MainWord.heading120
+    },
+    // this.Module5[1],
+    {
+      SubHeading: 'Branch', heading: 'Address Details', SubHeading1: 'Billing', SubHeading2: 'Shipping Address', heading0: 'Billing Name', heading1: 'Billing Address', heading2: 'City',
+       heading3: 'State', heading4: 'Country', heading5: 'Zip code', heading6: 'Shipping Type',heading7: 'Shipping Name', heading8: 'Zip code',heading9: 'Country',heading10: 'State',
+       heading11: 'City',heading13: 'Shipping Type',SubHeading22: 'Shipping Street', heading111: 'Billing Steet'
+    },
+    this.Module5[2],
+    this.Module5[3],
+    this.Module5[4],
+
   ]
   constructor() {
     const savedFieldsString = sessionStorage.getItem('Allfields');
@@ -779,7 +811,9 @@ export class HeadingServicesService {
     return this.Module21;
   }
 
-
+  getModule26(): any[] {
+    return this.Module26;
+  }
 
   getReturnLeftMenu() {
     var allmodule: any[] = [];
@@ -812,7 +846,7 @@ export class HeadingServicesService {
     return false;
   }
 
-  isModuleViewadd(module_id: number): boolean {  
+  isModuleViewadd(module_id: number): boolean {
     let savedModules2:any = sessionStorage.getItem('savedModules');
     this.savedModules = JSON.parse(savedModules2)
     const selectedModule = this.savedModules?.filter((module: any) => module.module_id === module_id);
@@ -823,14 +857,41 @@ export class HeadingServicesService {
     return false;
   }
 
-  isModuleViewedit(module_id: number): boolean { 
+  isModuleViewedit(module_id: number): boolean {
     let savedModules2:any = sessionStorage.getItem('savedModules');
-    this.savedModules = JSON.parse(savedModules2) 
+    this.savedModules = JSON.parse(savedModules2)
     const selectedModule = this.savedModules?.filter((module: any) => module.module_id === module_id);
     if (selectedModule && selectedModule.length > 0 && selectedModule[0].is_edit) {
       return true;
     }
     return false;
   }
+
+
+
+
+  isModulefieldview(module_id: number, key: string): boolean {
+    let savedModules2:any = sessionStorage.getItem('savedModules');
+    this.savedModules = JSON.parse(savedModules2)
+    const selectedModule = this.savedModules?.find((module: any) => module.module_id === module_id);
+    if (selectedModule) {
+      const hasViewPermission = selectedModule.data.some((item: any) => item.key === key && item.view);
+      return hasViewPermission;
+    }
+    return false;
+  }
+
+  isModulefieldedit(module_id: number, key: string): boolean {
+    let savedModules2:any = sessionStorage.getItem('savedModules');
+    this.savedModules = JSON.parse(savedModules2)
+    const selectedModule = this.savedModules?.find((module: any) => module.module_id === module_id);
+    if (selectedModule) {
+      const hasEditPermission = selectedModule.data.some((item: any) => item.key === key && item.edit);
+      return hasEditPermission;
+    }
+    return false;
+  }
+
+
 
 }

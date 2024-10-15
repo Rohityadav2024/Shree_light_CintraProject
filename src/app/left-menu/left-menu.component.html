@@ -93,6 +93,12 @@
       <i class='fa fa-quote-left'></i>
       <span class="links_name" >{{Headingss[5].leftheading}}</span>
     </li>
+
+    <li routerLink="/comptitor-quotation" (click)="falseDropdown()" [routerLinkActive]="['active']" title="{{'Comptitor Quotation'}}"*ngIf="isModuleView(5)">
+      <i class='fa fa-quote-left'></i>
+      <span class="links_name" >Comptitor Quotation</span>
+    </li>
+
     <li routerLink="/Directory-Partner" (click)="falseDropdown()" [routerLinkActive]="['active']" title="Directory-Partner"*ngIf="isModuleView(5)">
       <i class='fa fa-quote-left'></i>
       <span class="links_name" >Directory Partner</span>
@@ -136,10 +142,10 @@
       <span class="links_name" >{{Headingss[10].leftheading}}</span>
     </li>
 
-    <!-- <li (click)="CardcodeRemoveFilter()" routerLink="/price-list" [routerLinkActive]="['active']" title="{{'Price List'}}">
+    <li (click)="CardcodeRemoveFilter()" routerLink="/price-list" [routerLinkActive]="['active']" title="{{'Price List'}}">
       <i class="fa fa-file" aria-hidden="true"></i>
       <span class="links_name" >Price List</span>
-    </li> -->
+    </li>
 
 
 
@@ -209,6 +215,10 @@
         <li routerLink='/customertype' [routerLinkActive]="['active']">
           <i class="fa fa-users" aria-hidden="true"></i>
           <span class="links_name" title="BP Type">BP Type</span>
+        </li>
+        <li routerLink='/bp-catalog' [routerLinkActive]="['active']">
+          <i class="fa fa-users" aria-hidden="true"></i>
+          <span class="links_name" title="BP Type">BP Catalog</span>
         </li>
         <li routerLink='/opportunitytype' [routerLinkActive]="['active']">
           <i class="fa fa-tasks" aria-hidden="true"></i>

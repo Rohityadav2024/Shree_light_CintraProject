@@ -1,0 +1,297 @@
+<!-- <app-left-menu></app-left-menu> -->
+
+<section class="home-section" appLeftMenuNavbar>
+  <app-header></app-header>
+  <div class="home-content">
+    <div class="custom-search-container">
+      <p class="custom-search-head-name">{{Headingss[0].leftheading}}</p>
+      <div class="custom-search-wrapper">
+        <div ngbDropdown class="custom-common-search-container">
+          <button *ngIf="exportStatus" type="button" class="custom-action-btn openbtn" (click)="Exportexcel()" ><i >Export &nbsp;</i>
+            <i title="Download Excel" class="fa-solid fa-file-export download-icon cursor-pointer exportfileicon"></i>
+          </button>
+          <button type="button" class="custom-action-btn openbtn" (click)="openNav()"><i class="fa fa-filter openbtn"></i> {{Headingss[0].heading109}}</button>
+          <ng-template #filter>{{Headingss[0].heading109}}</ng-template>
+          <div class="custom-search-ico-input-container">
+            <!-- <span [innerHTML]="'search-icon' | svgIcons:''" class="custom-search"></span> -->
+            <input type="text" name="" id="" placeholder=" {{Headingss[0].heading110}}" [(ngModel)]="searchValue" (keyup.enter)="RowPerPage()">
+            <span [innerHTML]="'figma-modal-close2' | svgIcons:''" class="new-search-cross" (click)="emptySeach()"
+              *ngIf="searchValue != ''"></span>
+            <button type="button" class="new-search-btn" (click)="RowPerPage()"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+          <button type="button" class="custom-com-temp-btn" routerLink="/comptitor-quotation/addedit-comptitor-quotation"><span
+              class="custom-sp-plus-ft-sz">+</span> {{Headingss[0].heading101}}</button>
+
+        </div>
+      </div>
+    </div>
+    <div class="sales-boxes">
+      <div class="recent-sales UserManagement">
+        <div class="sales-details">
+          <div class="custom-outter-body-lead-list-c9">
+            <div class="custom-table-select-icons">
+              <!-- <span *ngIf="commonObj.tbCheckM_1 && commonObj.tbCheckM_2"
+                [innerHTML]="'figma-pencil-write' | svgIcons:'figma-template-central'"routerLink="/order/edit-order/{{count[0]}}"></span> -->
+              <!-- <span *ngIf="commonObj.tbCheckM_1" [innerHTML]="'figma-delete' | svgIcons:'figma-template-central'"
+                (click)="multipleDelete1()"></span> -->
+              <i *ngIf="commonObj.tbCheckM_2" class="fa-solid fa-eye figma-template-central" (click)="suplier(count[0])"></i>
+              <!-- <i class="fa-solid fa-gear" style="color:#909092;" data-bs-toggle="modal" data-bs-target="#EditModalNew"></i> -->
+              <span [innerHTML]="'figma-table-refresh' | svgIcons:'figma-template-central'" (click)="reload()"></span>
+            </div>
+          </div>
+        </div>
+        <!-- <div style="text-align: center;" *ngIf="isLoading2">
+          <img src="../../assets/img/loder.gif" style="width: 10%;margin: 10%;">
+        </div> -->
+          <table class="new-tabl" id="table-data">
+            <!-- <ng-container *ngIf="!isLoading2"> -->
+            <thead class="MainUserList">
+            <tr>
+              <th><input id="selectAll1" type="checkbox" (click)="selectAll1()"></th>
+              <th (click)="togglesortType('id')">{{Headingss[1].heading0}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('Name')">{{'Name'}} <span
+                [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+                <th (click)="togglesortType('CardCode')">{{'Business Partner'}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('TaxDate')">{{Headingss[1].heading5}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+              <th (click)="togglesortType('DocumentDueDate')">{{Headingss[1].heading50}} <span
+                  [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+                  <th>Document Date</th>
+                  <!-- <th>Approval Status</th> -->
+                  <th (click)="togglesortType('DocTotal')">{{Headingss[1].heading11}} <span [innerHTML]="'up-down-arrow' | svgIcons:''"></span> </th>
+
+                  <!-- <th>{{Headingss[1].heading14}} </th> -->
+              <th>{{Headingss[0].heading111}}</th>
+            </tr>
+          </thead>
+              <tr class="hover"
+                *ngFor="let item of orders; let i = index">
+                <td>
+                    <input type="checkbox" id="checkbox{{item.id}}" value="{{item.id}}" class="checkbox"
+                    (click)="checkboxclick(item.id)">
+                </td>
+                <td>{{item.id}}</td>
+                <td (click)="suplier(item.id)"> {{item.Name}}</td>
+                <td (click)="suplier(item.id)">{{item.CardName || 'NA'}}</td>
+                <td (click)="suplier(item.id)">{{item.TaxDate | customDate}} </td>
+                <td (click)="suplier(item.id)">{{item.DocumentDueDate | customDate}}</td>
+                <td (click)="suplier(item.id)">{{item.DocumentDate | customDate}}</td>
+
+
+              <div class="table-status-warning" *ngIf="item.status == '0'" (click)="open(mymodal,item.id)">{{'Pending'}}
+              </div>
+                <td (click)="suplier(item.id)">{{item.DocTotal || 0 | priceFormat}}</td>
+
+                <td class="EditBoxForm" style="padding: 0 0px; width: 50px;">
+                  <span class="edit-delete edit-delete{{item.id}}" (click)="editdeletepop(item)"
+                    [innerHTML]="'table-v-dots' | svgIcons:''" class="table-v-dots"></span>
+                  <div class="hover-show hover-show{{item.id}} hover-show-inactive">
+                    <a routerLink="/comptitor-quotation/addedit-comptitor-quotation/{{item.id}}" style="text-decoration: none; color:#4E4E56;">
+                      <span><i class="fa fa-pencil" aria-hidden="true"></i> {{Headingss[0].heading102}} {{Headingss[0].leftheading}}</span>
+                    </a>
+                    <br>
+                   </div>
+
+                </td>
+              </tr>
+            <!-- </ng-container> -->
+            <tr *ngIf="totalCount == 0">
+              <td colspan="10" style="text-align: center;font-size: 20px;color: #4A79E4;padding-top: 15% !important;">No Data Found</td>
+            </tr>
+          </table>
+          <div class="LoderGifHere" *ngIf="isLoading2">
+            <img src="../../assets/img/loder.gif">
+          </div>
+      </div>
+    </div>
+    <div class="figma-pagination-controls">
+      <div class="figma-pagination-rows-total">
+        <div class="figma-rows-per-page">
+          <div class="figma-rows-per-page-label">Row per page</div>
+          <ng-select [items]="['10','20','50','100','All']" class="figma-row-per-page-ng-select"
+            [(ngModel)]="pagination.maxItem" (change)="RowPerPage()"></ng-select>
+          <div class="figma-rows-per-page-total">Total {{startind}}-{{endind}} of {{totalCount}}</div>
+        </div>
+        <ngb-pagination [collectionSize]="totalCount" [pageSize]="pagination.PageShow"
+          (pageChange)="pageChanged($event)" [(page)]="CurrentPage" [maxSize]="5" [rotate]="true"
+          [boundaryLinks]="false" class="figma-pagination">
+          <ng-template ngbPaginationPrevious><i class="fa-solid fa-chevron-left"></i> Prev</ng-template>
+          <ng-template ngbPaginationNext>Next <i class="fa-solid fa-chevron-right"></i></ng-template>
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div id="mySidepanel" class="sidepanel">
+  <div class="row">
+    <div class="col-12 mb-1 px-3 border-bottom" id="FilterTopSide">
+      <strong style="color: #4a79e4 !important;">{{Headingss[0].heading117}}</strong>
+      <a class="closebtn" (click)="closeNav()">&times;</a>
+    </div>
+   </div>
+   <form name="form">
+    <div class="filterForm-container">
+    <div class="row">
+      <!-- <div class="col-md-6">
+        <label class="MainFilterLabel filtersize">{{'From Date'}}</label>
+        <input class="input-fld" type="date" name="CreateDate__gte" [(ngModel)]="filter_customer.CreateDate__gte" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="col-md-6">
+        <label class="MainFilterLabel filtersize">{{'To Date'}}</label>
+        <input class="input-fld" type="date" name="CreateDate__lte" [(ngModel)]="filter_customer.CreateDate__lte" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="col-12 pb-3">
+        <label class="MainLabelNames">{{'Order/Draft'}}</label>
+        <ng-select #selectcustomername [clearOnBackspace]="false" [searchable]="false"  [virtualScroll]="true" name="is_draft" placeholder="Select Type" [(ngModel)]="filter_customer.is_draft" class="ngsearch-dropdown input-fld">
+          <ng-template ng-header-tmp>
+            <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+              type="text" (input)="selectcustomername.filter($event.target.value)" />
+          </ng-template>
+          <ng-option value="" disable selected>All Type</ng-option>
+          <ng-option value="1">Draft</ng-option>
+          <ng-option value="0">{{Headingss[0].leftheading}}</ng-option>
+        </ng-select>
+        </div> -->
+      <div class="col-12 mb-1">
+        <label class="MainLabelNames">{{Headingss[1].heading3}}</label>
+        <ng-select #selectcustomername [clearOnBackspace]="false" [searchable]="false"  [virtualScroll]="true" name="CardCode" placeholder="Select {{Headingss[1].heading3}}" [(ngModel)]="filter_customer.CardCode" class="ngsearch-dropdown input-fld">
+          <ng-template ng-header-tmp>
+            <input class="ng-dropdown-search" style="width: 100%;line-height: 24px" placeholder="search"
+              type="text" (input)="selectcustomername.filter($event.target.value)" />
+          </ng-template>
+          <ng-option value="" disable selected>All {{Headingss[1].heading3}}</ng-option>
+          <ng-option *ngFor="let item of businesspartners" value="{{item.CardCode}}">{{item.CardName}}</ng-option>
+        </ng-select>
+      </div>
+    </div>
+  </div>
+      <div class="row">
+        <div class="FilterBtnHere">
+          <div class="ResetBTN">
+            <a (click)="resetfilter()">{{Headingss[0].heading114}}</a>
+          </div>
+          <div class="ApplyBTN">
+            <button (click)="RowPerPage()">{{Headingss[0].heading113}}</button>
+          </div>
+        </div>
+      </div>
+
+  </form>
+
+</div>
+
+
+
+<ng-template #confirmModal let-modal>
+  <div class="modal-body">
+    <p> Are You Sure Do You Want To Cancel This Order</p>
+    <div class="confirm-btn">
+      <button class="btn custom-btn-blue" (click)="cancelOrder(CanelID)">OK</button>
+      <button class="btn custom-btn-outline-blue" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title modal-heading" id="modal-basic-title">Approval Status</h4>
+    <button type="button" class="close clos-pop-btn" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      style="outline: none;">
+      <span aria-hidden="true" style="outline: none;">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <ng-container *ngIf="AppHistoryData.length != 0">
+      <div class="faqheading" style="
+      width: 100px;
+      padding: 5px 10px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      border: none;
+      color: #fff;
+      background: #4a79e4;
+      border-radius: 4px;cursor: pointer;
+      line-height: 14px;
+  " (click)="showhid()">
+        <div>History
+          <span style="float: right;"> <i [ngClass]="{'fa-caret-down': isShow,'fa-caret-right': !isShow}"
+              class="fa fa-caret-right"></i>
+          </span>
+        </div>
+      </div>
+
+      <div style="margin-top: 5px;position: relative;top: 2px;" *ngIf="AppHistoryData[0].json_fields != ''">
+        <span *ngFor="let it of AppHistoryData[0].json_fields; let i = index; let last = last">
+          {{it.field_name == 'DiscountPercent' ? 'Discount (%)' : 'Total Amount'}} :- {{it.field_new_value || 'NA'}}
+          <span *ngIf="!last">,</span>
+        </span>
+
+      </div> <br>
+
+
+      <div class="table-wrapper2" *ngIf="isShow">
+        <div class="v-progress">
+
+          <ul style="
+        display: grid;
+        grid-template-columns: 35px auto;
+    ">
+            <ng-container *ngFor="let item of AppHistoryData; let i = index;">
+              <div style="margin-top: -2px;font-size: 12px;">{{i+1}}</div>
+              <li class="v-progress-item"
+                [ngClass]="{'completed':item.status == 'Approved','':item.status == 'Pending'}"
+                style="font-size: 12px;">
+                {{item.designation}}
+                <span *ngIf="item.status == 'Approved'"> ({{item.updated_date || 'NA'}}) </span> <br><br>
+                Remarks : <div class="hidetext" style="margin-top: 5px;position: relative;top: 2px;"
+                  [title]="item.remarks">{{item.remarks || 'NA'}}</div> <br>
+                <div *ngIf="item.status == 'Approved'" style="margin-top: 5px;position: relative;top: 2px;"> Approved
+                    By : {{item.updated_by || 'NA'}}</div>
+
+
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+
+      </div>
+
+    </ng-container>
+    <form #f="ngForm" name="theForm" *ngIf="is_visible == true">
+      <div class="row">
+        <div class="col-md-12">
+          <label>Status </label>
+          <select type="text" class="input-fld required-fld" name="userName" [(ngModel)]="Payload.status" required>
+            <option [value]=0>Pending</option>
+            <option [value]=1>Approved</option>
+            <option [value]=2>Reject</option>
+          </select>
+
+
+        </div>
+
+        <div class="col-md-12">
+          <label>Remarks </label>
+          <textarea type="text" class="input-fld required-fld" name="remark" [(ngModel)]="Payload.remark"
+            placeholder="Enter remark" required>
+          </textarea>
+        </div>
+
+
+        <div class="col-md-12 text-center mt-3">
+          <button class="add-invent1" (click)="SendRequest()">Save</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+</ng-template>

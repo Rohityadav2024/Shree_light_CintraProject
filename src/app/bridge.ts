@@ -80,6 +80,15 @@
     Remarks:string,
   }
 
+  export interface BpCatalog{
+    id?: number,
+      CardCode:any,
+      CardName:any,
+      ItemGroup:any,
+      Item:any,
+      C_ItemCode:any,
+      C_ItemDescription:any,
+  }
   export interface Directory {
     DirectoryGroup: number;
     CompanyName: string;
